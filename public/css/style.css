@@ -1,0 +1,26 @@
+
+
+
+.navbar-DS{
+    background-color: #9DCE5B;
+    position: relative;
+    padding: 0.1rem 1rem;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.bordes-externo-DS{
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    height: 35px;
+    font-size: 80%;
+}
+
+.bordes-DS{
+    border-right: 2px solid white;
+}
+
+.sincursor-DS{
+    cursor: default;
+}
