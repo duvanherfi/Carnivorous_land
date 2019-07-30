@@ -8,9 +8,11 @@
     <title>Material Design Bootstrap</title>
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" async></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" async>
+    </script>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js" async>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+        async>
     </script>
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript"
@@ -18,14 +20,19 @@
     </script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/js/mdb.min.js" async>
-        //  Scripts para el Footer 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" async>
+    </script>
+    <!--Scripts para el Footer -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"
+        async>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" async>
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"
+        async>
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" async>
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"
+        async>
     </script>
 
     <!-- Font Awesome -->
@@ -41,7 +48,7 @@
     {{-- Montserrat --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
-    {{-- Estilos creados por DailySoft --}}
+    <!-- Estilos creados por DailySoft -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
@@ -94,6 +101,106 @@
     </nav>
     <!--/.Navbar -->
 
+    <!--Carousel Wrapper-->
+    <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+        <img class="logo" src="{{ asset('img/Logo.jpg') }}" alt="Logo Carnivorous Land">
+        {{-- Menu --}}
+        <nav class="navbar navbar-expand-lg navbar-dark div2">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-333">
+                <ul class="navbar-nav ml-auto nav-flex-icons bordes-menu-DS">
+                    <li class="nav-item opcion-menu-DS bordes-DS">
+                        <a class="nav-link waves-effect waves-light">
+                            INICIO
+                        </a>
+                    </li>
+                    <li class="nav-item bordes-DS">
+                        <a class="nav-link waves-effect waves-light">
+                            ¿QUIÉNES SOMOS?
+                        </a>
+                    </li>
+                    <li class="nav-item opcion-menu-DS bordes-DS">
+                        <a class="nav-link waves-effect waves-light">
+                            PRODUCTOS
+                        </a>
+                    </li>
+                    <li class="nav-item opcion-menu-DS bordes-DS">
+                        <a class="nav-link waves-effect waves-light">
+                            TIPS DE CULTIVOS
+                        </a>
+                    </li>
+                    <li class="nav-item opcion-menu-DS">
+                        <a class="nav-link waves-effect waves-light">
+                            CONTÁCTANOS
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        {{-- /.Menu --}}
+        <!--Indicators-->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-2" data-slide-to="1"></li>
+            <li data-target="#carousel-example-2" data-slide-to="2"></li>
+        </ol>
+        <!--/.Indicators-->
+        <!--Slides-->
+        <div class="carousel-inner carrousel-DS" role="listbox">
+            <div class="carousel-item active">
+                <div class="view">
+                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/1.png') }}"
+                        alt="First slide">
+                    <div class="mask rgba-black-light"></div>
+                </div>
+                <div class="carousel-caption letras-DS">
+                    <h3 class="h3-responsive">Light mask</h3>
+                    <p>First text</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view">
+                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/2.png') }}"
+                        alt="Second slide">
+                    <div class="mask rgba-black-strong"></div>
+                </div>
+                <div class="carousel-caption letras-DS">
+                    <h3 class="h3-responsive">Strong mask</h3>
+                    <p>Secondary text</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view">
+                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/3.png') }}"
+                        alt="Third slide">
+                    <div class="mask rgba-black-slight"></div>
+                </div>
+                <div class="carousel-caption letras-DS">
+                    <h3 class="h3-responsive">Slight mask</h3>
+                    <p>Third text</p>
+                </div>
+            </div>
+        </div>
+        <!--/.Slides-->
+        <!--Controls-->
+        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <!--/.Controls-->
+    </div>
+    <!--/.Carousel Wrapper-->
+
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, voluptas! Earum culpa facilis odit nostrum cumque
         exercitationem delectus doloremque tenetur harum expedita illo ea modi quos nihil fuga recusandae est quidem,
         esse obcaecati accusamus assumenda sunt impedit tempore! Consequatur, sequi commodi vitae rem obcaecati
@@ -145,11 +252,13 @@
                     <h5 class="headin5_amrc col_white_amrc pt2">Contáctanos</h5>
                     <!--headin5_amrc-->
                     <p class="mb10">Realizamos envios a nivel de todo Colombia</p>
-                    <p><img src="{{ asset('iconos-footer/whatsapp.png') }}" alt="Whatsapp" width="23"> +57 316 7973829
+                    <p><img src="{{ asset('img/iconos-footer/whatsapp.png') }}" alt="Whatsapp" width="23"> +57 316
+                        7973829
                     </p>
-                    <p><img src="{{ asset('iconos-footer/placeholder.png') }}" alt="Ubicación" width="23"> Ubicados en
+                    <p><img src="{{ asset('img/iconos-footer/placeholder.png') }}" alt="Ubicación" width="23"> Ubicados
+                        en
                         la ciudad de Cali, Colombia</p>
-                    <p><img src="{{ asset('iconos-footer/email.png') }}" alt="Email" width="23">
+                    <p><img src="{{ asset('img/iconos-footer/email.png') }}" alt="Email" width="23">
                         Carnivorousland@gmail.com</p>
                 </div>
 
@@ -166,16 +275,16 @@
                 <div class="col-sm-4 col-md  col-6 col">
                     <h5 class="headin5_amrc col_white_amrc pt2">Envios</h5>
                     <!--headin5_amrc-->
-                    <img class="mb-2" src="{{ asset('iconos-footer/servientrega.png') }}" alt="Servientrega"
+                    <img class="mb-2" src="{{ asset('img/iconos-footer/servientrega.png') }}" alt="Servientrega"
                         width="200">
-                    <img src="{{ asset('iconos-footer/interrapidisimo.png') }}" alt="Interrapidisimo" width="200">
+                    <img src="{{ asset('img/iconos-footer/interrapidisimo.png') }}" alt="Interrapidisimo" width="200">
                     <!--footer_ul_amrc ends here-->
                 </div>
 
                 <div class=" col-sm-4 col-md  col-12 col">
                     <h5 class="headin5_amrc col_white_amrc pt2">Métodos de pago</h5>
                     <!--headin5_amrc ends here-->
-                    <img src="{{ asset('iconos-footer/metodosdepago.png') }}" alt="Métodos de pago" width="300">
+                    <img src="{{ asset('img/iconos-footer/metodosdepago.png') }}" alt="Métodos de pago" width="300">
                     <!--footer_ul2_amrc ends here-->
                 </div>
             </div>
