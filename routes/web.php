@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('plantilla');
 });
+
+
+Route::get('/quienes_somos', function () {
+    return view('quienes_somos');
+});
