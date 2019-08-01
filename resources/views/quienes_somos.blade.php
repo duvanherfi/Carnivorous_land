@@ -228,18 +228,18 @@
    <h2 class="p-3">Valores</h2>
    <div class="container">
         <div class="row">
-            <div class="col ">
+            <div class="col pb-5 col-md-7">
                     <ul class="list-group lista">
                             <li class="list-group-item">Espíritu constructivo</li>
-                            <li class="list-group-item resaltar">Profesionalismo</li>
+                            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">Profesionalismo</li>
                             <li class="list-group-item">Honestidad</li>
-                            <li class="list-group-item resaltar">o</li>
+                            <li class="list-group-item resaltar"  data-aos="fade-right" data-aos-duration="2000">Compromiso</li>
                             <li class="list-group-item">Responsabilidad</li>
-                            <li class="pb-5 list-group-item resaltar">Enfoque en la mejora continua</li>
+                            <li class="list-group-item resaltar"  data-aos="fade-right" data-aos-duration="2000">Enfoque en la mejora continua</li>
                           </ul>         
              </div>
-            <div class="col">
-                    <img class="pb-5" src="{{ asset('img/quienes_somos/valores.png') }}" alt="Valores corporativos" width="170"> 
+            <div class="col pl-5 ml-5 ">
+                    <img class="pb-5" src="{{ asset('img/quienes_somos/valores.png') }}" alt="Valores corporativos" width="300"> 
 
             </div>
         </div>
