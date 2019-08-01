@@ -101,47 +101,55 @@
     </nav>
     <!--/.Navbar -->
 
+    {{-- Logo --}}
+    <img class="logo" src="{{ asset('img/Logo.jpg') }}" alt="Logo Carnivorous Land">
+    {{-- /Logo --}}
+    {{-- Menu --}}
+    <nav class="navbar navbar-expand-lg navbar-dark div2">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-333">
+            <ul class="navbar-nav ml-auto nav-flex-icons bordes-menu-DS">
+                <li class="nav-item opcion-menu-DS bordes-DS">
+                    <a class="nav-link waves-effect waves-light">
+                        INICIO
+                    </a>
+                </li>
+                <li class="nav-item bordes-DS">
+                    <a class="nav-link waves-effect waves-light">
+                        ¿QUIÉNES SOMOS?
+                    </a>
+                </li>
+                <li class="nav-item opcion-menu-DS bordes-DS">
+                    <a class="nav-link waves-effect waves-light">
+                        PRODUCTOS
+                    </a>
+                </li>
+                <li class="nav-item opcion-menu-DS bordes-DS">
+                    <a class="nav-link waves-effect waves-light">
+                        TIPS DE CULTIVOS
+                    </a>
+                </li>
+                <li class="nav-item opcion-menu-DS">
+                    <a class="nav-link waves-effect waves-light">
+                        CONTÁCTANOS
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <img class="ml-3 p-1" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="45">
+        <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram" width="45">
+        <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="45">
+        <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="45">
+        <img class="ml-3 p-1" id="bordes-left-DS" src="{{ asset('img/carro.png') }}" alt="Carro" width="45">
+        <span class="badge badge-primary badge-pill counter">1</span>
+    </nav>
+    {{-- /.Menu --}}
+
     <!--Carousel Wrapper-->
     <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
-        <img class="logo" src="{{ asset('img/Logo.jpg') }}" alt="Logo Carnivorous Land">
-        {{-- Menu --}}
-        <nav class="navbar navbar-expand-lg navbar-dark div2">
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-333">
-                <ul class="navbar-nav ml-auto nav-flex-icons bordes-menu-DS">
-                    <li class="nav-item opcion-menu-DS bordes-DS">
-                        <a class="nav-link waves-effect waves-light">
-                            INICIO
-                        </a>
-                    </li>
-                    <li class="nav-item bordes-DS">
-                        <a class="nav-link waves-effect waves-light">
-                            ¿QUIÉNES SOMOS?
-                        </a>
-                    </li>
-                    <li class="nav-item opcion-menu-DS bordes-DS">
-                        <a class="nav-link waves-effect waves-light">
-                            PRODUCTOS
-                        </a>
-                    </li>
-                    <li class="nav-item opcion-menu-DS bordes-DS">
-                        <a class="nav-link waves-effect waves-light">
-                            TIPS DE CULTIVOS
-                        </a>
-                    </li>
-                    <li class="nav-item opcion-menu-DS">
-                        <a class="nav-link waves-effect waves-light">
-                            CONTÁCTANOS
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        {{-- /.Menu --}}
         <!--Indicators-->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
@@ -201,6 +209,12 @@
     </div>
     <!--/.Carousel Wrapper-->
 
+    <br><br><h2 class="row justify-content-center subtitulo-DS">¿Por qué comprar con nosotros?</h2>
+    <div class="row align-items-center row justify-content-center">
+        <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade">✻
+        <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade">
+    </div>
+
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, voluptas! Earum culpa facilis odit nostrum cumque
         exercitationem delectus doloremque tenetur harum expedita illo ea modi quos nihil fuga recusandae est quidem,
         esse obcaecati accusamus assumenda sunt impedit tempore! Consequatur, sequi commodi vitae rem obcaecati
@@ -252,7 +266,7 @@
                     <h5 class="headin5_amrc col_white_amrc pt2">Contáctanos</h5>
                     <!--headin5_amrc-->
                     <p class="mb10">Realizamos envios a nivel de todo Colombia</p>
-                    <p><img src="{{ asset('img/iconos-footer/whatsapp.png') }}" alt="Whatsapp" width="23"> +57 316
+                    <p><img src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="23"> +57 316
                         7973829
                     </p>
                     <p><img src="{{ asset('img/iconos-footer/placeholder.png') }}" alt="Ubicación" width="23"> Ubicados
@@ -312,10 +326,5 @@
         </div>
     </footer>
     {{-- Footer --}}
-
-
 </body>
-
-
-
 </html>
