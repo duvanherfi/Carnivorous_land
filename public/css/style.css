@@ -27,7 +27,7 @@
 /* Carrousel */
 
 .carrousel-DS {
-    height: 450px;
+    height: 500px;
 }
 
 .letras-DS {
@@ -36,7 +36,25 @@
 
 .ajuste-imagen-DS {
     object-fit: cover;
-    height: 450px;
+    height: 500px;
+}
+
+.titulo {
+    z-index: 1;
+    position: absolute;
+    top: 150px;
+    left: 390px;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+h3{
+    font-weight: bold;
 }
 
 /* Logo */
@@ -55,18 +73,18 @@
 
 /* Titulos */
 
-.subtitulo-DS{
+.subtitulo-DS {
     font-family: 'Montserrat', sans-serif;
 }
 
-.izquierda-DS{
+.izquierda-DS {
     float: left;
     width: 300px;
     height: 2px;
     background-color: #263238;
 }
 
-.derecha-DS{
+.derecha-DS {
     float: right;
     width: 300px;
     height: 2px;
@@ -103,9 +121,10 @@
     text-align: center;
 }
 
-#bordes-left-DS{
-    padding-left: 10px;
+#bordes-left-DS {
+    padding-left: 20px;
     border-left: 2px solid white;
+    width: 55px;
 }
 
 /* Footer */
