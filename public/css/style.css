@@ -1,3 +1,14 @@
+p {
+    font-family: 'Montserrat', sans-serif;
+    text-align: justify;
+
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
 /* Navbar */
 
 .navbar-DS {
@@ -81,15 +92,20 @@ h3{
     float: left;
     width: 300px;
     height: 2px;
-    background-color: #263238;
+    background-color: #B3533A;
 }
 
 .derecha-DS {
     float: right;
     width: 300px;
     height: 2px;
-    background-color: #263238;
+    background-color: #B3533A;
 }
+
+#separador {
+    color: #B3533A;
+}
+
 
 /* Menu */
 
@@ -252,4 +268,25 @@ footer p {
     width: 20px;
     height: 20px;
     text-align: center;
+}
+
+
+
+/* Quienes somos*/
+/* Sección donde se encuentra la misión y visión*/
+#misi_visi {
+    background-color: #9DCE5B;
+    color: #ffffff;
+}
+
+/* Valores */
+.lista {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    
+
+}
+
+.resaltar{
+    background-color: #E48E66;
 }

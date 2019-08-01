@@ -34,6 +34,12 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"
         async>
     </script>
+     <!-- Libreria AOS js -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+   
+
+    <!-- Libreria AOS css-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -147,89 +153,111 @@
         <span class="badge badge-primary badge-pill counter">1</span>
     </nav>
     {{-- /.Menu --}}
-
-    <!--Carousel Wrapper-->
-    <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
-        {{-- Titulo Carnivorous Land --}}
-        <div class="titulo carrousel">
-            <h1>CARNIVOROUS LAND</h1>
-            <h3>¡DEJATE ATRAPAR!</h3>
-            <button type="button" class="btn btn-light-green">¡COMPRAR AHORA!</button>
-        </div>
-        <!--Indicators-->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-2" data-slide-to="1"></li>
-            <li data-target="#carousel-example-2" data-slide-to="2"></li>
-        </ol>
-        <!--/.Indicators-->
-        <!--Slides-->
-        <div class="carousel-inner carrousel-DS" role="listbox">
-            <div class="carousel-item active">
-                <div class="view">
-                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/1.png') }}"
-                        alt="First slide">
-                    <div class="mask rgba-black-light"></div>
-                </div>
-                <div class="carousel-caption letras-DS">
-                    <h3 class="h3-responsive">Light mask</h3>
-                    <p>First text</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <!--Mask color-->
-                <div class="view">
-                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/2.png') }}"
-                        alt="Second slide">
-                    <div class="mask rgba-black-strong"></div>
-                </div>
-                <div class="carousel-caption letras-DS">
-                    <h3 class="h3-responsive">Strong mask</h3>
-                    <p>Secondary text</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <!--Mask color-->
-                <div class="view">
-                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/3.png') }}"
-                        alt="Third slide">
-                    <div class="mask rgba-black-slight"></div>
-                </div>
-                <div class="carousel-caption letras-DS">
-                    <h3 class="h3-responsive">Slight mask</h3>
-                    <p>Third text</p>
-                </div>
-            </div>
-        </div>
-        <!--/.Slides-->
-        <!--Controls-->
-        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        <!--/.Controls-->
-    </div>
-    <!--/.Carousel Wrapper-->
-
-
     <body>
-        <br>
-        <h2 class="row justify-content-center subtitulo-DS">¿Quiénes somos ?</h2>
-        <div class="row align-items-center row justify-content-center">
+    
+        <div class="titulo carrousel">
+            <h1 id="titulo_quienes_somos" class="pt-5 mt-5">¿QUIÉNES SOMOS?</h1>
+        </div>
+        
+        <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/quienes_somos/fondo_quienes_somos.jpg') }}">
+ 
+        <h2 class="row justify-content-center subtitulo-DS pt-3">Un poco de historia..</h2>
+        <div id="separador" class="row align-items-center row justify-content-center">
             <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade">✻
             <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade">
         </div>
+
+        <!-- Sección de Historia-->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="p-3">
+                        Carnivorous Land nació como un proyecto de cultivo, reproducción y venta de Plantas Carnívoras en Cali, Colombia, que paso a paso hemos crecido, enseñando a grandes y chicos lo maravillosas que son estas plantas.
+                        <br>
+                        <br>
+                        En la actualidad tenemos una gran colección de estas maravillosas plantas, las cuales hemos ido reproduciendo para poder brindar los mejores ejemplares a nuestros ''Carnicultores''​.
+                        Nuestro Invernadero esta ubicado cerca a Ginebra, Valle.
+                        <br>
+                        <br>
+                        Si tienes un vivero y estas interesado en comercializar nuestras maravillosas plantas, contáctanos.
+                    </p>
+                </div>
+                <div class="col">
+                    <img class=" p-3 d-block w-100 "  src="{{ asset('img/quienes_somos/historia.jpg') }}" width="300" >
+
+                </div>
+            </div>
+
+        </div>
+   <!-- Fin sección historia-->
+
+   <!-- Misión y visión -->
+   <div id="misi_visi" data-aos="fade-up" data-aos-duration="1500" >
+    <div class="row">
+        <div class="col p-3">
+            <h2>Misión</h2>
+            </div>
+        <div class="col p-3">
+            <h2>Visión</h2>
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col">
+            <P class="pl-4"> Somos una empresa dedicada a la producción y comercialización de plantas Carnívoras,  
+                que mediante la investigación y pasión por este tipo de plantas, 
+                buscamos la concientización de importancia de estos seres vivos en los ecosistemas.</P>
+        </div>
+        <div class="col">
+            <P class="pr-4"> Ser en el 2023 la empresa líder en producción y comercialización de Plantas Carnívoras en Colombia, 
+                caracterizándose por la calidad de cultivo y servicio, 
+                haciendo uso de las buenas prácticas medioambientales.
+            </P>
+        </div>
+      
+     
+    </div>
+
+</div>
+   <!-- Fin Misión y visión -->
+
+
+
+   <!-- Valores-->
+
+   <h2 class="p-3">Valores</h2>
+   <div class="container">
+        <div class="row">
+            <div class="col ">
+                    <ul class="list-group lista">
+                            <li class="list-group-item">Espíritu constructivo</li>
+                            <li class="list-group-item resaltar">Profesionalismo</li>
+                            <li class="list-group-item">Honestidad</li>
+                            <li class="list-group-item resaltar">o</li>
+                            <li class="list-group-item">Responsabilidad</li>
+                            <li class="pb-5 list-group-item resaltar">Enfoque en la mejora continua</li>
+                          </ul>         
+             </div>
+            <div class="col">
+                    <img class="pb-5" src="{{ asset('img/quienes_somos/valores.png') }}" alt="Valores corporativos" width="170"> 
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+   <!-- Fin Valores-->
+
     
     </body>
  
     
     <!--Footer-->
     <footer class="footer">
-        <div class="container bottom_border">
+        <div class="container bottom_border pt-3">
             <div class="row">
                 <div class=" col-sm-4 col-md col-sm-4  col-12 col">
                     <h5 class="headin5_amrc col_white_amrc pt2">Contáctanos</h5>
@@ -295,6 +323,11 @@
         </div>
     </footer>
     {{-- Footer --}}
+
+<!-- Inici de la libreria AOS-->
+    <script>
+            AOS.init();
+    </script>
 </body>
 
 </html>
