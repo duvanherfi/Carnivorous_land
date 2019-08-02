@@ -1,7 +1,7 @@
 @extends('plantilla')
 @section('quienes_somos')
 
-<<<<<<< HEAD
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,15 +38,15 @@
      <!-- Libreria AOS js npm i aos -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    
-=======
->>>>>>> 93f8a5563c75ce947c9ed6db39e59b97a8bfb797
+
+
 
 
             <div class="titulo carrousel">
                 <h1 id="titulo_quienes_somos" class="pt-5 mt-5">¿QUIÉNES SOMOS?</h1>
             </div>
 
-            <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/quienes_somos/fondo_quienes_somos.jpg') }}">
+            <img class="d-block w-100 ajuste-imagen-DS" alt="planta_carnivora" src="{{ asset('img/quienes_somos/fondo_quienes_somos.jpg') }}">
 
             <h2 class="row justify-content-center subtitulo-DS pt-3">Un poco de historia..</h2>
             <div id="separador" class="row align-items-center row justify-content-center">
@@ -70,7 +70,7 @@
                         </p>
                     </div>
                     <div class="col">
-                        <img class=" p-3 d-block w-100 "  src="{{ asset('img/quienes_somos/historia.jpg') }}" width="300" >
+                        <img class=" p-3 d-block w-100 "  alt="matera con una planta" src="{{ asset('img/quienes_somos/historia.jpg') }}" width="300" >
 
                     </div>
                 </div>

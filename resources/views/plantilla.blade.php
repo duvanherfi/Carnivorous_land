@@ -140,6 +140,8 @@
 
     @yield('quienes_somos')
 
+    @yield('contactanos')
+
     <!--Footer-->
     <footer class="footer">
         <div class="container bottom_border">
