@@ -19,7 +19,12 @@
     <!-- MDB core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/js/mdb.min.js">
     </script>
+    <!-- Libreria AOS js -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+
+    <!-- Libreria AOS css-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
@@ -154,7 +159,7 @@
                 </div>
                 <div class="carousel-caption letras-DS">
                     <h3 class="h3-responsive">Light mask</h3>
-                    <p>First text</p>
+                    <p class="texto-DS">First text</p>
                 </div>
             </div>
             <div class="carousel-item">
@@ -166,7 +171,7 @@
                 </div>
                 <div class="carousel-caption letras-DS">
                     <h3 class="h3-responsive">Strong mask</h3>
-                    <p>Secondary text</p>
+                    <p class="texto-DS">Secondary text</p>
                 </div>
             </div>
             <div class="carousel-item">
@@ -178,7 +183,7 @@
                 </div>
                 <div class="carousel-caption letras-DS">
                     <h3 class="h3-responsive">Slight mask</h3>
-                    <p>Third text</p>
+                    <p class="texto-DS">Third text</p>
                 </div>
             </div>
         </div>
@@ -205,7 +210,8 @@
     </div>
     {{-- /Subtitulo --}}
 
-    <div class="row justify-content-center">
+    {{-- Cartas --}}
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-anchor-placement="top-center">
         <!--Card-->
         <div class="card m-3 carta-DS" style="width: 19rem;">
             <!--Card image-->
@@ -234,6 +240,7 @@
         </div>
         <!--/.Card-->
     </div>
+    {{-- /Cartas --}}
 
     {{-- Subtitulo --}}
     <br>
@@ -253,10 +260,12 @@
     </div>
     {{-- /Subtitulo --}}
 
-    <div class="row justify-content-center">
+    {{-- Eventos --}}
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-anchor-placement="top-center">
         <img class="imagen-DS evento-DS m-3" src="{{ asset('img/eventos/evento1.jpg') }}" alt="">
         <div class="mask rgba-white-slight"></div>
     </div>
+    {{-- /Eventos --}}
 
     <!--Footer-->
     <footer class="footer">
@@ -326,6 +335,11 @@
         </div>
     </footer>
     {{-- Footer --}}
+
+    <!-- Inici de la libreria AOS-->
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>
