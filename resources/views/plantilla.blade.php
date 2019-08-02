@@ -8,31 +8,16 @@
     <title>Material Design Bootstrap</title>
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" async>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
     </script>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
-        async>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
     </script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" async>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js">
     </script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/js/mdb.min.js" async>
-    </script>
-    <!--Scripts para el Footer -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"
-        async>
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"
-        async>
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"
-        async>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/js/mdb.min.js">
     </script>
 
     <!-- Font Awesome -->
@@ -61,7 +46,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-            <ul class="navbar-nav ml-auto nav-flex-icons bordes-externo-DS">
+            <ul class="navbar-nav ml-auto bordes-externo-DS">
                 <li class="nav-item bordes-DS">
                     <p class="nav-link">
                         <i class="fab fa-whatsapp"></i>
@@ -83,19 +68,6 @@
                         REGISTRARSE
                     </a>
                 </li>
-                {{-- Icono de user --}}
-                {{-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-default"
-                                aria-labelledby="navbarDropdownMenuLink-333">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li> --}}
             </ul>
         </div>
     </nav>
@@ -122,10 +94,19 @@
                         ¿QUIÉNES SOMOS?
                     </a>
                 </li>
-                <li class="nav-item opcion-menu-DS bordes-DS">
-                    <a class="nav-link waves-effect waves-light">
+                <li class="nav-item dropdown opcion-menu-DS bordes-DS">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{-- <p class="nav-link waves-effect waves-light "> --}}
                         PRODUCTOS
+                        {{-- </p> --}}
                     </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-default col-4"
+                        aria-labelledby="navbarDropdownMenuLink-333">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
                 </li>
                 <li class="nav-item opcion-menu-DS bordes-DS">
                     <a class="nav-link waves-effect waves-light">
@@ -153,7 +134,7 @@
         {{-- Titulo Carnivorous Land --}}
         <div class="titulo carrousel">
             <h1>CARNIVOROUS LAND</h1>
-            <h3>¡DEJATE ATRAPAR!</h3>
+            <h3>¡DÉJATE ATRAPAR!</h3>
             <button type="button" class="btn btn-light-green">¡COMPRAR AHORA!</button>
         </div>
         <!--Indicators-->
@@ -215,55 +196,67 @@
     </div>
     <!--/.Carousel Wrapper-->
 
+    {{-- Subtitulo --}}
     <br>
     <h2 class="row justify-content-center subtitulo-DS">¿Por qué comprar con nosotros?</h2>
     <div class="row align-items-center row justify-content-center">
-        <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade">✻
-        <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade">
+        <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:300px;">✻
+        <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:300px;">
+    </div>
+    {{-- /Subtitulo --}}
+
+    <div class="row justify-content-center">
+        <!--Card-->
+        <div class="card m-3 carta-DS" style="width: 19rem;">
+            <!--Card image-->
+            <div class="view overlay">
+                <img class="imagen-DS" src="{{ asset('img/cartas/carta1.jpg') }}" alt="">
+                <div class="mask rgba-white-slight"></div>
+            </div>
+        </div>
+        <!--/.Card-->
+        <!--Card-->
+        <div class="card m-3 carta-DS" style="width: 19rem;">
+            <!--Card image-->
+            <div class="view overlay">
+                <img class="imagen-DS" src="{{ asset('img/cartas/carta2.jpg') }}" alt="">
+                <div class="mask rgba-white-slight"></div>
+            </div>
+        </div>
+        <!--/.Card-->
+        <!--Card-->
+        <div class="card m-3 carta-DS" style="width: 19rem;">
+            <!--Card image-->
+            <div class="view overlay">
+                <img class="imagen-DS" src="{{ asset('img/cartas/carta3.jpg') }}" alt="">
+                <div class="mask rgba-white-slight"></div>
+            </div>
+        </div>
+        <!--/.Card-->
     </div>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, voluptas! Earum culpa facilis odit nostrum cumque
-        exercitationem delectus doloremque tenetur harum expedita illo ea modi quos nihil fuga recusandae est quidem,
-        esse obcaecati accusamus assumenda sunt impedit tempore! Consequatur, sequi commodi vitae rem obcaecati
-        provident animi cupiditate. Vitae deleniti voluptas animi excepturi unde iure dolor quas, voluptatem consequatur
-        sint. Assumenda labore excepturi, quasi dolor aliquid odit. Recusandae non vel velit fugiat animi? Magnam modi,
-        vero quidem hic iusto dolores accusantium voluptatum illo sit nostrum voluptas laborum aliquid aperiam debitis
-        est? Non eum nemo molestias aliquid eos. Animi delectus quidem eum.</p>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio tenetur ullam, rerum alias sequi voluptatem
-        aperiam facilis nemo hic sint ipsa! Eveniet, ullam voluptate praesentium minus minima fuga ducimus nam
-        reiciendis architecto distinctio, maxime fugiat commodi sapiente quidem voluptates dolorum nemo at mollitia sit
-        optio suscipit aspernatur ipsum! Aut quaerat iste facere, qui similique incidunt repellendus porro sunt labore
-        saepe quod obcaecati libero quasi assumenda alias iusto consectetur repellat iure molestias. Culpa est tempore
-        molestiae nam tenetur quia deserunt delectus debitis, aliquid, nostrum ducimus. Sed nemo dolores dolore
-        praesentium fugit, velit totam similique adipisci, minus repudiandae eum harum animi? Sed dolorem corrupti culpa
-        nihil saepe consequuntur. Debitis eos et id repudiandae. Aliquid accusamus quam optio eaque cupiditate
-        voluptatibus minus nihil vero saepe possimus, quaerat repudiandae aspernatur nulla, exercitationem repellat
-        rerum obcaecati at natus corporis eius. Aut ducimus repudiandae perspiciatis qui, quod laudantium quidem? Fugit
-        fuga eos deleniti aspernatur reprehenderit alias natus reiciendis vero animi earum, hic quasi in neque ratione
-        cumque voluptates repellendus laboriosam perferendis at expedita iure odit debitis? Dolorem, similique ab natus
-        quasi odio vero? Vel, quaerat eum? Impedit magnam temporibus adipisci quibusdam suscipit eaque dolores delectus
-        fugiat pariatur illum quos hic eligendi cumque alias laborum esse officiis maxime quasi voluptatibus, voluptas
-        odio aut, incidunt perferendis perspiciatis? Beatae rerum, omnis ipsa quia iure at quas, possimus dolorum
-        delectus adipisci assumenda iste nam ea blanditiis repellat expedita! Modi laboriosam, consequatur quidem a
-        voluptatibus veniam porro consectetur deleniti eveniet doloribus dicta officiis fuga corporis. Dolor assumenda
-        rerum optio modi veritatis nihil ipsam voluptas, neque error. Eaque mollitia, ipsum distinctio autem asperiores
-        molestias veniam debitis, odio explicabo labore fugit quis inventore. Tempore ab culpa, error accusantium
-        consectetur consequuntur aliquid doloribus numquam perferendis repellat esse ipsam dignissimos? Recusandae iure,
-        delectus consequatur officia odio magnam totam eligendi est? Necessitatibus dolorum repellat similique sint
-        beatae, temporibus adipisci placeat consequuntur ullam officiis harum dolore amet sit! Illum facilis veritatis
-        laborum praesentium labore dolorum aperiam, ad sit autem architecto, nobis tempore voluptatum voluptatibus nisi
-        dignissimos velit aut ullam aliquid tenetur provident! Esse ad cupiditate veniam fugiat sapiente eaque ea omnis
-        eum enim, a rem corporis excepturi repellendus sint natus maiores veritatis reiciendis obcaecati nemo et eveniet
-        facilis qui consectetur! Incidunt earum excepturi quisquam maxime placeat culpa voluptates fugit debitis non.
-        Vitae, molestias! Consectetur sapiente, quas a iure vitae natus pariatur ab inventore? Nisi, totam illo? Alias
-        voluptas necessitatibus quam ullam doloremque quia excepturi adipisci, incidunt iste aperiam, consequatur
-        molestias. A repellat perspiciatis, minus saepe cumque exercitationem labore obcaecati nihil facilis fugit
-        dicta, magni temporibus unde porro ullam quasi debitis illo nulla, mollitia iste. Consequatur ea in totam
-        sapiente delectus quaerat nulla velit dolor veniam ipsa est voluptates aperiam cum eos reprehenderit similique
-        quia officia, tempora perspiciatis aliquid aut! Unde doloremque quasi vitae dolorum quos debitis adipisci
-        quaerat, dolore consequatur cum corrupti neque provident iure accusamus recusandae ut tenetur inventore ad
-        deserunt quibusdam nesciunt. Adipisci praesentium voluptatibus nostrum eum magni eaque ex laborum iusto
-        explicabo vel numquam eos, magnam est maxime saepe voluptates aperiam eveniet illo obcaecati.</p>
+    {{-- Subtitulo --}}
+    <br>
+    <h2 class="row justify-content-center subtitulo-DS">Lo más destacado</h2>
+    <div class="row align-items-center row justify-content-center">
+        <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
+        <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;">
+    </div>
+    {{-- /Subtitulo --}}
+
+    {{-- Subtitulo --}}
+    <br>
+    <h2 class="row justify-content-center subtitulo-DS">Eventos</h2>
+    <div class="row align-items-center row justify-content-center">
+        <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
+        <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;">
+    </div>
+    {{-- /Subtitulo --}}
+
+    <div class="row justify-content-center">
+        <img class="imagen-DS evento-DS m-3" src="{{ asset('img/eventos/evento1.jpg') }}" alt="">
+        <div class="mask rgba-white-slight"></div>
+    </div>
 
     <!--Footer-->
     <footer class="footer">
