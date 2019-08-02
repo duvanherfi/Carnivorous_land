@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
+    <title>Carnivorousland</title>
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
@@ -19,7 +20,12 @@
     <!-- MDB core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/js/mdb.min.js">
     </script>
+    <!-- Libreria AOS js -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+
+    <!-- Libreria AOS css-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
@@ -36,8 +42,8 @@
     <!-- Estilos creados por DailySoft -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
-
 <body>
+
     <!--Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-DS">
         <a class="navbar-brand sincursor-DS" href="#">¡Bienvenido a Canivorous Land, déjate atrapar!</a>
@@ -85,12 +91,12 @@
         <div class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-33">
             <ul class="navbar-nav ml-auto nav-flex-icons bordes-menu-DS">
                 <li class="nav-item opcion-menu-DS bordes-DS">
-                    <a class="nav-link waves-effect waves-light">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('principal') }}">
                         INICIO
                     </a>
                 </li>
                 <li class="nav-item bordes-DS">
-                    <a class="nav-link waves-effect waves-light">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('quienes') }}">
                         ¿QUIÉNES SOMOS?
                     </a>
                 </li>
@@ -129,134 +135,10 @@
     </nav>
     {{-- /.Menu --}}
 
-    <!--Carousel Wrapper-->
-    <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
-        {{-- Titulo Carnivorous Land --}}
-        <div class="titulo carrousel">
-            <h1>CARNIVOROUS LAND</h1>
-            <h3>¡DÉJATE ATRAPAR!</h3>
-            <button type="button" class="btn btn-light-green">¡COMPRAR AHORA!</button>
-        </div>
-        <!--Indicators-->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-2" data-slide-to="1"></li>
-            <li data-target="#carousel-example-2" data-slide-to="2"></li>
-        </ol>
-        <!--/.Indicators-->
-        <!--Slides-->
-        <div class="carousel-inner carrousel-DS" role="listbox">
-            <div class="carousel-item active">
-                <div class="view">
-                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/1.png') }}"
-                        alt="First slide">
-                    <div class="mask rgba-black-light"></div>
-                </div>
-                <div class="carousel-caption letras-DS">
-                    <h3 class="h3-responsive">Light mask</h3>
-                    <p>First text</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <!--Mask color-->
-                <div class="view">
-                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/2.png') }}"
-                        alt="Second slide">
-                    <div class="mask rgba-black-strong"></div>
-                </div>
-                <div class="carousel-caption letras-DS">
-                    <h3 class="h3-responsive">Strong mask</h3>
-                    <p>Secondary text</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <!--Mask color-->
-                <div class="view">
-                    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/3.png') }}"
-                        alt="Third slide">
-                    <div class="mask rgba-black-slight"></div>
-                </div>
-                <div class="carousel-caption letras-DS">
-                    <h3 class="h3-responsive">Slight mask</h3>
-                    <p>Third text</p>
-                </div>
-            </div>
-        </div>
-        <!--/.Slides-->
-        <!--Controls-->
-        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        <!--/.Controls-->
-    </div>
-    <!--/.Carousel Wrapper-->
 
-    {{-- Subtitulo --}}
-    <br>
-    <h2 class="row justify-content-center subtitulo-DS">¿Por qué comprar con nosotros?</h2>
-    <div class="row align-items-center row justify-content-center">
-        <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:300px;">✻
-        <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:300px;">
-    </div>
-    {{-- /Subtitulo --}}
+    @yield('contenido')
 
-    <div class="row justify-content-center">
-        <!--Card-->
-        <div class="card m-3 carta-DS" style="width: 19rem;">
-            <!--Card image-->
-            <div class="view overlay">
-                <img class="imagen-DS" src="{{ asset('img/cartas/carta1.jpg') }}" alt="">
-                <div class="mask rgba-white-slight"></div>
-            </div>
-        </div>
-        <!--/.Card-->
-        <!--Card-->
-        <div class="card m-3 carta-DS" style="width: 19rem;">
-            <!--Card image-->
-            <div class="view overlay">
-                <img class="imagen-DS" src="{{ asset('img/cartas/carta2.jpg') }}" alt="">
-                <div class="mask rgba-white-slight"></div>
-            </div>
-        </div>
-        <!--/.Card-->
-        <!--Card-->
-        <div class="card m-3 carta-DS" style="width: 19rem;">
-            <!--Card image-->
-            <div class="view overlay">
-                <img class="imagen-DS" src="{{ asset('img/cartas/carta3.jpg') }}" alt="">
-                <div class="mask rgba-white-slight"></div>
-            </div>
-        </div>
-        <!--/.Card-->
-    </div>
-
-    {{-- Subtitulo --}}
-    <br>
-    <h2 class="row justify-content-center subtitulo-DS">Lo más destacado</h2>
-    <div class="row align-items-center row justify-content-center">
-        <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
-        <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;">
-    </div>
-    {{-- /Subtitulo --}}
-
-    {{-- Subtitulo --}}
-    <br>
-    <h2 class="row justify-content-center subtitulo-DS">Eventos</h2>
-    <div class="row align-items-center row justify-content-center">
-        <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
-        <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;">
-    </div>
-    {{-- /Subtitulo --}}
-
-    <div class="row justify-content-center">
-        <img class="imagen-DS evento-DS m-3" src="{{ asset('img/eventos/evento1.jpg') }}" alt="">
-        <div class="mask rgba-white-slight"></div>
-    </div>
+    @yield('quienes_somos')
 
     <!--Footer-->
     <footer class="footer">
@@ -326,6 +208,11 @@
         </div>
     </footer>
     {{-- Footer --}}
+
+    <!-- Inici de la libreria AOS-->
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

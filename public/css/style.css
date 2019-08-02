@@ -1,7 +1,6 @@
 p {
     font-family: 'Montserrat', sans-serif;
     text-align: justify;
-
 }
 
 h2 {
@@ -70,6 +69,10 @@ h1 {
     font-family: 'Source Sans Pro', serif;
 }
 
+.texto-DS{
+    text-align: center;
+}
+
 /* Logo */
 
 .logo {
@@ -94,17 +97,13 @@ h1 {
 .izquierda-DS {
     float: left;
     height: 2px;
-    background-color: #B3533A;
+    background-color: #434343;
 }
 
 .derecha-DS {
     float: right;
     height: 2px;
-    background-color: #B3533A;
-}
-
-#separador {
-    color: #B3533A;
+    background-color: #434343;
 }
 
 
