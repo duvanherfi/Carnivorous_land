@@ -12,10 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('contenido');
-});
+    return view('inicio');
+})->name('principal');
 
 
 Route::get('/quienes_somos', function () {
     return view('quienes_somos');
-});
+})->name('quienes');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

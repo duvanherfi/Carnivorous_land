@@ -11,8 +11,8 @@
 
             <h2 class="row justify-content-center subtitulo-DS pt-3">Un poco de historia..</h2>
             <div id="separador" class="row align-items-center row justify-content-center">
-                <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade">✻
-                <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade">
+                <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
+                <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;"php >
             </div>
 
             <!-- Sección de Historia-->

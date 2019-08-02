@@ -91,12 +91,12 @@
         <div class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-33">
             <ul class="navbar-nav ml-auto nav-flex-icons bordes-menu-DS">
                 <li class="nav-item opcion-menu-DS bordes-DS">
-                    <a class="nav-link waves-effect waves-light">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('principal') }}">
                         INICIO
                     </a>
                 </li>
                 <li class="nav-item bordes-DS">
-                    <a class="nav-link waves-effect waves-light" href="quienes_somos">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('quienes') }}">
                         ¿QUIÉNES SOMOS?
                     </a>
                 </li>
