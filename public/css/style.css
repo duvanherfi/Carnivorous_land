@@ -312,7 +312,23 @@ footer p {
 }
 
 /* contactanos*/
-#wpp {
-    display: block;
+#texto-mapa h3{
+  
+  text-align: center;
+  
     
+}
+
+.ubicacion {
+    background-color: #9DCE5B;
+    color: #FFF;
+   
+}
+
+.form-ubicacion {
+    color: #FFF;
+}
+.btn {
+
+    background-color: #434343;;;
 }
