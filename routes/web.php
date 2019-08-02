@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('/quienes_somos', function () {
     return view('quienes_somos');
 });
+
+Route::get('/contactanos', function () {
+    return view('contactanos');
+});
