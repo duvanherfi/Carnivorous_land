@@ -71,15 +71,16 @@
 
 {{-- Subtitulo --}}
 <br>
-<h2 class="row justify-content-center subtitulo-DS">¿Por qué comprar con nosotros?</h2>
-<div class="row align-items-center row justify-content-center">
+<h2 class="row justify-content-center subtitulo-DS w-100 m-0">¿Por qué comprar con nosotros?</h2>
+<div class="row align-items-center row justify-content-center w-100 m-0">
     <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:300px;">✻
     <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:300px;">
 </div>
+
 {{-- /Subtitulo --}}
 
 {{-- Cartas --}}
-<div class="row justify-content-center" data-aos="fade-up" data-aos-anchor-placement="top-center">
+<div class="row justify-content-center w-100 m-0" data-aos="fade-up" data-aos-anchor-placement="top-center">
     <!--Card-->
     <div class="card m-3 carta-DS" style="width: 19rem; height: 420px;">
         <!--Card image-->
@@ -112,8 +113,8 @@
 
 {{-- Subtitulo --}}
 <br>
-<h2 class="row justify-content-center subtitulo-DS">Lo más destacado</h2>
-<div class="row align-items-center row justify-content-center">
+<h2 class="row justify-content-center subtitulo-DS w-100 m-0">Lo más destacado</h2>
+<div class="row align-items-center row justify-content-center w-100 m-0">
     <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
     <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;">
 </div>
@@ -127,15 +128,15 @@
 
 {{-- Subtitulo --}}
 <br>
-<h2 class="row justify-content-center subtitulo-DS">Eventos</h2>
-<div class="row align-items-center row justify-content-center">
+<h2 class="row justify-content-center subtitulo-DS w-100 m-0">Eventos</h2>
+<div class="row align-items-center row justify-content-center w-100 m-0">
     <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:150px;">✻
     <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:150px;">
 </div>
 {{-- /Subtitulo --}}
 
 {{-- Eventos --}}
-<div class="row justify-content-center" data-aos="fade-up" data-aos-anchor-placement="top-center">
+<div class="row justify-content-center w-100 m-0" data-aos="fade-up" data-aos-anchor-placement="top-center">
     <img class="imagen-DS evento-DS m-3" src="{{ asset('img/eventos/evento1.jpg') }}" alt="">
     <div class="mask rgba-white-slight"></div>
 </div>

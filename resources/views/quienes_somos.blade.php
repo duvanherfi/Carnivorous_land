@@ -6,8 +6,8 @@
 
 <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/quienes_somos/fondo_quienes_somos.jpg') }}">
 
-<h2 class="row justify-content-center subtitulo-DS pt-3">Un poco de historia..</h2>
-<div id="separador" class="row align-items-center row justify-content-center">
+<h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">Un poco de historia...</h2>
+<div id="separador" class="row align-items-center row justify-content-center w-100 m-0">
     <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
     <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;" php>
 </div>
@@ -41,7 +41,7 @@
 
 <!-- Misión y visión -->
 <div id="misi_visi" data-aos="fade-up" data-aos-duration="1500">
-    <div class="row">
+    <div class="row w-100">
         <div class="col p-3">
             <h2>Misión</h2>
         </div>
@@ -71,8 +71,8 @@
 <!-- Fin Misión y visión -->
 
 <!-- Valores-->
-<h2 class="row justify-content-center subtitulo-DS pt-3">Nuestros valores</h2>
-<div id="separador" class="row align-items-center row justify-content-center pb-3">
+<h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">Nuestros valores</h2>
+<div id="separador" class="row align-items-center row justify-content-center pb-3 w-100 m-0">
     <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
     <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;" php>
 </div>
