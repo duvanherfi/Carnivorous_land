@@ -159,6 +159,7 @@ h1 {
     right: auto;
     left: -6px;
     min-width: 10.4rem;
+    z-index: 100;
 }
 
 /* Carta */

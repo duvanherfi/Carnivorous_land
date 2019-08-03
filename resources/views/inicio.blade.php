@@ -121,7 +121,7 @@
 {{-- /Subtitulo --}}
 
 <!--Cartas-->
-<div id="app" class="row justify-content-center" data-aos="fade-up" data-aos-anchor-placement="top-center">
+<div id="app" class="row justify-content-center w-100 m-0" data-aos="fade-up" data-aos-anchor-placement="top-center">
     <productos></productos>
 </div>
 <!--/Cartas-->

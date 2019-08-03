@@ -35,11 +35,10 @@
             <!-- Text -->
             <p class="font-weight-bold card-text mb-1">$50.000 COP</p>
             <!-- Button -->
-            <a class="btn btn-unique btn-block"><i class="fas fa-cart-plus"></i> Añadir al carro</a>
+            <button class="btn btn-block color-gris"><i class="fas fa-cart-plus"></i> Añadir al carro</button>
             <!-- /Contenido -->
         </div>
         <!--/.Card-->
-
     </div>
 </div>
 <!--/Cartas-->
@@ -64,14 +63,23 @@ input[type="radio"] {
     display: none;
 }
 
-label {
-    color: grey;
+label{
+    color: #434343;
+}
+
+.color-gris{
+    background-color:#86a74d;
+    color: white;
+}
+
+.color-gris:hover{
+    color: white;
 }
 
 .clasificacion {
     direction: rtl;
     unicode-bidi: bidi-override;
-    width: 85px;
+    width: 77px;
     height: 30px;
     margin: 0;
 }

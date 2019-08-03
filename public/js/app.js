@@ -6189,7 +6189,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#form {\r\n    width: 250px;\r\n    margin: 0 auto;\r\n    height: 50px;\n}\n#form p {\r\n    text-align: center;\n}\n#form label {\r\n    font-size: 20px;\n}\ninput[type=\"radio\"] {\r\n    display: none;\n}\nlabel {\r\n    color: grey;\n}\n.clasificacion {\r\n    direction: rtl;\r\n    unicode-bidi: bidi-override;\r\n    width: 85px;\r\n    height: 30px;\r\n    margin: 0;\n}\np {\r\n    cursor: default;\n}\nlabel:hover,\r\nlabel:hover~label {\r\n    color: orange;\r\n    cursor: pointer;\n}\ninput[type=\"radio\"]:checked~label {\r\n    color: orange;\n}\r\n", ""]);
+exports.push([module.i, "\n#form {\r\n    width: 250px;\r\n    margin: 0 auto;\r\n    height: 50px;\n}\n#form p {\r\n    text-align: center;\n}\n#form label {\r\n    font-size: 20px;\n}\ninput[type=\"radio\"] {\r\n    display: none;\n}\nlabel{\r\n    color: #434343;\n}\n.color-gris{\r\n    background-color:#86a74d;\r\n    color: white;\n}\n.color-gris:hover{\r\n    color: white;\n}\n.clasificacion {\r\n    direction: rtl;\r\n    unicode-bidi: bidi-override;\r\n    width: 77px;\r\n    height: 30px;\r\n    margin: 0;\n}\np {\r\n    cursor: default;\n}\nlabel:hover,\r\nlabel:hover~label {\r\n    color: orange;\r\n    cursor: pointer;\n}\ninput[type=\"radio\"]:checked~label {\r\n    color: orange;\n}\r\n", ""]);
 
 // exports
 
@@ -37818,7 +37818,7 @@ var staticRenderFns = [
               _vm._v("$50.000 COP")
             ]),
             _vm._v(" "),
-            _c("a", { staticClass: "btn btn-unique btn-block" }, [
+            _c("button", { staticClass: "btn btn-block color-gris" }, [
               _c("i", { staticClass: "fas fa-cart-plus" }),
               _vm._v(" Añadir al carro")
             ])
