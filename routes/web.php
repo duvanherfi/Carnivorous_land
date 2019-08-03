@@ -20,6 +20,11 @@ Route::get('/quienes_somos', function () {
     return view('quienes_somos');
 })->name('quienes_somos');
 
+Route::get('/contactanos', function () {
+    return view('contactanos');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
