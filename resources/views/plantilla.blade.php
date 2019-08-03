@@ -7,8 +7,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Carnivorous Land</title>
 
-    <!-- Styles -->
-
     {{-- Fuentes --}}
     {{-- Source Sans Pro --}}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900&display=swap" rel="stylesheet">
