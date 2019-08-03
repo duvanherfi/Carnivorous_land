@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -6,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Carnivorousland</title>
+    <title>Carnivorous Land</title>
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
@@ -22,8 +21,12 @@
     </script>
     <!-- Libreria AOS js -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
 
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Libreria AOS css-->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -32,18 +35,20 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/css/mdb.min.css" rel="stylesheet">
-
     {{-- Fuentes --}}
     {{-- Source Sans Pro --}}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900&display=swap" rel="stylesheet">
     {{-- Montserrat --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Estilos creados por DailySoft -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
-<body>
 
+<body>
     <!--Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-DS">
         <a class="navbar-brand sincursor-DS" href="#">¡Bienvenido a Canivorous Land, déjate atrapar!</a>
@@ -65,12 +70,12 @@
                     </p>
                 </li>
                 <li class="nav-item bordes-DS">
-                    <a class="nav-link waves-effect waves-light">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('login') }}">
                         INICIAR SESIÓN
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('register') }}">
                         REGISTRARSE
                     </a>
                 </li>
@@ -84,34 +89,36 @@
     {{-- /Logo --}}
     {{-- Menu --}}
     <nav class="navbar navbar-expand-lg navbar-dark div2">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-33"
-            aria-controls="navbarSupportedContent-33" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-33"
+            aria-controls="navbarSupportedContent-33" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> --}}
         <div class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-33">
             <ul class="navbar-nav ml-auto nav-flex-icons bordes-menu-DS">
                 <li class="nav-item opcion-menu-DS bordes-DS">
-                    <a class="nav-link waves-effect waves-light" href="{{ route('principal') }}">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('inicio') }}">
                         INICIO
                     </a>
                 </li>
                 <li class="nav-item bordes-DS">
-                    <a class="nav-link waves-effect waves-light" href="{{ route('quienes') }}">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('quienes_somos') }}">
                         ¿QUIÉNES SOMOS?
                     </a>
                 </li>
                 <li class="nav-item dropdown opcion-menu-DS bordes-DS">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        {{-- <p class="nav-link waves-effect waves-light "> --}}
                         PRODUCTOS
-                        {{-- </p> --}}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-default col-4"
+                    <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
                         aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Plantas</a>
+                        <a class="dropdown-item" href="#">Implementos de cultivo</a>
+                        <a class="dropdown-item" href="#">Merchandising</a>
                     </div>
                 </li>
                 <li class="nav-item opcion-menu-DS bordes-DS">
@@ -131,14 +138,11 @@
         <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="45">
         <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="45">
         <img class="ml-3" id="bordes-left-DS" src="{{ asset('img/carro.png') }}" alt="Carro" width="45">
-        <span class="badge badge-primary badge-pill counter">1</span>
+        <span class="badge badge-primary badge-pill counter">0</span>
     </nav>
     {{-- /.Menu --}}
 
-
     @yield('contenido')
-
-    @yield('quienes_somos')
 
     <!--Footer-->
     <footer class="footer">
@@ -170,9 +174,10 @@
 
                 <div class="col-sm-4 col-md  col-6 col">
                     <h5 class="headin5_amrc col_white_amrc pt2">Envios</h5>
+                    <p class="mb10 text-justify">Envios solo para ciudades de Colombia</p>
                     <!--headin5_amrc-->
                     <img class="mb-2" src="{{ asset('img/iconos-footer/servientrega.png') }}" alt="Servientrega"
-                        width="200">
+                    width="200">
                     <img src="{{ asset('img/iconos-footer/interrapidisimo.png') }}" alt="Interrapidisimo" width="200">
                     <!--footer_ul_amrc ends here-->
                 </div>

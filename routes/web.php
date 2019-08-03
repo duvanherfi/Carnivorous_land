@@ -13,12 +13,12 @@
 
 Route::get('/', function () {
     return view('inicio');
-})->name('principal');
+})->name('inicio');
 
 
 Route::get('/quienes_somos', function () {
     return view('quienes_somos');
-})->name('quienes');
+})->name('quienes_somos');
 
 Auth::routes();
 
