@@ -127,7 +127,7 @@
                     </a>
                 </li>
                 <li class="nav-item opcion-menu-DS">
-                    <a class="nav-link waves-effect waves-light">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('contactanos') }}">
                         CONTÁCTANOS
                     </a>
                 </li>
@@ -143,6 +143,7 @@
     {{-- /.Menu --}}
 
     @yield('contenido')
+    @yield('contactanos')
 
     <!--Footer-->
     <footer class="footer">
@@ -151,7 +152,7 @@
                 <div class=" col-sm-4 col-md col-sm-4  col-12 col">
                     <h5 class="headin5_amrc col_white_amrc pt2">Contáctanos</h5>
                     <!--headin5_amrc-->
-                    <p class="mb10">Realizamos envios a nivel de todo Colombia</p>
+                    <p class="mb10">Realizamos envíos a nivel de todo Colombia</p>
                     <p><img src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="23"> +57 316
                         7973829
                     </p>
@@ -173,7 +174,7 @@
                 </div>
 
                 <div class="col-sm-4 col-md  col-6 col">
-                    <h5 class="headin5_amrc col_white_amrc pt2">Envios</h5>
+                    <h5 class="headin5_amrc col_white_amrc pt2">Envíos</h5>
                     <p class="mb10 text-justify">Envios solo para ciudades de Colombia</p>
                     <!--headin5_amrc-->
                     <img class="mb-2" src="{{ asset('img/iconos-footer/servientrega.png') }}" alt="Servientrega"

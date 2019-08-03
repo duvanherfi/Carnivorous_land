@@ -71,7 +71,12 @@
 <!-- Fin Misión y visión -->
 
 <!-- Valores-->
-<h2 class="p-3">Valores</h2>
+<h2 class="row justify-content-center subtitulo-DS pt-3">Nuestros valores</h2>
+<div id="separador" class="row align-items-center row justify-content-center pb-3">
+    <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
+    <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;" php>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col pb-5 col-md-7">

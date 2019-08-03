@@ -22,7 +22,7 @@ Route::get('/quienes_somos', function () {
 
 Route::get('/contactanos', function () {
     return view('contactanos');
-});
+})->name('contactanos');
 
 Auth::routes();
 
