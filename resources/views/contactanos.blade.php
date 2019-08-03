@@ -1,6 +1,6 @@
 
 @extends('plantilla')
-@section('contactanos')
+@section('contenido')
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,7 +36,7 @@
     </script>
      <!-- Libreria AOS js npm i aos -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-   
+
 
 
 
@@ -57,29 +57,29 @@
             <div class="container pb-3">
                 <div class="row">
                     <div class="col p-3 ml-5">
-                   
+
                     <img id="wpp" class="ml-5" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="100">
-                    
+
                     </div>
 
                     <div class="col p-3">
 
                     <img class="ml-5" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram" width="100">
-             
+
                     </div>
 
                     <div class="col p-3">
 
                     <img class="ml-5 " src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="100">
-                          
+
                     </div>
 
                     <div class="col mr-5 p-3">
 
-                    <img class="ml-5 mr-0" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="100">          
-                    
+                    <img class="ml-5 mr-0" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="100">
+
                      </div>
-                
+
                  </div>
 
             </div>
@@ -107,14 +107,14 @@
 
                         <p>Puedes enviarnos una recomendación, queja, reclamo o lo que desees!</p>
 
-                    
+
 
                         <!-- Name -->
                         <input type="text" id="defaultSubscriptionFormPassword" class="form-control form-ubicacion mb-4" placeholder="Name">
 
                         <!-- Email -->
                         <input type="email" id="defaultSubscriptionFormEmail" class="form-control form-ubicacion bicacion mb-4" placeholder="E-mail">
-                        
+
                         <!-- Textp -->
                         <input type="text-area" id="texto" class="form-control form-ubicacion bicacion mb-4" placeholder="Tu mensaje">
 

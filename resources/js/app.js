@@ -1,5 +1,8 @@
-
 require('./bootstrap');
+
+var AOS = require('aos');
+AOS.init();
+
 
 window.Vue = require('vue');
 
