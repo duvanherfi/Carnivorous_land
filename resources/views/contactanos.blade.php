@@ -1,10 +1,11 @@
 @extends('plantilla')
-@section('contactanos')
-<div class="titulo carrousel">
-    <h1 id="titulo_quienes_somos" class="pt-5 mt-5 pl-5 ml-5">CONTÁCTANOS</h1>
-</div>
+@section('contenido')
 
-<img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/contactanos/fondo_contactanos.jpg') }}">
+    <div class="titulo carrousel">
+        <h1 id="titulo_quienes_somos" class="pt-5 mt-5 pl-5 ml-5">CONTÁCTANOS</h1>
+    </div>
+
+    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/contactanos/fondo_contactanos.jpg') }}">
 
 <h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">Nuestras redes sociales</h2>
 <div id="separador" class="row align-items-center row justify-content-center w-100 m-0">
