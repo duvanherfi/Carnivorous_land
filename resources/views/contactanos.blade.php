@@ -128,13 +128,4 @@
                 </div>
             </div>
     <!-- Fin Ubicación -->
-
-
-
-    
-
-
-
-
-
 @endsection
