@@ -360,7 +360,13 @@ footer p {
     background-color: #9DCE5B;
 }
 
-#formulario_login {
-  
+.botones {
+   
+background-color: #434343;
+color:#FFF;
     
+}
+
+.botones:hover{
+    color: grey;
 }
