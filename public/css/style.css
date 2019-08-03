@@ -342,6 +342,15 @@ footer p {
     
 }
 
+#separacion {
+
+    
+    border-right: 2px solid white;
+    width: 60px;
+
+
+}
+
 .ubicacion {
     background-color: #9DCE5B;
     color: #FFF;

@@ -21,7 +21,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body id="fondo_login">
-    <div id="app" class="">
+    <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container ">
                 <a class="navbar-brand" href="{{ url('/') }}">
