@@ -16,28 +16,29 @@
 <!-- Sección de Redes Sociales-->
 <div class="container pb-3">
     <div class="row">
+
         <div class="col p-3 ml-5">
-
-            <img id="wpp" class="ml-5" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="100">
-
+            <a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX" target="_blank">
+                <img id="wpp" class="ml-5" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="100">
+            </a>
         </div>
 
         <div class="col p-3">
-
-            <img class="ml-5" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram" width="100">
-
+            <a href="https://www.instagram.com/carnivorousland/" target="_blank">
+                <img class="ml-5" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram" width="100">
+            </a>
         </div>
 
         <div class="col p-3">
-
-            <img class="ml-5 " src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="100">
-
+            <a href="https://www.youtube.com/channel/UC-HHD-jISuSeqQnGylaow1w" target="blank">
+                <img class="ml-5 " src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="100">
+            </a>
         </div>
-
+      
         <div class="col mr-5 p-3">
-
-            <img class="ml-5 mr-0" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="100">
-
+            <a href="https://api.whatsapp.com/send?phone=573167973829" target="_blank">
+                <img class="ml-5 mr-0" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="100">
+            </a>
         </div>
 
     </div>
