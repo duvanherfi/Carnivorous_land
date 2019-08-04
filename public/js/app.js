@@ -1732,6 +1732,134 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/cartas_productos.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/cartas_productos.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      productos: [],
+      producto: {
+        imagen: '',
+        genero: '',
+        nombre: '',
+        valor: '',
+        tamaño: ''
+      }
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/productos').then(function (res) {
+      _this.productos = res.data;
+    });
+  },
+  methods: {
+    obtenerImagen: function obtenerImagen(e) {
+      var file = e.target.files[0];
+      this.producto.imagen = file;
+    },
+    añadirProducto: function aAdirProducto() {
+      var _this2 = this;
+
+      var formData = new FormData();
+      formData.append('imagen', this.producto.imagen);
+      formData.append('genero', this.producto.genero);
+      formData.append('nombre', this.producto.nombre);
+      formData.append('valor', this.producto.valor);
+      formData.append('tamaño', this.producto.tamaño);
+      axios.post('/productos', formData).then(function (response) {
+        console.log(response.data);
+
+        _this2.productos.push(response.data);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -6189,7 +6317,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#form {\r\n    width: 250px;\r\n    margin: 0 auto;\r\n    height: 50px;\n}\n#form p {\r\n    text-align: center;\n}\n#form label {\r\n    font-size: 20px;\n}\ninput[type=\"radio\"] {\r\n    display: none;\n}\nlabel{\r\n    color: #434343;\n}\n.color-gris{\r\n    background-color:#86a74d;\r\n    color: white;\n}\n.color-gris:hover{\r\n    color: white;\n}\n.clasificacion {\r\n    direction: rtl;\r\n    unicode-bidi: bidi-override;\r\n    width: 77px;\r\n    height: 30px;\r\n    margin: 0;\n}\np {\r\n    cursor: default;\n}\nlabel:hover,\r\nlabel:hover~label {\r\n    color: orange;\r\n    cursor: pointer;\n}\ninput[type=\"radio\"]:checked~label {\r\n    color: orange;\n}\r\n", ""]);
+exports.push([module.i, "\n#form {\r\n    width: 250px;\r\n    margin: 0 auto;\r\n    height: 50px;\n}\n#form p {\r\n    text-align: center;\n}\n#form label {\r\n    font-size: 20px;\n}\ninput[type=\"radio\"] {\r\n    display: none;\n}\nlabel {\r\n    color: #434343;\n}\n.color-gris {\r\n    background-color: #86a74d;\r\n    color: white;\n}\n.color-gris:hover {\r\n    color: white;\n}\n.clasificacion {\r\n    direction: rtl;\r\n    unicode-bidi: bidi-override;\r\n    width: 77px;\r\n    height: 30px;\r\n    margin: 0;\n}\np {\r\n    cursor: default;\n}\nlabel:hover,\r\nlabel:hover~label {\r\n    color: orange;\r\n    cursor: pointer;\n}\ninput[type=\"radio\"]:checked~label {\r\n    color: orange;\n}\r\n", ""]);
 
 // exports
 
@@ -37718,14 +37846,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
+  return _c(
+    "div",
+    [
+      _vm._l(_vm.productos, function(item, index) {
+        return _c(
+          "div",
+          {
+            key: index,
+            staticClass: "card m-3 carta-DS",
+            staticStyle: { width: "19rem", height: "370px" }
+          },
+          [
+            _c("div", { staticClass: "view overlay" }, [
+              _c("img", {
+                staticClass: "imagen-producto-DS shadow-lg mb-5 bg-white",
+                attrs: { src: "/imagenes-prueba/" + item.imagen, alt: "" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "mask rgba-white-slight" })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body card-body-cascade" }, [
+              _c("div", { staticClass: "row row justify-content-between" }, [
+                _c(
+                  "h5",
+                  { staticClass: "col-5 font-weight-bold card-title mb-1" },
+                  [_vm._v(_vm._s(item.genero))]
+                ),
+                _vm._v(" "),
+                _c("h6", { staticClass: "col-5 align-self-center mb-1 px-3" }, [
+                  _vm._v("Tamaño: " + _vm._s(item.tamaño))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("h6", { staticClass: "mb-1" }, [_vm._v(_vm._s(item.nombre))]),
+              _vm._v(" "),
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c("p", { staticClass: "font-weight-bold card-text mb-1" }, [
+                _vm._v("$" + _vm._s(item.valor) + " COP")
+              ]),
+              _vm._v(" "),
+              _vm._m(1, true)
+            ])
+          ]
+        )
+      }),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -37733,98 +37901,185 @@ var staticRenderFns = [
           staticStyle: { width: "19rem", height: "370px" }
         },
         [
-          _c("div", { staticClass: "view overlay" }, [
-            _c("img", {
-              staticClass: "imagen-producto-DS shadow-lg mb-5 bg-white",
-              attrs: { src: "/img/cartas/carta1.jpg", alt: "" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "mask rgba-white-slight" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body card-body-cascade" }, [
-            _c("div", { staticClass: "row row justify-content-between" }, [
-              _c(
-                "h5",
-                { staticClass: "col-5 font-weight-bold card-title mb-1" },
-                [_vm._v("Drosera")]
-              ),
-              _vm._v(" "),
-              _c("h6", { staticClass: "col-5 align-self-center mb-1 px-3" }, [
-                _vm._v("Tamaño: M")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("h6", { staticClass: "mb-1" }, [_vm._v("Capensis")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "clasificacion" }, [
-              _c("input", {
-                attrs: {
-                  id: "radio1",
-                  type: "radio",
-                  name: "estrellas",
-                  value: "5"
+          _c(
+            "form",
+            {
+              attrs: { enctype: "multipart/form-data" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.añadirProducto()
                 }
-              }),
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "imagen" } }, [_vm._v("Imagen")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control-file",
+                  attrs: { type: "file" },
+                  on: { change: _vm.obtenerImagen }
+                })
+              ]),
               _vm._v(" "),
-              _c("label", { attrs: { for: "radio1" } }, [_vm._v("★")]),
+              _c("div", [
+                _c("label", { attrs: { for: "genero" } }, [_vm._v("Genero")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.producto.genero,
+                      expression: "producto.genero"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "genero" },
+                  domProps: { value: _vm.producto.genero },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.producto, "genero", $event.target.value)
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _c("input", {
-                attrs: {
-                  id: "radio2",
-                  type: "radio",
-                  name: "estrellas",
-                  value: "4"
-                }
-              }),
+              _c("div", [
+                _c("label", { attrs: { for: "nombre" } }, [_vm._v("Nombre")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.producto.nombre,
+                      expression: "producto.nombre"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "nombre" },
+                  domProps: { value: _vm.producto.nombre },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.producto, "nombre", $event.target.value)
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _c("label", { attrs: { for: "radio2" } }, [_vm._v("★")]),
+              _c("div", [
+                _c("label", { attrs: { for: "valor" } }, [_vm._v("Valor")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.producto.valor,
+                      expression: "producto.valor"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "valor" },
+                  domProps: { value: _vm.producto.valor },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.producto, "valor", $event.target.value)
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _c("input", {
-                attrs: {
-                  id: "radio3",
-                  type: "radio",
-                  name: "estrellas",
-                  value: "3"
-                }
-              }),
+              _c("div", [
+                _c("label", { attrs: { for: "tamaño" } }, [_vm._v("Tamaño")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.producto.tamaño,
+                      expression: "producto.tamaño"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "tamaño" },
+                  domProps: { value: _vm.producto.tamaño },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.producto, "tamaño", $event.target.value)
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _c("label", { attrs: { for: "radio3" } }, [_vm._v("★")]),
-              _vm._v(" "),
-              _c("input", {
-                attrs: {
-                  id: "radio4",
-                  type: "radio",
-                  name: "estrellas",
-                  value: "2"
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "radio4" } }, [_vm._v("★")]),
-              _vm._v(" "),
-              _c("input", {
-                attrs: {
-                  id: "radio5",
-                  type: "radio",
-                  name: "estrellas",
-                  value: "1"
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "radio5" } }, [_vm._v("★")])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "font-weight-bold card-text mb-1" }, [
-              _vm._v("$50.000 COP")
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "btn btn-block color-gris" }, [
-              _c("i", { staticClass: "fas fa-cart-plus" }),
-              _vm._v(" Añadir al carro")
-            ])
-          ])
+              _c("input", { attrs: { type: "submit", value: "Agregar" } })
+            ]
+          )
         ]
       )
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "clasificacion" }, [
+      _c("input", {
+        attrs: { id: "radio1", type: "radio", name: "estrellas", value: "5" }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "radio1" } }, [_vm._v("★")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { id: "radio2", type: "radio", name: "estrellas", value: "4" }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "radio2" } }, [_vm._v("★")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { id: "radio3", type: "radio", name: "estrellas", value: "3" }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "radio3" } }, [_vm._v("★")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { id: "radio4", type: "radio", name: "estrellas", value: "2" }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "radio4" } }, [_vm._v("★")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { id: "radio5", type: "radio", name: "estrellas", value: "1" }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "radio5" } }, [_vm._v("★")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-block color-gris" }, [
+      _c("i", { staticClass: "fas fa-cart-plus" }),
+      _vm._v(" Añadir al carro")
     ])
   }
 ]
@@ -50130,17 +50385,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cartas_productos_vue_vue_type_template_id_3d385c9e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cartas_productos.vue?vue&type=template&id=3d385c9e& */ "./resources/js/components/cartas_productos.vue?vue&type=template&id=3d385c9e&");
-/* harmony import */ var _cartas_productos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cartas_productos.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/cartas_productos.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _cartas_productos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cartas_productos.vue?vue&type=script&lang=js& */ "./resources/js/components/cartas_productos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _cartas_productos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cartas_productos.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/cartas_productos.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _cartas_productos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _cartas_productos_vue_vue_type_template_id_3d385c9e___WEBPACK_IMPORTED_MODULE_0__["render"],
   _cartas_productos_vue_vue_type_template_id_3d385c9e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -50154,6 +50411,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/cartas_productos.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/cartas_productos.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/cartas_productos.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cartas_productos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./cartas_productos.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/cartas_productos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_cartas_productos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

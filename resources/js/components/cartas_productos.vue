@@ -2,10 +2,10 @@
 <!--Cartas-->
 <div>
     <!--Card-->
-    <div class="card m-3 carta-DS" style="width: 19rem; height: 370px;">
+    <div class="card m-3 carta-DS" v-for="(item, index) in productos" :key="index" style="width: 19rem; height: 370px;">
         <!--Card image-->
         <div class="view overlay">
-            <img class="imagen-producto-DS shadow-lg mb-5 bg-white" src="/img/cartas/carta1.jpg" alt="">
+            <img class="imagen-producto-DS shadow-lg mb-5 bg-white" v-bind:src="'/imagenes-prueba/' + item.imagen" alt="">
             <div class="mask rgba-white-slight"></div>
         </div>
         <!-- /Imagen -->
@@ -13,11 +13,11 @@
         <div class="card-body card-body-cascade">
             <div class="row row justify-content-between">
                 <!-- Label -->
-                <h5 class="col-5 font-weight-bold card-title mb-1">Drosera</h5>
-                <h6 class="col-5 align-self-center mb-1 px-3">Tamaño: M</h6>
+                <h5 class="col-5 font-weight-bold card-title mb-1">{{ item.genero }}</h5>
+                <h6 class="col-5 align-self-center mb-1 px-3">Tamaño: {{ item.tamaño }}</h6>
             </div>
             <!-- Title -->
-            <h6 class="mb-1">Capensis</h6>
+            <h6 class="mb-1">{{ item.nombre }}</h6>
             <!-- <form> -->
             <p class="clasificacion">
                 <input id="radio1" type="radio" name="estrellas" value="5">
@@ -33,16 +33,85 @@
             </p>
             <!-- </form> -->
             <!-- Text -->
-            <p class="font-weight-bold card-text mb-1">$50.000 COP</p>
+            <p class="font-weight-bold card-text mb-1">${{ item.valor }} COP</p>
             <!-- Button -->
             <button class="btn btn-block color-gris"><i class="fas fa-cart-plus"></i> Añadir al carro</button>
             <!-- /Contenido -->
         </div>
         <!--/.Card-->
     </div>
+    <!--Formulario-->
+    <div class="card m-3 carta-DS" style="width: 19rem; height: 370px;">
+        <form @submit.prevent="añadirProducto()" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="imagen">Imagen</label>
+                <input type="file" @change="obtenerImagen" class="form-control-file">
+            </div>
+            <div>
+                <label for="genero">Genero</label>
+                <input type="text" id="genero" v-model="producto.genero" class="form-control">
+            </div>
+            <div>
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" v-model="producto.nombre" class="form-control">
+            </div>
+            <div>
+                <label for="valor">Valor</label>
+                <input type="text" id="valor" v-model="producto.valor" class="form-control">
+            </div>
+            <div>
+                <label for="tamaño">Tamaño</label>
+                <input type="text" id="tamaño" v-model="producto.tamaño" class="form-control">
+            </div>
+
+            <input type="submit" value="Agregar">
+        </form>
+        <!--/.Formulario-->
+    </div>
 </div>
 <!--/Cartas-->
 </template>
+
+<script>
+export default {
+    data(){
+        return {
+            productos: [],
+            producto: {
+                imagen: '',
+                genero: '',
+                nombre: '',
+                valor: '',
+                tamaño: ''
+            }
+        }
+    },
+    created() {
+        axios.get('/productos').then(res => {
+            this.productos = res.data;
+        })
+    },
+    methods: {
+        obtenerImagen(e){
+            let file = e.target.files[0];
+            this.producto.imagen = file;
+        },
+        añadirProducto(){
+            let formData = new FormData();
+            formData.append('imagen', this.producto.imagen);
+            formData.append('genero', this.producto.genero);
+            formData.append('nombre', this.producto.nombre);
+            formData.append('valor', this.producto.valor);
+            formData.append('tamaño', this.producto.tamaño);
+            axios.post('/productos', formData).then(response =>{
+                console.log(response.data);
+                this.productos.push(response.data);
+            })
+        }
+    }
+}
+</script>
+
 
 <style>
 #form {
@@ -63,16 +132,16 @@ input[type="radio"] {
     display: none;
 }
 
-label{
+label {
     color: #434343;
 }
 
-.color-gris{
-    background-color:#86a74d;
+.color-gris {
+    background-color: #86a74d;
     color: white;
 }
 
-.color-gris:hover{
+.color-gris:hover {
     color: white;
 }
 

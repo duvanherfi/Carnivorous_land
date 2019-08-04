@@ -24,6 +24,9 @@ Route::get('/contactanos', function () {
     return view('contactanos');
 })->name('contactanos');
 
+Route::post('/productos', 'ProductoController@store')->name('productos.store');
+Route::get('/productos', 'ProductoController@index')->name('productos.index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
