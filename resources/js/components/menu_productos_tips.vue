@@ -1,5 +1,5 @@
 <template>
-<div class="col-3 pr-0 menu-producto-tips">
+<div class="col-3 pr-0 menu-producto-tips-DS">
     <!-- Subtitulo -->
     <br>
     <h2 class="row justify-content-center subtitulo-DS w-100 m-0">Género</h2>
@@ -8,48 +8,47 @@
         <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:100px;">
     </div>
     <div class="row justify-content-center">
-        <div class="col-9 borde-menu"></div>
-        <div class="col-9 text-center py-1 opcion-menu">
+        <div class="col-9 borde-menu-DS"></div>
+        <div class="col-9 text-center py-1 opcion-menu-DS">
             Sarracenia
         </div>
-        <div class="col-9 text-center py-1 opcion-menu">
+        <div class="col-9 text-center py-1 opcion-menu-DS">
             Drosera
         </div>
-        <div class="col-9 text-center py-1 opcion-menu">
+        <div class="col-9 text-center py-1 opcion-menu-DS">
             Dionaea
         </div>
-        <div class="col-9 text-center py-1 opcion-menu">
+        <div class="col-9 text-center py-1 opcion-menu-DS">
             Nepenthes
         </div>
-        <div class="col-9 text-center py-1 opcion-menu">
+        <div class="col-9 text-center py-1 opcion-menu-DS">
             Pinguicula
         </div>
-        <div class="col-9 text-center py-1 opcion-menu">
+        <div class="col-9 text-center py-1 opcion-menu-DS">
             Utricularia
         </div>
     </div>
 </div>
 </template>
 
-<style>
-.borde-menu{
+<style scoped>
+.borde-menu-DS{
     border-top: #434343 3px solid;
     width: 230px;
 }
 
-.opcion-menu {
+.opcion-menu-DS {
     border-bottom: #434343 3px solid;
     font-family: 'Montserrat', sans-serif;
 }
 
-.opcion-menu:hover{
+.opcion-menu-DS:hover{
     background-color:#9DCE5B;
     color: white;
     cursor: pointer;
 }
 
-.menu-producto-tips{
+.menu-producto-tips-DS{
     border-right: #434343 3px solid;
 }
-
 </style>
