@@ -382,13 +382,6 @@ color:#FFF;
     color: grey;
 }
 
-<<<<<<< HEAD
-/* Productos_plantas */
-
-.contenedor-productos{
-    margin-top: 7.5rem;
-}
-=======
 /* Carrito de compra*/
 .table>tbody>tr>td, .table>tfoot>tr>td{
     vertical-align: middle;
@@ -438,4 +431,9 @@ color:#FFF;
 
 .carrito{
     font-family: 'Montserrat', sans-serif;}
->>>>>>> 3623ddc9676a7959cfcf69c2f87a72bc59a83eff
+
+/* Productos_plantas */
+
+.contenedor-productos{
+    margin-top: 7.5rem;
+}
