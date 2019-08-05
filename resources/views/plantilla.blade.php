@@ -88,7 +88,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
                         aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Plantas</a>
+                        <a class="dropdown-item" href="{{ route('productos_plantas') }}">Plantas</a>
                         <a class="dropdown-item" href="#">Implementos de cultivo</a>
                         <a class="dropdown-item" href="#">Merchandising</a>
                     </div>
@@ -149,7 +149,7 @@
                     <p class="mb10 text-justify">Envios solo para ciudades de Colombia</p>
                     <!--headin5_amrc-->
                     <img class="mb-2" src="{{ asset('img/iconos-footer/servientrega.png') }}" alt="Servientrega"
-                    width="200">
+                        width="200">
                     <img src="{{ asset('img/iconos-footer/interrapidisimo.png') }}" alt="Interrapidisimo" width="200">
                     <!--footer_ul_amrc ends here-->
                 </div>
