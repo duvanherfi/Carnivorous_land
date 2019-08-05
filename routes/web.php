@@ -35,3 +35,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/carrito_compra', function () {
+    return view('carrito');
+})->name('carrito');
+
