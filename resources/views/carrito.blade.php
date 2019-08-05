@@ -23,8 +23,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td data-th="Price">$1.99</td>
-                                <td data-th="Quantity">
+                                <td data-th="Precio">$1.99</td>
+                                <td data-th="Cantidad">
                                     <input type="number" class="form-control text-center" value="1">
                                 </td>
                                 <td data-th="Subtotal" class="text-center">1.99</td>
