@@ -60,6 +60,7 @@
     <img class="logo" src="{{ asset('img/Logo.jpg') }}" alt="Logo Carnivorous Land">
     {{-- /Logo --}}
     {{-- Menu --}}
+    @routes
     <nav class="navbar navbar-expand-lg navbar-dark div2">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,6 +77,10 @@
                         INICIO
                     </a>
                 </li>
+                <div id="app">
+                    <menu></menu>
+                </div>
+
                 <li class="nav-item bordes-DS">
                     <a class="nav-link waves-effect waves-light" href="{{ route('quienes_somos') }}">
                         ¿QUIÉNES SOMOS?
