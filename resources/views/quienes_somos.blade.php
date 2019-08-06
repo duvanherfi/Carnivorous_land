@@ -42,22 +42,22 @@
 <!-- Misión y visión -->
 <div id="misi_visi" data-aos="fade-up" data-aos-duration="1500">
     <div class="row w-100">
-        <div class="col p-3">
+        <div class="col pt-3" id="separacion">
             <h2>Misión</h2>
         </div>
-        <div class="col p-3">
+        <div class="col p-3 pl-4 ml-2">
             <h2>Visión</h2>
         </div>
 
         <div class="w-100"></div>
 
-        <div class="col">
-            <P class="pl-4"> Somos una empresa dedicada a la producción y comercialización de plantas Carnívoras,
+        <div class="col" id="separacion" pr-4>
+            <P class="pl-4 mr-5 ml-3"> Somos una empresa dedicada a la producción y comercialización de plantas Carnívoras,
                 que mediante la investigación y pasión por este tipo de plantas,
                 buscamos la concientización de importancia de estos seres vivos en los ecosistemas.</P>
         </div>
-        <div class="col">
-            <P class="pr-4"> Ser en el 2023 la empresa líder en producción y comercialización de Plantas Carnívoras en
+        <div class="col pl-4 ml-2">
+            <P class="pr-5 ml-3"> Ser en el 2023 la empresa líder en producción y comercialización de Plantas Carnívoras en
                 Colombia,
                 caracterizándose por la calidad de cultivo y servicio,
                 haciendo uso de las buenas prácticas medioambientales.

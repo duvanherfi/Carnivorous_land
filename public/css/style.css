@@ -103,6 +103,7 @@ h1 {
 .subtitulo-DS {
     font-family: 'Source Sans Pro', serif;
     font-weight: bold;
+    color: #434343;
 }
 
 .izquierda-DS {
@@ -121,7 +122,7 @@ h1 {
 /* Menu */
 
 .div2 {
-    z-index: 2;
+    z-index: 3;
     position: absolute;
     width: 1150px;
     height: 75px;
@@ -159,7 +160,7 @@ h1 {
     right: auto;
     left: -6px;
     min-width: 10.4rem;
-    z-index: 100;
+    z-index: 3;
 }
 
 /* Carta */
@@ -342,6 +343,15 @@ footer p {
     
 }
 
+#separacion {
+
+    
+    border-right: 2px solid white;
+    width: 60px;
+
+
+}
+
 .ubicacion {
     background-color: #9DCE5B;
     color: #FFF;
@@ -370,4 +380,60 @@ color:#FFF;
 
 .botones:hover{
     color: grey;
+}
+
+/* Carrito de compra*/
+.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+@media screen and (max-width: 600px) {
+    table#cart tbody td .form-control{
+		width:20%;
+		display: inline !important;
+	}
+	.actions .btn{
+		width:36%;
+		margin:1.5em 0;
+	}
+	
+	.actions .btn-info{
+		float:left;
+	}
+	.actions .btn-danger{
+		float:right;
+	}
+	
+	table#cart thead { display: none; }
+	table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+	table#cart tbody tr td:first-child { background: #333; color: #fff; }
+	table#cart tbody td:before {
+		content: attr(data-th); font-weight: bold;
+		display: inline-block; width: 8rem;
+	}
+	
+	
+	
+	table#cart tfoot td{display:block; }
+	table#cart tfoot td .btn{display:block;}
+	
+}
+
+#carrito_tabla {
+    background-color: #9DCE5B;
+    color: #FFF;
+}
+
+#continuar_comprando {
+
+    background-color: #00A59C;
+    color: #FFF;
+}
+
+.carrito{
+    font-family: 'Montserrat', sans-serif;}
+
+/* Productos_plantas */
+
+.contenedor-productos{
+    margin-top: 7.5rem;
 }
