@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Carnivorous Land</title>
     {{-- Fuentes --}}
     {{-- Source Sans Pro --}}
@@ -78,15 +81,13 @@
                     </a>
                 </li>
 
-                <div id="app">
-                    <menu></menu>
-                </div>
 
                 <li class="nav-item bordes-DS">
                     <a class="nav-link waves-effect waves-light" href="{{ route('quienes_somos') }}">
                         ¿QUIÉNES SOMOS?
                     </a>
                 </li>
+                @if(1>1)
                 <li class="nav-item dropdown opcion-menu-DS bordes-DS">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -99,6 +100,13 @@
                         <a class="dropdown-item" href="#">Merchandising</a>
                     </div>
                 </li>
+                @else
+                <li class="nav-item opcion-menu-DS bordes-DS">
+                    <a class="nav-link waves-effect waves-light" href="{{ route('inicio') }}">
+                        INVENTARIO
+                    </a>
+                </li>
+                @endif
                 <li class="nav-item opcion-menu-DS bordes-DS">
                     <a class="nav-link waves-effect waves-light">
                         TIPS DE CULTIVOS
