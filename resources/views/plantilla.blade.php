@@ -87,7 +87,7 @@
                         ¿QUIÉNES SOMOS?
                     </a>
                 </li>
-                @if(1>1)
+                @if(1===1)
                 <li class="nav-item dropdown opcion-menu-DS bordes-DS">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
