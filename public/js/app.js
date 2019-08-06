@@ -38291,6 +38291,7 @@ var staticRenderFns = [
         _c("tbody", [
           _c("tr", [
             _c("td", { attrs: { "data-th": "Product" } }, [
+              _vm._v(".\r\n                "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-sm-10 ml-3" }, [
                   _c("h4", { staticClass: "nomargin" }, [_vm._v("Producto 1")]),
@@ -38348,14 +38349,6 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("td", { staticClass: "hidden-xs text-center" }, [
               _c("strong", [_vm._v("Total $1.99")])
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "a",
-                { staticClass: "btn btn-success", attrs: { href: "#" } },
-                [_vm._v("Terminar compra")]
-              )
             ])
           ])
         ])

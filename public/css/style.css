@@ -466,3 +466,25 @@ footer p {
     margin-top: 7.5rem;
     margin-bottom: 1.2rem;
 }
+
+
+/* Total compra*/
+.total_compra {
+    background-color: #9DCE5B;
+    color: #FFF;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    text-align: center;
+}
+
+
+#entrega-compra p {
+    
+   font-family: 'Montserrat', sans-serif;
+   font-weight: bold;
+   font-size: 20px;
+}
+
+#terminar_compra {
+    color: #FFF;
+}
