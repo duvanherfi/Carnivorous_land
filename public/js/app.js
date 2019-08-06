@@ -1813,8 +1813,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1854,6 +1852,11 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.productos.push(response.data);
       });
+      this.producto.imagen = '';
+      this.producto.genero = '';
+      this.producto.nombre = '';
+      this.producto.valor = '';
+      this.producto.tamaño = '';
     }
   }
 });
@@ -6317,7 +6320,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#form {\r\n    width: 250px;\r\n    margin: 0 auto;\r\n    height: 50px;\n}\n#form p {\r\n    text-align: center;\n}\n#form label {\r\n    font-size: 20px;\n}\ninput[type=\"radio\"] {\r\n    display: none;\n}\nlabel {\r\n    color: #434343;\n}\n.color-gris {\r\n    background-color: #86a74d;\r\n    color: white;\n}\n.color-gris:hover {\r\n    color: white;\n}\n.clasificacion {\r\n    direction: rtl;\r\n    unicode-bidi: bidi-override;\r\n    width: 77px;\r\n    height: 30px;\r\n    margin: 0;\n}\np {\r\n    cursor: default;\n}\nlabel:hover,\r\nlabel:hover~label {\r\n    color: orange;\r\n    cursor: pointer;\n}\ninput[type=\"radio\"]:checked~label {\r\n    color: orange;\n}\r\n", ""]);
+exports.push([module.i, "\n#form {\r\n    width: 250px;\r\n    margin: 0 auto;\r\n    height: 50px;\n}\n#form p {\r\n    text-align: center;\n}\n#form label {\r\n    font-size: 20px;\n}\ninput[type=\"radio\"] {\r\n    display: none;\n}\nlabel {\r\n    color: #434343;\n}\n.color-gris {\r\n    background-color: #86a74d;\r\n    color: white;\n}\n.color-gris:hover {\r\n    color: white;\n}\n.clasificacion {\r\n    direction: rtl;\r\n    unicode-bidi: bidi-override;\r\n    width: 84px;\r\n    height: 30px;\r\n    margin: 0;\r\n    font-size: 1rem;\n}\np {\r\n    cursor: default;\n}\nlabel:hover,\r\nlabel:hover~label {\r\n    color: orange;\r\n    cursor: pointer;\n}\ninput[type=\"radio\"]:checked~label {\r\n    color: orange;\n}\n.img-sombra-producto-DS {\r\n    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);\r\n    height: 185px;\n}\r\n", ""]);
 
 // exports
 
@@ -6336,7 +6339,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.imagen-subtitulo-DS[data-v-03b04752]{\r\n    width: 960px;\r\n    height: 150px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.contenido-productos-DS[data-v-03b04752]{\r\n    margin-top: 1.5rem;\r\n    margin-left: 2.3rem;\r\n    margin-bottom: 1.5rem;\n}\nh1[data-v-03b04752]{\r\n    z-index: 2;\r\n    widows: 500px;\n}\r\n", ""]);
+exports.push([module.i, "\n.imagen-subtitulo-DS[data-v-03b04752] {\r\n    width: 960px;\r\n    height: 150px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.contenido-productos-DS[data-v-03b04752] {\r\n    margin-top: 1.5rem;\r\n    margin-left: 2.3rem;\r\n    margin-bottom: 1.5rem;\r\n    max-width: 960px;\n}\n.subtitulo-producto-DS[data-v-03b04752] {\r\n    top: 34%;\r\n    left: 53%;\r\n    color: white;\n}\r\n", ""]);
 
 // exports
 
@@ -37952,35 +37955,31 @@ var render = function() {
           "div",
           {
             key: index,
-            staticClass: "card m-3 carta-DS",
-            staticStyle: { width: "19rem", height: "370px" }
+            staticClass: "card carta-DS",
+            staticStyle: { width: "290px", height: "370px" }
           },
           [
-            _c("div", { staticClass: "view overlay" }, [
+            _c("div", { staticClass: "img-sombra-producto-DS" }, [
               _c("img", {
-                staticClass: "imagen-producto-DS shadow-lg mb-5 bg-white",
+                staticClass: "imagen-producto-DS",
                 attrs: { src: "/imagenes-prueba/" + item.imagen, alt: "" }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "mask rgba-white-slight" })
+              })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body card-body-cascade" }, [
-              _c("div", { staticClass: "row row justify-content-between" }, [
-                _c(
-                  "h5",
-                  { staticClass: "col-5 font-weight-bold card-title mb-1" },
-                  [_vm._v(_vm._s(item.genero))]
-                ),
+              _c("div", { staticClass: "row justify-content-between m-0" }, [
+                _vm._m(0, true),
                 _vm._v(" "),
-                _c("h6", { staticClass: "col-5 align-self-center mb-1 px-3" }, [
+                _c("h6", { staticClass: "col-4 align-self-center mb-1 px-0" }, [
                   _vm._v("Tamaño: " + _vm._s(item.tamaño))
                 ])
               ]),
               _vm._v(" "),
-              _c("h6", { staticClass: "mb-1" }, [_vm._v(_vm._s(item.nombre))]),
+              _c("h5", { staticClass: "font-weight-bold card-title mb-1" }, [
+                _vm._v(_vm._s(item.genero))
+              ]),
               _vm._v(" "),
-              _vm._m(0, true),
+              _c("h6", { staticClass: "mb-1" }, [_vm._v(_vm._s(item.nombre))]),
               _vm._v(" "),
               _c("p", { staticClass: "font-weight-bold card-text mb-1" }, [
                 _vm._v("$" + _vm._s(item.valor) + " COP")
@@ -37995,8 +37994,8 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "card m-3 carta-DS",
-          staticStyle: { width: "19rem", height: "370px" }
+          staticClass: "card carta-DS",
+          staticStyle: { width: "290px", height: "370px" }
         },
         [
           _c(
@@ -38202,24 +38201,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "contenido-productos-DS" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("img", {
+      staticClass: "imagen-subtitulo-DS",
+      attrs: {
+        src: "/img/productos/fondo_productos.jpg",
+        alt: "Fondo productos"
+      }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "mask rgba-black-strong" }),
+    _vm._v(" "),
+    _c("p", { staticClass: "mt-4" }, [
+      _vm._v(
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, quas eaque veniam harum nostrum non pariatur! Non quidem adipisci pariatur eius provident impedit tenetur, quibusdam molestias culpa doloribus quam aliquam necessitatibus? Hic vel dolor quae ad veniam totam tempore culpa, omnis aut et doloremque laudantium. Incidunt labore alias libero aspernatur exercitationem sit tempora modi aliquid nesciunt ab atque minima, quos, dignissimos eos harum voluptates dicta! Vero eaque qui odit quo. Tempora et enim officiis dolore, eaque minima, quos voluptatum rerum velit officia assumenda praesentium tenetur quidem autem commodi culpa natus laudantium! Cupiditate voluptas est iure cumque enim perspiciatis id quasi nisi recusandae aliquam, labore numquam quod fugit temporibus distinctio omnis! Laboriosam explicabo consequatur nisi vitae neque tempore architecto blanditiis autem voluptatum sunt itaque magnam asperiores debitis dolor odit, accusantium nobis nulla fugiat totam odio reiciendis veritatis modi velit? Est accusantium blanditiis autem praesentium culpa? Similique libero quia natus est error voluptas sed et nobis ab sint accusantium, esse provident a in temporibus voluptate. Iure incidunt corporis dolorem aliquam quia rerum sit laudantium, debitis culpa maxime voluptatum doloribus, necessitatibus optio ea sequi alias laboriosam neque temporibus quis possimus inventore iusto aut impedit nemo. Amet nam iste at? Atque magni itaque quasi?"
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", [_c("productos")], 1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "contenido-productos-DS" }, [
-      _c("img", {
-        staticClass: "imagen-subtitulo-DS",
-        attrs: {
-          src: "/img/productos/fondo_productos.jpg",
-          alt: "Fondo productos"
-        }
-      }),
-      _vm._v(" "),
-      _c("h1", [_vm._v("Sarracenia")])
-    ])
+    return _c(
+      "div",
+      { staticClass: "position-absolute subtitulo-producto-DS" },
+      [_c("h1", [_vm._v("SARRACENIA")])]
+    )
   }
 ]
 render._withStripped = true
@@ -38278,6 +38291,7 @@ var staticRenderFns = [
         _c("tbody", [
           _c("tr", [
             _c("td", { attrs: { "data-th": "Product" } }, [
+              _vm._v(".\r\n                "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-sm-10 ml-3" }, [
                   _c("h4", { staticClass: "nomargin" }, [_vm._v("Producto 1")]),
@@ -38335,14 +38349,6 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("td", { staticClass: "hidden-xs text-center" }, [
               _c("strong", [_vm._v("Total $1.99")])
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "a",
-                { staticClass: "btn btn-success", attrs: { href: "#" } },
-                [_vm._v("Terminar compra")]
-              )
             ])
           ])
         ])

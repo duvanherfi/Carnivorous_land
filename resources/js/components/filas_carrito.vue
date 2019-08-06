@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         <tr>
-            <td data-th="Product">
+            <td data-th="Product">.
                 <div class="row">
                     <div class="col-sm-10 ml-3">
                         <h4 class="nomargin">Producto 1</h4>
@@ -34,7 +34,6 @@
             <td><a href="#" id="continuar_comprando" class="btn">Continuar comprando</a></td>
             <td colspan="2" class="hidden-xs"></td>
             <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
-            <td><a href="#" class="btn btn-success">Terminar compra</a></td>
         </tr>
     </tfoot>
 </table>

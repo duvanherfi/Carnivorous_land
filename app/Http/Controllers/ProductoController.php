@@ -51,6 +51,7 @@ class ProductoController extends Controller
         $producto->valor = $request->input('valor');
         $producto->tamaño = $request->input('tamaño');
         $producto->save();
+        $hola = 'hola';
         return $producto;
     }
 
