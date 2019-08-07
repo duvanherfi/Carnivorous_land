@@ -39,5 +39,7 @@ Route::get('/carrito_compra', function () {
     return view('carrito');
 })->name('carrito');
 
+Route::post('register', 'UsuarioControlador@store');
 
+/*Route::post('login', 'UsuarioControlador@inicio_sesion');*/
 
