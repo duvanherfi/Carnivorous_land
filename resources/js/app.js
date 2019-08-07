@@ -7,8 +7,6 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 
 
-
-
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('productos', require('./components/cartas_productos.vue').default);
 Vue.component('menu-producto-tips', require('./components/menu_productos_tips.vue').default);
