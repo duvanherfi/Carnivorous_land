@@ -39,5 +39,9 @@ Route::get('/carrito_compra', function () {
     return view('carrito');
 })->name('carrito');
 
+Route::get('/pedidos', function () {
+    return view('pedidos');
+})->name('pedidos');
+
 
 
