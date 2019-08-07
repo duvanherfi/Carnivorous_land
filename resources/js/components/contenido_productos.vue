@@ -31,4 +31,8 @@
     left: 53%;
     color: white;
 }
+
+h1{
+    text-shadow: 0 0 30px #9DCE5B;
+}
 </style>

@@ -28,6 +28,6 @@
         "aos": "^2.3.4",
         "mdbootstrap": "^4.8.7",
         "toastr": "^2.1.4",
-        "vue-router": "^3.0.7"
+        "vue-router": "^3.1.1"
     }
 }
