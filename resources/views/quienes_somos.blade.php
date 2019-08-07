@@ -8,8 +8,8 @@
 
 <h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">Un poco de historia...</h2>
 <div id="separador" class="row align-items-center row justify-content-center w-100 m-0">
-    <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
-    <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;" php>
+    <hr  class="izquierda-DS ml-0 mr-2"  style="width:200px;">✻
+    <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;" php>
 </div>
 
 <!-- Sección de Historia-->
@@ -42,7 +42,7 @@
 <!-- Misión y visión -->
 <div id="misi_visi" data-aos="fade-up" data-aos-duration="1500">
     <div class="row w-100">
-        <div class="col pt-3" id="separacion">
+        <div class="col pt-3 separacion" >
             <h2>Misión</h2>
         </div>
         <div class="col p-3 pl-4 ml-2">
@@ -51,7 +51,7 @@
 
         <div class="w-100"></div>
 
-        <div class="col" id="separacion" pr-4>
+        <div class="col separacion" >
             <P class="pl-4 mr-5 ml-3"> Somos una empresa dedicada a la producción y comercialización de plantas Carnívoras,
                 que mediante la investigación y pasión por este tipo de plantas,
                 buscamos la concientización de importancia de estos seres vivos en los ecosistemas.</P>
@@ -73,8 +73,8 @@
 <!-- Valores-->
 <h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">Nuestros valores</h2>
 <div id="separador" class="row align-items-center row justify-content-center pb-3 w-100 m-0">
-    <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
-    <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;" php>
+    <hr  class="izquierda-DS ml-0 mr-2"  style="width:200px;">✻
+    <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;">
 </div>
 
 <div class="container">
