@@ -73,8 +73,8 @@
 <br>
 <h2 class="row justify-content-center subtitulo-DS w-100 m-0">¿Por qué comprar con nosotros?</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
-    <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:300px;">✻
-    <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:300px;">
+    <hr  class="izquierda-DS ml-0 mr-2"  style="width:300px;">✻
+    <hr  class="derecha-DS ml-2 mr-0"  style="width:300px;">
 </div>
 
 {{-- /Subtitulo --}}
@@ -94,7 +94,7 @@
     <div class="card m-3 carta-DS" style="width: 19rem; height: 420px;">
         <!--Card image-->
         <div class="view overlay">
-            <img class="imagen-DS" src="{{ asset('img/cartas/carta2.jpg') }}" alt="">
+            <img class="imagen-DS" src="{{ asset('img/cartas/carta2.jpg') }}" alt="carta_imagen">
             <div class="mask rgba-white-slight"></div>
         </div>
     </div>
@@ -103,7 +103,7 @@
     <div class="card m-3 carta-DS" style="width: 19rem; height: 420px;">
         <!--Card image-->
         <div class="view overlay">
-            <img class="imagen-DS" src="{{ asset('img/cartas/carta3.jpg') }}" alt="">
+            <img class="imagen-DS" src="{{ asset('img/cartas/carta3.jpg') }}" alt="carta:imagen2">
             <div class="mask rgba-white-slight"></div>
         </div>
     </div>
@@ -115,8 +115,8 @@
 <br>
 <h2 class="row justify-content-center subtitulo-DS w-100 m-0">Lo más destacado</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
-    <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:200px;">✻
-    <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:200px;">
+    <hr  class="izquierda-DS ml-0 mr-2" style="width:200px;">✻
+    <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;">
 </div>
 {{-- /Subtitulo --}}
 
@@ -130,8 +130,8 @@
 <br>
 <h2 class="row justify-content-center subtitulo-DS w-100 m-0">Eventos</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
-    <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:150px;">✻
-    <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:150px;">
+    <hr class="izquierda-DS ml-0 mr-2"  style="width:150px;">✻
+    <hr  class="derecha-DS ml-2 mr-0"  style="width:150px;">
 </div>
 {{-- /Subtitulo --}}
 

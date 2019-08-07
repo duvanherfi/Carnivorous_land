@@ -89,13 +89,13 @@
                 </li>
                 @if(1===1)
                 <li class="nav-item dropdown opcion-menu-DS bordes-DS">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         PRODUCTOS
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
                         aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="{{ route('productos_plantas') }}">Plantas</a>
+                        <a class="dropdown-item" href="{{ 'productos_plantas' }}">Plantas</a>
                         <a class="dropdown-item" href="#">Implementos de cultivo</a>
                         <a class="dropdown-item" href="#">Merchandising</a>
                     </div>
@@ -119,11 +119,24 @@
                 </li>
             </ul>
         </div>
-        <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="45">
-        <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram" width="45">
-        <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="45">
-        <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="45">
-        <img class="ml-3" id="bordes-left-DS" src="{{ asset('img/carro.png') }}" alt="Carro" width="45">
+        <a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX" target="_blank">
+            <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="45">
+        </a>
+        <a href="https://www.instagram.com/carnivorousland" target="_blank">
+            <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram" width="45">
+
+        </a>
+        <a href="https://www.youtube.com/channel/UC-HHD-jISuSeqQnGylaow1w" target="_blank">
+            <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="45">
+        </a>
+
+        <a href="https://api.whatsapp.com/send?phone=573167973829" target="_blank">
+            <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="45">
+        </a>
+
+        <a href="{{ route('carrito') }}">
+            <img class="ml-3" id="bordes-left-DS" src="{{ asset('img/carro.png') }}" alt="Carro" width="45">
+        </a>
         <span class="badge badge-primary badge-pill counter">0</span>
     </nav>
     {{-- /.Menu --}}
@@ -190,10 +203,10 @@
             <p class="text-center">Copyright @2019 | Diseñado por DailySoft</p>
 
             <ul class="social_footer_ul pl-0">
-                <li class="pl-0"><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                <li><a href=""><i class="fab fa-youtube"></i></a></li>
-                <li><a href=""><i class="fab fa-whatsapp"></i></a></li>
+                <li class="pl-0"><a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/carnivorousland" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UC-HHD-jISuSeqQnGylaow1w" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="https://api.whatsapp.com/send?phone=573167973829" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
             </ul>
             <!--social_footer_ul ends here-->
         </div>
