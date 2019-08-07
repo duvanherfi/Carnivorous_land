@@ -64,7 +64,7 @@ h2 {
     text-align: center;
 }
 
-h1 {
+.titulo h1 {
     font-size: 60px;
     font-weight: bold;
     font-family: 'Source Sans Pro', serif;
@@ -467,6 +467,11 @@ footer p {
     margin-bottom: 1.2rem;
 }
 
+/* Descripcion producto */
+
+.descripcion-producto .container{
+    margin-top: 10%;
+}
 
 /* Total compra*/
 .total_compra {
