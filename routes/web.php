@@ -40,6 +40,10 @@ Route::get('/carrito_compra', function () {
 })->name('carrito');
 
 Route::post('register', 'UsuarioControlador@store');
+Route::get('/pedidos', function () {
+    return view('pedidos');
+})->name('pedidos');
+
 
 /*Route::post('login', 'UsuarioControlador@inicio_sesion');*/
 
