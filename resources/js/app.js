@@ -13,7 +13,12 @@ Vue.component('contenido-productos', require('./components/contenido_productos.v
 Vue.component('carrousel-descripcion', require('./components/descripcion_producto/carrousel_descripcion_producto.vue').default);
 Vue.component('contenido-descripcion', require('./components/descripcion_producto/contenido_descripcion_producto.vue').default);
 Vue.component('filas-carrito', require('./components/filas_carrito.vue').default);
+Vue.component('menu_prueba', require('./components/menu_prueba.vue').default);
 
 const app = new Vue({
     el: '#app',
+});
+
+const app2 = new Vue({
+    el: '#app2',
 });

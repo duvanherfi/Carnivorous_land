@@ -66,7 +66,7 @@
     <img class="logo" src="{{ asset('img/Logo.jpg') }}" alt="Logo Carnivorous Land">
     {{-- /Logo --}}
     {{-- Menu --}}
-    @routes
+
     <nav class="navbar navbar-expand-lg navbar-dark div2">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,51 +76,11 @@
             aria-controls="navbarSupportedContent-33" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button> --}}
-        <div class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-33">
-            <ul class="navbar-nav ml-auto nav-flex-icons bordes-menu-DS">
-                <li class="nav-item opcion-menu-DS bordes-DS">
-                    <a class="nav-link waves-effect waves-light" href="{{ route('inicio') }}">
-                        INICIO
-                    </a>
-                </li>
+        <div id="app2" class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-33">
+
+                    <menu_prueba> </menu_prueba>
 
 
-                <li class="nav-item bordes-DS">
-                    <a class="nav-link waves-effect waves-light" href="{{ route('quienes_somos') }}">
-                        ¿QUIÉNES SOMOS?
-                    </a>
-                </li>
-                @if(1===1)
-                <li class="nav-item dropdown opcion-menu-DS bordes-DS">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        PRODUCTOS
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
-                        aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="{{ 'productos_plantas' }}">Plantas</a>
-                        <a class="dropdown-item" href="#">Implementos de cultivo</a>
-                        <a class="dropdown-item" href="#">Merchandising</a>
-                    </div>
-                </li>
-                @else
-                <li class="nav-item opcion-menu-DS bordes-DS">
-                    <a class="nav-link waves-effect waves-light" href="{{ route('inicio') }}">
-                        INVENTARIO
-                    </a>
-                </li>
-                @endif
-                <li class="nav-item opcion-menu-DS bordes-DS">
-                    <a class="nav-link waves-effect waves-light">
-                        TIPS DE CULTIVOS
-                    </a>
-                </li>
-                <li class="nav-item opcion-menu-DS">
-                    <a class="nav-link waves-effect waves-light" href="{{ route('contactanos') }}">
-                        CONTÁCTANOS
-                    </a>
-                </li>
-            </ul>
         </div>
         <a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX" target="_blank">
             <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="45">
@@ -216,6 +176,7 @@
     </footer>
     {{-- Footer --}}
     <!-- Scripts -->
+    @routes
     <script src="{{ asset('js/app.js') }}" defer></script>
    
     
