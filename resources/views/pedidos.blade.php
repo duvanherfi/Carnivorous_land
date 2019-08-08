@@ -5,12 +5,13 @@
 <div class="pedido">
 
 	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS PENDIENTES</h2><br>
-	<p class="mb10 text-justify">Fecha: <input class="fecha" type="date"> </p>
+	
 
-	<table class="table">
+	<table class="table tabla">
   		<thead class="cabecera_pedidos">
     		<tr>
       			<th scope="col">Entregado</th>
+            <th scope="col">Fecha</th>
       			<th scope="col">Nombre cliente</th>
       			<th scope="col">Nombre producto(s)</th>
             <th scope="col">Ciudad</th>
@@ -25,45 +26,53 @@
   					<label class="custom-control-label" for="customSwitch1"></label>
 					</div>
 				</td>
+            <td>01-08-2019</td>
       			<td>Johhan Andres Perez Carrillo</td>
       			<td>Tropical Sundews, Cape Sundews</td>
             <td>Cali, Valle del cauca</td>
       			<td>Pagado</td>
       			<td><input type=image src="{{ asset('img/pedidos/ver.png') }}" data-toggle="modal" data-target="#modal_pedidos"></td>
-    		<tr>
+    		</tr>
+
+        <tr>
       			<td><div class="custom-control custom-switch">
   					<input type="checkbox" class="custom-control-input" id="customSwitch2" checked>
-  					<label class="custom-control-label" for="customSwitch1"></label>
+  					<label class="custom-control-label" for="customSwitch2"></label>
 					</div>
 				</td>
+            <td>05-06-2019</td>
       			<td>Duvan Hernandez Figueroa</td>
-     			  <td>Winter Growing Sundews</td>
+     			  <td>Winter </td>
             <td>Cali, Valle del cauca</td>
       			<td>Pagado</td>
       			<td><input type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
     		</tr>
+
     		<tr>
       			<td><div class="custom-control custom-switch">
   					<input type="checkbox" class="custom-control-input" id="customSwitch3" checked>
-  					<label class="custom-control-label" for="customSwitch1"></label>
+  					<label class="custom-control-label" for="customSwitch3"></label>
 					</div>
 				</td>
+            <td>15-02-2019</td>
       			<td>Andres Felipe Garcia Gaviria</td>
       			<td>Cape Sundews</td>
             <td>Cali, Valle del cauca</td>
       			<td>En proceso</td>
       			<td><input type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
     		</tr>
+
   		</tbody>
 	</table>
 
 
   <br><br><h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS ENTREGADOS</h2><br>
 
-  <table class="table">
+  <table class="table tabla" >
       <thead class="cabecera_pedidos">
         <tr>
             <th scope="col">Entregado</th>
+            <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
             <th scope="col">Nombre producto(s)</th>
             <th scope="col">Ciudad</th>
@@ -74,10 +83,11 @@
       <tbody class="cuerpo_pedidos">
         <tr>
             <td><div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-            <label class="custom-control-label" for="customSwitch1"></label>
+            <input type="checkbox" class="custom-control-input" id="customSwitch4" checked>
+            <label class="custom-control-label" for="customSwitch4"></label>
           </div>
         </td>
+            <td>01-08-2019</td>
             <td>Johhan Andres Perez Carrillo</td>
             <td>Tropical Sundews, Cape Sundews</td>
             <td>Cali, Valle del cauca</td>
@@ -85,10 +95,11 @@
             <td><input type=image src="{{ asset('img/pedidos/ver.png') }}" ></td>
         <tr>
             <td><div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch2" checked>
-            <label class="custom-control-label" for="customSwitch1"></label>
+            <input type="checkbox" class="custom-control-input" id="customSwitch5" checked>
+            <label class="custom-control-label" for="customSwitch5"></label>
           </div>
         </td>
+            <td>05-06-2019</td>
             <td>Duvan Hernandez Figueroa</td>
             <td>Winter Growing Sundews</td>
             <td>Cali, Valle del cauca</td>
@@ -97,10 +108,11 @@
         </tr>
         <tr>
             <td><div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch3" checked>
-            <label class="custom-control-label" for="customSwitch1"></label>
+            <input type="checkbox" class="custom-control-input" id="customSwitch6" checked>
+            <label class="custom-control-label" for="customSwitch6"></label>
           </div>
         </td>
+            <td>15-02-2019</td>
             <td>Andres Felipe Garcia Gaviria</td>
             <td>Cape Sundews</td>
             <td>Cali, Valle del cauca</td>
@@ -166,7 +178,7 @@
               </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
         
       </div>
     </div>
