@@ -2,7 +2,7 @@
 <div class="col-3 pr-0 menu-producto-tips-DS">
     <!-- Subtitulo -->
     <br>
-    <h2 class="row justify-content-center subtitulo-DS w-100 m-0">Género</h2>
+    <h2 class="row justify-content-center subtitulo-DS w-100 m-0">GÉNERO</h2>
     <div class="row align-items-center row justify-content-center w-100 m-0">
         <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:100px;">✻
         <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:100px;">

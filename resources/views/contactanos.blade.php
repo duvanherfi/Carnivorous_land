@@ -7,7 +7,7 @@
 
     <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/contactanos/fondo_contactanos.jpg') }}" alt="fondo_contactanos">
 
-<h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">Nuestras redes sociales</h2>
+<h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">NUESTRAS REDES SOCIALES</h2>
 <div id="separador" class="row align-items-center row justify-content-center w-100 m-0">
     <hr  class="izquierda-DS ml-0 mr-2"  style="width:200px;">✻
     <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;">

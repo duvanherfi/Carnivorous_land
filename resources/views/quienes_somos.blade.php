@@ -6,7 +6,7 @@
 
 <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/quienes_somos/fondo_quienes_somos.jpg') }}">
 
-<h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">Un poco de historia...</h2>
+<h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">UN POCO DE HISTORIA...</h2>
 <div id="separador" class="row align-items-center row justify-content-center w-100 m-0">
     <hr  class="izquierda-DS ml-0 mr-2"  style="width:200px;">✻
     <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;" php>
@@ -71,7 +71,7 @@
 <!-- Fin Misión y visión -->
 
 <!-- Valores-->
-<h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">Nuestros valores</h2>
+<h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">NUESTROS VALORES</h2>
 <div id="separador" class="row align-items-center row justify-content-center pb-3 w-100 m-0">
     <hr  class="izquierda-DS ml-0 mr-2"  style="width:200px;">✻
     <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;">

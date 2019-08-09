@@ -16,9 +16,17 @@ Route::get('/descripcion_producto', function () {
     return view('descripcion_producto');
 })->name('descripcion_producto');
 
+Route::get('/inventario', function () {
+    return view('inventario');
+})->name('inventario');
+
 Route::get('/contactanos', function () {
     return view('contactanos');
 })->name('contactanos');
+
+Route::get('/pedidos', function () {
+    return view('pedidos');
+})->name('pedidos');
 
 Route::get('/carrito_compra', function () {
     return view('carrito');
@@ -32,10 +40,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('register', 'UsuarioControlador@store');
-
-Route::get('/pedidos', function () {
-    return view('pedidos');
-})->name('pedidos');
 
 /*Route::post('login', 'UsuarioControlador@inicio_sesion');*/
 

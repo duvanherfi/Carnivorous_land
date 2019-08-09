@@ -33,6 +33,9 @@
 }
 
 h1{
+    font-size: 60px;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', serif;
     text-shadow: 0 0 30px #9DCE5B;
 }
 </style>

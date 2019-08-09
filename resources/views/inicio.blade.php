@@ -71,7 +71,7 @@
 
 {{-- Subtitulo --}}
 <br>
-<h2 class="row justify-content-center subtitulo-DS w-100 m-0">¿Por qué comprar con nosotros?</h2>
+<h2 class="row justify-content-center subtitulo-DS w-100 m-0">¿POR QUÉ COMPRAR CON NOSOTROS?</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
     <hr  class="izquierda-DS ml-0 mr-2"  style="width:300px;">✻
     <hr  class="derecha-DS ml-2 mr-0"  style="width:300px;">
@@ -113,7 +113,7 @@
 
 {{-- Subtitulo --}}
 <br>
-<h2 class="row justify-content-center subtitulo-DS w-100 m-0">Lo más destacado</h2>
+<h2 class="row justify-content-center subtitulo-DS w-100 m-0">LO MÁS DESTACADO</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
     <hr  class="izquierda-DS ml-0 mr-2" style="width:200px;">✻
     <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;">
@@ -128,7 +128,7 @@
 
 {{-- Subtitulo --}}
 <br>
-<h2 class="row justify-content-center subtitulo-DS w-100 m-0">Eventos</h2>
+<h2 class="row justify-content-center subtitulo-DS w-100 m-0">EVENTOS</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
     <hr class="izquierda-DS ml-0 mr-2"  style="width:150px;">✻
     <hr  class="derecha-DS ml-2 mr-0"  style="width:150px;">
