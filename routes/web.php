@@ -24,6 +24,15 @@ Route::get('/carrito_compra', function () {
     return view('carrito');
 })->name('carrito');
 
+Route::get('/pedidos', function () {
+    return view('pedidos');
+})->name('pedidos');
+
+Route::get('/mis_datos',function(){
+  return view('mis_datos'); 
+})
+->name('mis_datos');
+
 Route::post('/productos', 'ProductoController@store')->name('productos.store');
 Route::get('/productos', 'ProductoController@index')->name('productos.index');
 
@@ -33,9 +42,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('register', 'UsuarioControlador@store');
 
-Route::get('/pedidos', function () {
-    return view('pedidos');
-})->name('pedidos');
 
 /*Route::post('login', 'UsuarioControlador@inicio_sesion');*/
 
