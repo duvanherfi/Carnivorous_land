@@ -532,6 +532,14 @@ tr:nth-child(odd) td {
 
 
 
+/*Mis datos */
+.datos{
+    background-color: #9DCE5B;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #FFF;
+}
+
 
 
 

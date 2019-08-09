@@ -17,6 +17,14 @@ class UsuarioControlador extends Controller
 
     }
 /*
+    public function datos(){
+
+      auth()->user();
+
+      return compact();
+    }
+    */
+/*
     public function inicio_sesion (Request $request){
      
 
