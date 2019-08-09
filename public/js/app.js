@@ -6451,7 +6451,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.borde-menu-DS[data-v-505828be] {\r\n    border-top: #434343 3px solid;\r\n    width: 230px;\n}\n.opcion-menu-DS[data-v-505828be] {\r\n    border-bottom: #434343 3px solid;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.contenedor-submenu-DS[data-v-505828be] {\r\n    width: 261px;\n}\n.opcion-menu-DS[data-v-505828be]:hover {\r\n    background-color: #9DCE5B;\r\n    color: white;\r\n    cursor: pointer;\n}\n.menu-producto-tips-DS[data-v-505828be] {\r\n    border-right: #434343 3px solid;\n}\r\n\r\n/* Collapse */\n[data-toggle=\"collapse\"][data-v-505828be]:after {\r\n    display: inline-block;\r\n    display: inline-block;\r\n    font: normal normal normal 14px/1 FontAwesome;\r\n    font-size: inherit;\r\n    text-rendering: auto;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    content: \"\\25BC\";\r\n    transform: rotate(-90deg);\r\n    transition: all linear 0.25s;\n}\n[data-toggle=\"collapse\"].collapsed[data-v-505828be]:after {\r\n    transform: rotate(0deg);\n}\r\n", ""]);
+exports.push([module.i, "\n.borde-menu-DS[data-v-505828be] {\r\n    border-top: #434343 3px solid;\r\n    width: 230px;\n}\n.opcion-menu-DS[data-v-505828be] {\r\n    border-bottom: #434343 3px solid;\r\n    font-family: 'Montserrat', sans-serif;\r\n    width: 261px;\n}\n.contenedor-submenu-DS[data-v-505828be] {\r\n    width: 261px;\n}\n.opcion-menu-DS[data-v-505828be]:hover {\r\n    background-color: #9DCE5B;\r\n    color: white;\r\n    cursor: pointer;\n}\n.menu-producto-tips-DS[data-v-505828be] {\r\n    border-right: #434343 3px solid;\n}\r\n\r\n/* Collapse */\n[data-toggle=\"collapse\"][data-v-505828be]:after {\r\n    display: inline-block;\r\n    display: inline-block;\r\n    font: normal normal normal 14px/1 FontAwesome;\r\n    font-size: inherit;\r\n    text-rendering: auto;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    content: \"\\25BC\";\r\n    transform: rotate(-90deg);\r\n    transition: all linear 0.25s;\n}\n[data-toggle=\"collapse\"].collapsed[data-v-505828be]:after {\r\n    transform: rotate(0deg);\n}\r\n", ""]);
 
 // exports
 
@@ -38902,171 +38902,174 @@ var staticRenderFns = [
         [
           _c("div", { staticClass: "col-9 borde-menu-DS" }),
           _vm._v(" "),
-          _c("div", [
-            _c(
-              "div",
-              {
-                staticClass: "col-9 text-center py-1 opcion-menu-DS",
-                attrs: { role: "tab" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "collapsed",
-                    attrs: {
-                      "data-toggle": "collapse",
-                      href: "#collapseOne",
-                      "aria-expanded": "false",
-                      "aria-controls": "collapseOne"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\r\n                    Plantas\r\n                "
-                    )
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse contenedor-submenu-DS",
-                attrs: {
-                  id: "collapseOne",
-                  role: "tabpanel",
-                  "aria-labelledby": "headingOne",
-                  "data-parent": "#accordion"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
-                  [
-                    _vm._v(
-                      "\r\n                    Sarracenia\r\n                "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
-                  [
-                    _vm._v(
-                      "\r\n                    Drosera\r\n                "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
-                  [
-                    _vm._v(
-                      "\r\n                    Dionaea\r\n                "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
-                  [
-                    _vm._v(
-                      "\r\n                    Nepenthes\r\n                "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
-                  [
-                    _vm._v(
-                      "\r\n                    Pinguicula\r\n                "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
-                  [
-                    _vm._v(
-                      "\r\n                    Utricularia\r\n                "
-                    )
-                  ]
-                )
-              ]
-            )
-          ]),
+          _c(
+            "div",
+            {
+              staticClass: "text-center py-1 opcion-menu-DS",
+              attrs: { role: "tab" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "collapsed",
+                  attrs: {
+                    "data-toggle": "collapse",
+                    href: "#collapseOne",
+                    "aria-expanded": "false",
+                    "aria-controls": "collapseOne"
+                  }
+                },
+                [_vm._v("\r\n                Plantas\r\n            ")]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _c("div", [
-            _c(
-              "div",
-              {
-                staticClass: "col-9 text-center py-1 opcion-menu-DS",
-                attrs: { role: "tab" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "collapsed",
-                    attrs: {
-                      "data-toggle": "collapse",
-                      href: "#collapseTwo",
-                      "aria-expanded": "false",
-                      "aria-controls": "collapseTwo"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\r\n                    Merchandising\r\n                "
-                    )
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "collapse contenedor-submenu-DS",
-                attrs: {
-                  id: "collapseTwo",
-                  role: "tabpanel",
-                  "aria-labelledby": "headingTwo",
-                  "data-parent": "#accordion"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
-                  [
-                    _vm._v(
-                      "\r\n                    Camisetas\r\n                "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
-                  [_vm._v("\r\n                    Vasos\r\n                ")]
-                )
-              ]
-            )
-          ]),
+          _c(
+            "div",
+            {
+              staticClass: "collapse contenedor-submenu-DS",
+              attrs: {
+                id: "collapseOne",
+                role: "tabpanel",
+                "aria-labelledby": "headingOne",
+                "data-parent": "#accordion"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Sarracenia\r\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Drosera\r\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Dionaea\r\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Nepenthes\r\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Pinguicula\r\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Utricularia\r\n            ")]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "col-9 text-center py-1 opcion-menu-DS" }, [
-            _vm._v("\r\n            Implementos de cultivo\r\n        ")
-          ])
+          _c(
+            "div",
+            {
+              staticClass: "text-center py-1 opcion-menu-DS",
+              attrs: { role: "tab" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "collapsed",
+                  attrs: {
+                    "data-toggle": "collapse",
+                    href: "#collapseTwo",
+                    "aria-expanded": "false",
+                    "aria-controls": "collapseTwo"
+                  }
+                },
+                [_vm._v("\r\n                Merchandising\r\n            ")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse contenedor-submenu-DS",
+              attrs: {
+                id: "collapseTwo",
+                role: "tabpanel",
+                "aria-labelledby": "headingTwo",
+                "data-parent": "#accordion"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Camisetas\r\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Vasos\r\n            ")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "text-center py-1 opcion-menu-DS",
+              attrs: { role: "tab" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "collapsed",
+                  attrs: {
+                    "data-toggle": "collapse",
+                    href: "#collapseThree",
+                    "aria-expanded": "false",
+                    "aria-controls": "collapseThree"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\r\n                Implementos de cultivo\r\n            "
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse contenedor-submenu-DS",
+              attrs: {
+                id: "collapseThree",
+                role: "tabpanel",
+                "aria-labelledby": "headingThree",
+                "data-parent": "#accordion"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "text-center py-1 w-100 opcion-menu-DS" },
+                [_vm._v("\r\n                Macetas\r\n            ")]
+              )
+            ]
+          )
         ]
       ),
       _vm._v(" "),
@@ -39113,121 +39116,6 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-9 text-center py-1 opcion-menu-DS" }, [
           _vm._v("\r\n            Eliminar artículo\r\n        ")
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "accordion", role: "tablist" } }, [
-        _c("div", { attrs: { role: "tab" } }, [
-          _c(
-            "a",
-            {
-              attrs: {
-                "data-toggle": "collapse",
-                href: "#collapseOne",
-                "aria-expanded": "true",
-                "aria-controls": "collapseOne"
-              }
-            },
-            [
-              _vm._v(
-                "\r\n                Collapsible Group Item #1\r\n            "
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "collapse show",
-            attrs: {
-              id: "collapseOne",
-              role: "tabpanel",
-              "aria-labelledby": "headingOne",
-              "data-parent": "#accordion"
-            }
-          },
-          [
-            _vm._v(
-              "\r\n            ...............................................................................#1\r\n        "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { attrs: { role: "tab" } }, [
-          _c(
-            "a",
-            {
-              staticClass: "collapsed",
-              attrs: {
-                "data-toggle": "collapse",
-                href: "#collapseTwo",
-                "aria-expanded": "false",
-                "aria-controls": "collapseTwo"
-              }
-            },
-            [
-              _vm._v(
-                "\r\n                Collapsible Group Item #2\r\n            "
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "collapse",
-            attrs: {
-              id: "collapseTwo",
-              role: "tabpanel",
-              "aria-labelledby": "headingTwo",
-              "data-parent": "#accordion"
-            }
-          },
-          [
-            _vm._v(
-              "\r\n            ...............................................................................#2\r\n        "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { attrs: { role: "tab" } }, [
-          _c(
-            "a",
-            {
-              staticClass: "collapsed",
-              attrs: {
-                "data-toggle": "collapse",
-                href: "#collapseThree",
-                "aria-expanded": "false",
-                "aria-controls": "collapseThree"
-              }
-            },
-            [
-              _vm._v(
-                "\r\n                Collapsible Group Item #3\r\n            "
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "collapse",
-            attrs: {
-              id: "collapseThree",
-              role: "tabpanel",
-              "aria-labelledby": "headingThree",
-              "data-parent": "#accordion"
-            }
-          },
-          [
-            _vm._v(
-              "\r\n            ...............................................................................#3\r\n        "
-            )
-          ]
-        )
       ])
     ])
   }

@@ -10,7 +10,7 @@
     <div id="accordion" class="row justify-content-center" role="tablist">
         <div class="col-9 borde-menu-DS"></div>
         <!-- Opcion Plantas -->
-        <div role="tab" class="col-9 text-center py-1 opcion-menu-DS">
+        <div role="tab" class="text-center py-1 opcion-menu-DS">
             <div class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 Plantas
             </div>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <!-- Opcion Merchandising -->
-        <div role="tab" class="col-9 text-center py-1 opcion-menu-DS">
+        <div role="tab" class="text-center py-1 opcion-menu-DS">
             <div class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 Merchandising
             </div>
@@ -50,8 +50,15 @@
             </div>
         </div>
         <!-- Opcion Implementos -->
-        <div class="col-9 text-center py-1 opcion-menu-DS">
-            Implementos de cultivo
+        <div role="tab" class="text-center py-1 opcion-menu-DS">
+            <div class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Implementos de cultivo
+            </div>
+        </div>
+        <div id="collapseThree" class="collapse contenedor-submenu-DS" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="text-center py-1 w-100 opcion-menu-DS">
+                Macetas
+            </div>
         </div>
     </div>
 
@@ -73,34 +80,6 @@
             Eliminar artículo
         </div>
     </div>
-
-    <div id="accordion" role="tablist">
-        <div role="tab">
-            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Collapsible Group Item #1
-            </a>
-        </div>
-        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-            ...............................................................................#1
-        </div>
-        <div role="tab">
-            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Collapsible Group Item #2
-            </a>
-        </div>
-        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-            ...............................................................................#2
-        </div>
-        <div role="tab">
-            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Collapsible Group Item #3
-            </a>
-        </div>
-        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-            ...............................................................................#3
-        </div>
-    </div>
-
 </div>
 </template>
 
@@ -113,6 +92,7 @@
 .opcion-menu-DS {
     border-bottom: #434343 3px solid;
     font-family: 'Montserrat', sans-serif;
+    width: 261px;
 }
 
 .contenedor-submenu-DS {
