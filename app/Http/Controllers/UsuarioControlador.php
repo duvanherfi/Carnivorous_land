@@ -15,6 +15,7 @@ class UsuarioControlador extends Controller
 
       
         $user = new User($request->all());
+        $user->password = bcrypt($request->password);
         $user->save();
        
 
@@ -38,18 +39,12 @@ class UsuarioControlador extends Controller
 
       //Método que  realiza una consulta a la base de datos que retorna la contraseña y correo, del correo con el
       // que se intenta inciar sesión y lo compara con los campos ingresados en el formulario
-      $correo = DB::table('users')->where('correo', $request->correo)->value('correo');
-      $contraseña = DB::table('users')->where('correo', $request->correo)->value('password');
-  
-      if($contraseña == $request->password && $correo == $request->correo){
+    
+      if(Auth::attempt(['correo' => $request->correo, 'password' => $request->password], true)){
         return redirect()->route('mis_datos');
-      }else{
-        return Redirect::back()->with('error_message', 'Invalid data')->withInput();
-      }
-
-     
-        
-
+      }else {
+        return redirect()->route('login');
     }
     
+}
 }
