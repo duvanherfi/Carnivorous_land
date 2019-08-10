@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('cedula');
-            $table->integer('telefono');
+            $table->string('telefono');
             $table->date('fecha_nacimiento');
             $table->string('sexo');
             $table->rememberToken();
