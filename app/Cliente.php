@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     protected $fillable = [
-        'direccion_residencia'
+       'correo', 'departamento', 'ciudad', 'barrio', 'via',
     ];
 
 
-    protected $primaryKey = 'correo_cliente';
+    protected $primaryKey = 'correo';
     public $incrementing = false;
 }

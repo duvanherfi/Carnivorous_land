@@ -86,8 +86,7 @@
                             <div class="col-md-6">
                                 <input id="fecha_nacimiento" type="date" class="form-control" name="fecha_nacimiento" required autocomplete="fecha_nacimiento">
                             </div>
-                        </div>
-
+                        </div> 
 
 
                             

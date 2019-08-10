@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'correo', 'password', 'cedula', 'telefono', 'fecha_nacimiento', 'sexo',
+        'nombre', 'correo', 'password', 'cedula', 'telefono', 'sexo', 'fecha_nacimiento',
     ];
 
     /**
@@ -33,16 +33,18 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'password' => 'datetime',
-    ];
+ 
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 
     protected $primaryKey = 'correo';
     public $incrementing = false;
 
-   public function setPasswordAttribute ($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
+//    public function setPasswordAttribute ($value)
+//     {
+//         $this->attributes['password'] = bcrypt($value);
+//     }
     
 }
