@@ -36,9 +36,7 @@ Route::get('/pedidos', function () {
     return view('pedidos');
 })->name('pedidos');
 
-Route::get('/mis_datos',function(){
-  return view('mis_datos'); 
-})
+Route::get('/mis_datos','UsuarioControlador@mostrar_datos')
 ->name('mis_datos');
 
 Route::post('/productos', 'ProductoController@store')->name('productos.store');

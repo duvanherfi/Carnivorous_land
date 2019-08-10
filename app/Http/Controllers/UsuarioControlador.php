@@ -47,4 +47,17 @@ class UsuarioControlador extends Controller
     }
     
 }
+
+  public function mostrar_datos(){
+    $correo=auth()->user()->correo;
+    $usuarios = DB::table('users')
+     ->join('clientes', 'users.correo', '=', 'clientes.correo')
+     ->select('*')
+     ->where('clientes.correo','=', $correo)
+      ->get();
+
+      
+    return view('mis_datos',compact('usuarios'));
+    
+  }
 }
