@@ -45,6 +45,7 @@ Route::get('/productos', 'ProductoController@index')->name('productos.index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('logout', 'usuarioControlador@logout')->name('cerrar_sesion');
 
 Route::post('register', 'UsuarioControlador@store');
 

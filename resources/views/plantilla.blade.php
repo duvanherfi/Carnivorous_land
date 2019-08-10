@@ -30,6 +30,8 @@
     
 </head>
 
+    
+
 <body>
     <!--Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-DS">
@@ -38,8 +40,10 @@
             aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="navbar-nav ml-auto bordes-externo-DS">
+                @if(auth()->user() == null)
                 <li class="nav-item bordes-DS">
                     <p class="nav-link">
                         <i class="fab fa-whatsapp"></i>
@@ -61,6 +65,21 @@
                         REGISTRARSE
                     </a>
                 </li>
+               
+             
+                @else
+                <li class="nav-item dropdown opcion-menu-DS bordes-DS" v-if="1>0">
+                        <a class="nav-link dropdown-toggle" href="producto" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                {{auth()->user()->nombre}}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
+                                aria-labelledby="navbarDropdownMenuLink-333">
+                        <a class="dropdown-item" href="{{route('mis_datos')}}">Mi perfil</a>
+                        <a class="dropdown-item" href="{{route('cerrar_sesion')}}">Cerrar sesión</a>
+                            </div>
+                </li>
+                    @endif
             </ul>
         </div>
     </nav>

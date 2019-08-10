@@ -39,9 +39,10 @@ class UsuarioControlador extends Controller
 
       //Método que  realiza una consulta a la base de datos que retorna la contraseña y correo, del correo con el
       // que se intenta inciar sesión y lo compara con los campos ingresados en el formulario
+ 
     
       if(Auth::attempt(['correo' => $request->correo, 'password' => $request->password], true)){
-        return redirect()->route('mis_datos');
+        return redirect()->route('inicio');
       }else {
         return redirect()->route('login');
     }
@@ -59,5 +60,10 @@ class UsuarioControlador extends Controller
       
     return view('mis_datos',compact('usuarios'));
     
+  }
+
+  public function logout(){
+    Auth::logout();
+    return redirect()->route('inicio');
   }
 }
