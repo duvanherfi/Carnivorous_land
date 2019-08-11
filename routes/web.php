@@ -39,6 +39,10 @@ Route::get('/pedidos', function () {
 Route::get('/mis_datos','UsuarioControlador@mostrar_datos')
 ->name('mis_datos');
 
+Route::post('/mis_datos','UsuarioControlador@actualizar')
+->name('mis_datos');
+
+
 Route::post('/productos', 'ProductoController@store')->name('productos.store');
 Route::get('/productos', 'ProductoController@index')->name('productos.index');
 
