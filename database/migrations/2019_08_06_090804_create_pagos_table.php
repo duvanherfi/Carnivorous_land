@@ -16,7 +16,6 @@ class CreatePagosTable extends Migration
         Schema::create('pagos', function (Blueprint $table) {
             $table->bigIncrements('id_pago');
             $table->double('valor', 8, 2);
-            $table->primary('id_pago');
             $table->timestamps();
         });
     }

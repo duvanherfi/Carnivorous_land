@@ -22,7 +22,7 @@
                         <a class="dropdown-item" v-bind:href="imple_cultivo">Implementos de cultivo</a>
                         <a class="dropdown-item" v-bind:href="merchandising">Merchandising</a>
                     </div>
-                </li>
+        </li>
 
                 <li class="nav-item opcion-menu-DS bordes-DS" v-else>
                     <a class="nav-link waves-effect waves-light" v-bind:href="inventario">

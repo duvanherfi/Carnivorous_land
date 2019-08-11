@@ -14,13 +14,13 @@ class CreateClientesTable extends Migration
     public function up()
     {
         Schema::create('clientes', function (Blueprint $table) {
-            $table->string('correo_cliente')->unique();
+            $table->string('correo')->unique();
             $table->string('departamento');
             $table->string('ciudad');
             $table->string('barrio');
             $table->string('via');
-            $table->primary('correo_cliente');
-            $table->foreign('correo_cliente')->references('correo')->on('users');
+            $table->primary('correo');
+            $table->foreign('correo')->references('correo')->on('users');
             $table->timestamps();
         });
     }
