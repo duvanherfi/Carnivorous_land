@@ -1,4 +1,4 @@
-<template>
+<template lang="es">
 <div class="col-3 pr-0 menu-producto-tips-DS">
     <!-- Subtitulo -->
     <br>
@@ -11,7 +11,7 @@
         <div class="col-9 borde-menu-DS"></div>
         <!-- Opcion Plantas -->
         <div role="tab" class="text-center py-1 opcion-menu-DS">
-            <div class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            <div class="collapsed flecha" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 Plantas
             </div>
         </div>
@@ -37,7 +37,7 @@
         </div>
         <!-- Opcion Merchandising -->
         <div role="tab" class="text-center py-1 opcion-menu-DS">
-            <div class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <div class="collapsed flecha" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 Merchandising
             </div>
         </div>
@@ -51,7 +51,7 @@
         </div>
         <!-- Opcion Implementos -->
         <div role="tab" class="text-center py-1 opcion-menu-DS">
-            <div class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <div class="collapsed flecha" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 Implementos de cultivo
             </div>
         </div>
@@ -70,7 +70,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-9 borde-menu-DS"></div>
-        <div class="col-9 text-center py-1 opcion-menu-DS">
+        <div class="col-9 text-center py-1 opcion-menu-DS" data-toggle="modal" data-target="#modal_registrar_articulo">
             Registrar artículo
         </div>
         <div class="col-9 text-center py-1 opcion-menu-DS">
@@ -78,6 +78,160 @@
         </div>
         <div class="col-9 text-center py-1 opcion-menu-DS">
             Eliminar artículo
+        </div>
+    </div>
+
+    <!-- Modal registrar articulo -->
+    <div class="modal fade" id="modal_registrar_articulo" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">REGISTRO DE ARTÍCULO</h2><br>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="ml-3" method="POST" action="">
+                        <div class="form-group row">
+                            <label for="imagen_principal" class="col-md-4 col-form-label">Imagen principal:</label>
+                            <div class="custom-file col-md-7">
+                                <input type="file" class="custom-file-input" name="imagen_principal" id="customFileLang" lang="es">
+                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="imagen2" class="col-md-4 col-form-label">Imagen #2:</label>
+                            <div class="custom-file col-md-7">
+                                <input type="file" class="custom-file-input" name="imagen2" id="customFileLang" lang="es">
+                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="imagen3" class="col-md-4 col-form-label">Imagen #3:</label>
+                            <div class="custom-file col-md-7">
+                                <input type="file" class="custom-file-input" name="imagen3" id="customFileLang" lang="es">
+                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="nombre" class="col-md-4 col-form-label">Nombre:</label>
+                            <div class="col-md-7 p-0">
+                                <input id="nombre" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre" required autocomplete="nombre" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="valor" class="col-md-4 col-form-label">Valor:</label>
+                            <div class="col-md-7 p-0">
+                                <input id="valor" placeholder="Ej: 50000" type="number" class="form-control" name="valor" required autocomplete="valor" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cantidad" class="col-md-4 col-form-label">Cantidad:</label>
+                            <div class="col-md-7 p-0">
+                                <input id="cantidad" placeholder="Ej: 43" type="number" class="form-control" name="cantidad" required autocomplete="cantidad" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="stock_minimo" class="col-md-4 col-form-label">Stock mínimo:</label>
+                            <div class="col-md-7 p-0">
+                                <input id="stock_minimo" placeholder="Ej: 10" type="number" class="form-control" name="stock_minimo" required autocomplete="stock_minimo" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="categoria" class="col-md-4 col-form-label">Categoría: </label>
+                            <div class="col-md-7 p-0">
+                                <select class="custom-select form-control" id="categoria" name="categoria" required autocomplete="categoria">
+                                    <option selected>Escoge una opción</option>
+                                    <option value="plantas">Plantas</option>
+                                    <option value="merchandising">Merchandising</option>
+                                    <option value="implementos">Implementos de cultivo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="tipo" class="col-md-4 col-form-label">Género: </label>
+                            <div class="col-md-7 p-0">
+                                <select class="custom-select form-control" id="tipo" name="tipo" required autocomplete="tipo">
+                                    <option selected>Escoge una opción</option>
+                                    <option value="Sarracenia">Sarracenia</option>
+                                    <option value="Drosera">Drosera</option>
+                                    <option value="Dionaea">Dionaea</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Registrar genero -->
+                        <button type="button" class="btn btn-md color-verde btn-registrar-genero mt-0" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Registrar Género</button>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="collapse" id="registrar_genero">
+                                    <div class="card card-body form-registrar-genero">
+                                        <form class="ml-3" method="POST" action="">
+                                            <div class="form-group row">
+                                                <label for="imagen" class="col-md-3 col-form-label">Imagen:</label>
+                                                <div class="custom-file col-md-8">
+                                                    <input type="file" class="custom-file-input" name="imagen" id="customFileLang" lang="es">
+                                                    <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="nombre_tipo" class="col-md-3 col-form-label">Nombre:</label>
+                                                <div class="col-md-8 p-0">
+                                                    <input id="nombre_tipo" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_tipo" required autocomplete="nombre_tipo" autofocus>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group mr-4">
+                                                <label for="descripcion_tipo" class="d-inline-flex col-form-label">Descripción:</label>
+                                                <textarea class="form-control" id="descripcion_tipo" rows="5"></textarea>
+                                            </div>
+
+                                            <button type="button" class="btn btn-md color-verde" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Registrar</button>
+                                            <button type="button" class="btn btn-md botones" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Cancelar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Registrar genero -->
+
+                        <div class="form-group row">
+                            <label for="tamaño" class="col-md-4 col-form-label">Tamaño:</label>
+                            <div class="col-md-7 p-0">
+                                <input id="tamaño" placeholder="Ej: S" type="text" class="form-control" name="tamaño" required autocomplete="tamaño" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="catalogo" class="col-md-4 col-form-label">Enviar a catalogo:</label>
+                            <div class="custom-control custom-switch pt-2 pl-5">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch2" checked>
+                                <label class="custom-control-label" for="customSwitch2"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mr-4">
+                            <label for="descripcion" class="d-inline-flex col-form-label">Descripción:</label>
+                            <textarea class="form-control" id="descripcion" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn color-verde">Registrar</button>
+                    <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -109,9 +263,23 @@
     border-right: #434343 3px solid;
 }
 
+label {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-registrar-genero {
+    margin-left: 147px;
+    margin-bottom: 16px;
+}
+
+.form-registrar-genero {
+    margin-right: 27px;
+    margin-bottom: 16px;
+}
+
 /* Collapse */
 
-[data-toggle="collapse"]:after {
+.flecha:after {
     display: inline-block;
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -124,7 +292,7 @@
     transition: all linear 0.25s;
 }
 
-[data-toggle="collapse"].collapsed:after {
+.flecha.collapsed:after {
     transform: rotate(0deg);
 }
 </style>

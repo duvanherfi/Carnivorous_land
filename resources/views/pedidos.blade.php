@@ -179,7 +179,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
-        
       </div>
     </div>
   </div>

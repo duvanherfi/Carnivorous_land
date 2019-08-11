@@ -33,7 +33,7 @@
             <h6 class="mb-1">{{ item.nombre }}</h6>
             <p class="font-weight-bold card-text mb-1">${{ item.valor }} COP</p>
             <!-- Button -->
-            <button class="btn btn-block color-gris"><i class="fas fa-cart-plus"></i> Añadir al carro</button>
+            <button class="btn btn-block color-verde"><i class="fas fa-cart-plus"></i> Añadir al carro</button>
         </div>
         <!-- /Contenido -->
         <!--/.Card-->
@@ -139,12 +139,8 @@ label {
     color: #434343;
 }
 
-.color-gris {
+.color-verde {
     background-color: #86a74d;
-    color: white;
-}
-
-.color-gris:hover {
     color: white;
 }
 

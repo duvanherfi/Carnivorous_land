@@ -541,7 +541,15 @@ tr:nth-child(odd) td {
 }
 
 
+/* Boton */
 
+.color-verde {
+    background-color: #86a74d;
+    color: white;
+}
+.color-verde:hover {
+    color: white;
+}
 
 
 
