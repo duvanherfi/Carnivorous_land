@@ -51,3 +51,5 @@ Route::post('register', 'UsuarioControlador@store');
 
 Route::post('login', 'UsuarioControlador@inicio_sesion');
 
+Route::get('/pedidos', "PedidosController@mostrar");
+
