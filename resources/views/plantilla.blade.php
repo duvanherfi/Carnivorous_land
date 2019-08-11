@@ -34,7 +34,7 @@
 
 <body>
     <!--Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-DS">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-DS lol">
         <a class="navbar-brand sincursor-DS" href="#">¡Bienvenido a Canivorous Land, déjate atrapar!</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
             aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,17 +68,20 @@
                
              
                 @else
-                <li class="nav-item dropdown opcion-menu-DS bordes-DS" v-if="1>0">
+                 <li class="nav-item dropdown opcion-menu-DS bordes-DS" >
                         <a class="nav-link dropdown-toggle" href="producto" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 {{auth()->user()->nombre}}
+                               
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
                                 aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="{{route('mis_datos')}}">Mi perfil</a>
-                        <a class="dropdown-item" href="{{route('cerrar_sesion')}}">Cerrar sesión</a>
+                                 <a class="dropdown-item" href="{{route('mis_datos')}}">Mi perfil</a>
+                                <a class="dropdown-item" href="{{route('cerrar_sesion')}}">Cerrar sesión</a>
                             </div>
-                </li>
+                </li> 
+
+               
                     @endif
             </ul>
         </div>

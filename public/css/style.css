@@ -16,7 +16,7 @@ h2 {
     margin: 0;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     font-family: 'Source Sans Pro', serif;
-    z-index: 2;
+    z-index: 4;
     font-size: 80%;
 }
 
@@ -161,6 +161,9 @@ h2 {
     left: -6px;
     min-width: 10.4rem;
     z-index: 3;
+    position: absolute;
+  
+    
 }
 
 /* Carta */
@@ -539,10 +542,6 @@ tr:nth-child(odd) td {
     text-align: center;
     color: #FFF;
 }
-
-
-
-
 
 
 
