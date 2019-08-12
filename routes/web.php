@@ -59,3 +59,5 @@ Route::post('login', 'UsuarioControlador@inicio_sesion');
 
 Route::get('/pedidos', "PedidosController@mostrar");
 
+Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
+
