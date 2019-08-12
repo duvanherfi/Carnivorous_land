@@ -13,15 +13,15 @@ class UsuarioControlador extends Controller
 {
     public function store(Request $request){
 
-      
+
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->save();
-       
+
 
         $cliente = new Cliente($request->all());
         $cliente->save();
-       
+
         return redirect()->route('login');
 
     }
@@ -35,18 +35,23 @@ class UsuarioControlador extends Controller
     */
 
     public function inicio_sesion(Request $request){
-     
+        $credenciales=$this->validate($request,[
+            'correo'=>'email|required|string',
+            'password'=> 'required|string'
+        ]);
 
       //Método que  realiza una consulta a la base de datos que retorna la contraseña y correo, del correo con el
       // que se intenta inciar sesión y lo compara con los campos ingresados en el formulario
- 
-    
-      if(Auth::attempt(['correo' => $request->correo, 'password' => $request->password], true)){
+
+
+      if(Auth::attempt($credenciales)){
         return redirect()->route('inicio');
       }else {
-        return redirect()->route('login');
+        return back()->withErrors(['correo'=>trans('auth.failed'),
+                                    'password'=>trans('auth.failed')])
+                    ->withInput(request(['correo']));
     }
-    
+
 }
 
   public function mostrar_datos(){
@@ -57,9 +62,9 @@ class UsuarioControlador extends Controller
      ->where('clientes.correo','=', $correo)
       ->get();
 
-      
+
     return view('mis_datos',compact('usuarios'));
-    
+
   }
 
   public function logout(){
