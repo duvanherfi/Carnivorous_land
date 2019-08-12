@@ -56,14 +56,14 @@ class UsuarioControlador extends Controller
 
   public function mostrar_datos(){
     $correo=auth()->user()->correo;
-    $usuarios = DB::table('users')
+    $user = DB::table('users')
      ->join('clientes', 'users.correo', '=', 'clientes.correo')
      ->select('*')
      ->where('clientes.correo','=', $correo)
-      ->get();
+      ->first();
 
 
-    return view('mis_datos',compact('usuarios'));
+    return view('mis_datos',compact('user'));
 
   }
 
@@ -75,22 +75,22 @@ class UsuarioControlador extends Controller
 
   public function actualizar(Request $request){
 
-    $correo=auth()->user()->correo;
 
+  
             DB::table('users')
-              ->where('correo', $correo)
+              ->where('correo', $request->correo)
               ->update(['nombre' => $request->nombre,
                       'telefono' => $request->telefono
             ]);
 
             DB::table('clientes')
-              ->where('correo', $correo)
+              ->where('correo', $request->correo)
               ->update(['departamento' => $request->departamento,
                         'ciudad' => $request->ciudad,
                         'barrio' => $request->barrio,
                         'via' => $request->via
             ]);
 
-            return dd("Se actualizaron exitosamento los datos");
+            return redirect()->route('inicio');
   }
 }
