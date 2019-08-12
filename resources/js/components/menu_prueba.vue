@@ -51,9 +51,9 @@ export default {
             inicio: route('inicio'),
             quienes_somos: route('quienes_somos'),
             producto:null,
-            plantas:route('productos_plantas'),
-            imple_cultivo:null,
-            merchandising:null,
+            plantas:route('productos', 'plantas'),
+            merchandising:route('productos', 'merchandising'),
+            imple_cultivo:route('productos', 'implementos'),
             inventario:null,
             tips_cultivo:null,
             contactanos:route('contactanos')

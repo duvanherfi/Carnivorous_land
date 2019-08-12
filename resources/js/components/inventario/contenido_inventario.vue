@@ -29,12 +29,12 @@
         <productos></productos>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal modificar genero -->
     <div class="modal fade" id="modal_modificar_genero" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">REGISTRO DE ARTÍCULO</h2>
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">MODIFICAR GÉNERO</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

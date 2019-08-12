@@ -8,9 +8,9 @@ Route::get('/quienes_somos', function () {
     return view('quienes_somos');
 })->name('quienes_somos');
 
-Route::get('/productos_plantas', function () {
-    return view('productos_plantas');
-})->name('productos_plantas');
+Route::get('/productos/{tipo}', function ($tipo) {
+    return view('productos', compact('tipo'));
+})->name('productos');
 
 Route::get('/descripcion_producto', function () {
     return view('descripcion_producto');
@@ -39,8 +39,11 @@ Route::get('/pedidos', function () {
 Route::get('/mis_datos','UsuarioControlador@mostrar_datos')
 ->name('mis_datos');
 
-Route::post('/productos', 'ProductoController@store')->name('productos.store');
-Route::get('/productos', 'ProductoController@index')->name('productos.index');
+Route::get('/tiposControl/{tipo}', 'TiposControlador@index')->name('tipos.index');
+Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');
+
+Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');
+Route::get('/productosControl', 'ProductoControlador@index')->name('productos.index');
 
 Auth::routes();
 

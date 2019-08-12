@@ -85,7 +85,7 @@ export default {
         }
     },
     created() {
-        axios.get('/productos').then(res => {
+        axios.get('/productosControl').then(res => {
             this.productos = res.data;
         })
     },
@@ -95,7 +95,6 @@ export default {
             this.producto.imagen = file;
         },
         añadirProducto() {
-
             let formData = new FormData();
             formData.append('imagen', this.producto.imagen);
             formData.append('genero', this.producto.genero);
@@ -103,7 +102,7 @@ export default {
             formData.append('valor', this.producto.valor);
             formData.append('tamaño', this.producto.tamaño);
             axios.post('/productos', formData).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.productos.push(response.data);
             })
             this.producto.imagen = '';
