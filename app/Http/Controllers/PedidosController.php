@@ -16,4 +16,11 @@ class PedidosController extends Controller
 		return view('pedidos', compact('pedidos'));
 	}
     
+
+    public function detalles($id){
+
+    	$pedido = Pedido::findOrFail($id);
+
+    	return response()->json(['success' => $pedido]);
+    }
 }

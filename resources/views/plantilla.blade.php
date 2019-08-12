@@ -236,6 +236,32 @@
             });
           
         } );
+
+
+        jQuery(document).on("click", "#detalle_pedido", function(){
+
+            var url = 'http://127.0.0.1:8000/pedidos/'+$(this).attr('data-id');
+            $.ajax({
+
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                method: 'POST',
+
+                url: url,
+                    success: function(result){
+                        console.log(result.success);
+                      
+                        $('#nombre_cli').html(result.success.nombre_cliente);
+
+
+                        $('#modal_pedidos').modal('show');
+
+
+                    },
+                    error: function (result){
+                         console.log(result)
+                    }
+            })
+        })
     </script>
    
     
