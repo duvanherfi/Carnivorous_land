@@ -8,7 +8,7 @@
 
 <div class="container pt-5 mt-5 ">
 <h3 class="mt-5 datos">Datos personales</h3>
-<form>
+<form method="POST" action=" {{ route('mis_datos')}} ">
     {{--Nombre --}}
 
     @foreach ($usuarios as $user )
