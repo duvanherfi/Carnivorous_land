@@ -10,65 +10,45 @@
 	<table class="table tabla">
   		<thead class="cabecera_pedidos">
     		<tr>
-      			<th scope="col">Entregado</th>
+      		
+            <th scope="col">Entregado</th>
             <th scope="col">Fecha</th>
-      			<th scope="col">Nombre cliente</th>
-      			<th scope="col">Nombre producto(s)</th>
+            <th scope="col">Nombre cliente</th>
+            <th scope="col">Nombre producto(s)</th>
             <th scope="col">Ciudad</th>
-      			<th scope="col">Estado</th>
-      			<th scope="col">Detalle</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Detalle</th>
+        
     		</tr>
   		</thead>
   		<tbody class="cuerpo_pedidos">
+       	@foreach ( $pedidos as $pedido)
     		<tr>
-      			<td><div class="custom-control custom-switch">
-  					<input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-  					<label class="custom-control-label" for="customSwitch1"></label>
-					</div>
-				</td>
-            <td>01-08-2019</td>
-      			<td>Johhan Andres Perez Carrillo</td>
-      			<td>Tropical Sundews, Cape Sundews</td>
-            <td>Cali, Valle del cauca</td>
-      			<td>Pagado</td>
-      			<td><input type=image src="{{ asset('img/pedidos/ver.png') }}" data-toggle="modal" data-target="#modal_pedidos"></td>
+      			
+            <td><div class="custom-control custom-switch">
+            	<input type="checkbox" class="custom-control-input" id="customSwitch4" checked>
+            	<label class="custom-control-label" for="customSwitch4"></label>
+          		</div>
+        	</td>
+            <td>{{$pedido->fecha}}</td>
+            <td>{{$pedido->nombre_cliente}}</td>
+            <td>{{$pedido->nombre_producto}}</td>
+            <td>{{$pedido->ciudad}}</td>
+            <td>{{$pedido->estado}}</td>
+            <td><input type=image src="{{ asset('img/pedidos/ver.png') }}" data-toggle="modal" data-target="#modal_pedidos"></td>
+      			
     		</tr>
 
-        <tr>
-      			<td><div class="custom-control custom-switch">
-  					<input type="checkbox" class="custom-control-input" id="customSwitch2" checked>
-  					<label class="custom-control-label" for="customSwitch2"></label>
-					</div>
-				</td>
-            <td>05-06-2019</td>
-      			<td>Duvan Hernandez Figueroa</td>
-     			  <td>Winter </td>
-            <td>Cali, Valle del cauca</td>
-      			<td>Pagado</td>
-      			<td><input type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
-    		</tr>
-
-    		<tr>
-      			<td><div class="custom-control custom-switch">
-  					<input type="checkbox" class="custom-control-input" id="customSwitch3" checked>
-  					<label class="custom-control-label" for="customSwitch3"></label>
-					</div>
-				</td>
-            <td>15-02-2019</td>
-      			<td>Andres Felipe Garcia Gaviria</td>
-      			<td>Cape Sundews</td>
-            <td>Cali, Valle del cauca</td>
-      			<td>En proceso</td>
-      			<td><input type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
-    		</tr>
-
+  		@endforeach()
+        
   		</tbody>
 	</table>
 
 
   <br><br><h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS ENTREGADOS</h2><br>
 
-  <table class="table tabla" >
+  	<table class="table tabla" >
+
       <thead class="cabecera_pedidos">
         <tr>
             <th scope="col">Entregado</th>
@@ -80,19 +60,23 @@
             <th scope="col">Detalle</th>
         </tr>
       </thead>
+
       <tbody class="cuerpo_pedidos">
         <tr>
+
             <td><div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch4" checked>
-            <label class="custom-control-label" for="customSwitch4"></label>
-          </div>
-        </td>
+            	<input type="checkbox" class="custom-control-input" id="customSwitch4" checked>
+            	<label class="custom-control-label" for="customSwitch4"></label>
+          		</div>
+        	</td>
             <td>01-08-2019</td>
             <td>Johhan Andres Perez Carrillo</td>
             <td>Tropical Sundews, Cape Sundews</td>
             <td>Cali, Valle del cauca</td>
             <td>Pagado</td>
-            <td><input type=image src="{{ asset('img/pedidos/ver.png') }}" ></td>
+            <td><input type=image src="{{ asset('img/pedidos/ver.png') }}" data-toggle="modal" data-target="#modal_pedidos"></td>
+        </tr>
+
         <tr>
             <td><div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="customSwitch5" checked>
@@ -120,10 +104,11 @@
             <td><input type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
         </tr>
       </tbody>
-  </table><br><br><br><br>
+  	</table><br><br><br><br>
 
 
 </div>
+
 
 
 <div class="modal" id="modal_pedidos" tabindex="-1" role="dialog">
@@ -183,6 +168,5 @@
     </div>
   </div>
 </div>
-
 
 @endsection 

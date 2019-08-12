@@ -71,4 +71,26 @@ class UsuarioControlador extends Controller
     Auth::logout();
     return redirect()->route('inicio');
   }
+
+
+  public function actualizar(Request $request){
+
+    $correo=auth()->user()->correo;
+
+            DB::table('users')
+              ->where('correo', $correo)
+              ->update(['nombre' => $request->nombre,
+                      'telefono' => $request->telefono
+            ]);
+
+            DB::table('clientes')
+              ->where('correo', $correo)
+              ->update(['departamento' => $request->departamento,
+                        'ciudad' => $request->ciudad,
+                        'barrio' => $request->barrio,
+                        'via' => $request->via
+            ]);
+
+            return dd("Se actualizaron exitosamento los datos");
+  }
 }
