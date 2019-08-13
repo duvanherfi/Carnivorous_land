@@ -45,9 +45,11 @@ Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');
 Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');
 Route::get('/productosControl', 'ProductoControlador@index')->name('productos.index');
 
-Route::post('/mis_datos','UsuarioControlador@actualizar')
-->name('mis_datos');
 
+
+Route::put('/actualizar','UsuarioControlador@actualizar')
+->name('actualizar');
+ 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -58,4 +60,6 @@ Route::post('register', 'UsuarioControlador@store');
 Route::post('login', 'UsuarioControlador@inicio_sesion');
 
 Route::get('/pedidos', "PedidosController@mostrar");
+
+Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
 

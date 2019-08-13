@@ -35,7 +35,7 @@
             <td>{{$pedido->nombre_producto}}</td>
             <td>{{$pedido->ciudad}}</td>
             <td>{{$pedido->estado}}</td>
-            <td><input type=image src="{{ asset('img/pedidos/ver.png') }}" data-toggle="modal" data-target="#modal_pedidos"></td>
+            <td><input data-id="{{$pedido->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
       			
     		</tr>
 
@@ -121,7 +121,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <br><p class="mb10 text-justify">Nombre: Johhan Andres Perez Carrillo <br>
+        <br><label id="nombre_cli" name="nombre_cli" class=""></label><br>
               Destino: Yumbo, valle del cauca<br>
               Dirección: Carrera 6# 10 an 24<br>
               Tipo de entrega: Domicilio<br>

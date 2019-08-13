@@ -68,9 +68,9 @@
                                 <input id="cedula" placeholder="Ej: 1113693793" type="number" class="form-control" name="cedula" required autocomplete="cedula">
                             </div>
                         </div>
-                                
 
-                        
+
+
                         <div class="form-group row">
                             <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Número De Teléfono') }}</label>
 
@@ -79,17 +79,17 @@
                             </div>
                         </div>
 
-                            
+
                         <div class="form-group row">
                             <label for="fecha_nacimiento" class="col-md-4 col-form-label text-md-right">{{ __('Fecha De Nacimiento') }}</label>
 
                             <div class="col-md-6">
                                 <input id="fecha_nacimiento" type="date" class="form-control" name="fecha_nacimiento" required autocomplete="fecha_nacimiento">
                             </div>
-                        </div> 
+                        </div>
 
 
-                            
+
                         <div class="form-group row">
                             <label for="sexo" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
 
@@ -106,34 +106,34 @@
                         {{--Dirección--}}
                         <div class="form-group row">
                                 <label for="Departamento" class="col-md-4 col-form-label text-md-right">{{ __('Departamento') }}</label>
-    
+
                                 <div class="col-md-6">
                                     <input id="departamento" type="text" class="form-control" name="departamento" required autocomplete="Departamento" placeholder="Ej: Valle del cauca ">
                                 </div>
                             </div>
 
-                            
+
                         <div class="form-group row">
                                 <label for="ciudad" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad') }}</label>
-    
+
                                 <div class="col-md-6">
                                     <input id="ciudad" type="text" class="form-control" name="ciudad" required autocomplete="ciudad" placeholder="Ej: Cali">
                                 </div>
                             </div>
 
-                            
+
                         <div class="form-group row">
                                 <label for="barrio" class="col-md-4 col-form-label text-md-right">{{ __('Barrio') }}</label>
-    
+
                                 <div class="col-md-6">
                                     <input id="barrio" type="text" class="form-control" name="barrio" required autocomplete="barrio" placeholder="Ej: Petecuy">
                                 </div>
                             </div>
 
-                            
+
                         <div class="form-group row">
                                 <label for="via" class="col-md-4 col-form-label text-md-right">{{ __('Vía') }}</label>
-    
+
                                 <div class="col-md-6">
                                     <input id="via" type="text" class="form-control" name="via" required autocomplete="via" placeholder="Ej: Calle 13Cn # 13N40">
                                 </div>
