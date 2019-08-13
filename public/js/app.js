@@ -2111,6 +2111,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2135,6 +2136,12 @@ __webpack_require__.r(__webpack_exports__);
       },
       tipos: []
     };
+  },
+  mounted: function mounted() {
+    $('#example').click(function popover() {
+      $('[data-toggle="popover"]').popover('show');
+      setTimeout("$('#añadirCarrito').popover('hide');", 5000);
+    });
   },
   methods: {
     obtenerImagenPrincipal: function obtenerImagenPrincipal(e) {
@@ -2266,10 +2273,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2284,7 +2287,18 @@ __webpack_require__.r(__webpack_exports__);
       contactanos: route('contactanos')
     };
   },
-  methods: {}
+  mounted: function mounted() {
+    $(document).ready(function () {
+      var altura = $('.menu').offset().top;
+      $(window).on('scroll', function () {
+        if ($(window).scrollTop() > altura) {
+          $('.menu').addClass('menu-fixed');
+        } else {
+          $('.menu').removeClass('menu-fixed');
+        }
+      });
+    });
+  }
 });
 
 /***/ }),
@@ -40501,6 +40515,19 @@ var render = function() {
           ]
         )
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        attrs: { type: "button", id: "example" },
+        on: {
+          click: function($event) {
+            return _vm.popover()
+          }
+        }
+      },
+      [_vm._v("Hola")]
     )
   ])
 }
@@ -40796,18 +40823,18 @@ var render = function() {
             staticClass: "nav-link waves-effect waves-light",
             attrs: { href: _vm.inicio }
           },
-          [_vm._v("\n            INICIO\n        ")]
+          [_vm._v("\r\n            INICIO\r\n        ")]
         )
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "nav-item bordes-DS" }, [
+      _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
         _c(
           "a",
           {
             staticClass: "nav-link waves-effect waves-light",
             attrs: { href: _vm.quienes_somos }
           },
-          [_vm._v("\n            ¿QUIÉNES SOMOS?\n        ")]
+          [_vm._v("\r\n            ¿QUIÉNES SOMOS?\r\n        ")]
         )
       ]),
       _vm._v(" "),
@@ -40828,7 +40855,7 @@ var render = function() {
                     "aria-expanded": "false"
                   }
                 },
-                [_vm._v("\n                    PRODUCTOS\n                ")]
+                [_vm._v("\r\n            PRODUCTOS\r\n        ")]
               ),
               _vm._v(" "),
               _c(
@@ -40876,7 +40903,7 @@ var render = function() {
                 staticClass: "nav-link waves-effect waves-light",
                 attrs: { href: _vm.inventario }
               },
-              [_vm._v("\n                    INVENTARIO\n                ")]
+              [_vm._v("\r\n            INVENTARIO\r\n        ")]
             )
           ]),
       _vm._v(" "),
@@ -40887,18 +40914,18 @@ var render = function() {
             staticClass: "nav-link waves-effect waves-light",
             attrs: { href: _vm.tips_cultivo }
           },
-          [_vm._v("\n                    TIPS DE CULTIVOS\n                ")]
+          [_vm._v("\r\n            TIPS DE CULTIVOS\r\n        ")]
         )
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "nav-item opcion-menu-DS" }, [
+      _c("li", { staticClass: "nav-item opcion-menu-DS px-0" }, [
         _c(
           "a",
           {
             staticClass: "nav-link waves-effect waves-light",
             attrs: { href: _vm.contactanos }
           },
-          [_vm._v("\n                    CONTÁCTANOS\n                ")]
+          [_vm._v("\r\n            CONTÁCTANOS\r\n        ")]
         )
       ])
     ]

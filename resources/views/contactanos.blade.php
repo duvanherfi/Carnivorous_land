@@ -1,16 +1,18 @@
 @extends('plantilla')
 @section('contenido')
 
-    <div class="titulo carrousel">
-        <h1 id="titulo_quienes_somos" class="pt-5 mt-5 pl-5 ml-5">CONTÁCTANOS</h1>
-    </div>
 
-    <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/contactanos/fondo_contactanos.jpg') }}" alt="fondo_contactanos">
+<div class="d-flex titulo">
+    <h1 id="titulo_contactanos">CONTÁCTANOS</h1>
+</div>
+
+<img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/contactanos/fondo_contactanos.jpg') }}"
+    alt="fondo_contactanos">
 
 <h2 class="row justify-content-center subtitulo-DS pt-3 w-100 m-0">NUESTRAS REDES SOCIALES</h2>
 <div id="separador" class="row align-items-center row justify-content-center w-100 m-0">
-    <hr  class="izquierda-DS ml-0 mr-2"  style="width:200px;">✻
-    <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;">
+    <hr class="izquierda-DS ml-0 mr-2" style="width:200px;">✻
+    <hr class="derecha-DS ml-2 mr-0" style="width:200px;">
 </div>
 
 <!-- Sección de Redes Sociales-->
@@ -19,7 +21,8 @@
 
         <div class="col p-3 ml-5">
             <a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX" target="_blank">
-                <img id="wpp" class="ml-5" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="100">
+                <img id="wpp" class="ml-5" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook"
+                    width="100">
             </a>
         </div>
 
@@ -34,7 +37,7 @@
                 <img class="ml-5 " src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="100">
             </a>
         </div>
-      
+
         <div class="col mr-5 p-3">
             <a href="https://api.whatsapp.com/send?phone=573167973829" target="_blank">
                 <img class="ml-5 mr-0" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="100">

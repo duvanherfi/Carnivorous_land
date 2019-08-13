@@ -26,11 +26,11 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
-    
-    
+
+
 </head>
 
-    
+
 
 <body>
     <!--Navbar -->
@@ -65,70 +65,82 @@
                         REGISTRARSE
                     </a>
                 </li>
-               
-             
-                @else
-                 <li class="nav-item dropdown opcion-menu-DS bordes-DS" >
-                        <a class="nav-link dropdown-toggle" href="producto" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                {{auth()->user()->nombre}}
-                               
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
-                                aria-labelledby="navbarDropdownMenuLink-333">
-                                 <a class="dropdown-item" href="{{route('mis_datos')}}">Mi perfil</a>
-                                <a class="dropdown-item" href="{{route('cerrar_sesion')}}">Cerrar sesión</a>
-                            </div>
-                </li> 
 
-               
-                    @endif
+
+                @else
+                <li class="nav-item dropdown opcion-menu-DS bordes-DS">
+                    <a class="nav-link dropdown-toggle" href="producto" id="navbarDropdownMenuLink-333"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{auth()->user()->nombre}}
+
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
+                        aria-labelledby="navbarDropdownMenuLink-333">
+                        <a class="dropdown-item" href="{{route('mis_datos')}}">Mi perfil</a>
+                        <a class="dropdown-item" href="{{route('cerrar_sesion')}}">Cerrar sesión</a>
+                    </div>
+                </li>
+
+
+                @endif
             </ul>
         </div>
     </nav>
     <!--/.Navbar -->
 
-    {{-- Logo --}}
-    <img class="logo" src="{{ asset('img/Logo.jpg') }}" alt="Logo Carnivorous Land">
-    {{-- /Logo --}}
-    {{-- Menu --}}
+    <div class="container">
+        {{-- Logo --}}
+        <div>
+            <img class="logo" src="{{ asset('img/Logo.jpg') }}" alt="Logo Carnivorous Land">
+        </div>
+        {{-- /Logo --}}
+        {{-- Menu --}}
 
-    <nav class="navbar navbar-expand-lg navbar-dark div2">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-33"
+        <nav class="navbar navbar-expand-lg navbar-dark div2 row align-items-md-center menu">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-33"
             aria-controls="navbarSupportedContent-33" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button> --}}
-        <div id="app2" class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-33">
+            <div id="app2" class="collapse navbar-collapse justificar-DS" id="navbarSupportedContent-33">
 
-                    <menu_prueba> </menu_prueba>
+                <menu_prueba> </menu_prueba>
 
 
-        </div>
-        <a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX" target="_blank">
-            <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="45">
-        </a>
-        <a href="https://www.instagram.com/carnivorousland" target="_blank">
-            <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram" width="45">
+            </div>
+            <div class="redes-sociales-compra d-flex align-items-md-center justify-content-end">
+                <a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX"
+                    target="_blank">
+                    <img class="p-1" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook"
+                        width="45">
+                </a>
+                <a href="https://www.instagram.com/carnivorousland" target="_blank">
+                    <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram"
+                        width="45">
 
-        </a>
-        <a href="https://www.youtube.com/channel/UC-HHD-jISuSeqQnGylaow1w" target="_blank">
-            <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="45">
-        </a>
+                </a>
+                <a href="https://www.youtube.com/channel/UC-HHD-jISuSeqQnGylaow1w" target="_blank">
+                    <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/youtube.png') }}" alt="Youtube" width="45">
+                </a>
 
-        <a href="https://api.whatsapp.com/send?phone=573167973829" target="_blank">
-            <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp" width="45">
-        </a>
+                <a href="https://api.whatsapp.com/send?phone=573167973829" target="_blank">
+                    <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp"
+                        width="45">
+                </a>
 
-        <a href="{{ route('carrito') }}">
-            <img class="ml-3" id="bordes-left-DS" src="{{ asset('img/carro.png') }}" alt="Carro" width="45">
-        </a>
-        <span class="badge badge-primary badge-pill counter">0</span>
-    </nav>
-    {{-- /.Menu --}}
+                <a href="{{ route('carrito') }}">
+                    <img class="bordes-left-DS ml-4" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
+                        data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
+                    <span class="badge badge-primary badge-pill counter" style="z-index:4;">0</span>
+                </a>
+            </div>
+
+        </nav>
+        {{-- /.Menu --}}
+    </div>
 
     @yield('contenido')
 
@@ -165,7 +177,7 @@
                     <p class="mb10 text-justify">Envios solo para ciudades de Colombia</p>
                     <!--headin5_amrc-->
                     <img class="mb-2" src="{{ asset('img/iconos-footer/servientrega.png') }}" alt="Servientrega"
-                    width="200">
+                        width="200">
                     <img src="{{ asset('img/iconos-footer/interrapidisimo.png') }}" alt="Interrapidisimo" width="200">
                     <!--footer_ul_amrc ends here-->
                 </div>
@@ -192,10 +204,15 @@
             <p class="text-center">Copyright @2019 | Diseñado por DailySoft</p>
 
             <ul class="social_footer_ul pl-0">
-                <li class="pl-0"><a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/carnivorousland" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="https://www.youtube.com/channel/UC-HHD-jISuSeqQnGylaow1w" target="_blank"><i class="fab fa-youtube"></i></a></li>
-                <li><a href="https://api.whatsapp.com/send?phone=573167973829" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                <li class="pl-0"><a
+                        href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX"
+                        target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/carnivorousland" target="_blank"><i
+                            class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UC-HHD-jISuSeqQnGylaow1w" target="_blank"><i
+                            class="fab fa-youtube"></i></a></li>
+                <li><a href="https://api.whatsapp.com/send?phone=573167973829" target="_blank"><i
+                            class="fab fa-whatsapp"></i></a></li>
             </ul>
             <!--social_footer_ul ends here-->
         </div>
@@ -203,12 +220,12 @@
     {{-- Footer --}}
     <!-- Scripts -->
     @routes
-    <script src="{{ asset('js/app.js') }}" ></script>
-    
+    <script src="{{ asset('js/app.js') }}"></script>
+
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
-    <script >
+    <script>
         $(document).ready(function() {
             $(".tabla").DataTable({
 
@@ -237,8 +254,8 @@
           
         } );
     </script>
-   
-    
+
+
 </body>
 
 </html>

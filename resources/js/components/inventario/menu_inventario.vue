@@ -161,10 +161,10 @@
                             <label v-else for="tipo" class="col-md-4 col-form-label">Tipo: </label>
                             <div class="col-md-7 p-0">
                                 <select v-model="producto.genero" v-if="this.producto.categoria=='plantas'" class="custom-select form-control" id="tipo" name="tipo" required autocomplete="tipo">
-                                    <option v-for="(item, index) in tipos" :key="index" value=item.genero >{{ item.genero }}</option>
+                                    <option v-for="(item, index) in tipos" :key="index" value=item.genero>{{ item.genero }}</option>
                                 </select>
                                 <select v-model="producto.genero" v-else class="custom-select form-control" id="tipo" name="tipo" required autocomplete="tipo">
-                                    <option v-for="(item, index) in tipos" :key="index" value=item.tipo >{{ item.tipo }}</option>
+                                    <option v-for="(item, index) in tipos" :key="index" value=item.tipo>{{ item.tipo }}</option>
                                 </select>
                             </div>
                         </div>
@@ -235,6 +235,7 @@
             </div>
         </div>
     </div>
+    <button type="button" id="example" @click="popover()">Hola</button>
 </div>
 </template>
 
@@ -264,6 +265,12 @@ export default {
             tipos: []
         }
     },
+    mounted(){
+        $('#example').click(function popover() {
+            $('[data-toggle="popover"]').popover('show');
+            setTimeout("$('#añadirCarrito').popover('hide');", 5000);
+        });
+    },
     methods: {
         obtenerImagenPrincipal(e) {
             let file = e.target.files[0];
@@ -277,11 +284,11 @@ export default {
             let file = e.target.files[0];
             this.producto.imagen3 = file;
         },
-        obtenerImagenTipo(e){
+        obtenerImagenTipo(e) {
             let file = e.target.files[0];
             this.tipo.imagen_tipo = file;
         },
-        registrarTipo(){
+        registrarTipo() {
             let formData = new FormData();
             formData.append('imagen_tipo', this.tipo.imagen_tipo);
             formData.append('nombre', this.tipo.nombre);
@@ -308,20 +315,20 @@ export default {
             formData.append('descripcion', this.producto.descripcion);
             axios.post('/productosControl', formData).then(response => {
                 console.log(response.data);
-                
+
             })
         },
-        generarTipos(){
+        generarTipos() {
             axios.get(`/tiposControl/${this.producto.categoria}`).then(response => {
                 this.tipos = response.data;
             })
         },
-        limpiarRegistrarTipo(){
+        limpiarRegistrarTipo() {
             this.tipo.imagen_tipo = '';
             this.tipo.nombre = '';
             this.tipo.descripcion = '';
         },
-        limpiarRegistraProducto(){
+        limpiarRegistraProducto() {
             this.producto.imagen_principal = '';
             this.producto.imagen2 = '';
             this.producto.imagen3 = '';

@@ -1,7 +1,7 @@
 @extends('plantilla')
 @section('contenido')
-<div class="titulo carrousel">
-    <h1 id="titulo_quienes_somos" class="pt-5 mt-5">¿QUIÉNES SOMOS?</h1>
+<div class="d-flex titulo">
+    <h1 id="titulo_quienes_somos">¿QUIÉNES SOMOS?</h1>
 </div>
 
 <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/quienes_somos/fondo_quienes_somos.jpg') }}">

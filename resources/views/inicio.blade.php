@@ -4,7 +4,7 @@
 <!--Carousel Wrapper-->
 <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
     {{-- Titulo Carnivorous Land --}}
-    <div class="titulo carrousel">
+    <div class="titulo inicio">
         <h1>CARNIVOROUS LAND</h1>
         <h3>¡DÉJATE ATRAPAR!</h3>
         <h5>ENVIOS A TODO COLOMBIA</h5>
