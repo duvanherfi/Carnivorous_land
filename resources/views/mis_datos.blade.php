@@ -18,7 +18,7 @@
     <div class="form-group col-md-6">
       <label for="nombre">Nombre</label>
     <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $user->nombre }}" placeholder="tu nombre">
-    
+    </div>
 
     {{--Correo --}}
     <div class="form-group col-md-6">
