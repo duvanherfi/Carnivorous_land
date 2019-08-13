@@ -4,9 +4,18 @@
 
 @extends('plantilla')
 @section('contenido')
-    
+
 
 <div class="container pt-5 mt-5 ">
+    <br>
+    <br>
+@if (session()->has('act'))
+<div class="alert alert-success" role="alert">
+    {{ session('act') }}
+   datos actualizados con exito
+</div>
+@endif
+
 <h3 class="mt-5 datos">Datos personales</h3>
 
 <form method="POST" action=" {{ route('actualizar') }} ">
@@ -18,7 +27,7 @@
     <div class="form-group col-md-6">
       <label for="nombre">Nombre</label>
     <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $user->nombre }}" placeholder="tu nombre">
-    
+
 
     {{--Correo --}}
     <div class="form-group col-md-6">
@@ -36,12 +45,12 @@
       </div>
 
     {{--Teléfono --}}
-   
+
       <div class="form-group col-md-6">
         <label for="telefono">Teléfono</label>
       <input type="tel" class="form-control" name="telefono" id="telefono" value="{{ $user->telefono }}" placeholder="tu telefono">
       </div>
-   
+
     </div>
      {{--Fecha de nacimiento --}}
      <div class="form-row">
@@ -50,7 +59,7 @@
         <input type="text" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ $user->fecha_nacimiento }}" aria-describedby="avisoFecha" placeholder="tu fecha de nacimiento" readonly>
         <small id="avisoFecha" class="form-text text-muted">No puedes editar tu fecha de nacimiento ingresada en el registro.</small>
       </div>
-    
+
      {{--Sexo --}}
       <div class="form-group col-md-6">
         <label for="sexo">Sexo</label>
@@ -65,7 +74,7 @@
                 <label for="departamento">Departamento</label>
                 <input type="text" class="form-control" name="departamento" id="departamento" value="{{ $user->departamento }}" placeholder="Tu departamento">
             </div>
-        
+
 
             <div class="form-group col-md-6">
                 <label for="ciudad">Ciudad</label>
@@ -82,16 +91,16 @@
             <div class="form-group col-md-6">
                 <label for="via">Vía</label>
                 <input type="text" class="form-control" id="via" name="via" value="{{ $user->via }}" placeholder="tu vía">
-            </div>  
+            </div>
         </div>
 
 
 
- 
+
       <div class="form-group">
       <button type="submit" class="btn btn-success">Guardar</button>
     </div>
   </form>
-        
+
 </div>
   @endsection

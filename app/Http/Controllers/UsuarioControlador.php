@@ -22,7 +22,7 @@ class UsuarioControlador extends Controller
         $cliente = new Cliente($request->all());
         $cliente->save();
 
-        return redirect()->route('login');
+        return redirect('login')->with('flash','Usuario registrado con exito.');
 
     }
 /*
@@ -76,7 +76,7 @@ class UsuarioControlador extends Controller
   public function actualizar(Request $request){
 
 
-  
+
             DB::table('users')
               ->where('correo', $request->correo)
               ->update(['nombre' => $request->nombre,
@@ -91,6 +91,6 @@ class UsuarioControlador extends Controller
                         'via' => $request->via
             ]);
 
-            return redirect()->route('inicio');
+            return redirect('mis_datos')->with('act','Datos actualizados correctamente.');
   }
 }
