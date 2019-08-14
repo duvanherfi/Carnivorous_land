@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Cliente;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class UsuarioControlador extends Controller
 {
-    public function store(Request $request){
+
+    // Método que crea un usuario y encripta la contraseña
+    public function registrar(Request $request){
 
 
         $user = new User($request->all());
@@ -19,30 +19,17 @@ class UsuarioControlador extends Controller
         $user->save();
 
 
-        $cliente = new Cliente($request->all());
-        $cliente->save();
-
         return redirect('login')->with('flash','Usuario registrado con exito.');
 
     }
-/*
-    public function datos(){
 
-      auth()->user();
-
-      return compact();
-    }
-    */
-
+// Método que valida las credenciales y sí son correctas le permite al usuario iniciar sesión
+// De lo contrario mostrará los errores correspondientes
     public function inicio_sesion(Request $request){
         $credenciales=$this->validate($request,[
             'correo'=>'email|required|string',
             'password'=> 'required|string'
         ]);
-
-      //Método que  realiza una consulta a la base de datos que retorna la contraseña y correo, del correo con el
-      // que se intenta inciar sesión y lo compara con los campos ingresados en el formulario
-
 
       if(Auth::attempt($credenciales)){
         return redirect()->route('inicio');
@@ -53,44 +40,28 @@ class UsuarioControlador extends Controller
     }
 
 }
-
+// Método que le permite al usuario logueado visualizar todos sus datos ingresados en el registro
   public function mostrar_datos(){
-    $correo=auth()->user()->correo;
-    $user = DB::table('users')
-     ->join('clientes', 'users.correo', '=', 'clientes.correo')
-     ->select('*')
-     ->where('clientes.correo','=', $correo)
-      ->first();
+    $user=auth()->user();
 
 
     return view('mis_datos',compact('user'));
 
   }
 
-  public function logout(){
+  //Método que le permite a un usuario cerrar la sesión
+  public function cerrar_sesion(){
     Auth::logout();
     return redirect()->route('inicio');
   }
 
+// Método que le permite al usuario actualizar parte de sus datos
+  public function actualizar(Request $request, User $user){
 
-  public function actualizar(Request $request){
+          $data = $request->all();
+          $user->update($data);
 
 
-
-            DB::table('users')
-              ->where('correo', $request->correo)
-              ->update(['nombre' => $request->nombre,
-                      'telefono' => $request->telefono
-            ]);
-
-            DB::table('clientes')
-              ->where('correo', $request->correo)
-              ->update(['departamento' => $request->departamento,
-                        'ciudad' => $request->ciudad,
-                        'barrio' => $request->barrio,
-                        'via' => $request->via
-            ]);
-
-            return redirect('mis_datos')->with('act','Datos actualizados correctamente.');
+          return redirect('mis_datos')->with('act','Datos actualizados correctamente.');
   }
 }

@@ -18,19 +18,25 @@
 
 <h3 class="mt-5 datos">Datos personales</h3>
 
-<form method="POST" action=" {{ route('actualizar') }} ">
+<form method="POST" action=" {{ route('actualizar', $user) }} ">
     {{--Nombre --}}
     {{ method_field('PUT') }}
     @csrf
 
     <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="nombre">Nombre</label>
+    <div class="form-group col-md-4">
+      <label for="nombre">Nombres</label>
     <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $user->nombre }}" placeholder="tu nombre">
     </div>
 
+    
+      <div class="form-group col-md-4">
+        <label for="apellido">Apellidos</label>
+      <input type="text" class="form-control" name="apellido" id="apellido" value="{{ $user->apellido }}" placeholder="tus apellidos">
+      </div>
+
     {{--Correo --}}
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         <label for="correo">Correo</label>
     <input type="email" class="form-control" name="correo" id="correo" value="{{ $user->correo }} "aria-describedby="avisoCorreo" placeholder="tu correo" readonly>
         <small id="avisoCorreo" class="form-text text-muted">No puedes editar tu correo ingresado en el registro.</small>
