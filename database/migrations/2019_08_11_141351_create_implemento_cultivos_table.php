@@ -14,11 +14,14 @@ class CreateImplementoCultivosTable extends Migration
     public function up()
     {
         Schema::create('implemento_cultivos', function (Blueprint $table) {
-            $table->integerIncrements('id_implemento');
-            $table->integer('id_tipo');
+            $table->integerIncrements('id_implemento')->unsigned();
+            $table->integer('id_tipo')->unsigned();
+            $table->timestamps();
+        });
+
+        Schema::table('implemento_cultivos', function (Blueprint $table) {
             $table->foreign('id_implemento')->references('id')->on('productos');
             $table->foreign('id_tipo')->references('id')->on('tipo_implementos');
-            $table->timestamps();
         });
     }
 

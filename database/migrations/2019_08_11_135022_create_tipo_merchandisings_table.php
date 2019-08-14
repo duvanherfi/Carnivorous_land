@@ -14,12 +14,11 @@ class CreateTipoMerchandisingsTable extends Migration
     public function up()
     {
         Schema::create('tipo_merchandisings', function (Blueprint $table) {
-            $table->integer('id')->unique();
+            $table->increments('id');
             $table->string('tipo');
             $table->string('imagen');
             $table->text('descripcion');
             $table->timestamps();
-            $table->primary('id');
         });
     }
 

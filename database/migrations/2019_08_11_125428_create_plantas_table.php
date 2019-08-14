@@ -14,12 +14,15 @@ class CreatePlantasTable extends Migration
     public function up()
     {
         Schema::create('plantas', function (Blueprint $table) {
-            $table->integerIncrements('id_planta')->unique();
+            $table->integerIncrements('id_planta')->unsigned();
             $table->string('tamaño');
-            $table->integer('id_genero');
+            $table->integer('id_genero')->unsigned();
+            $table->timestamps();
+        });
+
+        Schema::table('plantas', function (Blueprint $table) {
             $table->foreign('id_planta')->references('id')->on('productos');
             $table->foreign('id_genero')->references('id')->on('generos');
-            $table->timestamps();
         });
     }
 
