@@ -5,6 +5,15 @@ AOS.init();
 
 window.Vue = require('vue');
 import VueRouter from 'vue-router';
+import VueCurrencyFilter from 'vue-currency-filter';
+Vue.use(VueCurrencyFilter, {
+    symbol: '$',
+    thousandsSeparator: '.',
+    fractionCount: 0,
+    fractionSeparator: ',',
+    symbolPosition: 'front',
+    symbolSpacing: false
+});
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('productos', require('./components/cartas_productos.vue').default);

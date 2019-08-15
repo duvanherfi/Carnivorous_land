@@ -19,7 +19,7 @@ class CreateProductosTable extends Migration
             $table->string('imagen2');
             $table->string('imagen3');
             $table->string('nombre');
-            $table->decimal('valor');
+            $table->integer('valor');
             $table->integer('cantidad');
             $table->integer('stock_minimo');
             $table->string('opcion_catologo');

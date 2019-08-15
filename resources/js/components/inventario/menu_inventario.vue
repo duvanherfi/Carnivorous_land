@@ -161,18 +161,11 @@
                             <label v-else for="tipo" class="col-md-4 col-form-label">Tipo: </label>
                             <div class="col-md-7 p-0">
                                 <select v-model="producto.genero" v-if="this.producto.categoria=='plantas'" class="custom-select form-control" id="tipo" name="tipo" required autocomplete="tipo">
-                                    <option v-for="(item, index) in tipos" :key="index" value=item.genero>{{ item.genero }}</option>
+                                    <option v-for="(item, index) in tipos" :key="index">{{ item.genero }}</option>
                                 </select>
                                 <select v-model="producto.genero" v-else class="custom-select form-control" id="tipo" name="tipo" required autocomplete="tipo">
-                                    <option v-for="(item, index) in tipos" :key="index" value=item.tipo>{{ item.tipo }}</option>
+                                    <option v-for="(item, index) in tipos" :key="index">{{ item.tipo }}</option>
                                 </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="tamaño" class="col-md-4 col-form-label">Tamaño:</label>
-                            <div class="col-md-7 p-0">
-                                <input v-model="producto.tamaño" id="tamaño" placeholder="Ej: S" type="text" class="form-control" name="tamaño" required autocomplete="tamaño" autofocus>
                             </div>
                         </div>
 
@@ -215,6 +208,13 @@
                         <!-- /Registrar genero -->
 
                         <div class="form-group row">
+                            <label for="tamaño" class="col-md-4 col-form-label">Tamaño:</label>
+                            <div class="col-md-7 p-0">
+                                <input v-model="producto.tamaño" id="tamaño" placeholder="Ej: S" type="text" class="form-control" name="tamaño" required autocomplete="tamaño" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="catalogo" class="col-md-4 col-form-label">Enviar a catalogo:</label>
                             <div class="custom-control custom-switch pt-2 pl-5">
                                 <input v-model="producto.opcion_catalogo" type="checkbox" class="custom-control-input" id="customSwitch2" checked>
@@ -229,7 +229,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button @click="registrarProducto()" type="button" class="btn color-verde" data-dismiss="modal">Registrar</button>
+                    <button @click="registrarProducto" type="button" class="btn color-verde" data-dismiss="modal">Registrar</button>
                     <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -311,11 +311,13 @@ export default {
             formData.append('categoria', this.producto.categoria);
             formData.append('genero', this.producto.genero);
             formData.append('tamaño', this.producto.tamaño);
+            if (this.producto.opcion_catalogo != true) {
+                this.producto.opcion_catalogo = false;
+            }
             formData.append('opcion_catalogo', this.producto.opcion_catalogo);
-            formData.append('descripcion', this.producto.descripcion);
+            formData.append('descripcion', this.producto.descripcion);            
             axios.post('/productosControl', formData).then(response => {
                 console.log(response.data);
-
             })
         },
         generarTipos() {
@@ -324,14 +326,10 @@ export default {
             })
         },
         limpiarRegistrarTipo() {
-            this.tipo.imagen_tipo = '';
             this.tipo.nombre = '';
             this.tipo.descripcion = '';
         },
         limpiarRegistraProducto() {
-            this.producto.imagen_principal = '';
-            this.producto.imagen2 = '';
-            this.producto.imagen3 = '';
             this.producto.nombre = '';
             this.producto.valor = '';
             this.producto.cantidad = '';

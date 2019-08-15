@@ -5,7 +5,7 @@
     <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
         <!--Card image-->
         <div class="img-sombra-producto-DS">
-            <img class="imagen-producto-DS" v-bind:src="'/imagenes-prueba/' + item.imagen" alt="">
+            <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="">
         </div>
         <!-- /Imagen -->
         <!-- Contenido -->
@@ -25,10 +25,10 @@
                     <label for="radio5">★</label>
                 </p>
                 <!-- </form> -->
-                <h6 class="col-4 align-self-center mb-1 px-0">Tamaño: {{ item.tamaño }}</h6>
+                <h6 class="col-4 align-self-center mb-1 px-0">Tamaño: {{ item.nombre }}</h6>
             </div>
             <!-- Género -->
-            <h5 class="font-weight-bold card-title mb-1">{{ item.genero }}</h5>
+            <h5 class="font-weight-bold card-title mb-1">{{ item.nombre }}</h5>
             <!-- Nombre -->
             <h6 class="mb-1">{{ item.nombre }}</h6>
             <p class="font-weight-bold card-text mb-1">${{ item.valor }} COP</p>
@@ -36,36 +36,8 @@
             <button class="btn btn-block color-verde"><i class="fas fa-cart-plus"></i> Añadir al carro</button>
         </div>
         <!-- /Contenido -->
-        <!--/.Card-->
     </div>
-    <!--Formulario-->
-    <div class="card carta-DS" style="width: 290px; height: 370px;">
-        <form @submit.prevent="añadirProducto()" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="imagen">Imagen</label>
-                <input type="file" @change="obtenerImagen" class="form-control-file">
-            </div>
-            <div>
-                <label for="genero">Genero</label>
-                <input type="text" id="genero" v-model="producto.genero" class="form-control">
-            </div>
-            <div>
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" v-model="producto.nombre" class="form-control">
-            </div>
-            <div>
-                <label for="valor">Valor</label>
-                <input type="text" id="valor" v-model="producto.valor" class="form-control">
-            </div>
-            <div>
-                <label for="tamaño">Tamaño</label>
-                <input type="text" id="tamaño" v-model="producto.tamaño" class="form-control">
-            </div>
-
-            <input type="submit" value="Agregar">
-        </form>
-        <!--/.Formulario-->
-    </div>
+    <!--/.Card-->
 </div>
 <!--/Cartas-->
 </template>
@@ -85,8 +57,13 @@ export default {
         }
     },
     created() {
-        axios.get('/productosControl').then(res => {
-            this.productos = res.data;
+        axios.get('/productosControl').then(response => {
+            this.productos = response.data;
+        })
+    },
+    updated() {
+        axios.get('/productosControl').then(response => {
+            this.productos = response.data;
         })
     },
     methods: {

@@ -28,6 +28,7 @@
         "aos": "^2.3.4",
         "mdbootstrap": "^4.8.7",
         "toastr": "^2.1.4",
+        "vue-currency-filter": "^3.4.2",
         "vue-router": "^3.1.1"
     }
 }

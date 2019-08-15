@@ -16,9 +16,13 @@ class ProductoControlador extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        if ($request->ajax()) {
+            return Producto::all();
+        } else {
+            return view('inicio');
+        }
     }
 
     /**
@@ -39,6 +43,7 @@ class ProductoControlador extends Controller
      */
     public function store(Request $request)
     {
+        
         if($request->hasFile('imagen_principal')){
             $file = $request->file('imagen_principal');
             $imagen_principal = time().$file->getClientOriginalName();
@@ -54,20 +59,20 @@ class ProductoControlador extends Controller
             $imagen3 = time().$file->getClientOriginalName();
             $file->move(public_path().'/img/productoss/', $imagen3);
         }
+        
         $producto = new Producto();
-        // $producto->imagen_principal = $imagen_principal;
-        // $producto->imagen2 = $imagen2;
-        // $producto->imagen3 = $imagen3;
+        $producto->imagen_principal = $imagen_principal;
+        $producto->imagen2 = $imagen2;
+        $producto->imagen3 = $imagen3;
         $producto->nombre = $request->input('nombre');
         $producto->valor = $request->input('valor');
         $producto->cantidad = $request->input('cantidad');
         $producto->stock_minimo = $request->input('stock_minimo');
-        $producto->opcion_catalogo = $request->input('opcion_catalogo');
+        $producto->opcion_catologo = $request->input('opcion_catalogo');
         $producto->descripcion = $request->input('descripcion');
         $producto->save();
         
         if ($request->categoria == 'plantas') {
-            return 'Hola';
             $plantas = new Plantas();
             $id = Producto::all()->last();
             $plantas->id_planta = $id->id;

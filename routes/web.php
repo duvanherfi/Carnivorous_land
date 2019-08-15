@@ -45,8 +45,6 @@ Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');
 Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');
 Route::get('/productosControl', 'ProductoControlador@index')->name('productos.index');
 
-
-
 Route::put('/actualizar','UsuarioControlador@actualizar')
 ->name('actualizar');
  

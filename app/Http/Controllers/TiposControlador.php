@@ -54,12 +54,6 @@ class TiposControlador extends Controller
         }
         if ($request->categoria == 'plantas') {
             $genero = new Genero();
-            $id = Genero::all()->last();
-            if ($id == null) {
-                $genero->id = 1;
-            }else{
-                $genero->id = $id->id + 1;
-            }
             $genero->imagen = $imagen_tipo;
             $genero->genero = $request->nombre;
             $genero->descripcion = $request->descripcion;
@@ -67,12 +61,6 @@ class TiposControlador extends Controller
             return $genero;
         }else if($request->categoria == 'merchandising'){
             $merchandising = new Tipo_merchandising();
-            $id = Tipo_merchandising::all()->last();
-            if ($id == null) {
-                $merchandising->id = 1;
-            }else{
-                $merchandising->id = $id->id + 1;
-            }
             $merchandising->imagen = $imagen_tipo;
             $merchandising->tipo = $request->nombre;
             $merchandising->descripcion = $request->descripcion;
@@ -80,12 +68,6 @@ class TiposControlador extends Controller
             return $merchandising;
         }else if($request->categoria == 'implementos'){
             $implemento = new Tipo_implemento();
-            $id = Tipo_implemento::all()->last();
-            if ($id == null) {
-                $implemento->id = 1;
-            }else{
-                $implemento->id = $id->id + 1;
-            }
             $implemento->imagen = $imagen_tipo;
             $implemento->tipo = $request->nombre;
             $implemento->descripcion = $request->descripcion;
