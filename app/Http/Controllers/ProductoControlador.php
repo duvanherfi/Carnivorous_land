@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Producto;
 use App\Plantas;
 use App\Genero;
+use App\Implemento_cultivo;
+use App\Merchandising;
 use App\Tipo_implemento;
 use App\Tipo_merchandising;
 
@@ -77,12 +79,24 @@ class ProductoControlador extends Controller
             $id = Producto::all()->last();
             $plantas->id_planta = $id->id;
             $plantas->tamaño = $request->tamaño;
-            $id = Genero::where('genero', $request->genero)->get();
+            $id = Genero::where('genero', $request->genero)->first();
             $plantas->id_genero = $id->id;
             $plantas->save();
+        }else if ($request->categoria == 'merchandising') {
+            $merchandisings = new Merchandising();
+            $id = Producto::all()->last();
+            $merchandisings->id_merchandising = $id->id;
+            $id = Tipo_merchandising::where('tipo', $request->genero)->first();
+            $merchandisings->id_tipo = $id->id;
+            $merchandisings->save();
+        }else if ($request->categoria == 'implementos') {
+            $implemento_cultivos = new Implemento_cultivo();
+            $id = Producto::all()->last();
+            $implemento_cultivos->id_implemento = $id->id;
+            $id = Tipo_implemento::where('tipo', $request->genero)->first();
+            $implemento_cultivos->id_tipo = $id->id;
+            $implemento_cultivos->save();
         }
-
-        return $plantas;
     }
 
     /**

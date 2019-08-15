@@ -19,7 +19,6 @@ class CreateGenerosTable extends Migration
             $table->string('imagen');
             $table->text('descripcion');
             $table->timestamps();
-            // $table->primary('id');
         });
     }
 
@@ -30,6 +29,7 @@ class CreateGenerosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('plantas');
         Schema::dropIfExists('generos');
     }
 }

@@ -56,7 +56,6 @@ Route::get('/pedidos', function () {
 })->name('pedidos');
 
 Route::get('/tiposControl/{tipo}', 'TiposControlador@index')->name('tipos.index');
-
 Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');
 
 Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');

@@ -5,7 +5,7 @@
     <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
         <!--Card image-->
         <div class="img-sombra-producto-DS">
-            <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="">
+            <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt />
         </div>
         <!-- /Imagen -->
         <!-- Contenido -->
@@ -13,15 +13,15 @@
             <div class="row justify-content-between m-0">
                 <!-- <form> -->
                 <p class="clasificacion">
-                    <input id="radio1" type="radio" name="estrellas" value="5">
+                    <input id="radio1" type="radio" name="estrellas" value="5" />
                     <label for="radio1">★</label>
-                    <input id="radio2" type="radio" name="estrellas" value="4">
+                    <input id="radio2" type="radio" name="estrellas" value="4" />
                     <label for="radio2">★</label>
-                    <input id="radio3" type="radio" name="estrellas" value="3">
+                    <input id="radio3" type="radio" name="estrellas" value="3" />
                     <label for="radio3">★</label>
-                    <input id="radio4" type="radio" name="estrellas" value="2">
+                    <input id="radio4" type="radio" name="estrellas" value="2" />
                     <label for="radio4">★</label>
-                    <input id="radio5" type="radio" name="estrellas" value="1">
+                    <input id="radio5" type="radio" name="estrellas" value="1" />
                     <label for="radio5">★</label>
                 </p>
                 <!-- </form> -->
@@ -31,9 +31,12 @@
             <h5 class="font-weight-bold card-title mb-1">{{ item.nombre }}</h5>
             <!-- Nombre -->
             <h6 class="mb-1">{{ item.nombre }}</h6>
-            <p class="font-weight-bold card-text mb-1">${{ item.valor }} COP</p>
+            <p class="font-weight-bold card-text mb-1">{{ item.valor | currency}} COP</p>
             <!-- Button -->
-            <button class="btn btn-block color-verde"><i class="fas fa-cart-plus"></i> Añadir al carro</button>
+            <button @click="popoverProducto" class="btn btn-block color-verde añadirCarritoBtn">
+                <i class="fas fa-cart-plus"></i>
+                Añadir al carro
+            </button>
         </div>
         <!-- /Contenido -->
     </div>
@@ -48,21 +51,21 @@ export default {
         return {
             productos: [],
             producto: {
-                imagen: '',
-                genero: '',
-                nombre: '',
-                valor: '',
-                tamaño: ''
+                imagen: "",
+                genero: "",
+                nombre: "",
+                valor: "",
+                tamaño: ""
             }
-        }
+        };
     },
     created() {
-        axios.get('/productosControl').then(response => {
+        axios.get("/productosControl").then(response => {
             this.productos = response.data;
-        })
+        });
     },
     updated() {
-        axios.get('/productosControl').then(response => {
+        axios.get("/productosControl").then(response => {
             this.productos = response.data;
         })
     },
@@ -73,23 +76,27 @@ export default {
         },
         añadirProducto() {
             let formData = new FormData();
-            formData.append('imagen', this.producto.imagen);
-            formData.append('genero', this.producto.genero);
-            formData.append('nombre', this.producto.nombre);
-            formData.append('valor', this.producto.valor);
-            formData.append('tamaño', this.producto.tamaño);
-            axios.post('/productos', formData).then(response => {
+            formData.append("imagen", this.producto.imagen);
+            formData.append("genero", this.producto.genero);
+            formData.append("nombre", this.producto.nombre);
+            formData.append("valor", this.producto.valor);
+            formData.append("tamaño", this.producto.tamaño);
+            axios.post("/productos", formData).then(response => {
                 // console.log(response.data);
                 this.productos.push(response.data);
-            })
-            this.producto.imagen = '';
-            this.producto.genero = '';
-            this.producto.nombre = '';
-            this.producto.valor = '';
-            this.producto.tamaño = '';
+            });
+            this.producto.imagen = "";
+            this.producto.genero = "";
+            this.producto.nombre = "";
+            this.producto.valor = "";
+            this.producto.tamaño = "";
+        },
+        popoverProducto(){
+            $('[data-toggle="popover"]').popover("show");
+            setTimeout("$('#añadirCarrito').popover('hide');", 5000);
         }
     }
-}
+};
 </script>
 
 <style>

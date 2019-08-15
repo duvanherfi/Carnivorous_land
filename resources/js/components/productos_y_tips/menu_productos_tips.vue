@@ -9,10 +9,16 @@
         <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:100px;">✻
         <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:100px;">
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="tipo=='plantas'">
         <div class="col-9 borde-menu-DS"></div>
         <div v-for="(item, index) in generos" :key="index" class="col-9 text-center py-1 opcion-menu-DS">
             {{ item.genero }}
+        </div>
+    </div>
+    <div class="row justify-content-center" v-else>
+        <div class="col-9 borde-menu-DS"></div>
+        <div v-for="(item, index) in generos" :key="index" class="col-9 text-center py-1 opcion-menu-DS">
+            {{ item.tipo }}
         </div>
     </div>
 </div>
@@ -27,7 +33,7 @@ export default {
     },
     created() {
         axios.get(`/tiposControl/${this.tipo}`).then(response => {
-            // console.log(response.data);
+            console.log(response.data);
             this.generos = response.data;
         })
     },
