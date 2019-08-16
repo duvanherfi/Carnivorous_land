@@ -62,7 +62,8 @@ Route::post('/productosControl', 'ProductoControlador@store')->name('productos.s
 Route::get('/productosControl', 'ProductoControlador@index')->name('productos.index');
 
 
-
+//llamada al metodo isAdmin del controlador usuario para hacer el menú
+Route::get('/comprobarSiAdmin','usuarioControlador@isAdmin');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

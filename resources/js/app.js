@@ -4,7 +4,7 @@ var AOS = require('aos');
 AOS.init();
 
 window.Vue = require('vue');
-import VueRouter from 'vue-router';
+
 import VueCurrencyFilter from 'vue-currency-filter';
 Vue.use(VueCurrencyFilter, {
     symbol: '$',
