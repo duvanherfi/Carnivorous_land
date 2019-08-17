@@ -6,9 +6,7 @@ Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
 
-Route::get('/quienes_somos', function () {
-    return view('quienes_somos');
-})->name('quienes_somos');
+Route::get('/quienes_somos', 'EmpresaControlador@mostrar')->name('quienes_somos');
 
 Route::get('/productos/{tipo}', function ($tipo) {
     return view('productos', compact('tipo'));
