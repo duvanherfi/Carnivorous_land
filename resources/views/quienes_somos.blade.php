@@ -52,16 +52,10 @@
         <div class="w-100"></div>
 
         <div class="col separacion" >
-            <P class="pl-4 mr-5 ml-3"> Somos una empresa dedicada a la producción y comercialización de plantas Carnívoras,
-                que mediante la investigación y pasión por este tipo de plantas,
-                buscamos la concientización de importancia de estos seres vivos en los ecosistemas.</P>
+        <P class="pl-4 mr-5 ml-3">{{$datos->mision}}</P>
         </div>
         <div class="col pl-4 ml-2">
-            <P class="pr-5 ml-3"> Ser en el 2023 la empresa líder en producción y comercialización de Plantas Carnívoras en
-                Colombia,
-                caracterizándose por la calidad de cultivo y servicio,
-                haciendo uso de las buenas prácticas medioambientales.
-            </P>
+        <P class="pr-5 ml-3">{{$datos->vision}}</P>
         </div>
 
 

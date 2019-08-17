@@ -6,9 +6,7 @@ Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
 
-Route::get('/quienes_somos', function () {
-    return view('quienes_somos');
-})->name('quienes_somos');
+Route::get('/quienes_somos', 'EmpresaControlador@mostrar')->name('quienes_somos');
 
 Route::get('/productos/{tipo}', function ($tipo) {
     return view('productos', compact('tipo'));
@@ -60,6 +58,10 @@ Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');
 // Productos
 Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');
 Route::get('/productosControl', 'ProductoControlador@index')->name('productos.index');
+
+
+//llamada al metodo isAdmin del controlador usuario para hacer el menú
+Route::get('/comprobarSiAdmin','usuarioControlador@isAdmin');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

@@ -10,7 +10,7 @@
             ¿QUIÉNES SOMOS?
         </a>
     </li>
-    <li class="nav-item dropdown opcion-menu-DS bordes-DS" v-if="1>0">
+    <li class="nav-item dropdown opcion-menu-DS bordes-DS" v-if="isAdmin==='cliente' || isAdmin==='null'">
         <a class="nav-link dropdown-toggle" v-bind:href="producto" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             PRODUCTOS
         </a>
@@ -40,7 +40,9 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+
     data() {
         return {
             inicio: route('inicio'),
@@ -51,13 +53,28 @@ export default {
             imple_cultivo: route('productos', 'implementos'),
             inventario: route('inventario', 'gestion'),
             tips_cultivo: route('productos', 'tips_cultivo'),
-            contactanos: route('contactanos')
+            contactanos: route('contactanos'),
+            isAdmin: null
+        }
+    },
+    created: function(){
+        this.comprobarAdmin();
+    },
+    methods: {
+        comprobarAdmin: function ()   {
+            axios.get('comprobarSiAdmin')
+            .then(response => {
+                this.isAdmin=response.data
+            })
+            .catch(err => {
+                console.error(err);
+            })
         }
     },
     mounted(){
         $(document).ready(function(){
             var altura = $('.menu').offset().top;
-            
+
             $(window).on('scroll', function(){
                 if ($(window).scrollTop() > altura){
                     $('.menu').addClass('menu-fixed');
