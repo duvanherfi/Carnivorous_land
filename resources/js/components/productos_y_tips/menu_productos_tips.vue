@@ -2,7 +2,7 @@
 <div class="col-3 pr-0 menu-producto-tips-DS">
     <!-- Subtitulo -->
     <br>
-    <h2 class="row justify-content-center subtitulo-DS w-100 m-0" v-if="tipo=='plantas'">GÉNERO</h2>
+    <h2 class="row justify-content-center subtitulo-DS w-100 m-0" v-if="tipo=='plantas' || tipo=='tips_cultivo'">GÉNERO</h2>
     <h2 class="row justify-content-center subtitulo-DS w-100 m-0" v-else-if="tipo=='merchandising'">TIPO DE PRODUCTO</h2>
     <h2 class="row justify-content-center subtitulo-DS w-100 m-0" v-else-if="tipo=='implementos'">TIPO DE IMPLEMENTO</h2>
     <div class="row align-items-center row justify-content-center w-100 m-0">

@@ -73,12 +73,6 @@
         <div @click="limpiarRegistraProducto" class="col-9 text-center py-1 opcion-menu-DS" data-toggle="modal" data-target="#modal_registrar_articulo">
             Registrar artículo
         </div>
-        <div class="col-9 text-center py-1 opcion-menu-DS">
-            Modificar artículo
-        </div>
-        <div class="col-9 text-center py-1 opcion-menu-DS">
-            Eliminar artículo
-        </div>
     </div>
 
     <!-- Modal registrar articulo -->
@@ -122,7 +116,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="nombre" class="col-md-4 col-form-label">Nombre*:</label>
+                            <label id="nombre_label" for="nombre" class="col-md-4 col-form-label">Nombre*:</label>
                             <div class="col-md-7 p-0">
                                 <input v-model="producto.nombre" id="nombre" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre" required autocomplete="nombre" autofocus>
                             </div>
@@ -220,7 +214,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="catalogo" class="col-md-4 col-form-label">Enviar a catalogo:</label>
+                            <label for="catalogo" class="col-md-4 col-form-label">Enviar a catálogo:</label>
                             <div class="custom-control custom-switch pt-2 pl-5">
                                 <input v-model="producto.opcion_catalogo" type="checkbox" class="custom-control-input" id="customSwitch2" checked>
                                 <label class="custom-control-label" for="customSwitch2"></label>
@@ -247,6 +241,7 @@
 import {
     isNullOrUndefined
 } from 'util';
+import EventBus from '../event_bus'
 export default {
     data() {
         return {

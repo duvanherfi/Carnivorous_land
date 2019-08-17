@@ -34,7 +34,6 @@ Route::get('/carrito_compra', function () {
 Route::get('/mis_datos','UsuarioControlador@mostrar_datos')
 ->name('mis_datos');
 
-
 Route::put('/actualizar/{user}','UsuarioControlador@actualizar')
 ->name('actualizar');
 
@@ -46,29 +45,24 @@ Route::get('logout', 'usuarioControlador@cerrar_sesion')->name('cerrar_sesion');
 
 
 //Vistas del administrador
-Route::get('/inventario', function () {
-    return view('inventario');
+Route::get('/inventario/{gestion}', function ($gestion) {
+    return view('inventario', compact('gestion'));
 })->name('inventario');
-
 
 Route::get('/pedidos', function () {
     return view('pedidos');
 })->name('pedidos');
 
+// Tipos o generos
 Route::get('/tiposControl/{tipo}', 'TiposControlador@index')->name('tipos.index');
 Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');
 
+// Productos
 Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');
 Route::get('/productosControl', 'ProductoControlador@index')->name('productos.index');
-
-Route::put('/actualizar','UsuarioControlador@actualizar')
-->name('actualizar');
- 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/pedidos', "PedidosController@mostrar");
 
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
-
