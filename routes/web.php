@@ -51,6 +51,9 @@ Route::get('/pedidos', function () {
     return view('pedidos');
 })->name('pedidos');
 
+Route::get('/actualizar_datos', 'EmpresaControlador@actualizar')
+->name('actualizar_datos');
+
 // Tipos o generos
 Route::get('/tiposControl/{tipo}', 'TiposControlador@index')->name('tipos.index');
 Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');

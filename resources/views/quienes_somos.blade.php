@@ -78,7 +78,7 @@
             <li class="list-group-item">{{$valores[0]->nombre}}</li>
             <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores[1]->nombre}}</li>
             <li class="list-group-item">{{$valores[2]->nombre}}</li>
-            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores[3]->nombre}}/li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores[3]->nombre}}</li>
             <li class="list-group-item">{{$valores[4]->nombre}}</li>
             <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores[5]->nombre}}</li>
             </ul>

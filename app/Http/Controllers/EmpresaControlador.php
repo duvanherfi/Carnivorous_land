@@ -14,4 +14,11 @@ class EmpresaControlador extends Controller
             return view('quienes_somos', compact('datos','valores'));
 
         }
+
+        public function actualizar(){
+
+            $datos = Dato::find(1);
+
+            return view('actualizar_datos', compact('datos'));
+        }
 }
