@@ -75,12 +75,12 @@
     <div class="row">
         <div class="col pb-5 col-md-7">
             <ul class="list-group lista">
-            <li class="list-group-item">{{$valores[0]->nombre}}</li>
-            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores[1]->nombre}}</li>
-            <li class="list-group-item">{{$valores[2]->nombre}}</li>
-            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores[3]->nombre}}</li>
-            <li class="list-group-item">{{$valores[4]->nombre}}</li>
-            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores[5]->nombre}}</li>
+            <li class="list-group-item">{{$valores->valor1}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor2}}</li>
+            <li class="list-group-item">{{$valores->valor3}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor4}}</li>
+            <li class="list-group-item">{{$valores->valor5}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor6}}</li>
             </ul>
         </div>
 
