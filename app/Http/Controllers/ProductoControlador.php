@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Producto;
 use App\Plantas;
 use App\Genero;
@@ -21,7 +22,9 @@ class ProductoControlador extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return Producto::all();
+            $productos = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+            ->join('generos', 'generos.id', '=', 'plantas.id_genero')->get();
+            return $productos;
         } else {
             return view('inicio');
         }
@@ -70,7 +73,7 @@ class ProductoControlador extends Controller
         $producto->valor = $request->input('valor');
         $producto->cantidad = $request->input('cantidad');
         $producto->stock_minimo = $request->input('stock_minimo');
-        $producto->opcion_catologo = $request->input('opcion_catalogo');
+        $producto->opcion_catalogo = $request->input('opcion_catalogo');
         $producto->descripcion = $request->input('descripcion');
         $producto->save();
         

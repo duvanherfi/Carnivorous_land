@@ -20,13 +20,14 @@
                 </select>
             </div>
         </div>
-        <div class="d-flex flex-row-reverse">
-            <button class="btn btn-block color-verde" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Género</button>
+        <div>
+            <button class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Género</button>
+            <button class="btn botones d-inline">Eliminar Género</button>
         </div>
     </div>
 
     <div>
-        <productos></productos>
+        <productos :gestion="gestion"></productos>
     </div>
 
     <!-- Modal modificar genero -->
@@ -72,6 +73,12 @@
 
 </div>
 </template>
+
+<script>
+export default {
+    props: ['gestion']
+}
+</script>
 
 <style scoped>
 .imagen-subtitulo-DS {

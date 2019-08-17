@@ -22,7 +22,7 @@ class CreateProductosTable extends Migration
             $table->integer('valor');
             $table->integer('cantidad');
             $table->integer('stock_minimo');
-            $table->string('opcion_catologo');
+            $table->string('opcion_catalogo');
             $table->text('descripcion');
             $table->timestamps();
         });

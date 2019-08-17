@@ -26,7 +26,6 @@
             INVENTARIO
         </a>
     </li>
-
     <li class="nav-item opcion-menu-DS bordes-DS">
         <a class="nav-link waves-effect waves-light" v-bind:href="tips_cultivo">
             TIPS DE CULTIVOS
@@ -52,8 +51,8 @@ export default {
             plantas: route('productos', 'plantas'),
             merchandising: route('productos', 'merchandising'),
             imple_cultivo: route('productos', 'implementos'),
-            inventario: null,
-            tips_cultivo: null,
+            inventario: route('inventario', 'gestion'),
+            tips_cultivo: route('productos', 'tips_cultivo'),
             contactanos: route('contactanos'),
             isAdmin: null
         }
