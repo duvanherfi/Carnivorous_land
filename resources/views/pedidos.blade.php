@@ -26,11 +26,7 @@
        	@foreach ( $pedidos as $pedido)
     		<tr>
       			
-            <td><div class="custom-control custom-switch">
-            	<input type="checkbox" class="custom-control-input" id="customSwitch4" checked>
-            	<label class="custom-control-label" for="customSwitch4"></label>
-          		</div>
-        	</td>
+            <td>{{$pedido->fecha}}</td>
             <td>{{$pedido->fecha}}</td>
             <td>{{$pedido->nombre_cliente}}</td>
             <td>{{$pedido->nombre_producto}}</td>

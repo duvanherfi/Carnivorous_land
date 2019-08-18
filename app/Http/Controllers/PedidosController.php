@@ -26,7 +26,7 @@ class PedidosController extends Controller
     
 
     public function detalles($id){
-
+    	
     	
 		$pedido= Pedido::findOrFail($id);
 
