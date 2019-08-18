@@ -131,13 +131,21 @@
                     <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp"
                         width="45">
                 </a>
-                @if(!auth()->user()->rol=='administrador')
+                @if(auth()->user()==null)
+
+                <a href="{{ route('carrito') }}">
+                    <img class="bordes-left-DS ml-4" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
+                        data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
+                    <span class="badge badge-primary badge-pill counter" style="z-index:4;">0</span>
+                </a>
+                @elseif(auth()->user()->rol=='cliente')
                 <a href="{{ route('carrito') }}">
                     <img class="bordes-left-DS ml-4" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
                     <span class="badge badge-primary badge-pill counter" style="z-index:4;">0</span>
                 </a>
                 @endif
+
             </div>
 
 
@@ -265,13 +273,23 @@
 
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 method: 'POST',
+            
 
                 url: url,
                     success: function(result){
                         console.log(result.success);
 
                         $('#nombre_cli').html(result.success.nombre_cliente);
-
+                        $('#ciudad').html(result.success.ciudad);
+                        $('#direccion').html(result.success.direccion);
+                        $('#tipo_entrega').html(result.success.tipo_entrega);
+                        $('#estado').html(result.success.estado);
+                        $('#cantidad').html(result.success.cantidad);
+                        $('#producto_name').html(result.success.nombre_producto);
+                        $('#cantidad').html(result.success.cantidad);
+                        $('#subtotal').html(result.success.subtotal);
+                        $('#imagen').html(result.success.imagen);
+                        $('#total').html(result.success.total);
 
                         $('#modal_pedidos').modal('show');
 
