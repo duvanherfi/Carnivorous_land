@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="nav-item dropdown opcion-menu-DS bordes-DS" v-if="isAdmin==='cliente' || isAdmin===null">
-        <a class="nav-link dropdown-toggle" v-bind:href="productoLink" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             PRODUCTOS
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS" aria-labelledby="navbarDropdownMenuLink-333">
@@ -36,6 +36,11 @@
             CONTÁCTANOS
         </a>
     </li>
+    <li class="nav-item opcion-menu-DS bordes-DS" v-if="isAdmin==='administrador'">
+        <a class="nav-link waves-effect waves-light" v-bind:href="pedidosLink">
+            PEDIDOS
+        </a>
+    </li>
 
 </ul>
 </template>
@@ -48,13 +53,13 @@ export default {
         return {
             inicioLink: route('inicio'),
             quienes_somosLink: route('quienes_somos'),
-            productoLink: null,
             plantasLink: route('productos', 'plantas'),
             merchandisingLink: route('productos', 'merchandising'),
             imple_cultivoLink: route('productos', 'implementos'),
             inventarioLink: route('inventario', 'gestion'),
             tips_cultivoLink: route('productos', 'tips_cultivo'),
             contactanosLink: route('contactanos'),
+            pedidosLink:route('pedidos'),
             isAdmin: null
         }
     },

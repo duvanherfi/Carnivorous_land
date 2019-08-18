@@ -138,7 +138,7 @@
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
                     <span class="badge badge-primary badge-pill counter" style="z-index:4;">0</span>
                 </a>
-                @elseif(!auth()->user()->rol=='administrador')
+                @elseif(auth()->user()->rol=='cliente')
                 <a href="{{ route('carrito') }}">
                     <img class="bordes-left-DS ml-4" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">

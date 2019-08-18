@@ -2558,19 +2558,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       inicioLink: route('inicio'),
       quienes_somosLink: route('quienes_somos'),
-      productoLink: null,
       plantasLink: route('productos', 'plantas'),
       merchandisingLink: route('productos', 'merchandising'),
       imple_cultivoLink: route('productos', 'implementos'),
       inventarioLink: route('inventario', 'gestion'),
       tips_cultivoLink: route('productos', 'tips_cultivo'),
       contactanosLink: route('contactanos'),
+      pedidosLink: route('pedidos'),
       isAdmin: null
     };
   },
@@ -42961,7 +42966,6 @@ var render = function() {
                 {
                   staticClass: "nav-link dropdown-toggle",
                   attrs: {
-                    href: _vm.productoLink,
                     id: "navbarDropdownMenuLink-333",
                     "data-toggle": "dropdown",
                     "aria-haspopup": "true",
@@ -43040,7 +43044,20 @@ var render = function() {
           },
           [_vm._v("\n            CONTÁCTANOS\n        ")]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.isAdmin === "administrador"
+        ? _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link waves-effect waves-light",
+                attrs: { href: _vm.pedidosLink }
+              },
+              [_vm._v("\n            PEDIDOS\n        ")]
+            )
+          ])
+        : _vm._e()
     ]
   )
 }
