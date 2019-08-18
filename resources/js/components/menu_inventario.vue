@@ -73,12 +73,6 @@
         <div @click="limpiarRegistraProducto" class="col-9 text-center py-1 opcion-menu-DS" data-toggle="modal" data-target="#modal_registrar_articulo">
             Registrar artículo
         </div>
-        <div class="col-9 text-center py-1 opcion-menu-DS">
-            Modificar artículo
-        </div>
-        <div class="col-9 text-center py-1 opcion-menu-DS">
-            Eliminar artículo
-        </div>
     </div>
 
     <!-- Modal registrar articulo -->
@@ -93,60 +87,64 @@
                 </div>
                 <div class="modal-body">
                     <form class="ml-3">
+                        <p>Todos los campos con * son obligatorios</p>
                         <div class="form-group row">
-                            <label for="imagen_principal" class="col-md-4 col-form-label">Imagen principal:</label>
+                            <label for="imagen_principal" class="col-md-4 col-form-label pr-0">Imagen principal*:</label>
                             <div class="custom-file col-md-7">
                                 <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="customFileLang" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="customFileLang" v-else>{{ this.producto.imagen_principalnombre }}</label>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="imagen2" class="col-md-4 col-form-label">Imagen #2:</label>
+                            <label for="imagen2" class="col-md-4 col-form-label">Imagen #2*:</label>
                             <div class="custom-file col-md-7">
                                 <input @change="obtenerImagen2" type="file" class="custom-file-input" name="imagen2" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="customFileLang" v-if="this.producto.imagen2nombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="customFileLang" v-else>{{ this.producto.imagen2nombre }}</label>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="imagen3" class="col-md-4 col-form-label">Imagen #3:</label>
+                            <label for="imagen3" class="col-md-4 col-form-label">Imagen #3*:</label>
                             <div class="custom-file col-md-7">
                                 <input @change="obtenerImagen3" type="file" class="custom-file-input" name="imagen3" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="customFileLang" v-if="this.producto.imagen3nombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="customFileLang" v-else>{{ this.producto.imagen3nombre }}</label>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="nombre" class="col-md-4 col-form-label">Nombre:</label>
+                            <label id="nombre_label" for="nombre" class="col-md-4 col-form-label">Nombre*:</label>
                             <div class="col-md-7 p-0">
                                 <input v-model="producto.nombre" id="nombre" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre" required autocomplete="nombre" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="valor" class="col-md-4 col-form-label">Valor:</label>
+                            <label for="valor" class="col-md-4 col-form-label">Valor*:</label>
                             <div class="col-md-7 p-0">
                                 <input v-model="producto.valor" id="valor" placeholder="Ej: 50000" type="number" class="form-control" name="valor" required autocomplete="valor" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="cantidad" class="col-md-4 col-form-label">Cantidad:</label>
+                            <label for="cantidad" class="col-md-4 col-form-label">Cantidad*:</label>
                             <div class="col-md-7 p-0">
                                 <input v-model="producto.cantidad" id="cantidad" placeholder="Ej: 43" type="number" class="form-control" name="cantidad" required autocomplete="cantidad" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="stock_minimo" class="col-md-4 col-form-label">Stock mínimo:</label>
+                            <label for="stock_minimo" class="col-md-4 col-form-label">Stock mínimo*:</label>
                             <div class="col-md-7 p-0">
                                 <input v-model="producto.stock_minimo" id="stock_minimo" placeholder="Ej: 10" type="number" class="form-control" name="stock_minimo" required autocomplete="stock_minimo" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="categoria" class="col-md-4 col-form-label">Categoría: </label>
+                            <label for="categoria" class="col-md-4 col-form-label">Categoría*: </label>
                             <div class="col-md-7 p-0">
                                 <select @change="generarTipos" v-model="producto.categoria" class="custom-select form-control" id="categoria" name="categoria" required autocomplete="categoria">
                                     <option value="plantas">Plantas</option>
@@ -157,8 +155,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label v-if="this.producto.categoria=='plantas'" for="tipo" class="col-md-4 col-form-label">Género: </label>
-                            <label v-else for="tipo" class="col-md-4 col-form-label">Tipo: </label>
+                            <label v-if="this.producto.categoria=='plantas'" for="tipo" class="col-md-4 col-form-label">Género*: </label>
+                            <label v-else for="tipo" class="col-md-4 col-form-label">Tipo*: </label>
                             <div class="col-md-7 p-0">
                                 <select v-model="producto.genero" v-if="this.producto.categoria=='plantas'" class="custom-select form-control" id="tipo" name="tipo" required autocomplete="tipo">
                                     <option v-for="(item, index) in tipos" :key="index">{{ item.genero }}</option>
@@ -179,22 +177,23 @@
                                     <div class="card card-body form-registrar-genero">
                                         <form class="ml-3">
                                             <div class="form-group row">
-                                                <label for="imagen" class="col-md-3 col-form-label">Imagen:</label>
+                                                <label for="imagen" class="col-md-3 col-form-label">Imagen*:</label>
                                                 <div class="custom-file col-md-8">
                                                     <input @change="obtenerImagenTipo" type="file" class="custom-file-input" name="imagen" id="customFileLang" lang="es">
-                                                    <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                                    <label class="custom-file-label" for="customFileLang" v-if="this.tipo.imagen_tiponombre == ''">Seleccionar Archivo</label>
+                                                    <label class="custom-file-label" for="customFileLang" v-else>{{ this.tipo.imagen_tiponombre }}</label>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="nombre_tipo" class="col-md-3 col-form-label">Nombre:</label>
+                                                <label for="nombre_tipo" class="col-md-3 col-form-label">Nombre*:</label>
                                                 <div class="col-md-8 p-0">
                                                     <input v-model="tipo.nombre" id="nombre_tipo" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_tipo" required autocomplete="nombre_tipo" autofocus>
                                                 </div>
                                             </div>
 
                                             <div class="form-group mr-4">
-                                                <label for="descripcion_tipo" class="d-inline-flex col-form-label">Descripción:</label>
+                                                <label for="descripcion_tipo" class="d-inline-flex col-form-label">Descripción*:</label>
                                                 <textarea v-model="tipo.descripcion" class="form-control" id="descripcion_tipo" rows="5"></textarea>
                                             </div>
 
@@ -207,15 +206,15 @@
                         </div>
                         <!-- /Registrar genero -->
 
-                        <div class="form-group row">
-                            <label for="tamaño" class="col-md-4 col-form-label">Tamaño:</label>
+                        <div class="form-group row" v-if="this.producto.categoria=='plantas'">
+                            <label for="tamaño" class="col-md-4 col-form-label">Tamaño*:</label>
                             <div class="col-md-7 p-0">
                                 <input v-model="producto.tamaño" id="tamaño" placeholder="Ej: S" type="text" class="form-control" name="tamaño" required autocomplete="tamaño" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="catalogo" class="col-md-4 col-form-label">Enviar a catalogo:</label>
+                            <label for="catalogo" class="col-md-4 col-form-label">Enviar a catálogo:</label>
                             <div class="custom-control custom-switch pt-2 pl-5">
                                 <input v-model="producto.opcion_catalogo" type="checkbox" class="custom-control-input" id="customSwitch2" checked>
                                 <label class="custom-control-label" for="customSwitch2"></label>
@@ -223,7 +222,7 @@
                         </div>
 
                         <div class="form-group mr-4">
-                            <label for="descripcion" class="d-inline-flex col-form-label">Descripción:</label>
+                            <label for="descripcion" class="d-inline-flex col-form-label">Descripción*:</label>
                             <textarea v-model="producto.descripcion" class="form-control" id="descripcion" rows="5"></textarea>
                         </div>
                     </form>
@@ -235,18 +234,24 @@
             </div>
         </div>
     </div>
-    <button type="button" id="example" @click="popover()">Hola</button>
 </div>
 </template>
 
 <script>
+import {
+    isNullOrUndefined
+} from 'util';
+import EventBus from '../event_bus'
 export default {
     data() {
         return {
             producto: {
                 imagen_principal: '',
+                imagen_principalnombre: '',
                 imagen2: '',
+                imagen2nombre: '',
                 imagen3: '',
+                imagen3nombre: '',
                 nombre: '',
                 valor: '',
                 cantidad: '',
@@ -259,33 +264,48 @@ export default {
             },
             tipo: {
                 imagen_tipo: '',
+                imagen_tiponombre: '',
                 nombre: '',
                 descripcion: ''
             },
             tipos: []
         }
     },
-    mounted(){
-        $('#example').click(function popover() {
-            $('[data-toggle="popover"]').popover('show');
-            setTimeout("$('#añadirCarrito').popover('hide');", 5000);
-        });
-    },
     methods: {
         obtenerImagenPrincipal(e) {
             let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen_principalnombre = '';
+            } else {
+                this.producto.imagen_principalnombre = file.name;
+            }
             this.producto.imagen_principal = file;
         },
         obtenerImagen2(e) {
             let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen2nombre = '';
+            } else {
+                this.producto.imagen2nombre = file.name;
+            }
             this.producto.imagen2 = file;
         },
         obtenerImagen3(e) {
             let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen3nombre = '';
+            } else {
+                this.producto.imagen3nombre = file.name;
+            }
             this.producto.imagen3 = file;
         },
         obtenerImagenTipo(e) {
             let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.tipo.imagen_tiponombre = '';
+            } else {
+                this.tipo.imagen_tiponombre = file.name;
+            }
             this.tipo.imagen_tipo = file;
         },
         registrarTipo() {
@@ -315,7 +335,7 @@ export default {
                 this.producto.opcion_catalogo = false;
             }
             formData.append('opcion_catalogo', this.producto.opcion_catalogo);
-            formData.append('descripcion', this.producto.descripcion);            
+            formData.append('descripcion', this.producto.descripcion);
             axios.post('/productosControl', formData).then(response => {
                 console.log(response.data);
             })
@@ -381,6 +401,12 @@ label {
 .form-registrar-genero {
     margin-right: 27px;
     margin-bottom: 16px;
+}
+
+.custom-file label {
+    overflow: hidden;
+    padding-top: 8px;
+    padding-bottom: 4px;
 }
 
 /* Collapse */

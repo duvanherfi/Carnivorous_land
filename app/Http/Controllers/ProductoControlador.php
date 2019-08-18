@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Producto;
 use App\Plantas;
 use App\Genero;
+use App\Implemento_cultivo;
+use App\Merchandising;
 use App\Tipo_implemento;
 use App\Tipo_merchandising;
 
@@ -19,7 +22,9 @@ class ProductoControlador extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return Producto::all();
+            $productos = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+            ->join('generos', 'generos.id', '=', 'plantas.id_genero')->get();
+            return $productos;
         } else {
             return view('inicio');
         }
@@ -68,7 +73,7 @@ class ProductoControlador extends Controller
         $producto->valor = $request->input('valor');
         $producto->cantidad = $request->input('cantidad');
         $producto->stock_minimo = $request->input('stock_minimo');
-        $producto->opcion_catologo = $request->input('opcion_catalogo');
+        $producto->opcion_catalogo = $request->input('opcion_catalogo');
         $producto->descripcion = $request->input('descripcion');
         $producto->save();
         
@@ -77,12 +82,24 @@ class ProductoControlador extends Controller
             $id = Producto::all()->last();
             $plantas->id_planta = $id->id;
             $plantas->tamaño = $request->tamaño;
-            $id = Genero::where('genero', $request->genero)->get();
+            $id = Genero::where('genero', $request->genero)->first();
             $plantas->id_genero = $id->id;
             $plantas->save();
+        }else if ($request->categoria == 'merchandising') {
+            $merchandisings = new Merchandising();
+            $id = Producto::all()->last();
+            $merchandisings->id_merchandising = $id->id;
+            $id = Tipo_merchandising::where('tipo', $request->genero)->first();
+            $merchandisings->id_tipo = $id->id;
+            $merchandisings->save();
+        }else if ($request->categoria == 'implementos') {
+            $implemento_cultivos = new Implemento_cultivo();
+            $id = Producto::all()->last();
+            $implemento_cultivos->id_implemento = $id->id;
+            $id = Tipo_implemento::where('tipo', $request->genero)->first();
+            $implemento_cultivos->id_tipo = $id->id;
+            $implemento_cultivos->save();
         }
-
-        return $plantas;
     }
 
     /**

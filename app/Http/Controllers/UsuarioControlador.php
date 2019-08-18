@@ -64,4 +64,14 @@ class UsuarioControlador extends Controller
 
           return redirect('mis_datos')->with('act','Datos actualizados correctamente.');
   }
+
+  public function isAdmin(){
+
+
+        $permiso=auth()->user()->rol;
+
+        return $permiso;
+
+
+  }
 }

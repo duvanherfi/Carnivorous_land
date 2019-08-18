@@ -21,8 +21,8 @@ class CreatePlantasTable extends Migration
         });
 
         Schema::table('plantas', function (Blueprint $table) {
-            $table->foreign('id_planta')->references('id')->on('productos');
-            $table->foreign('id_genero')->references('id')->on('generos');
+            $table->foreign('id_planta')->references('id')->on('productos')->onDelete('cascade');
+            $table->foreign('id_genero')->references('id')->on('generos')->onDelete('cascade');
         });
     }
 

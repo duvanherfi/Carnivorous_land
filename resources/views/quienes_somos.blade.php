@@ -52,16 +52,10 @@
         <div class="w-100"></div>
 
         <div class="col separacion" >
-            <P class="pl-4 mr-5 ml-3"> Somos una empresa dedicada a la producción y comercialización de plantas Carnívoras,
-                que mediante la investigación y pasión por este tipo de plantas,
-                buscamos la concientización de importancia de estos seres vivos en los ecosistemas.</P>
+        <P class="pl-4 mr-5 ml-3">{{$datos->mision}}</P>
         </div>
         <div class="col pl-4 ml-2">
-            <P class="pr-5 ml-3"> Ser en el 2023 la empresa líder en producción y comercialización de Plantas Carnívoras en
-                Colombia,
-                caracterizándose por la calidad de cultivo y servicio,
-                haciendo uso de las buenas prácticas medioambientales.
-            </P>
+        <P class="pr-5 ml-3">{{$datos->vision}}</P>
         </div>
 
 
@@ -81,15 +75,16 @@
     <div class="row">
         <div class="col pb-5 col-md-7">
             <ul class="list-group lista">
-                <li class="list-group-item">Espíritu constructivo</li>
-                <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">Profesionalismo</li>
-                <li class="list-group-item">Honestidad</li>
-                <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">Compromiso</li>
-                <li class="list-group-item">Responsabilidad</li>
-                <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">Enfoque en la mejora
-                    continua</li>
+            <li class="list-group-item">{{$valores->valor1}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor2}}</li>
+            <li class="list-group-item">{{$valores->valor3}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor4}}</li>
+            <li class="list-group-item">{{$valores->valor5}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor6}}</li>
             </ul>
         </div>
+
+
         <div class="col pl-5 ml-5 ">
             <img class="pb-5" src="{{ asset('img/quienes_somos/valores.png') }}" alt="Valores corporativos" width="300">
 
