@@ -23,16 +23,16 @@
     		</tr>
   		</thead>
   		<tbody class="cuerpo_pedidos">
-       	@foreach ( $pedidos as $pedido)
+       	@foreach ( $pedido_pendiente as $pendiente)
     		<tr>
       			
-            <td>{{$pedido->fecha}}</td>
-            <td>{{$pedido->fecha}}</td>
-            <td>{{$pedido->nombre_cliente}}</td>
-            <td>{{$pedido->nombre_producto}}</td>
-            <td>{{$pedido->ciudad}}</td>
-            <td>{{$pedido->estado}}</td>
-            <td><input data-id="{{$pedido->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
+            <td>{{$pendiente->fecha}}</td>
+            <td>{{$pendiente->fecha}}</td>
+            <td>{{$pendiente->nombre_cliente}}</td>
+            <td>{{$pendiente->nombre_cliente}}</td>
+            <td>{{$pendiente->nombre_cliente}}</td>
+            <td>{{$pendiente->estado}}</td>
+            <td><input data-id="{{$pendiente->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
       			
     		</tr>
 
@@ -51,7 +51,7 @@
             <th scope="col">Entregado</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
-            <th scope="col">Nombre producto(s)</th>
+            <th scope="col">Nombre producto</th>
             <th scope="col">Ciudad</th>
             <th scope="col">Estado</th>
             <th scope="col">Detalle</th>
@@ -59,49 +59,17 @@
       </thead>
 
       <tbody class="cuerpo_pedidos">
-        
+        @foreach ( $pedido_entregado as $entregado)
         <tr>
-
-
-            <td><div class="custom-control custom-switch">
-            	<input type="checkbox" class="custom-control-input" id="customSwitch4" checked>
-            	<label class="custom-control-label" ></label>
-          		</div>
-        	</td>
-            <td>05-06-2019</td>
-            <td>Johhan Andres Perez Carrillo</td>
-            <td>Tropical Sundews, Cape Sundews</td>
-            <td>Cali, Valle del cauca</td>
-            <td>Pagado</td>
-            <td><input type=image src="{{ asset('img/pedidos/ver.png') }}" data-toggle="modal" data-target="#modal_pedidos"></td>
+            <td>{{$entregado->fecha}}</td>
+            <td>{{$entregado->fecha}}</td>
+            <td>{{$entregado->nombre_cliente}}</td>
+            <td>{{$entregado->nombre_cliente}}</td>
+            <td>{{$entregado->nombre_cliente}}</td>
+            <td>{{$entregado->estado}}</td>
+            <td><input data-id="{{$entregado->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
         </tr>
-       
-        <tr>
-            <td><div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch5" checked>
-            <label class="custom-control-label" ></label>
-          </div>
-        </td>
-            <td>05-06-2019</td>
-            <td>Duvan Hernandez Figueroa</td>
-            <td>Winter Growing Sundews</td>
-            <td>Cali, Valle del cauca</td>
-            <td>Pagado</td>
-            <td><input type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
-        </tr>
-        <tr>
-            <td><div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch6" checked>
-            <label class="custom-control-label" for="customSwitch6"></label>
-          </div>
-        </td>
-            <td>15-02-2019</td>
-            <td>Andres Felipe Garcia Gaviria</td>
-            <td>Cape Sundews</td>
-            <td>Cali, Valle del cauca</td>
-            <td>En proceso</td>
-            <td><input type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
-        </tr>
+       @endforeach()
       </tbody>
   	</table><br><br><br><br>
 

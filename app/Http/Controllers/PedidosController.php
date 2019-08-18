@@ -14,12 +14,14 @@ class PedidosController extends Controller
 
 	public function mostrar(){
 
-		$pedidos = Pedido::all();
+		$pedido_pendiente = DB::table('pedidos')->where('entregado', 'no')->get();
+		$pedido_entregado = DB::table('pedidos')->where('entregado', 'si')->get();
+		//$pedidos = Pedido::all();
 		//$pedidos = DB::table('pedidos')
 		//->join('compras', 'compras.id_compra', '=', 'pedidos.id_compra')
 		//->get();
 		
-		return view('pedidos',compact('pedidos'));
+		return view('pedidos',compact('pedido_pendiente', 'pedido_entregado' ));
 		
 	}
 

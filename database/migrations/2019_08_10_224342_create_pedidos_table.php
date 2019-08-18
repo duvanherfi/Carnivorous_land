@@ -25,6 +25,7 @@ class CreatePedidosTable extends Migration
             $table->Integer('subtotal');
             $table->Integer('imagen');
             $table->string('estado');
+            $table->string('entregado');
             $table->Integer('total');
 
             $table->timestamps();
