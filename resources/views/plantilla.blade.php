@@ -262,13 +262,23 @@
 
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 method: 'POST',
+            
 
                 url: url,
                     success: function(result){
                         console.log(result.success);
                       
                         $('#nombre_cli').html(result.success.nombre_cliente);
-
+                        $('#ciudad').html(result.success.ciudad);
+                        $('#direccion').html(result.success.direccion);
+                        $('#tipo_entrega').html(result.success.tipo_entrega);
+                        $('#estado').html(result.success.estado);
+                        $('#cantidad').html(result.success.cantidad);
+                        $('#producto_name').html(result.success.nombre_producto);
+                        $('#cantidad').html(result.success.cantidad);
+                        $('#subtotal').html(result.success.subtotal);
+                        $('#imagen').html(result.success.imagen);
+                        $('#total').html(result.success.total);
 
                         $('#modal_pedidos').modal('show');
 

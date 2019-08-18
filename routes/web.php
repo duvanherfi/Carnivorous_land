@@ -71,5 +71,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/pedidos', "PedidosController@mostrar");
 
-Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
+Route::post('/pedidos/{id}', "PedidosController@detalles");
+
+
+
+
+
+
 
