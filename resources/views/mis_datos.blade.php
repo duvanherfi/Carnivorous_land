@@ -26,13 +26,13 @@
     <div class="form-row">
     <div class="form-group col-md-4">
       <label for="nombre">Nombres</label>
-    <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $user->nombre }}" placeholder="tu nombre">
+    <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $user->nombre }}" placeholder="tu nombre" required >
     </div>
 
     
       <div class="form-group col-md-4">
         <label for="apellido">Apellidos</label>
-      <input type="text" class="form-control" name="apellido" id="apellido" value="{{ $user->apellido }}" placeholder="tus apellidos">
+      <input type="text" class="form-control" name="apellido" id="apellido" value="{{ $user->apellido }}" placeholder="tus apellidos" required>
       </div>
 
     {{--Correo --}}
@@ -54,7 +54,7 @@
 
       <div class="form-group col-md-6">
         <label for="telefono">Teléfono</label>
-      <input type="tel" class="form-control" name="telefono" id="telefono" value="{{ $user->telefono }}" placeholder="tu telefono">
+      <input type="tel" class="form-control" name="telefono" id="telefono" value="{{ $user->telefono }}" placeholder="tu telefono" required>
       </div>
 
     </div>
@@ -78,25 +78,25 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="departamento">Departamento</label>
-                <input type="text" class="form-control" name="departamento" id="departamento" value="{{ $user->departamento }}" placeholder="Tu departamento">
+                <input type="text" class="form-control" name="departamento" id="departamento" value="{{ $user->departamento }}" placeholder="Tu departamento" required>
             </div>
 
 
             <div class="form-group col-md-6">
                 <label for="ciudad">Ciudad</label>
-                <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $user->ciudad }}" placeholder="tu ciudad">
+                <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $user->ciudad }}" placeholder="tu ciudad" required>
              </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="Barrio">Barrio</label>
-                <input type="text" class="form-control" id="Barrio" name="barrio" value="{{ $user->barrio }}" placeholder="{{$user->barrio}}">
+                <input type="text" class="form-control" id="Barrio" name="barrio" value="{{ $user->barrio }}" placeholder="{{$user->barrio}}" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="via">Vía</label>
-                <input type="text" class="form-control" id="via" name="via" value="{{ $user->via }}" placeholder="tu vía">
+                <input type="text" class="form-control" id="via" name="via" value="{{ $user->via }}" placeholder="tu vía" required>
             </div>
         </div>
 
@@ -104,9 +104,33 @@
 
 
       <div class="form-group">
-      <button type="submit" class="btn btn-success">Guardar</button>
+      <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success">Guardar cambios</button>
     </div>
-  </form>
+  
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      ¿Está seguro que desea actualizar sus datos?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Avanzar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
 
 </div>
   @endsection
