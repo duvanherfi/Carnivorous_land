@@ -71,7 +71,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="producto" id="navbarDropdownMenuLink-333"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{auth()->user()->nombre}}
+                        {{ auth()->user()->nombre }}
 
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
@@ -111,6 +111,7 @@
 
 
             </div>
+
             <div class="redes-sociales-compra d-flex align-items-md-center justify-content-end">
                 <a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX"
                     target="_blank">
@@ -130,13 +131,15 @@
                     <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp"
                         width="45">
                 </a>
-
+                @if(!auth()->user()->rol=='administrador')
                 <a href="{{ route('carrito') }}">
                     <img class="bordes-left-DS ml-4" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
                     <span class="badge badge-primary badge-pill counter" style="z-index:4;">0</span>
                 </a>
+                @endif
             </div>
+
 
         </nav>
         {{-- /.Menu --}}
@@ -249,9 +252,9 @@
                     "zeroRecords": "No hay coincidencias",
                     "infoEmpty": "",
                     "infoFiltered": "",
-                }   
+                }
             });
-          
+
         } );
 
 
@@ -266,7 +269,7 @@
                 url: url,
                     success: function(result){
                         console.log(result.success);
-                      
+
                         $('#nombre_cli').html(result.success.nombre_cliente);
 
 

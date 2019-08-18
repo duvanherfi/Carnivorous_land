@@ -2557,19 +2557,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      inicio: route('inicio'),
-      quienes_somos: route('quienes_somos'),
-      producto: null,
-      plantas: route('productos', 'plantas'),
-      merchandising: route('productos', 'merchandising'),
-      imple_cultivo: route('productos', 'implementos'),
-      inventario: route('inventario', 'gestion'),
-      tips_cultivo: route('productos', 'tips_cultivo'),
-      contactanos: route('contactanos'),
+      inicioLink: route('inicio'),
+      quienes_somosLink: route('quienes_somos'),
+      productoLink: null,
+      plantasLink: route('productos', 'plantas'),
+      merchandisingLink: route('productos', 'merchandising'),
+      imple_cultivoLink: route('productos', 'implementos'),
+      inventarioLink: route('inventario', 'gestion'),
+      tips_cultivoLink: route('productos', 'tips_cultivo'),
+      contactanosLink: route('contactanos'),
       isAdmin: null
     };
   },
@@ -42933,9 +42934,9 @@ var render = function() {
           "a",
           {
             staticClass: "nav-link waves-effect waves-light",
-            attrs: { href: _vm.inicio }
+            attrs: { href: _vm.inicioLink }
           },
-          [_vm._v("\r\n            INICIO\r\n        ")]
+          [_vm._v("\n            INICIO\n        ")]
         )
       ]),
       _vm._v(" "),
@@ -42944,13 +42945,13 @@ var render = function() {
           "a",
           {
             staticClass: "nav-link waves-effect waves-light",
-            attrs: { href: _vm.quienes_somos }
+            attrs: { href: _vm.quienes_somosLink }
           },
-          [_vm._v("\r\n            ¿QUIÉNES SOMOS?\r\n        ")]
+          [_vm._v("\n            ¿QUIÉNES SOMOS?\n        ")]
         )
       ]),
       _vm._v(" "),
-      _vm.isAdmin === "cliente" || _vm.isAdmin === "null"
+      _vm.isAdmin === "cliente" || _vm.isAdmin === null
         ? _c(
             "li",
             { staticClass: "nav-item dropdown opcion-menu-DS bordes-DS" },
@@ -42960,14 +42961,14 @@ var render = function() {
                 {
                   staticClass: "nav-link dropdown-toggle",
                   attrs: {
-                    href: _vm.producto,
+                    href: _vm.productoLink,
                     id: "navbarDropdownMenuLink-333",
                     "data-toggle": "dropdown",
                     "aria-haspopup": "true",
                     "aria-expanded": "false"
                   }
                 },
-                [_vm._v("\r\n            PRODUCTOS\r\n        ")]
+                [_vm._v("\n            PRODUCTOS\n        ")]
               ),
               _vm._v(" "),
               _c(
@@ -42982,7 +42983,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "dropdown-item",
-                      attrs: { href: _vm.plantas }
+                      attrs: { href: _vm.plantasLink }
                     },
                     [_vm._v("Plantas")]
                   ),
@@ -42991,7 +42992,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "dropdown-item",
-                      attrs: { href: _vm.imple_cultivo }
+                      attrs: { href: _vm.imple_cultivoLink }
                     },
                     [_vm._v("Implementos de cultivo")]
                   ),
@@ -43000,7 +43001,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "dropdown-item",
-                      attrs: { href: _vm.merchandising }
+                      attrs: { href: _vm.merchandisingLink }
                     },
                     [_vm._v("Merchandising")]
                   )
@@ -43013,9 +43014,9 @@ var render = function() {
               "a",
               {
                 staticClass: "nav-link waves-effect waves-light",
-                attrs: { href: _vm.inventario }
+                attrs: { href: _vm.inventarioLink }
               },
-              [_vm._v("\r\n            INVENTARIO\r\n        ")]
+              [_vm._v("\n            INVENTARIO\n        ")]
             )
           ]),
       _vm._v(" "),
@@ -43024,20 +43025,20 @@ var render = function() {
           "a",
           {
             staticClass: "nav-link waves-effect waves-light",
-            attrs: { href: _vm.tips_cultivo }
+            attrs: { href: _vm.tips_cultivoLink }
           },
-          [_vm._v("\r\n            TIPS DE CULTIVOS\r\n        ")]
+          [_vm._v("\n            TIPS DE CULTIVOS\n        ")]
         )
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "nav-item opcion-menu-DS px-0" }, [
+      _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
         _c(
           "a",
           {
             staticClass: "nav-link waves-effect waves-light",
-            attrs: { href: _vm.contactanos }
+            attrs: { href: _vm.contactanosLink }
           },
-          [_vm._v("\r\n            CONTÁCTANOS\r\n        ")]
+          [_vm._v("\n            CONTÁCTANOS\n        ")]
         )
       ])
     ]
@@ -58450,8 +58451,8 @@ $hiddenDiv.css('width',$textarea.is(':visible')?$textarea.width():$(window).widt
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ENVY 14-J008LA\Desktop\carnivorous_land\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ENVY 14-J008LA\Desktop\carnivorous_land\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\D\Desktop\carnivorous_land\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\D\Desktop\carnivorous_land\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
