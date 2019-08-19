@@ -75,15 +75,16 @@
     <div class="row">
         <div class="col pb-5 col-md-7">
             <ul class="list-group lista">
-                <li class="list-group-item">Espíritu constructivo</li>
-                <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">Profesionalismo</li>
-                <li class="list-group-item">Honestidad</li>
-                <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">Compromiso</li>
-                <li class="list-group-item">Responsabilidad</li>
-                <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">Enfoque en la mejora
-                    continua</li>
+            <li class="list-group-item">{{$valores->valor1}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor2}}</li>
+            <li class="list-group-item">{{$valores->valor3}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor4}}</li>
+            <li class="list-group-item">{{$valores->valor5}}</li>
+            <li class="list-group-item resaltar" data-aos="fade-right" data-aos-duration="2000">{{$valores->valor6}}</li>
             </ul>
         </div>
+
+
         <div class="col pl-5 ml-5 ">
             <img class="pb-5" src="{{ asset('img/quienes_somos/valores.png') }}" alt="Valores corporativos" width="300">
 
