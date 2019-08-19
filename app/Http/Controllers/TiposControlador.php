@@ -47,6 +47,7 @@ class TiposControlador extends Controller
      */
     public function store(Request $request)
     {
+        
         if($request->hasFile('imagen_tipo')){
             $file = $request->file('imagen_tipo');
             $imagen_tipo = time().$file->getClientOriginalName();

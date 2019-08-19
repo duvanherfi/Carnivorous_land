@@ -18,7 +18,7 @@ class CreateProductosTable extends Migration
             $table->string('imagen_principal');
             $table->string('imagen2');
             $table->string('imagen3');
-            $table->string('nombre');
+            $table->string('nombre')->unique();
             $table->integer('valor');
             $table->integer('cantidad');
             $table->integer('stock_minimo');

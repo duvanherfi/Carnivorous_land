@@ -57,8 +57,9 @@ Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');
 
 // Productos
 Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');
-Route::get('/productosControl', 'ProductoControlador@index')->name('productos.index');
-
+Route::get('/productosControl/{tipo}/{categoria}', 'ProductoControlador@index')->name('productos.index');
+Route::post('/productosControl/{id}/{categoria}', 'ProductoControlador@update')->name('productos.update'); // PUT
+Route::put('/productosControl/{opcion_catalogo}/{id}', 'ProductoControlador@actualizarOpcionCatalogo')->name('productos.opcion_catalogo');
 
 //llamada al metodo isAdmin del controlador usuario para hacer el menú
 Route::get('/comprobarSiAdmin','usuarioControlador@isAdmin');

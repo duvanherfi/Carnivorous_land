@@ -1,25 +1,24 @@
-<template>
+<template lang="es">
 <!--Cartas-->
 <div>
     <!--Card-->
     <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
         <!--Card image-->
         <div class="img-sombra-producto-DS">
-
             <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt />
         </div>
         <div class="btn-gestion">
-            <button @click="modalModificar(item)" class="btn color-verde d-inline" >Modificar</button>
+            <button @click="modalModificar(item)" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_articulo">Modificar</button>
             <button class="btn botones ml-1 d-inline">Eliminar</button>
         </div>
         <!-- /Imagen -->
 
         <!-- Contenido Inventario -->
         <div class="card-body card-body-cascade" v-if="gestion == 'gestion'">
-            <!-- Género -->
-            <h5 class="font-weight-bold mb-0 text-center">{{ item.genero }}</h5>
+            <div v-if="producto.categoria == 'merchandising'
+                || producto.categoria == 'implementos'" class="my-2"></div>
             <!-- Nombre -->
-            <p class="mb-0 text-center">{{ item.nombre }}</p>
+            <h5 class="font-weight-bold mb-0 text-center">{{ item.nombre }}</h5>
             <hr class="my-1">
             <!-- Valor -->
             <p class="mb-0 text-center">Valor: {{ item.valor | currency}} COP</p>
@@ -27,16 +26,18 @@
             <p class="mb-0 text-center">Cantidad: {{ item.cantidad }}</p>
             <!-- Stock minimo -->
             <p class="mb-0 text-center">Stock mínimo: {{ item.stock_minimo }}</p>
+            <!-- Tamaño -->
+            <p v-if="producto.categoria == 'plantas'" class="mb-0 text-center">Tamaño: {{ item.tamaño }}</p>
             <hr class="my-1">
             <!-- Opcion catalogo -->
             <div class="custom-control custom-switch pl-5" v-if="item.opcion_catalogo == 'true'">
                 <label class="opcion_catalogo">Enviar a catálogo:</label>
-                <input type="checkbox" class="custom-control-input" :id="item.nombre" checked>
+                <input @change="guardarOpcionCatalogo(item.id_producto, item.opcion_catalogo, index)" type="checkbox" class="custom-control-input" :id="item.nombre" checked>
                 <label class="custom-control-label" :for="item.nombre"></label>
             </div>
             <div class="custom-control custom-switch pl-5" v-else>
                 <label class="opcion_catalogo">Enviar a catálogo:</label>
-                <input type="checkbox" class="custom-control-input" :id="item.nombre" name="check">
+                <input @change="guardarOpcionCatalogo(item.id_producto, item.opcion_catalogo, index)" type="checkbox" class="custom-control-input" :id="item.nombre" name="check">
                 <label class="custom-control-label" :for="item.nombre"></label>
             </div>
         </div>
@@ -81,155 +82,83 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">REGISTRO DE ARTÍCULO</h2><br>
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">MODIFICAR ARTÍCULO</h2><br>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form class="ml-3">
-                        <p id="msj_campos">Todos los campos con * son obligatorios</p>
                         <div class="form-group row">
-                            <label for="imagen_principal" class="col-md-4 col-form-label pr-0">Imagen principal*:</label>
+                            <label for="imagen_principal_modificar" class="col-md-4 col-form-label pr-0">Imagen principal:</label>
                             <div class="custom-file col-md-7">
-                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
-                                <label class="custom-file-label" for="customFileLang" v-else>{{ this.producto.imagen_principalnombre }}</label>
+                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal_modificar" id="imagen_principal_modificar" lang="es">
+                                <label class="custom-file-label" for="imagen_principal_modificar" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="imagen_principal_modificar" v-else>{{ this.producto.imagen_principalnombre }}</label>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="imagen2" class="col-md-4 col-form-label">Imagen #2*:</label>
+                            <label for="imagen2_modificar" class="col-md-4 col-form-label">Imagen #2:</label>
                             <div class="custom-file col-md-7">
-                                <input @change="obtenerImagen2" type="file" class="custom-file-input" name="imagen2" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang" v-if="this.producto.imagen2nombre == ''">Seleccionar Archivo</label>
-                                <label class="custom-file-label" for="customFileLang" v-else>{{ this.producto.imagen2nombre }}</label>
+                                <input @change="obtenerImagen2" type="file" class="custom-file-input" name="imagen2_modificar" id="imagen2_modificar" lang="es">
+                                <label class="custom-file-label" for="imagen2_modificar" v-if="this.producto.imagen2nombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="imagen2_modificar" v-else>{{ this.producto.imagen2nombre }}</label>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="imagen3" class="col-md-4 col-form-label">Imagen #3*:</label>
+                            <label for="imagen3_modificar" class="col-md-4 col-form-label">Imagen #3:</label>
                             <div class="custom-file col-md-7">
-                                <input @change="obtenerImagen3" type="file" class="custom-file-input" name="imagen3" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang" v-if="this.producto.imagen3nombre == ''">Seleccionar Archivo</label>
-                                <label class="custom-file-label" for="customFileLang" v-else>{{ this.producto.imagen3nombre }}</label>
+                                <input @change="obtenerImagen3" type="file" class="custom-file-input" name="imagen3_modificar" id="imagen3_modificar" lang="es">
+                                <label class="custom-file-label" for="imagen3_modificar" v-if="this.producto.imagen3nombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="imagen3_modificar" v-else>{{ this.producto.imagen3nombre }}</label>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label id="nombre_label" for="nombre" class="col-md-4 col-form-label">Nombre*:</label>
+                            <label for="nombre_modificar" class="col-md-4 col-form-label">Nombre:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.nombre" id="nombre" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre" required autocomplete="nombre" autofocus>
+                                <input v-model="producto.nombre" id="nombre_modificar" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_modificar" required autocomplete="nombre_modificar" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="valor" class="col-md-4 col-form-label">Valor*:</label>
+                            <label for="valor_modificar" class="col-md-4 col-form-label">Valor:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.valor" id="valor" placeholder="Ej: 50000" type="number" class="form-control" name="valor" required autocomplete="valor" autofocus>
+                                <input v-model="producto.valor" id="valor_modificar" placeholder="Ej: 50000" type="number" class="form-control" name="valor_modificar" required autocomplete="valor_modificar" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="cantidad" class="col-md-4 col-form-label">Cantidad*:</label>
+                            <label for="cantidad_modificar" class="col-md-4 col-form-label">Cantidad:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.cantidad" id="cantidad" placeholder="Ej: 43" type="number" class="form-control" name="cantidad" required autocomplete="cantidad" autofocus>
+                                <input v-model="producto.cantidad" id="cantidad_modificar" placeholder="Ej: 43" type="number" class="form-control" name="cantidad_modificar" required autocomplete="cantidad_modificar" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="stock_minimo" class="col-md-4 col-form-label">Stock mínimo*:</label>
+                            <label for="stock_minimo_modificar" class="col-md-4 col-form-label">Stock mínimo:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.stock_minimo" id="stock_minimo" placeholder="Ej: 10" type="number" class="form-control" name="stock_minimo" required autocomplete="stock_minimo" autofocus>
+                                <input v-model="producto.stock_minimo" id="stock_minimo_modificar" placeholder="Ej: 10" type="number" class="form-control" name="stock_minimo_modificar" required autocomplete="stock_minimo_modificar" autofocus>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="categoria" class="col-md-4 col-form-label">Categoría*: </label>
-                            <div class="col-md-7 p-0">
-                                <select @change="generarTipos" v-model="producto.categoria" class="custom-select form-control" id="categoria" name="categoria" required autocomplete="categoria">
-                                    <option value="plantas">Plantas</option>
-                                    <option value="merchandising">Merchandising</option>
-                                    <option value="implementos">Implementos de cultivo</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label v-if="this.producto.categoria=='plantas'" for="tipo" class="col-md-4 col-form-label">Género*: </label>
-                            <label v-else for="tipo" class="col-md-4 col-form-label">Tipo*: </label>
-                            <div class="col-md-7 p-0">
-                                <select v-model="producto.genero" v-if="this.producto.categoria=='plantas'" class="custom-select form-control" id="tipo" name="tipo" required autocomplete="tipo">
-                                    <option v-for="(item, index) in tipos" :key="index">{{ item.genero }}</option>
-                                </select>
-                                <select v-model="producto.genero" v-else class="custom-select form-control" id="tipo" name="tipo" required autocomplete="tipo">
-                                    <option v-for="(item, index) in tipos" :key="index">{{ item.tipo }}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Registrar genero -->
-                        <button @click="limpiarRegistrarTipo" v-if="this.producto.categoria=='plantas'" type="button" class="btn btn-md color-verde btn-registrar-genero mt-0" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Registrar Género</button>
-                        <button @click="limpiarRegistrarTipo" v-else type="button" class="btn btn-md color-verde btn-registrar-genero mt-0" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Registrar Tipo</button>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="collapse" id="registrar_genero">
-                                    <div class="card card-body form-registrar-genero">
-                                        <form class="ml-3">
-                                            <div class="form-group row">
-                                                <label for="imagen" class="col-md-3 col-form-label">Imagen*:</label>
-                                                <div class="custom-file col-md-8">
-                                                    <input @change="obtenerImagenTipo" type="file" class="custom-file-input" name="imagen" id="customFileLang" lang="es">
-                                                    <label class="custom-file-label" for="customFileLang" v-if="this.tipo.imagen_tiponombre == ''">Seleccionar Archivo</label>
-                                                    <label class="custom-file-label" for="customFileLang" v-else>{{ this.tipo.imagen_tiponombre }}</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="nombre_tipo" class="col-md-3 col-form-label">Nombre*:</label>
-                                                <div class="col-md-8 p-0">
-                                                    <input v-model="tipo.nombre" id="nombre_tipo" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_tipo" required autocomplete="nombre_tipo" autofocus>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group mr-4">
-                                                <label for="descripcion_tipo" class="d-inline-flex col-form-label">Descripción*:</label>
-                                                <textarea v-model="tipo.descripcion" class="form-control" id="descripcion_tipo" rows="5"></textarea>
-                                            </div>
-
-                                            <button @click="registrarTipo" type="button" class="btn btn-md color-verde" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Registrar</button>
-                                            <button type="button" class="btn btn-md botones" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Cancelar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Registrar genero -->
 
                         <div class="form-group row" v-if="this.producto.categoria=='plantas'">
-                            <label for="tamaño" class="col-md-4 col-form-label">Tamaño*:</label>
+                            <label for="tamaño_modificar" class="col-md-4 col-form-label">Tamaño:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.tamaño" id="tamaño" placeholder="Ej: S" type="text" class="form-control" name="tamaño" required autocomplete="tamaño" autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="catalogo" class="col-md-4 col-form-label">Enviar a catálogo:</label>
-                            <div class="custom-control custom-switch pt-2 pl-5">
-                                <input v-model="producto.opcion_catalogo" type="checkbox" class="custom-control-input" id="customSwitch2" checked>
-                                <label class="custom-control-label" for="customSwitch2"></label>
+                                <input v-model="producto.tamaño" id="tamaño_modificar" placeholder="Ej: S" type="text" class="form-control" name="tamaño_modificar" required autocomplete="tamaño_modificar" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group mr-4">
-                            <label for="descripcion" class="d-inline-flex col-form-label">Descripción*:</label>
-                            <textarea v-model="producto.descripcion" class="form-control" id="descripcion" rows="5"></textarea>
+                            <label for="descripcion_modificar" class="d-inline-flex col-form-label">Descripción:</label>
+                            <textarea v-model="producto.descripcion" class="form-control" id="descripcion_modificar" rows="5"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button @click="registrarProducto" type="button" class="btn color-verde" data-dismiss="modal">Registrar</button>
+                    <button @click="modificarProducto(producto.id)" type="button" class="btn color-verde" data-dismiss="modal">Modificar</button>
                     <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -242,35 +171,146 @@
 
 <script>
 import EventBus from '../event_bus'
+import {
+    isNullOrUndefined
+} from 'util';
 export default {
     data() {
         return {
-            productos: []
+            productos: [],
+            tipos: [],
+            producto: {
+                id: '',
+                imagen_principal: '',
+                imagen_principalnombre: '',
+                imagen_principalnombreAntiguo: '',
+                imagen2: '',
+                imagen2nombre: '',
+                imagen2nombreAntiguo: '',
+                imagen3: '',
+                imagen3nombre: '',
+                imagen3nombreAntiguo: '',
+                nombre: '',
+                valor: '',
+                cantidad: '',
+                stock_minimo: '',
+                categoria: 'plantas',
+                genero: '',
+                tamaño: '',
+                opcion_catalogo: '',
+                descripcion: ''
+            },
+            activar: true
         };
     },
     created() {
-        axios.get("/productosControl").then(response => {
-            console.log(response.data);
-            this.productos = response.data;
-        });
-    },
-    updated() {
-        axios.get("/productosControl").then(response => {
-            this.productos = response.data;
+        EventBus.$on('articulos', data => {
+            this.producto.categoria = data.categoria;
+            this.producto.genero = data.genero;
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+                this.productos = response.data;
+            })
         })
     },
+    beforeUpdate() {
+        EventBus.$on('activarUpdate', data => {
+            this.activar = data;
+            if (this.activar == true) {
+                this.actualizarProductos();
+            }
+        })
+    },
+    updated() {
+        this.activar = false;
+    },
     methods: {
+        obtenerImagenPrincipal(e) {
+            let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen_principalnombre = '';
+            } else {
+                this.producto.imagen_principalnombre = file.name;
+            }
+            this.producto.imagen_principal = file;
+        },
+        obtenerImagen2(e) {
+            let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen2nombre = '';
+            } else {
+                this.producto.imagen2nombre = file.name;
+            }
+            this.producto.imagen2 = file;
+        },
+        obtenerImagen3(e) {
+            let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen3nombre = '';
+            } else {
+                this.producto.imagen3nombre = file.name;
+            }
+            this.producto.imagen3 = file;
+        },
+        actualizarProductos() {
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+                this.productos = response.data;
+            });
+        },
+        generarTipos() {
+            axios.get(`/tiposControl/${this.producto.categoria}`).then(response => {
+                this.tipos = response.data;
+            })
+        },
         popoverProducto() {
             $('[data-toggle="popover"]').popover("show");
             setTimeout("$('#añadirCarrito').popover('hide');", 5000);
         },
         modalModificar(item) {
-            $('#modal_registrar_articulo').modal('show');
-            $('#titulo_modal').html('MODIFICAR ARTÍCULO');
+            this.generarTipos();
 
-            $('#msj_campos').hide();
-            $('#nombre_label').html('Nombre:');
-            $('#nombre').val(item.nombre);
+            this.producto.imagen_principalnombre = this.producto.imagen_principalnombreAntiguo = item.imagen_principal;
+            this.producto.imagen2nombre = this.producto.imagen2nombreAntiguo = item.imagen2;
+            this.producto.imagen3nombre = this.producto.imagen3nombreAntiguo = item.imagen3;
+            this.producto.nombre = item.nombre;
+            this.producto.valor = item.valor;
+            this.producto.cantidad = item.cantidad;
+            this.producto.stock_minimo = item.stock_minimo;
+            this.producto.tamaño = item.tamaño;
+            this.producto.descripcion = item.descripcion;
+
+            this.producto.id = item.id_producto;
+
+            $('#imagen_principal_modificar').val(null);
+            $('#imagen2_modificar').val(null);
+            $('#imagen3_modificar').val(null);
+        },
+        modificarProducto(id) {
+            let formData = new FormData();
+            formData.append('imagen_principal', this.producto.imagen_principal);
+            formData.append('imagen_principalnombreAntiguo', this.producto.imagen_principalnombreAntiguo);
+            formData.append('imagen2', this.producto.imagen2);
+            formData.append('imagen2nombreAntiguo', this.producto.imagen2nombreAntiguo);
+            formData.append('imagen3', this.producto.imagen3);
+            formData.append('imagen3nombreAntiguo', this.producto.imagen3nombreAntiguo);
+            formData.append('nombre', this.producto.nombre);
+            formData.append('valor', this.producto.valor);
+            formData.append('cantidad', this.producto.cantidad);
+            formData.append('stock_minimo', this.producto.stock_minimo);
+            formData.append('tamaño', this.producto.tamaño);
+            formData.append('descripcion', this.producto.descripcion);
+
+            axios.post(`/productosControl/${id}/${this.producto.categoria}`, formData).then(response => {
+                this.actualizarProductos();
+            })
+        },
+        guardarOpcionCatalogo(id_producto, opcion_catalogo, index) {
+            if(opcion_catalogo == 'true'){
+                this.productos[index].opcion_catalogo = 'false';
+            }else{
+                this.productos[index].opcion_catalogo = 'true';
+            }
+            
+            axios.put(`/productosControl/${this.productos[index].opcion_catalogo}/${id_producto}`).then(response => {})
         }
     },
     props: ['gestion']
@@ -278,6 +318,12 @@ export default {
 </script>
 
 <style>
+.custom-file label {
+    overflow: hidden;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+
 .btn-gestion {
     position: absolute;
 }
