@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="nav-item dropdown opcion-menu-DS bordes-DS" v-if="isAdmin==='cliente' || isAdmin===null">
-        <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             PRODUCTOS
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS" aria-labelledby="navbarDropdownMenuLink-333">
@@ -31,12 +31,12 @@
             TIPS DE CULTIVOS
         </a>
     </li>
-    <li class="nav-item opcion-menu-DS">
+    <li id="contactanos" class="nav-item opcion-menu-DS">
         <a class="nav-link waves-effect waves-light" v-bind:href="contactanosLink">
             CONTÁCTANOS
         </a>
     </li>
-    <li class="nav-item opcion-menu-DS bordes-DS" v-if="isAdmin==='administrador'">
+    <li class="nav-item opcion-menu-DS" v-if="isAdmin==='administrador'">
         <a class="nav-link waves-effect waves-light" v-bind:href="pedidosLink">
             PEDIDOS
         </a>
@@ -58,34 +58,41 @@ export default {
             inventarioLink: route('inventario', 'gestion'),
             tips_cultivoLink: route('productos', 'tips_cultivo'),
             contactanosLink: route('contactanos'),
-            pedidosLink:route('pedidos'),
+            pedidosLink: route('pedidos'),
             isAdmin: null
         }
     },
-    created: function(){
+    created: function () {
         this.comprobarAdmin();
-        console.log(this.isAdmin);
-        
+
     },
     methods: {
-        comprobarAdmin: function ()   {
+        comprobarAdmin: function () {
             axios.get('comprobarSiAdmin')
-            .then(response => {
-                this.isAdmin=response.data
-            })
-            .catch(err => {
-                console.error(err);
-            })
+                .then(response => {
+                    this.isAdmin = response.data;
+                    if (this.isAdmin == 'administrador') {
+                        $('.redes-sociales-compra').addClass('redes-sociales-administrador');
+                        $('.justificar-DS').addClass('justificar-administrador');
+                        $('#contactanos').addClass('bordes-DS');
+                    }else{
+                        $('#contactanos').removeClass('bordes-DS');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+                
         }
     },
-    mounted(){
-        $(document).ready(function(){
+    mounted() {
+        $(document).ready(function () {
             var altura = $('.menu').offset().top;
 
-            $(window).on('scroll', function(){
-                if ($(window).scrollTop() > altura){
+            $(window).on('scroll', function () {
+                if ($(window).scrollTop() > altura) {
                     $('.menu').addClass('menu-fixed');
-                }else{
+                } else {
                     $('.menu').removeClass('menu-fixed');
                 }
             });

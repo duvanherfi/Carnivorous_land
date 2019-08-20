@@ -2839,7 +2839,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.comprobarAdmin();
-    console.log(this.isAdmin);
   },
   methods: {
     comprobarAdmin: function comprobarAdmin() {
@@ -2847,6 +2846,14 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('comprobarSiAdmin').then(function (response) {
         _this.isAdmin = response.data;
+
+        if (_this.isAdmin == 'administrador') {
+          $('.redes-sociales-compra').addClass('redes-sociales-administrador');
+          $('.justificar-DS').addClass('justificar-administrador');
+          $('#contactanos').addClass('bordes-DS');
+        } else {
+          $('#contactanos').removeClass('bordes-DS');
+        }
       })["catch"](function (err) {
         console.error(err);
       });
@@ -43133,19 +43140,26 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "nav-item opcion-menu-DS" }, [
-        _c(
-          "a",
-          {
-            staticClass: "nav-link waves-effect waves-light",
-            attrs: { href: _vm.contactanosLink }
-          },
-          [_vm._v("\r\n            CONTÁCTANOS\r\n        ")]
-        )
-      ]),
+      _c(
+        "li",
+        {
+          staticClass: "nav-item opcion-menu-DS",
+          attrs: { id: "contactanos" }
+        },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link waves-effect waves-light",
+              attrs: { href: _vm.contactanosLink }
+            },
+            [_vm._v("\r\n            CONTÁCTANOS\r\n        ")]
+          )
+        ]
+      ),
       _vm._v(" "),
       _vm.isAdmin === "administrador"
-        ? _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
+        ? _c("li", { staticClass: "nav-item opcion-menu-DS" }, [
             _c(
               "a",
               {
