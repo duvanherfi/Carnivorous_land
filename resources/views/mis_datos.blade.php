@@ -125,7 +125,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Avanzar</button>
+        <button type="submit" class="btn btn-success">Avanzar</button>
       </div>
     </div>
   </div>

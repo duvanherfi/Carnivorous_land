@@ -580,3 +580,9 @@ tr:nth-child(odd) td {
 .text-align-center{
     text-align: center;
 }
+
+.datos_usuario{
+
+    font-family: 'Source Sans Pro', serif;
+    font-size: 1rem;
+}

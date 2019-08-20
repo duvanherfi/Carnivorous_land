@@ -65,22 +65,28 @@
                         REGISTRARSE
                     </a>
                 </li>
-
+           
 
                 @else
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="producto" id="navbarDropdownMenuLink-333"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+               <li class="nav-item dropdown datos_usuario">
+                    <a class="nav-link dropdown-toggle pl-5 pr-5 href="producto" id="navbarDropdownMenuLink-333"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         {{ auth()->user()->nombre }}
 
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
                         aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="{{route('mis_datos')}}">Mi perfil</a>
-                        <a class="dropdown-item" href="{{route('cerrar_sesion')}}">Cerrar sesión</a>
+                        <a class="dropdown-item" href="{{route('mis_datos')}}">
+                            <img  src="{{ asset('img/user.png') }}" alt="Icono de usuario"  width="23">
+                            Mi perfil</a>
+                        <a class="dropdown-item" href="{{route('cerrar_sesion')}}">
+                            <img  src="{{ asset('img/logout.png') }}" alt="Cerrar Sesión"  width="23">
+                            Cerrar sesión</a>
                     </div>
-                </li>
-
+                </li> 
+          
+          
 
                 @endif
             </ul>
