@@ -18,6 +18,7 @@ class CreateTipoImplementosTable extends Migration
             $table->string('tipo');
             $table->string('imagen');
             $table->text('descripcion');
+            $table->string('habilitado')->default('true');
             $table->timestamps();
         });
     }

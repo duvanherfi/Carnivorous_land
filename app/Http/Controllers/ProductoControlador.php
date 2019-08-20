@@ -25,15 +25,15 @@ class ProductoControlador extends Controller
         if ($request->ajax()) {
             if ($categoria == 'plantas') {
                 $productos = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
-                    ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('genero', $tipo)
+                    ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('genero', $tipo)->where('habilitado', 'true')
                     ->select('*', 'productos.id as id_producto')->get();
             } else if ($categoria == 'merchandising') {
                 $productos = DB::table('productos')->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
-                    ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('tipo', $tipo)
+                    ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('tipo', $tipo)->where('habilitado', 'true')
                     ->select('*', 'productos.id as id_producto')->get();
             } else if ($categoria == 'implementos') {
                 $productos = DB::table('productos')->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
-                    ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)
+                    ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)->where('habilitado', 'true')
                     ->select('*', 'productos.id as id_producto')->get();
             }
             return $productos;
@@ -60,6 +60,48 @@ class ProductoControlador extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->categoria == 'plantas') {
+            $producto = DB::table('productos')
+                ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+                ->join('generos', 'plantas.id_genero', '=', 'generos.id')
+                ->where('habilitado', 'false')
+                ->where('nombre', $request->nombre)
+                ->where('tamaño', $request->tamaño)
+                ->where('genero', $request->genero)
+                ->select('*', 'productos.id as id_producto');
+        }else if ($request->categoria == 'merchandising') {
+            $producto = DB::table('productos')
+                ->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
+                ->join('tipo_merchandisings', 'merchandisings.id_tipo', '=', 'tipo_merchandisings.id')
+                ->where('habilitado', 'false')
+                ->where('nombre', $request->nombre)
+                ->where('tipo', $request->genero)
+                ->select('*', 'productos.id as id_producto');
+        }else if ($request->categoria == 'implementos') {
+            $producto = DB::table('productos')
+                ->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
+                ->join('tipo_implementos', 'implemento_cultivos.id_tipo', '=', 'tipo_implementos.id')
+                ->where('habilitado', 'false')
+                ->where('nombre', $request->nombre)
+                ->where('tipo', $request->genero)
+                ->select('*', 'productos.id as id_producto');
+        }
+        $productos = $producto->get();
+
+        if (count($productos, 1) == 1) {
+            $producto = $producto->update([
+                'opcion_catalogo' => $request->opcion_catalogo,
+                'habilitado' => 'true'
+            ]);
+            return response()->json([
+                'imagen_principal' => $productos[0]->imagen_principal,
+                'imagen2' => $productos[0]->imagen2,
+                'imagen3' => $productos[0]->imagen3,
+                'id' => $productos[0]->id_producto,
+                'categoria' => $request->categoria
+            ]);
+        }
+        
         if ($request->hasFile('imagen_principal')) {
             $file = $request->file('imagen_principal');
             $imagen_principal = time() . $file->getClientOriginalName();
@@ -142,7 +184,7 @@ class ProductoControlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, $categoria)
+    public static function update(Request $request, $id, $categoria)
     {
         $producto = Producto::find($id);
 
@@ -179,27 +221,25 @@ class ProductoControlador extends Controller
             DB::table('plantas')
                 ->where('id_planta', $id)
                 ->update(['tamaño' => $request->input('tamaño')]);
-
-            $mezcla = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
-                ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('productos.id', $id)
-                ->select('*', 'productos.id as id_producto')->get();
-        } else if ($categoria == 'merchandising') {
-            $mezcla = DB::table('productos')->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
-                ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('productos.id', $id)
-                ->select('*', 'productos.id as id_producto')->get();
-        } else if ($categoria == 'implementos') {
-            $mezcla = DB::table('productos')->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
-                ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('productos.id', $id)
-                ->select('*', 'productos.id as id_producto')->get();
         }
+        //     $mezcla = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+        //         ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('productos.id', $id)
+        //         ->select('*', 'productos.id as id_producto')->get();
+        // } else if ($categoria == 'merchandising') {
+        //     $mezcla = DB::table('productos')->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
+        //         ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('productos.id', $id)
+        //         ->select('*', 'productos.id as id_producto')->get();
+        // } else if ($categoria == 'implementos') {
+        //     $mezcla = DB::table('productos')->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
+        //         ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('productos.id', $id)
+        //         ->select('*', 'productos.id as id_producto')->get();
+        // }
 
-        return $mezcla;
+        return $producto;
     }
 
-    public function actualizarOpcionCatalogo($opcion_catalogo, $id){
-        // DB::table('productos')
-        //         ->where('id', $id)
-        //         ->update(['opcion_catalogo' => $opcion_catalogo]);
+    public function actualizarOpcionCatalogo($opcion_catalogo, $id)
+    {
         $producto = Producto::find($id);
         $producto->opcion_catalogo = $opcion_catalogo;
         $producto->save();
@@ -213,6 +253,8 @@ class ProductoControlador extends Controller
      */
     public function destroy($id)
     {
-        //
+        $producto = Producto::find($id);
+        $producto->habilitado = 'false';
+        $producto->save();
     }
 }

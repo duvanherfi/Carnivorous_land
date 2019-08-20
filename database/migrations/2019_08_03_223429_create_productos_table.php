@@ -18,12 +18,13 @@ class CreateProductosTable extends Migration
             $table->string('imagen_principal');
             $table->string('imagen2');
             $table->string('imagen3');
-            $table->string('nombre')->unique();
+            $table->string('nombre');
             $table->integer('valor');
             $table->integer('cantidad');
             $table->integer('stock_minimo');
             $table->string('opcion_catalogo');
             $table->text('descripcion');
+            $table->string('habilitado')->default('true');
             $table->timestamps();
         });
     }

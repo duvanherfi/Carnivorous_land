@@ -1,17 +1,16 @@
 <template lang="es">
 <div class="contenido-productos-DS">
-    <div class="position-absolute subtitulo-producto-DS">
-        <h1>SARRACENIA</h1>
+    <div class="titulo_intentario_content d-flex align-items-center justify-content-center">
+        <h1 id="titulo_inventario" class="text-uppercase">{{ nombre }}</h1>
+        <img v-if="imagen != ''" class="imagen-subtitulo-DS" id="imagen_inventario" v-bind:src="'/img/generos/' + imagen" alt="Fondo titulo inventario">
     </div>
-    <img class="imagen-subtitulo-DS" src="/img/productos/fondo_productos.jpg" alt="Fondo productos">
-    <div class="mask rgba-black-strong"></div>
-    <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, quas eaque veniam harum nostrum non pariatur! Non quidem adipisci pariatur eius provident impedit tenetur, quibusdam molestias culpa doloribus quam aliquam necessitatibus? Hic vel dolor quae ad veniam totam tempore culpa, omnis aut et doloremque laudantium. Incidunt labore alias libero aspernatur exercitationem sit tempora modi aliquid nesciunt ab atque minima, quos, dignissimos eos harum voluptates dicta! Vero eaque qui odit quo. Tempora et enim officiis dolore, eaque minima, quos voluptatum rerum velit officia assumenda praesentium tenetur quidem autem commodi culpa natus laudantium! Cupiditate voluptas est iure cumque enim perspiciatis id quasi nisi recusandae aliquam, labore numquam quod fugit temporibus distinctio omnis! Laboriosam explicabo consequatur nisi vitae neque tempore architecto blanditiis autem voluptatum sunt itaque magnam asperiores debitis dolor odit, accusantium nobis nulla fugiat totam odio reiciendis veritatis modi velit? Est accusantium blanditiis autem praesentium culpa? Similique libero quia natus est error voluptas sed et nobis ab sint accusantium, esse provident a in temporibus voluptate. Iure incidunt corporis dolorem aliquam quia rerum sit laudantium, debitis culpa maxime voluptatum doloribus, necessitatibus optio ea sequi alias laboriosam neque temporibus quis possimus inventore iusto aut impedit nemo. Amet nam iste at? Atque magni itaque quasi?</p>
-    <div class="d-flex justify-content-between">
+    <pre class="mt-4" id="descripcion_inventario">{{ descripcion }}</pre>
+    <div class="d-flex justify-content-between" id="opciones_inventario">
         <div class="d-flex">
-            <label for="sexo" class="d-inline-flex col-form-label pr-0">Ordenar:</label>
+            <label for="ordenar" class="d-inline-flex col-form-label pr-0">Ordenar:</label>
 
             <div class="col-md-10">
-                <select class="custom-select form-control" id="sexo" name="sexo" required autocomplete="sexo">
+                <select class="custom-select form-control" id="ordenar" name="ordenar" required autocomplete="ordenar">
                     <option selected>Ninguno</option>
                     <option value="alfabeticamente">Alfabéticamente (Nombre)</option>
                     <option value="ascendente">Ascendente (Precio)</option>
@@ -20,9 +19,13 @@
                 </select>
             </div>
         </div>
-        <div>
-            <button class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Género</button>
+        <div v-if="categoria == 'plantas'">
+            <button @click="modalModificarTipo" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Género</button>
             <button class="btn botones d-inline">Eliminar Género</button>
+        </div>
+        <div v-else>
+            <button @click="modalModificarTipo" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Tipo</button>
+            <button class="btn botones d-inline">Eliminar Tipo</button>
         </div>
     </div>
 
@@ -45,59 +48,153 @@
                         <div class="form-group row">
                             <label for="imagen" class="col-md-3 col-form-label">Imagen:</label>
                             <div class="custom-file col-md-8">
-                                <input type="file" class="custom-file-input" name="imagen" id="customFileLang" lang="es">
-                                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                <input @change="obtenerImagen" type="file" class="custom-file-input" name="imagen_modificar" id="imagen_modificar" lang="es">
+                                <label class="custom-file-label" for="imagen_modificar" v-if="this.genero.imagennombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="imagen_modificar" v-else>{{ this.genero.imagennombre }}</label>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <label for="nombre_tipo" class="col-md-3 col-form-label">Nombre:</label>
                             <div class="col-md-8 p-0">
-                                <input id="nombre_tipo" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_tipo" required autocomplete="nombre_tipo" autofocus>
+                                <input v-model="genero.nombre" id="nombre_tipo" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_tipo" required autocomplete="nombre_tipo" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group mr-4">
                             <label for="descripcion_tipo" class="d-inline-flex col-form-label">Descripción:</label>
-                            <textarea class="form-control" id="descripcion_tipo" rows="5"></textarea>
+                            <textarea v-model="genero.descripcion" class="form-control" id="descripcion_tipo" rows="5"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn color-verde">Modificar</button>
+                    <button @click="modificarTipo" type="button" class="btn color-verde" data-dismiss="modal">Modificar</button>
                     <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 </template>
 
 <script>
+import EventBus from '../event_bus'
+import {
+    log,
+    isNullOrUndefined
+} from 'util';
 export default {
+    data() {
+        return {
+            id: '',
+            imagen: '',
+            descripcion: '',
+            nombre: '',
+            categoria: '',
+            genero: {
+                imagen: '',
+                imagennombre: '',
+                imagennombreAntiguo: '',
+                nombre: '',
+                descripcion: ''
+            }
+        }
+    },
+    created() {
+        $('#imagen_inventario').css('visibility', 'hidden');
+        $('#opciones_inventario').css('visibility', 'hidden');
+        EventBus.$on('articulos', data => {
+            $('#opciones_inventario').css('visibility', 'visible');
+            $('#imagen_inventario').css('visibility', 'visible');
+            this.categoria = data.categoria;
+            axios.get(`/tiposControl/${data.genero}/${data.categoria}`).then(response => {
+                this.imagen = response.data.imagen;
+                if (this.categoria == 'plantas') {
+                    this.nombre = response.data.genero;
+                } else {
+                    this.nombre = response.data.tipo;
+                }
+                this.descripcion = response.data.descripcion;
+                this.id = response.data.id;
+            })
+        })
+    },
+    methods: {
+        obtenerImagen(e) {
+            let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.genero.imagennombre = '';
+            } else {
+                this.genero.imagennombre = file.name;
+            }
+            this.genero.imagen = file;
+        },
+        actualizar() {
+            axios.get(`/tiposControl/${this.genero.nombre}/${this.categoria}`).then(response => {
+                this.imagen = response.data.imagen;
+                if (this.categoria == 'plantas') {
+                    this.nombre = response.data.genero;
+                } else {
+                    this.nombre = response.data.tipo;
+                }
+                this.descripcion = response.data.descripcion;
+                this.id = response.data.id;
+            })
+        },
+        modalModificarTipo() {
+            this.genero.imagennombre = this.genero.imagennombreAntiguo = this.imagen;
+            this.genero.nombre = this.nombre;
+            this.genero.descripcion = this.descripcion;
+
+            $('#imagen_modificar').val(null);
+        },
+        modificarTipo() {
+            let formData = new FormData();
+            formData.append('imagen', this.genero.imagen);
+            formData.append('imagennombreAntiguo', this.genero.imagennombreAntiguo);
+            formData.append('genero', this.genero.nombre);
+            formData.append('descripcion', this.genero.descripcion);
+            formData.append('categoria', this.categoria);
+
+            axios.post(`/tiposControl/${this.id}`, formData).then(response => {
+                // console.log(response.data);
+                this.actualizar();
+                const params = {
+                    activar: true,
+                    categoria: this.categoria
+                }
+                EventBus.$emit('actualizarMenuInventario', params);
+            })
+        }
+    },
     props: ['gestion']
 }
 </script>
 
 <style scoped>
 .imagen-subtitulo-DS {
-    width: 960px;
+    width: 100%;
     height: 150px;
     object-fit: cover;
 }
 
-.contenido-productos-DS {
-    margin-top: 1.5rem;
-    margin-left: 2.3rem;
-    margin-bottom: 1.5rem;
-    max-width: 960px;
+.titulo_intentario_content {
+    width: 100%;
+    height: 150px;
 }
 
-.subtitulo-producto-DS {
-    top: 34%;
-    left: 53%;
+#titulo_inventario {
+    position: absolute;
     color: white;
+}
+
+.contenido-productos-DS {
+    padding-top: 1.5rem;
+    padding-left: 2rem;
+    padding-bottom: 1.5rem;
+    max-width: 74%;
+    width: 74%;
+    border-left: #434343 3px solid;
 }
 
 h1 {

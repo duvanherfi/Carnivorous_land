@@ -3,6 +3,10 @@ require('./mdb');
 var AOS = require('aos');
 AOS.init();
 
+import bsCustomFileInput from 'bs-custom-file-input';
+
+global.bsCustomFileInput = bsCustomFileInput;
+
 window.Vue = require('vue');
 
 import VueCurrencyFilter from 'vue-currency-filter';

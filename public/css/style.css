@@ -3,9 +3,20 @@ p {
     text-align: justify;
 }
 
+pre{
+    font-family: 'Montserrat', sans-serif;
+    text-align: justify;
+    font-size: 14.4px;
+    color: #434343;
+}
+
 h2 {
     font-family: 'Source Sans Pro', serif;
     text-align: center;
+}
+
+body {
+    color: #434343;
 }
 
 /* Navbar */

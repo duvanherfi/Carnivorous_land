@@ -18,6 +18,7 @@ class CreateGenerosTable extends Migration
             $table->string('genero');
             $table->string('imagen');
             $table->text('descripcion');
+            $table->string('habilitado')->default('true');
             $table->timestamps();
         });
     }

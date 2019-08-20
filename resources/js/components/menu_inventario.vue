@@ -199,7 +199,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="catalogo" class="col-md-4 col-form-label">Enviar a catálogo:</label>
+                            <label for="catalogo" class="col-md-4 col-form-label pr-0">Enviar a catálogo*:</label>
                             <div class="custom-control custom-switch pt-2 pl-5">
                                 <input v-model="producto.opcion_catalogo" type="checkbox" class="custom-control-input" id="customSwitch2" checked>
                                 <label class="custom-control-label" for="customSwitch2"></label>
@@ -212,9 +212,12 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button @click="registrarProducto" type="button" class="btn color-verde" data-dismiss="modal">Registrar</button>
-                    <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
+                <div class="modal-footer d-block">
+                    <p>Señor(a) usuario, los campos "Categoría" y "Género" no podran ser modificados, así que recuerde revisar bien la información antes de registrar el artículo.</p>
+                    <div class="d-flex justify-content-end">
+                        <button @click="registrarProducto" type="button" class="btn color-verde" data-dismiss="modal">Registrar</button>
+                        <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -256,20 +259,62 @@ export default {
             tipos: [],
             generos: [],
             merchandising: [],
-            implementos: []
+            implementos: [],
+            activar: true
         }
     },
     created() {
         axios.get('/tiposControl/plantas').then(response => {
-            this.generos = response.data;
-        })
+            if (!(isNullOrUndefined(response.data))) {
+                this.generos = response.data;
+                const params = {
+                    genero: response.data[0].genero,
+                    categoria: 'plantas'
+                };
+                EventBus.$emit('articulos', params);
+            }
+        });
 
         axios.get('/tiposControl/merchandising').then(response => {
             this.merchandising = response.data;
-        })
+            if (this.generos == '') {
+                const params = {
+                    genero: response.data[0].tipo,
+                    categoria: 'merchandising'
+                };
+                EventBus.$emit('articulos', params);
+            }
+        });
 
         axios.get('/tiposControl/implementos').then(response => {
             this.implementos = response.data;
+            if (this.merchandising == '') {
+                const params = {
+                    genero: response.data[0].tipo,
+                    categoria: 'implementos'
+                };
+                EventBus.$emit('articulos', params);
+            }
+        });
+    },
+    updated() {
+        EventBus.$on('actualizarMenuInventario', data => {
+            this.activar = data.activar;
+            if (this.activar == true) {
+                if (data.categoria == 'plantas') {
+                    axios.get('/tiposControl/plantas').then(response => {
+                        this.generos = response.data;
+                    });
+                } else if (data.categoria == 'merchandising') {
+                    axios.get('/tiposControl/merchandising').then(response => {
+                        this.merchandising = response.data;
+                    });
+                } else if (data.categoria == 'implementos') {
+                    axios.get('/tiposControl/implementos').then(response => {
+                        this.implementos = response.data;
+                    });
+                }
+            }
         })
     },
     methods: {
@@ -316,8 +361,17 @@ export default {
             formData.append('descripcion', this.tipo.descripcion);
             formData.append('categoria', this.producto.categoria);
             axios.post('/tiposControl', formData).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.tipos.push(response.data);
+                axios.get(`/tiposControl/${this.producto.categoria}`).then(response => {
+                    if (this.producto.categoria == 'plantas') {
+                        this.generos = response.data;
+                    } else if (this.producto.categoria == 'merchandising') {
+                        this.merchandising = response.data;
+                    } else if (this.producto.categoria == 'implementos') {
+                        this.implementos = response.data;
+                    }
+                })
             })
         },
         registrarProducto() {
@@ -339,8 +393,18 @@ export default {
             formData.append('descripcion', this.producto.descripcion);
 
             axios.post('/productosControl', formData).then(response => {
-                console.log(response.data);
-                // EventBus.$emit('activarUpdate', true);
+                // console.log(response.data);
+                EventBus.$emit('activarUpdate', true);
+                if (!(isNullOrUndefined(response.data.imagen_principal))) {
+                    formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
+                    formData.append('imagen2nombreAntiguo', response.data.imagen2);
+                    formData.append('imagen3nombreAntiguo', response.data.imagen3);
+                    // console.log(formData);
+                    axios.post(`/productosControl/${response.data.id}/${response.data.categoria}`, formData).then(response => {
+                        // console.log(response.data);
+                    })
+                }
+
             })
         },
         generarTipos() {
@@ -348,21 +412,21 @@ export default {
                 this.tipos = response.data;
             })
         },
-        mostrarPlantas(genero){
+        mostrarPlantas(genero) {
             const params = {
                 genero: genero,
                 categoria: 'plantas'
             };
             EventBus.$emit('articulos', params);
         },
-        mostrarMerchandising(tipo){
+        mostrarMerchandising(tipo) {
             const params = {
                 genero: tipo,
                 categoria: 'merchandising'
             };
             EventBus.$emit('articulos', params);
         },
-        mostrarImplementos(tipo){
+        mostrarImplementos(tipo) {
             const params = {
                 genero: tipo,
                 categoria: 'implementos'
@@ -416,10 +480,6 @@ export default {
     background-color: #9DCE5B;
     color: white;
     cursor: pointer;
-}
-
-.menu-producto-tips-DS {
-    border-right: #434343 3px solid;
 }
 
 label {

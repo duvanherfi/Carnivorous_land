@@ -31,7 +31,7 @@
             TIPS DE CULTIVOS
         </a>
     </li>
-    <li class="nav-item opcion-menu-DS bordes-DS">
+    <li class="nav-item opcion-menu-DS">
         <a class="nav-link waves-effect waves-light" v-bind:href="contactanosLink">
             CONTÁCTANOS
         </a>
@@ -41,7 +41,6 @@
             PEDIDOS
         </a>
     </li>
-
 </ul>
 </template>
 
@@ -65,6 +64,8 @@ export default {
     },
     created: function(){
         this.comprobarAdmin();
+        console.log(this.isAdmin);
+        
     },
     methods: {
         comprobarAdmin: function ()   {

@@ -5,11 +5,11 @@
     <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
         <!--Card image-->
         <div class="img-sombra-producto-DS">
-            <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt />
+            <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" />
         </div>
         <div class="btn-gestion">
             <button @click="modalModificar(item)" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_articulo">Modificar</button>
-            <button class="btn botones ml-1 d-inline">Eliminar</button>
+            <button @click="eliminarProducto(item.id_producto)" class="btn botones ml-1 d-inline">Eliminar</button>
         </div>
         <!-- /Imagen -->
 
@@ -311,6 +311,11 @@ export default {
             }
             
             axios.put(`/productosControl/${this.productos[index].opcion_catalogo}/${id_producto}`).then(response => {})
+        },
+        eliminarProducto(id) {
+            axios.delete(`/productosControl/${id}`).then(response => {
+                this.actualizarProductos();
+            })
         }
     },
     props: ['gestion']
