@@ -2821,6 +2821,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2834,6 +2839,7 @@ __webpack_require__.r(__webpack_exports__);
       tips_cultivoLink: route('productos', 'tips_cultivo'),
       contactanosLink: route('contactanos'),
       pedidosLink: route('pedidos'),
+      actualizarLink: route('actualizar_datos'),
       isAdmin: null
     };
   },
@@ -43046,20 +43052,31 @@ var render = function() {
             staticClass: "nav-link waves-effect waves-light",
             attrs: { href: _vm.inicioLink }
           },
-          [_vm._v("\r\n            INICIO\r\n        ")]
+          [_vm._v("\n            INICIO\n        ")]
         )
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
-        _c(
-          "a",
-          {
-            staticClass: "nav-link waves-effect waves-light",
-            attrs: { href: _vm.quienes_somosLink }
-          },
-          [_vm._v("\r\n            ¿QUIÉNES SOMOS?\r\n        ")]
-        )
-      ]),
+      _vm.isAdmin === "cliente" || _vm.isAdmin === null
+        ? _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link waves-effect waves-light",
+                attrs: { href: _vm.quienes_somosLink }
+              },
+              [_vm._v("\n            ¿QUIÉNES SOMOS?\n        ")]
+            )
+          ])
+        : _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link waves-effect waves-light",
+                attrs: { href: _vm.actualizarLink }
+              },
+              [_vm._v("\n            ACTUALIZAR DATOS\n        ")]
+            )
+          ]),
       _vm._v(" "),
       _vm.isAdmin === "cliente" || _vm.isAdmin === null
         ? _c(
@@ -43077,7 +43094,7 @@ var render = function() {
                     "aria-expanded": "false"
                   }
                 },
-                [_vm._v("\r\n            PRODUCTOS\r\n        ")]
+                [_vm._v("\n            PRODUCTOS\n        ")]
               ),
               _vm._v(" "),
               _c(
@@ -43125,7 +43142,7 @@ var render = function() {
                 staticClass: "nav-link waves-effect waves-light",
                 attrs: { href: _vm.inventarioLink }
               },
-              [_vm._v("\r\n            INVENTARIO\r\n        ")]
+              [_vm._v("\n            INVENTARIO\n        ")]
             )
           ]),
       _vm._v(" "),
@@ -43136,7 +43153,7 @@ var render = function() {
             staticClass: "nav-link waves-effect waves-light",
             attrs: { href: _vm.tips_cultivoLink }
           },
-          [_vm._v("\r\n            TIPS DE CULTIVOS\r\n        ")]
+          [_vm._v("\n            TIPS DE CULTIVOS\n        ")]
         )
       ]),
       _vm._v(" "),
@@ -43153,7 +43170,7 @@ var render = function() {
               staticClass: "nav-link waves-effect waves-light",
               attrs: { href: _vm.contactanosLink }
             },
-            [_vm._v("\r\n            CONTÁCTANOS\r\n        ")]
+            [_vm._v("\n            CONTÁCTANOS\n        ")]
           )
         ]
       ),
@@ -43166,7 +43183,7 @@ var render = function() {
                 staticClass: "nav-link waves-effect waves-light",
                 attrs: { href: _vm.pedidosLink }
               },
-              [_vm._v("\r\n            PEDIDOS\r\n        ")]
+              [_vm._v("\n            PEDIDOS\n        ")]
             )
           ])
         : _vm._e()
@@ -58585,8 +58602,8 @@ $hiddenDiv.css('width',$textarea.is(':visible')?$textarea.width():$(window).widt
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ENVY 14-J008LA\Desktop\carnivorous_land\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ENVY 14-J008LA\Desktop\carnivorous_land\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\D\Desktop\carnivorous_land\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\D\Desktop\carnivorous_land\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
