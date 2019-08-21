@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Genero;
 use App\Tipo_implemento;
 use App\Tipo_merchandising;
@@ -18,11 +19,11 @@ class TiposControlador extends Controller
     {
         if ($request->ajax()) {
             if ($categoria == 'plantas') {
-                return Genero::select('genero')->get();
+                return Genero::select('genero')->where('habilitado', 'true')->get();
             } else if ($categoria == 'merchandising') {
-                return Tipo_merchandising::select('tipo')->get();
+                return Tipo_merchandising::select('tipo')->where('habilitado', 'true')->get();
             } else if ($categoria == 'implementos') {
-                return Tipo_implemento::select('tipo')->get();
+                return Tipo_implemento::select('tipo')->where('habilitado', 'true')->get();
             }
         } else {
             return view('inicio');
@@ -31,7 +32,7 @@ class TiposControlador extends Controller
 
     public function tipoEspecifico($tipo, $categoria)
     {
-        
+
         if ($categoria == 'plantas') {
             return Genero::where('genero', $tipo)->first();
         } else if ($categoria == 'merchandising') {
@@ -168,8 +169,41 @@ class TiposControlador extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $categoria)
     {
-        //
+        if ($categoria == 'plantas') {
+            $genero = DB::table('productos')
+                    ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+                    ->join('generos', 'generos.id', '=', 'plantas.id_genero')
+                    ->where('generos.id', $id)
+                    ->where('productos.habilitado', 'true')
+                    ->update([
+                        'productos.habilitado' => 'false',
+                        'generos.habilitado' => 'false'
+                    ]);
+            return $genero;
+        }else if ($categoria == 'merchandising'){
+            $merchandising = DB::table('productos')
+                    ->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
+                    ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')
+                    ->where('tipo_merchandisings.id', $id)
+                    ->where('productos.habilitado', 'true')
+                    ->update([
+                        'productos.habilitado' => 'false',
+                        'tipo_merchandisings.habilitado' => 'false'
+                    ]);
+            return $merchandising;
+        }else if ($categoria == 'implementos'){
+            $implementos = DB::table('productos')
+                    ->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
+                    ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')
+                    ->where('tipo_implementos.id', $id)
+                    ->where('productos.habilitado', 'true')
+                    ->update([
+                        'productos.habilitado' => 'false',
+                        'tipo_implementos.habilitado' => 'false'
+                    ]);
+            $implementos;
+        }
     }
 }

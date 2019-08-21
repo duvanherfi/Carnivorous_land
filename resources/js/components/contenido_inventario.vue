@@ -1,36 +1,65 @@
 <template lang="es">
 <div class="contenido-productos-DS">
-    <div class="titulo_intentario_content d-flex align-items-center justify-content-center">
-        <h1 id="titulo_inventario" class="text-uppercase">{{ nombre }}</h1>
-        <img v-if="imagen != ''" class="imagen-subtitulo-DS" id="imagen_inventario" v-bind:src="'/img/generos/' + imagen" alt="Fondo titulo inventario">
+    <div v-if="id == ''" class="text-center spinner">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
-    <pre class="mt-4" id="descripcion_inventario">{{ descripcion }}</pre>
-    <div class="d-flex justify-content-between" id="opciones_inventario">
-        <div class="d-flex">
-            <label for="ordenar" class="d-inline-flex col-form-label pr-0">Ordenar:</label>
+    <div v-else>
+        <div class="titulo_intentario_content d-flex align-items-center justify-content-center">
+            <h1 id="titulo_inventario" class="text-uppercase">{{ nombre }}</h1>
+            <img v-if="imagen != ''" class="imagen-subtitulo-DS" id="imagen_inventario" v-bind:src="'/img/generos/' + imagen" alt="Fondo titulo inventario">
+        </div>
+        <pre class="mt-4" id="descripcion_inventario">{{ descripcion }}</pre>
+        <div class="d-flex justify-content-between" id="opciones_inventario">
+            <div class="d-flex">
+                <label for="ordenar" class="d-inline-flex col-form-label pr-0">Ordenar:</label>
 
-            <div class="col-md-10">
-                <select class="custom-select form-control" id="ordenar" name="ordenar" required autocomplete="ordenar">
-                    <option selected>Ninguno</option>
-                    <option value="alfabeticamente">Alfabéticamente (Nombre)</option>
-                    <option value="ascendente">Ascendente (Precio)</option>
-                    <option value="descendente">Descendente (Precio)</option>
-                    <option value="destacados">Más destacados</option>
-                </select>
+                <div class="col-md-10">
+                    <select class="custom-select form-control" id="ordenar" name="ordenar" required autocomplete="ordenar">
+                        <option selected>Ninguno</option>
+                        <option value="alfabeticamente">Alfabéticamente (Nombre)</option>
+                        <option value="ascendente">Ascendente (Precio)</option>
+                        <option value="descendente">Descendente (Precio)</option>
+                        <option value="destacados">Más destacados</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div v-if="categoria == 'plantas'">
-            <button @click="modalModificarTipo" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Género</button>
-            <button class="btn botones d-inline">Eliminar Género</button>
-        </div>
-        <div v-else>
-            <button @click="modalModificarTipo" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Tipo</button>
-            <button class="btn botones d-inline">Eliminar Tipo</button>
+            <div v-if="categoria == 'plantas'">
+                <button @click="modalModificarTipo" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Género</button>
+                <button class="btn botones d-inline" data-toggle="modal" data-target="#verificar_eliminar">Eliminar Género</button>
+            </div>
+            <div v-else>
+                <button @click="modalModificarTipo" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_genero">Modificar Tipo</button>
+                <button class="btn botones d-inline" data-toggle="modal" data-target="#verificar_eliminar">Eliminar Tipo</button>
+            </div>
         </div>
     </div>
 
     <div>
         <productos :gestion="gestion"></productos>
+    </div>
+
+    <!-- Verificar eliminar -->
+    <div class="modal fade" id="verificar_eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">¡ADVERTENCIA!</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Señor(a) usuario, recuerde que al eliminar un género o tipo también borrará los productos del mismo.</p>
+                    <p>¿Esta seguro de desea eliminar el género o tipo?</p>
+                </div>
+                <div class="modal-footer">
+                    <button @click="eliminarGenero" type="button" class="btn color-verde" data-dismiss="modal">Si</button>
+                    <button type="button" class="btn botones" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Modal modificar genero -->
@@ -101,11 +130,8 @@ export default {
         }
     },
     created() {
-        $('#imagen_inventario').css('visibility', 'hidden');
-        $('#opciones_inventario').css('visibility', 'hidden');
         EventBus.$on('articulos', data => {
-            $('#opciones_inventario').css('visibility', 'visible');
-            $('#imagen_inventario').css('visibility', 'visible');
+            this.id = '';
             this.categoria = data.categoria;
             axios.get(`/tiposControl/${data.genero}/${data.categoria}`).then(response => {
                 this.imagen = response.data.imagen;
@@ -165,6 +191,53 @@ export default {
                 }
                 EventBus.$emit('actualizarMenuInventario', params);
             })
+        },
+        eliminarGenero() {
+            axios.delete(`/tiposControl/${this.id}/${this.categoria}`).then(response => {
+                console.log(response.data);
+                var merchandising = false;
+                var implementos = false;
+                axios.get('/tiposControl/plantas').then(response => {
+                    if (!(isNullOrUndefined(response.data))) {
+                        const params = {
+                            genero: response.data[0].genero,
+                            categoria: 'plantas'
+                        };
+                        EventBus.$emit('articulos', params);
+                    } else {
+                        merchandising = true;
+                    }
+                });
+                if (merchandising == true) {
+                    axios.get('/tiposControl/merchandising').then(response => {
+                        if (!(isNullOrUndefined(response.data))) {
+                            const params = {
+                                genero: response.data[0].genero,
+                                categoria: 'merchandising'
+                            };
+                            EventBus.$emit('articulos', params);
+                        } else {
+                            implementos = true;
+                        }
+                    });
+                }
+                if (implementos == true) {
+                    axios.get('/tiposControl/implementos').then(response => {
+                        if (!(isNullOrUndefined(response.data))) {
+                            const params = {
+                                genero: response.data[0].genero,
+                                categoria: 'implementos'
+                            };
+                            EventBus.$emit('articulos', params);
+                        }
+                    });
+                }
+            })
+            const param = {
+                activar: true,
+                categoria: this.categoria
+            }
+            EventBus.$emit('actualizarMenuInventario', param);
         }
     },
     props: ['gestion']
@@ -172,6 +245,10 @@ export default {
 </script>
 
 <style scoped>
+.spinner {
+    margin-top: 150px;
+}
+
 .imagen-subtitulo-DS {
     width: 100%;
     height: 150px;

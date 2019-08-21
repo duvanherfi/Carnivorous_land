@@ -75,6 +75,7 @@ Route::get('/tiposControl/{tipo}', 'TiposControlador@index')->name('tipos.index'
 Route::post('/tiposControl', 'TiposControlador@store')->name('tipos.store');
 Route::get('/tiposControl/{tipo}/{categoria}', 'TiposControlador@tipoEspecifico')->name('tipos.tipoEspecifico');
 Route::post('/tiposControl/{id}', 'TiposControlador@update')->name('tipos.update'); //PUT
+Route::delete('/tiposControl/{id}/{categoria}', 'TiposControlador@destroy')->name('tipos.destroy');
 
 // Productos
 Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');

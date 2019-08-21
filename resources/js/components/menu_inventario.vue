@@ -288,7 +288,7 @@ export default {
 
         axios.get('/tiposControl/implementos').then(response => {
             this.implementos = response.data;
-            if (this.merchandising == '') {
+            if (this.merchandising == '' && this.generos == '') {
                 const params = {
                     genero: response.data[0].tipo,
                     categoria: 'implementos'
@@ -297,7 +297,7 @@ export default {
             }
         });
     },
-    updated() {
+    beforeUpdate() {
         EventBus.$on('actualizarMenuInventario', data => {
             this.activar = data.activar;
             if (this.activar == true) {
@@ -316,6 +316,9 @@ export default {
                 }
             }
         })
+    },
+    updated(){
+        this.activar = false;
     },
     methods: {
         obtenerImagenPrincipal(e) {
@@ -393,18 +396,18 @@ export default {
             formData.append('descripcion', this.producto.descripcion);
 
             axios.post('/productosControl', formData).then(response => {
-                // console.log(response.data);
                 EventBus.$emit('activarUpdate', true);
+                console.log(response.data);
                 if (!(isNullOrUndefined(response.data.imagen_principal))) {
                     formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
                     formData.append('imagen2nombreAntiguo', response.data.imagen2);
                     formData.append('imagen3nombreAntiguo', response.data.imagen3);
-                    // console.log(formData);
+                    console.log(formData);
                     axios.post(`/productosControl/${response.data.id}/${response.data.categoria}`, formData).then(response => {
-                        // console.log(response.data);
+                        console.log(response.data);
+                        EventBus.$emit('activarUpdate', true);
                     })
                 }
-
             })
         },
         generarTipos() {

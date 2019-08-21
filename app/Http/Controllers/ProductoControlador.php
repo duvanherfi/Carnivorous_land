@@ -24,16 +24,17 @@ class ProductoControlador extends Controller
     {
         if ($request->ajax()) {
             if ($categoria == 'plantas') {
+                
                 $productos = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
-                    ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('genero', $tipo)->where('habilitado', 'true')
+                    ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('genero', $tipo)->where('productos.habilitado', 'true')
                     ->select('*', 'productos.id as id_producto')->get();
             } else if ($categoria == 'merchandising') {
                 $productos = DB::table('productos')->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
-                    ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('tipo', $tipo)->where('habilitado', 'true')
+                    ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('tipo', $tipo)->where('productos.habilitado', 'true')
                     ->select('*', 'productos.id as id_producto')->get();
             } else if ($categoria == 'implementos') {
                 $productos = DB::table('productos')->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
-                    ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)->where('habilitado', 'true')
+                    ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)->where('productos.habilitado', 'true')
                     ->select('*', 'productos.id as id_producto')->get();
             }
             return $productos;
@@ -64,7 +65,7 @@ class ProductoControlador extends Controller
             $producto = DB::table('productos')
                 ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
                 ->join('generos', 'plantas.id_genero', '=', 'generos.id')
-                ->where('habilitado', 'false')
+                ->where('productos.habilitado', 'false')
                 ->where('nombre', $request->nombre)
                 ->where('tamaño', $request->tamaño)
                 ->where('genero', $request->genero)
@@ -73,7 +74,7 @@ class ProductoControlador extends Controller
             $producto = DB::table('productos')
                 ->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
                 ->join('tipo_merchandisings', 'merchandisings.id_tipo', '=', 'tipo_merchandisings.id')
-                ->where('habilitado', 'false')
+                ->where('productos.habilitado', 'false')
                 ->where('nombre', $request->nombre)
                 ->where('tipo', $request->genero)
                 ->select('*', 'productos.id as id_producto');
@@ -81,17 +82,17 @@ class ProductoControlador extends Controller
             $producto = DB::table('productos')
                 ->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
                 ->join('tipo_implementos', 'implemento_cultivos.id_tipo', '=', 'tipo_implementos.id')
-                ->where('habilitado', 'false')
+                ->where('productos.habilitado', 'false')
                 ->where('nombre', $request->nombre)
                 ->where('tipo', $request->genero)
                 ->select('*', 'productos.id as id_producto');
         }
         $productos = $producto->get();
-
+        
         if (count($productos, 1) == 1) {
             $producto = $producto->update([
                 'opcion_catalogo' => $request->opcion_catalogo,
-                'habilitado' => 'true'
+                'productos.habilitado' => 'true'
             ]);
             return response()->json([
                 'imagen_principal' => $productos[0]->imagen_principal,
@@ -187,7 +188,7 @@ class ProductoControlador extends Controller
     public static function update(Request $request, $id, $categoria)
     {
         $producto = Producto::find($id);
-
+        
         if ($request->hasFile('imagen_principal')) {
             $file = $request->file('imagen_principal');
             $imagen_principal = time() . $file->getClientOriginalName();
