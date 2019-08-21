@@ -5,9 +5,14 @@
             INICIO
         </a>
     </li>
-    <li class="nav-item opcion-menu-DS bordes-DS">
+    <li class="nav-item opcion-menu-DS bordes-DS" v-if="isAdmin==='cliente' || isAdmin===null">
         <a class="nav-link waves-effect waves-light" v-bind:href="quienes_somosLink">
             ¿QUIÉNES SOMOS?
+        </a>
+    </li>
+    <li class="nav-item opcion-menu-DS bordes-DS" v-else>
+        <a class="nav-link waves-effect waves-light" v-bind:href="actualizarLink">
+            ACTUALIZAR DATOS
         </a>
     </li>
     <li class="nav-item dropdown opcion-menu-DS bordes-DS" v-if="isAdmin==='cliente' || isAdmin===null">
@@ -59,6 +64,7 @@ export default {
             tips_cultivoLink: route('productos', 'tips_cultivo'),
             contactanosLink: route('contactanos'),
             pedidosLink: route('pedidos'),
+            actualizarLink:route('actualizar_datos'),
             isAdmin: null
         }
     },
@@ -81,7 +87,7 @@ export default {
                 .catch(err => {
                     console.error(err);
                 })
-                
+
         }
     },
     mounted() {
