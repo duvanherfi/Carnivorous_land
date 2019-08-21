@@ -70,7 +70,6 @@ export default {
     },
     created: function () {
         this.comprobarAdmin();
-
     },
     methods: {
         comprobarAdmin: function () {

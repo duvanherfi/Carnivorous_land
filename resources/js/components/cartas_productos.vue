@@ -1,6 +1,6 @@
 <template lang="es">
 <!--Cartas-->
-<div>
+<div id="todos_los_productos">
     <!--Card-->
     <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
         <!--Card image-->
@@ -205,10 +205,12 @@ export default {
     },
     created() {
         EventBus.$on('articulos', data => {
+            $('#todos_los_productos').css('visibility', 'hidden');
             this.producto.categoria = data.categoria;
             this.producto.genero = data.genero;
             axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
                 this.productos = response.data;
+                $('#todos_los_productos').css('visibility', 'visible');
             })
         })
     },

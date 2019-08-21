@@ -1950,10 +1950,12 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('articulos', function (data) {
+      $('#todos_los_productos').css('visibility', 'hidden');
       _this.producto.categoria = data.categoria;
       _this.producto.genero = data.genero;
       axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria)).then(function (response) {
         _this.productos = response.data;
+        $('#todos_los_productos').css('visibility', 'visible');
       });
     });
   },
@@ -2172,6 +2174,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2194,11 +2225,8 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    $('#imagen_inventario').css('visibility', 'hidden');
-    $('#opciones_inventario').css('visibility', 'hidden');
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('articulos', function (data) {
-      $('#opciones_inventario').css('visibility', 'visible');
-      $('#imagen_inventario').css('visibility', 'visible');
+      _this.id = '';
       _this.categoria = data.categoria;
       axios.get("/tiposControl/".concat(data.genero, "/").concat(data.categoria)).then(function (response) {
         _this.imagen = response.data.imagen;
@@ -2267,6 +2295,55 @@ __webpack_require__.r(__webpack_exports__);
         };
         _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('actualizarMenuInventario', params);
       });
+    },
+    eliminarGenero: function eliminarGenero() {
+      axios["delete"]("/tiposControl/".concat(this.id, "/").concat(this.categoria)).then(function (response) {
+        console.log(response.data);
+        var merchandising = false;
+        var implementos = false;
+        axios.get('/tiposControl/plantas').then(function (response) {
+          if (!Object(util__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(response.data)) {
+            var params = {
+              genero: response.data[0].genero,
+              categoria: 'plantas'
+            };
+            _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos', params);
+          } else {
+            merchandising = true;
+          }
+        });
+
+        if (merchandising == true) {
+          axios.get('/tiposControl/merchandising').then(function (response) {
+            if (!Object(util__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(response.data)) {
+              var params = {
+                genero: response.data[0].genero,
+                categoria: 'merchandising'
+              };
+              _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos', params);
+            } else {
+              implementos = true;
+            }
+          });
+        }
+
+        if (implementos == true) {
+          axios.get('/tiposControl/implementos').then(function (response) {
+            if (!Object(util__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(response.data)) {
+              var params = {
+                genero: response.data[0].genero,
+                categoria: 'implementos'
+              };
+              _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos', params);
+            }
+          });
+        }
+      });
+      var param = {
+        activar: true,
+        categoria: this.categoria
+      };
+      _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('actualizarMenuInventario', param);
     }
   },
   props: ['gestion']
@@ -2575,7 +2652,7 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/tiposControl/implementos').then(function (response) {
       _this.implementos = response.data;
 
-      if (_this.merchandising == '') {
+      if (_this.merchandising == '' && _this.generos == '') {
         var params = {
           genero: response.data[0].tipo,
           categoria: 'implementos'
@@ -2584,7 +2661,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
   },
-  updated: function updated() {
+  beforeUpdate: function beforeUpdate() {
     var _this2 = this;
 
     _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$on('actualizarMenuInventario', function (data) {
@@ -2606,6 +2683,9 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     });
+  },
+  updated: function updated() {
+    this.activar = false;
   },
   methods: {
     obtenerImagenPrincipal: function obtenerImagenPrincipal(e) {
@@ -2695,15 +2775,17 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('opcion_catalogo', this.producto.opcion_catalogo);
       formData.append('descripcion', this.producto.descripcion);
       axios.post('/productosControl', formData).then(function (response) {
-        // console.log(response.data);
         _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true);
+        console.log(response.data);
 
         if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen_principal)) {
           formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
           formData.append('imagen2nombreAntiguo', response.data.imagen2);
-          formData.append('imagen3nombreAntiguo', response.data.imagen3); // console.log(formData);
-
-          axios.post("/productosControl/".concat(response.data.id, "/").concat(response.data.categoria), formData).then(function (response) {// console.log(response.data);
+          formData.append('imagen3nombreAntiguo', response.data.imagen3);
+          console.log(formData);
+          axios.post("/productosControl/".concat(response.data.id, "/").concat(response.data.categoria), formData).then(function (response) {
+            console.log(response.data);
+            _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true);
           });
         }
       });
@@ -7620,7 +7702,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.imagen-subtitulo-DS[data-v-5be4af42] {\r\n    width: 100%;\r\n    height: 150px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.titulo_intentario_content[data-v-5be4af42] {\r\n    width: 100%;\r\n    height: 150px;\n}\n#titulo_inventario[data-v-5be4af42] {\r\n    position: absolute;\r\n    color: white;\n}\n.contenido-productos-DS[data-v-5be4af42] {\r\n    padding-top: 1.5rem;\r\n    padding-left: 2rem;\r\n    padding-bottom: 1.5rem;\r\n    max-width: 74%;\r\n    width: 74%;\r\n    border-left: #434343 3px solid;\n}\nh1[data-v-5be4af42] {\r\n    font-size: 60px;\r\n    font-weight: bold;\r\n    font-family: 'Source Sans Pro', serif;\r\n    text-shadow: 0 0 30px #9DCE5B;\n}\nlabel[data-v-5be4af42] {\r\n    font-family: 'Montserrat', sans-serif;\n}\r\n", ""]);
+exports.push([module.i, "\n.spinner[data-v-5be4af42] {\r\n    margin-top: 150px;\n}\n.imagen-subtitulo-DS[data-v-5be4af42] {\r\n    width: 100%;\r\n    height: 150px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.titulo_intentario_content[data-v-5be4af42] {\r\n    width: 100%;\r\n    height: 150px;\n}\n#titulo_inventario[data-v-5be4af42] {\r\n    position: absolute;\r\n    color: white;\n}\n.contenido-productos-DS[data-v-5be4af42] {\r\n    padding-top: 1.5rem;\r\n    padding-left: 2rem;\r\n    padding-bottom: 1.5rem;\r\n    max-width: 74%;\r\n    width: 74%;\r\n    border-left: #434343 3px solid;\n}\nh1[data-v-5be4af42] {\r\n    font-size: 60px;\r\n    font-weight: bold;\r\n    font-family: 'Source Sans Pro', serif;\r\n    text-shadow: 0 0 30px #9DCE5B;\n}\nlabel[data-v-5be4af42] {\r\n    font-family: 'Montserrat', sans-serif;\n}\r\n", ""]);
 
 // exports
 
@@ -40205,6 +40287,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { attrs: { id: "todos_los_productos" } },
     [
       _vm._l(_vm.productos, function(item, index) {
         return _c(
@@ -40965,88 +41048,162 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "contenido-productos-DS" }, [
+    _vm.id == ""
+      ? _c("div", { staticClass: "text-center spinner" }, [_vm._m(0)])
+      : _c("div", [
+          _c(
+            "div",
+            {
+              staticClass:
+                "titulo_intentario_content d-flex align-items-center justify-content-center"
+            },
+            [
+              _c(
+                "h1",
+                {
+                  staticClass: "text-uppercase",
+                  attrs: { id: "titulo_inventario" }
+                },
+                [_vm._v(_vm._s(_vm.nombre))]
+              ),
+              _vm._v(" "),
+              _vm.imagen != ""
+                ? _c("img", {
+                    staticClass: "imagen-subtitulo-DS",
+                    attrs: {
+                      id: "imagen_inventario",
+                      src: "/img/generos/" + _vm.imagen,
+                      alt: "Fondo titulo inventario"
+                    }
+                  })
+                : _vm._e()
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "pre",
+            { staticClass: "mt-4", attrs: { id: "descripcion_inventario" } },
+            [_vm._v(_vm._s(_vm.descripcion))]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "d-flex justify-content-between",
+              attrs: { id: "opciones_inventario" }
+            },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm.categoria == "plantas"
+                ? _c("div", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn color-verde d-inline",
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#modal_modificar_genero"
+                        },
+                        on: { click: _vm.modalModificarTipo }
+                      },
+                      [_vm._v("Modificar Género")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn botones d-inline",
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#verificar_eliminar"
+                        }
+                      },
+                      [_vm._v("Eliminar Género")]
+                    )
+                  ])
+                : _c("div", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn color-verde d-inline",
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#modal_modificar_genero"
+                        },
+                        on: { click: _vm.modalModificarTipo }
+                      },
+                      [_vm._v("Modificar Tipo")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn botones d-inline",
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#verificar_eliminar"
+                        }
+                      },
+                      [_vm._v("Eliminar Tipo")]
+                    )
+                  ])
+            ]
+          )
+        ]),
+    _vm._v(" "),
+    _c("div", [_c("productos", { attrs: { gestion: _vm.gestion } })], 1),
+    _vm._v(" "),
     _c(
       "div",
       {
-        staticClass:
-          "titulo_intentario_content d-flex align-items-center justify-content-center"
+        staticClass: "modal fade",
+        attrs: {
+          id: "verificar_eliminar",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
       },
       [
         _c(
-          "h1",
-          { staticClass: "text-uppercase", attrs: { id: "titulo_inventario" } },
-          [_vm._v(_vm._s(_vm.nombre))]
-        ),
-        _vm._v(" "),
-        _vm.imagen != ""
-          ? _c("img", {
-              staticClass: "imagen-subtitulo-DS",
-              attrs: {
-                id: "imagen_inventario",
-                src: "/img/generos/" + _vm.imagen,
-                alt: "Fondo titulo inventario"
-              }
-            })
-          : _vm._e()
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "pre",
-      { staticClass: "mt-4", attrs: { id: "descripcion_inventario" } },
-      [_vm._v(_vm._s(_vm.descripcion))]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "d-flex justify-content-between",
-        attrs: { id: "opciones_inventario" }
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm.categoria == "plantas"
-          ? _c("div", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn color-verde d-inline",
-                  attrs: {
-                    "data-toggle": "modal",
-                    "data-target": "#modal_modificar_genero"
-                  },
-                  on: { click: _vm.modalModificarTipo }
-                },
-                [_vm._v("Modificar Género")]
-              ),
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
               _vm._v(" "),
-              _c("button", { staticClass: "btn botones d-inline" }, [
-                _vm._v("Eliminar Género")
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn color-verde",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.eliminarGenero }
+                  },
+                  [_vm._v("Si")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn botones",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("No")]
+                )
               ])
             ])
-          : _c("div", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn color-verde d-inline",
-                  attrs: {
-                    "data-toggle": "modal",
-                    "data-target": "#modal_modificar_genero"
-                  },
-                  on: { click: _vm.modalModificarTipo }
-                },
-                [_vm._v("Modificar Tipo")]
-              ),
-              _vm._v(" "),
-              _c("button", { staticClass: "btn botones d-inline" }, [
-                _vm._v("Eliminar Tipo")
-              ])
-            ])
+          ]
+        )
       ]
     ),
-    _vm._v(" "),
-    _c("div", [_c("productos", { attrs: { gestion: _vm.gestion } })], 1),
     _vm._v(" "),
     _c(
       "div",
@@ -41069,7 +41226,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -41240,6 +41397,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "spinner-border", attrs: { role: "status" } },
+      [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "d-flex" }, [
       _c(
         "label",
@@ -41283,6 +41450,43 @@ var staticRenderFns = [
           ]
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h2", { staticClass: "row subtitulo-DS pt-3 w-100 m-0" }, [
+        _vm._v("¡ADVERTENCIA!")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("p", [
+        _vm._v(
+          "Señor(a) usuario, recuerde que al eliminar un género o tipo también borrará los productos del mismo."
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("¿Esta seguro de desea eliminar el género o tipo?")])
     ])
   },
   function() {
