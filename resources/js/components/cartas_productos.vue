@@ -9,7 +9,7 @@
         </div>
         <div class="btn-gestion">
             <button @click="modalModificar(item)" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_articulo">Modificar</button>
-            <button @click="eliminarProducto(item.id_producto)" class="btn botones ml-1 d-inline">Eliminar</button>
+            <button @click="modaleliminarProducto(item.id_producto)" class="btn botones ml-1 d-inline" data-toggle="modal" data-target="#verificar_eliminar_producto">Eliminar</button>
         </div>
         <!-- /Imagen -->
 
@@ -76,6 +76,27 @@
         <!-- /Contenido -->
     </div>
     <!--/.Card-->
+
+    <!-- Verificar eliminar -->
+    <div class="modal fade" id="verificar_eliminar_producto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">¡ADVERTENCIA!</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Esta seguro de desea eliminar el artículo?</p>
+                </div>
+                <div class="modal-footer">
+                    <button @click="eliminarProducto(producto.id)" type="button" class="btn color-verde" data-dismiss="modal">Si</button>
+                    <button type="button" class="btn botones" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal modificar articulo -->
     <div class="modal fade" id="modal_modificar_articulo" tabindex="-1" role="dialog">
@@ -221,6 +242,25 @@ export default {
                 this.actualizarProductos();
             }
         })
+
+        EventBus.$on('ordenar', data => {
+            if (data == 'ninguno') {
+                this.actualizarProductos();
+            } else if (data == 'alfabeticamente') {
+                this.productos.sort(function comparar(a, b) {
+                    if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+                });
+            } else if (data == 'ascendente') {
+                this.productos.sort(function comparar(a, b) {
+                    return b.valor - a.valor;
+                });
+            } else if (data == 'descendente') {
+                this.productos.sort(function comparar(a, b) {
+                    return a.valor - b.valor;
+                });
+            }
+        })
+
     },
     updated() {
         this.activar = false;
@@ -306,13 +346,16 @@ export default {
             })
         },
         guardarOpcionCatalogo(id_producto, opcion_catalogo, index) {
-            if(opcion_catalogo == 'true'){
+            if (opcion_catalogo == 'true') {
                 this.productos[index].opcion_catalogo = 'false';
-            }else{
+            } else {
                 this.productos[index].opcion_catalogo = 'true';
             }
-            
+
             axios.put(`/productosControl/${this.productos[index].opcion_catalogo}/${id_producto}`).then(response => {})
+        },
+        modaleliminarProducto(id) {
+            this.producto.id = id;
         },
         eliminarProducto(id) {
             axios.delete(`/productosControl/${id}`).then(response => {

@@ -16,8 +16,8 @@
                 <label for="ordenar" class="d-inline-flex col-form-label pr-0">Ordenar:</label>
 
                 <div class="col-md-10">
-                    <select class="custom-select form-control" id="ordenar" name="ordenar" required autocomplete="ordenar">
-                        <option selected>Ninguno</option>
+                    <select @change="ordenar" v-model="tipoOrden" class="custom-select form-control" id="ordenar" name="ordenar" required autocomplete="ordenar">
+                        <option value="ninguno">Ninguno</option>
                         <option value="alfabeticamente">Alfabéticamente (Nombre)</option>
                         <option value="ascendente">Ascendente (Precio)</option>
                         <option value="descendente">Descendente (Precio)</option>
@@ -126,7 +126,8 @@ export default {
                 imagennombreAntiguo: '',
                 nombre: '',
                 descripcion: ''
-            }
+            },
+            tipoOrden: 'ninguno'
         }
     },
     created() {
@@ -194,7 +195,7 @@ export default {
         },
         eliminarGenero() {
             axios.delete(`/tiposControl/${this.id}/${this.categoria}`).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 var merchandising = false;
                 var implementos = false;
                 axios.get('/tiposControl/plantas').then(response => {
@@ -238,6 +239,9 @@ export default {
                 categoria: this.categoria
             }
             EventBus.$emit('actualizarMenuInventario', param);
+        },
+        ordenar() {
+            EventBus.$emit('ordenar', this.tipoOrden);
         }
     },
     props: ['gestion']
