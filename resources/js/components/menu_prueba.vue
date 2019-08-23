@@ -75,7 +75,10 @@ export default {
         comprobarAdmin: function () {
             axios.get('comprobarSiAdmin')
                 .then(response => {
-                    this.isAdmin = response.data;
+                    if(response.data==='administrador' || response.data==='cliente'){
+                        this.isAdmin = response.data;
+                    }
+
                     if (this.isAdmin == 'administrador') {
                         $('.redes-sociales-compra').addClass('redes-sociales-administrador');
                         $('.justificar-DS').addClass('justificar-administrador');

@@ -2978,7 +2978,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('comprobarSiAdmin').then(function (response) {
-        _this.isAdmin = response.data;
+        if (response.data === 'administrador' || response.data === 'cliente') {
+          _this.isAdmin = response.data;
+        }
 
         if (_this.isAdmin == 'administrador') {
           $('.redes-sociales-compra').addClass('redes-sociales-administrador');
