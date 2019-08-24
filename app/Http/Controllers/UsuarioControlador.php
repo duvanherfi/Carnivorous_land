@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -60,18 +61,16 @@ class UsuarioControlador extends Controller
 
           $data = $request->all();
           $user->update($data);
-
-
           return redirect('mis_datos')->with('act','Datos actualizados correctamente.');
   }
 
   public function isAdmin(){
-
-
+    $permiso=null;
+    try{
         $permiso=auth()->user()->rol;
-
-        return $permiso;
-
-
+    }catch(Exception $e){
+        return null;
+    }
+    return $permiso;
   }
 }
