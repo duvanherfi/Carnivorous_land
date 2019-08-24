@@ -39,10 +39,10 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 Route::get('/carrito_compra', function () {
     return view('carrito');
-})->name('carrito');
+})->name('carrito')->middleware('auth');
 
 Route::get('/mis_datos','UsuarioControlador@mostrar_datos')
-->name('mis_datos');
+->name('mis_datos')->middleware('auth');
 
 Route::put('/actualizar/{user}','UsuarioControlador@actualizar')
 ->name('actualizar');
@@ -57,15 +57,15 @@ Route::get('logout', 'usuarioControlador@cerrar_sesion')->name('cerrar_sesion');
 //Vistas del administrador
 Route::get('/inventario/{gestion}', function ($gestion) {
     return view('inventario', compact('gestion'));
-})->name('inventario');
+})->name('inventario')->middleware('admin');
 
 Route::get('/pedidos', function () {
     return view('pedidos');
-})->name('pedidos');
+})->name('pedidos')->middleware('admin');
 
 
 Route::get('/actualizar_datos', 'EmpresaControlador@actualizar')
-->name('actualizar_datos');
+->name('actualizar_datos')->middleware('admin');
 
 Route::put('/guardar', 'EmpresaControlador@guardar')
 ->name('guardar');
@@ -87,8 +87,7 @@ Route::delete('/productosControl/{id}', 'ProductoControlador@destroy')->name('pr
 //llamada al metodo isAdmin del controlador usuario para hacer el menú
 Route::get('/comprobarSiAdmin','usuarioControlador@isAdmin');
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos');
+Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');
 
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
