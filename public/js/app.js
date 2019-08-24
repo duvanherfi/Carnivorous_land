@@ -44002,7 +44002,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      !_vm.isAdmin === "administrador"
+      _vm.isAdmin === "cliente" || _vm.isAdmin === null
         ? _c(
             "li",
             {

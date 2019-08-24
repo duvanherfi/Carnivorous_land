@@ -36,7 +36,7 @@
             TIPS DE CULTIVOS
         </a>
     </li>
-    <li id="contactanos" class="nav-item opcion-menu-DS" v-if="!isAdmin==='administrador'">
+    <li id="contactanos" class="nav-item opcion-menu-DS" v-if="isAdmin==='cliente' || isAdmin===null">
         <a class="nav-link waves-effect waves-light" v-bind:href="contactanosLink">
             CONTÁCTANOS
         </a>

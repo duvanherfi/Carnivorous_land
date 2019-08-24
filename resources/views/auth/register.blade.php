@@ -15,7 +15,7 @@
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nombre" placeholder="Ej: Pedro Antonio" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+                                <input id="nombre" placeholder="Ej: Pedro Antonio" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}"  autocomplete="nombre" autofocus>
 
                                 @error('nombre')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="apellido" placeholder="Ej: Espinosa Carrillo" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
+                                <input id="apellido" placeholder="Ej: Espinosa Carrillo" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}"  autocomplete="apellido" autofocus>
 
                                 @error('apellido')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                             <label for="correo" class="col-md-4 col-form-label text-md-right">{{ __('Correo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="correo" placeholder="Ej: ejemplo@gmail.com" type="email" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{ old('correo') }}" required autocomplete="correo">
+                                <input id="correo" placeholder="Ej: ejemplo@gmail.com" type="email" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{ old('correo') }}"  autocomplete="correo">
 
                                 @error('correo')
                                     <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('contraseña') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  value="{{ old('password') }}" autocomplete="new-password" placeholder="********">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -66,30 +66,45 @@
                                 @enderror
                             </div>
                         </div>
-                        {{--
+
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
+                            <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Confirme La Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password-confirm" required autocomplete="new-password">
+                                <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"  autocomplete="new-password">
+                                @error('password_confirmation')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                         </div>
-                              --}}
+
                         <div class="form-group row">
                             <label for="cedula" class="col-md-4 col-form-label text-md-right">{{ __('Número De Cédula') }}</label>
 
                             <div class="col-md-6">
-                                <input id="cedula" placeholder="Ej: 1113693793" type="number" class="form-control" name="cedula" required autocomplete="cedula">
+                                <input id="cedula" placeholder="Ej: 1113693793" type="number" class="form-control  @error('cedula') is-invalid @enderror" name="cedula"   value="{{ old('cedula') }}" autocomplete="cedula">
+                                @error('cedula')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
 
 
                         <div class="form-group row">
-                            <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Número De Teléfono') }}</label>
+                            <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefono" placeholder="Ej: xxx xxx xx xx" type="tel" class="form-control" name="telefono" required autocomplete="telefono">
+                                <input id="telefono" placeholder="Ej: xxx xxx xx xx" type="tel" class="form-control @error('telefono') is-invalid @enderror" name="telefono"  value="{{ old('telefono') }}" autocomplete="telefono">
+                                @error('telefono')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -98,7 +113,12 @@
                             <label for="fecha_nacimiento" class="col-md-4 col-form-label text-md-right">{{ __('Fecha De Nacimiento') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fecha_nacimiento" type="date" class="form-control" name="fecha_nacimiento" required autocomplete="fecha_nacimiento">
+                                <input id="fecha_nacimiento" type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" name="fecha_nacimiento"  value="{{ old('fecha_nacimiento') }}" autocomplete="fecha_nacimiento">
+                                @error('fecha_nacimiento')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -108,11 +128,16 @@
                             <label for="sexo" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
 
                             <div class="col-md-6">
-                                    <select class="custom-select form-control" id="sexo" name="sexo" required autocomplete="sexo">
+                                    <select class="custom-select form-control @error('sexo') is-invalid @enderror" id="sexo" name="sexo" value="{{ old('sexo') }}" autocomplete="sexo">
                                             <option selected>Escoge una opción</option>
                                             <option value="Masculino">Masculino</option>
                                             <option value="Femenino">Femenino</option>
                                     </select>
+                                    @error('sexo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
                         </div>
 
@@ -122,7 +147,12 @@
                                 <label for="Departamento" class="col-md-4 col-form-label text-md-right">{{ __('Departamento') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="departamento" type="text" class="form-control" name="departamento" required autocomplete="Departamento" placeholder="Ej: Valle del cauca ">
+                                    <input id="departamento" type="text" class="form-control @error('departamento') is-invalid @enderror" name="departamento" value="{{ old('departamento') }}" autocomplete="Departamento" placeholder="Ej: Valle del cauca ">
+                                    @error('departamento')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -131,7 +161,12 @@
                                 <label for="ciudad" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="ciudad" type="text" class="form-control" name="ciudad" required autocomplete="ciudad" placeholder="Ej: Cali">
+                                    <input id="ciudad" type="text" class="form-control @error('ciudad') is-invalid @enderror" name="ciudad" value="{{ old('ciudad') }}" autocomplete="ciudad" placeholder="Ej: Cali">
+                                    @error('ciudad')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -140,7 +175,12 @@
                                 <label for="barrio" class="col-md-4 col-form-label text-md-right">{{ __('Barrio') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="barrio" type="text" class="form-control" name="barrio" required autocomplete="barrio" placeholder="Ej: Petecuy">
+                                    <input id="barrio" type="text" class="form-control @error('barrio') is-invalid @enderror" name="barrio" value="{{ old('barrio') }}" autocomplete="barrio" placeholder="Ej: Petecuy">
+                                    @error('barrio')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -149,7 +189,12 @@
                                 <label for="via" class="col-md-4 col-form-label text-md-right">{{ __('Vía') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="via" type="text" class="form-control" name="via" required autocomplete="via" placeholder="Ej: Calle 13Cn # 13N40">
+                                    <input id="via" type="text" class="form-control @error('via') is-invalid @enderror" name="via" value="{{ old('via') }}" autocomplete="via" placeholder="Ej: Calle 13Cn # 13N40">
+                                    @error('via')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 

@@ -14,6 +14,23 @@ class UsuarioControlador extends Controller
     // Método que crea un usuario y encripta la contraseña
     public function registrar(Request $request){
 
+        $datos=\Validator::make($request->all(),[
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'correo' => 'required|string|email|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'cedula'=>'required|string|min:8',
+            'telefono'=>'required|string|min:7',
+            'fecha_nacimiento'=>'required|date',
+            'sexo'=>'required',
+            'departamento'=>'required|string',
+            'ciudad'=>'required|string',
+            'barrio'=>'required|string',
+            'via'=>'required|string'
+        ]);
+        if($datos->fails()){
+            return redirect()->back()->withInput()->withErrors($datos->errors());
+        }
 
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
