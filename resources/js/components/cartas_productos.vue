@@ -112,7 +112,7 @@
                     <form class="ml-3">
                         <div class="form-group row">
                             <label for="imagen_principal_modificar" class="col-md-4 col-form-label pr-0">Imagen principal:</label>
-                            <div class="custom-file col-md-7">
+                            <div class="archivos col-md-7">
                                 <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal_modificar" id="imagen_principal_modificar" lang="es">
                                 <label class="custom-file-label" for="imagen_principal_modificar" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen_principal_modificar" v-else>{{ this.producto.imagen_principalnombre }}</label>
@@ -121,7 +121,7 @@
 
                         <div class="form-group row">
                             <label for="imagen2_modificar" class="col-md-4 col-form-label">Imagen #2:</label>
-                            <div class="custom-file col-md-7">
+                            <div class="archivos col-md-7">
                                 <input @change="obtenerImagen2" type="file" class="custom-file-input" name="imagen2_modificar" id="imagen2_modificar" lang="es">
                                 <label class="custom-file-label" for="imagen2_modificar" v-if="this.producto.imagen2nombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen2_modificar" v-else>{{ this.producto.imagen2nombre }}</label>
@@ -130,7 +130,7 @@
 
                         <div class="form-group row">
                             <label for="imagen3_modificar" class="col-md-4 col-form-label">Imagen #3:</label>
-                            <div class="custom-file col-md-7">
+                            <div class="archivos col-md-7">
                                 <input @change="obtenerImagen3" type="file" class="custom-file-input" name="imagen3_modificar" id="imagen3_modificar" lang="es">
                                 <label class="custom-file-label" for="imagen3_modificar" v-if="this.producto.imagen3nombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen3_modificar" v-else>{{ this.producto.imagen3nombre }}</label>
@@ -260,7 +260,6 @@ export default {
                 });
             }
         })
-
     },
     updated() {
         this.activar = false;
@@ -368,12 +367,6 @@ export default {
 </script>
 
 <style>
-.custom-file label {
-    overflow: hidden;
-    padding-top: 8px;
-    padding-bottom: 4px;
-}
-
 .btn-gestion {
     position: absolute;
 }

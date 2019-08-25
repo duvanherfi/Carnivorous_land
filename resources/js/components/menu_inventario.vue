@@ -72,16 +72,18 @@
                         <p>Todos los campos con * son obligatorios</p>
                         <div class="form-group row">
                             <label for="imagen_principal" class="col-md-4 col-form-label pr-0">Imagen principal*:</label>
-                            <div class="custom-file col-md-7">
+                            <div class="archivos col-md-7">
                                 <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal" id="imagen_principal" lang="es">
                                 <label class="custom-file-label" for="imagen_principal" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen_principal" v-else>{{ this.producto.imagen_principalnombre }}</label>
+                                <!-- <label class="custom-file-label" for="imagen_principal" id="Nombre_imagenprincipal"></label> -->
+                                <!-- <label v-if="this.producto.imagen_principalnombre == ''" for="nombre" class="col-md-4 col-form-label">Nombre*:</label> -->
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="imagen2" class="col-md-4 col-form-label">Imagen #2*:</label>
-                            <div class="custom-file col-md-7">
+                            <div class="archivos col-md-7">
                                 <input @change="obtenerImagen2" type="file" class="custom-file-input" name="imagen2" id="imagen2" lang="es">
                                 <label class="custom-file-label" for="imagen2" v-if="this.producto.imagen2nombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen2" v-else>{{ this.producto.imagen2nombre }}</label>
@@ -90,7 +92,7 @@
 
                         <div class="form-group row">
                             <label for="imagen3" class="col-md-4 col-form-label">Imagen #3*:</label>
-                            <div class="custom-file col-md-7">
+                            <div class="archivos col-md-7">
                                 <input @change="obtenerImagen3" type="file" class="custom-file-input" name="imagen3" id="imagen3" lang="es">
                                 <label class="custom-file-label" for="imagen3" v-if="this.producto.imagen3nombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen3" v-else>{{ this.producto.imagen3nombre }}</label>
@@ -163,7 +165,7 @@
                                         <form class="ml-3">
                                             <div class="form-group row">
                                                 <label for="imagen" class="col-md-3 col-form-label">Imagen*:</label>
-                                                <div class="custom-file col-md-8">
+                                                <div class="archivos col-md-8">
                                                     <input @change="obtenerImagenTipo" type="file" class="custom-file-input" name="imagen" id="imagen" lang="es">
                                                     <label class="custom-file-label" for="imagen" v-if="this.tipo.imagen_tiponombre == ''">Seleccionar Archivo</label>
                                                     <label class="custom-file-label" for="imagen" v-else>{{ this.tipo.imagen_tiponombre }}</label>
@@ -296,6 +298,7 @@ export default {
                 EventBus.$emit('articulos', params);
             }
         });
+
     },
     beforeUpdate() {
         EventBus.$on('actualizarMenuInventario', data => {
@@ -317,7 +320,7 @@ export default {
             }
         })
     },
-    updated(){
+    updated() {
         this.activar = false;
     },
     methods: {
@@ -359,13 +362,26 @@ export default {
         },
         registrarTipo() {
             let formData = new FormData();
-            formData.append('imagen_tipo', this.tipo.imagen_tipo);
-            formData.append('nombre', this.tipo.nombre);
+            formData.append('imagen', this.tipo.imagen_tipo);
+            formData.append('genero', this.tipo.nombre);
             formData.append('descripcion', this.tipo.descripcion);
             formData.append('categoria', this.producto.categoria);
             axios.post('/tiposControl', formData).then(response => {
-                // console.log(response.data);
-                this.tipos.push(response.data);
+                console.log(response.data);
+                console.log(response.data.modificar);
+                if (response.data.modificar == 'modificar') {
+                    if (!(isNullOrUndefined(response.data.imagen))) {
+                        formData.append('imagennombreAntiguo', response.data.imagen);
+                        console.log(formData);
+                        axios.post(`/tiposControl/${response.data.id}`, formData).then(response => {
+                            console.log(response.data);
+                            this.tipos.push(response.data);
+                        })
+                    }
+                } else {
+                    this.tipos.push(response.data);
+                }
+
                 axios.get(`/tiposControl/${this.producto.categoria}`).then(response => {
                     if (this.producto.categoria == 'plantas') {
                         this.generos = response.data;
@@ -397,14 +413,14 @@ export default {
 
             axios.post('/productosControl', formData).then(response => {
                 EventBus.$emit('activarUpdate', true);
-                console.log(response.data);
+                // console.log(response.data);
                 if (!(isNullOrUndefined(response.data.imagen_principal))) {
                     formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
                     formData.append('imagen2nombreAntiguo', response.data.imagen2);
                     formData.append('imagen3nombreAntiguo', response.data.imagen3);
-                    console.log(formData);
+                    // console.log(formData);
                     axios.post(`/productosControl/${response.data.id}/${response.data.categoria}`, formData).then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                         EventBus.$emit('activarUpdate', true);
                     })
                 }
@@ -443,8 +459,9 @@ export default {
             this.tipo.descripcion = '';
         },
         limpiarRegistraProducto() {
-            $('#imagen_principal').val(null);
             this.producto.imagen_principalnombre = '';
+            $('#imagen_principal').val(null);
+
             $('#imagen2').val(null);
             this.producto.imagen2nombre = '';
             $('#imagen3').val(null);
@@ -458,6 +475,7 @@ export default {
             this.producto.tamaño = '';
             this.producto.opcion_catalogo = '';
             this.producto.descripcion = '';
+            console.log(this.producto.imagen_principalnombre);
         }
     }
 }
@@ -497,12 +515,6 @@ label {
 .form-registrar-genero {
     margin-right: 27px;
     margin-bottom: 16px;
-}
-
-.custom-file label {
-    overflow: hidden;
-    padding-top: 8px;
-    padding-bottom: 4px;
 }
 
 /* Collapse */

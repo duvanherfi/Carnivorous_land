@@ -20,12 +20,7 @@ class CreateComprasTable extends Migration
             $table->double('valor', 8, 2);
             $table->string('imagen');
             $table->timestamps();
-        });
-
-        
-        
-
-        
+        });   
     }
 
     /**

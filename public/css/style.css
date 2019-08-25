@@ -574,7 +574,12 @@ tr:nth-child(odd) td {
     text-align: center;
 }
 
-
+/* Archivos */
+.archivos label {
+    overflow: hidden;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
 
 /*Mis datos */
 .datos{

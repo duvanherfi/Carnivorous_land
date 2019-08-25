@@ -27,12 +27,13 @@ class CreatePedidosTable extends Migration
             $table->string('estado');
             $table->string('entregado');
             $table->Integer('total');
-
+            $table->integer('id_compra')->unsigned();
             $table->timestamps();
         });
 
-        
-    
+        Schema::table('pedidos', function (Blueprint $table) {
+            $table->foreign('id_compra')->references('id_compra')->on('compras');
+        });
     }
 
     /**
