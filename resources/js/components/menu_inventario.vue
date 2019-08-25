@@ -196,7 +196,14 @@
                         <div class="form-group row" v-if="this.producto.categoria=='plantas'">
                             <label for="tamaño" class="col-md-4 col-form-label">Tamaño*:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.tamaño" id="tamaño" placeholder="Ej: S" type="text" class="form-control" name="tamaño" required autocomplete="tamaño" autofocus>
+                                <select v-model="producto.tamaño" class="custom-select form-control" id="tamaño" name="tamaño" required autocomplete="tamaño">
+                                    <option disabled value="">Escoge una opción</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XS">XS</option>
+                                    <option value="XL">XL</option>
+                                </select>
                             </div>
                         </div>
 

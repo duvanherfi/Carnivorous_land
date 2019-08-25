@@ -196,49 +196,38 @@ export default {
         eliminarGenero() {
             axios.delete(`/tiposControl/${this.id}/${this.categoria}`).then(response => {
                 // console.log(response.data);
-                var merchandising = false;
-                var implementos = false;
-                var nada = false;
                 axios.get('/tiposControl/plantas').then(response => {
-                    if (!(isNullOrUndefined(response.data))) {
+                    if (response.data.length > 0) {
+
                         const params = {
                             genero: response.data[0].genero,
                             categoria: 'plantas'
                         };
                         EventBus.$emit('articulos', params);
                     } else {
-                        merchandising = true;
+                        axios.get('/tiposControl/merchandising').then(response => {
+                            if (response.data.length > 0) {
+                                const params = {
+                                    genero: response.data[0].tipo,
+                                    categoria: 'merchandising'
+                                };
+                                EventBus.$emit('articulos', params);
+                            } else {
+                                axios.get('/tiposControl/implementos').then(response => {
+                                    if (response.data.length > 0) {
+                                        const params = {
+                                            genero: response.data[0].tipo,
+                                            categoria: 'implementos'
+                                        };
+                                        EventBus.$emit('articulos', params);
+                                    } else {
+                                        this.id = '';
+                                    }
+                                });
+                            }
+                        });
                     }
-                });
-                if (merchandising == true) {
-                    axios.get('/tiposControl/merchandising').then(response => {
-                        if (!(isNullOrUndefined(response.data))) {
-                            const params = {
-                                genero: response.data[0].genero,
-                                categoria: 'merchandising'
-                            };
-                            EventBus.$emit('articulos', params);
-                        } else {
-                            implementos = true;
-                        }
-                    });
-                }
-                if (implementos == true) {
-                    axios.get('/tiposControl/implementos').then(response => {
-                        if (!(isNullOrUndefined(response.data))) {
-                            const params = {
-                                genero: response.data[0].genero,
-                                categoria: 'implementos'
-                            };
-                            EventBus.$emit('articulos', params);
-                        }else{
-                            nada = true;
-                        }
-                    });
-                }
-                if(nada == true){
-                    this.id = '';
-                }
+                })
             })
             const param = {
                 activar: true,

@@ -1936,6 +1936,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2343,52 +2350,37 @@ __webpack_require__.r(__webpack_exports__);
 
       axios["delete"]("/tiposControl/".concat(this.id, "/").concat(this.categoria)).then(function (response) {
         // console.log(response.data);
-        var merchandising = false;
-        var implementos = false;
-        var nada = false;
         axios.get('/tiposControl/plantas').then(function (response) {
-          if (!Object(util__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(response.data)) {
+          if (response.data.length > 0) {
             var params = {
               genero: response.data[0].genero,
               categoria: 'plantas'
             };
             _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos', params);
           } else {
-            merchandising = true;
+            axios.get('/tiposControl/merchandising').then(function (response) {
+              if (response.data.length > 0) {
+                var _params = {
+                  genero: response.data[0].tipo,
+                  categoria: 'merchandising'
+                };
+                _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos', _params);
+              } else {
+                axios.get('/tiposControl/implementos').then(function (response) {
+                  if (response.data.length > 0) {
+                    var _params2 = {
+                      genero: response.data[0].tipo,
+                      categoria: 'implementos'
+                    };
+                    _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos', _params2);
+                  } else {
+                    _this4.id = '';
+                  }
+                });
+              }
+            });
           }
         });
-
-        if (merchandising == true) {
-          axios.get('/tiposControl/merchandising').then(function (response) {
-            if (!Object(util__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(response.data)) {
-              var params = {
-                genero: response.data[0].genero,
-                categoria: 'merchandising'
-              };
-              _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos', params);
-            } else {
-              implementos = true;
-            }
-          });
-        }
-
-        if (implementos == true) {
-          axios.get('/tiposControl/implementos').then(function (response) {
-            if (!Object(util__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(response.data)) {
-              var params = {
-                genero: response.data[0].genero,
-                categoria: 'implementos'
-              };
-              _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos', params);
-            } else {
-              nada = true;
-            }
-          });
-        }
-
-        if (nada == true) {
-          _this4.id = '';
-        }
       });
       var param = {
         activar: true,
@@ -2417,6 +2409,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
 /* harmony import */ var util__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../event_bus */ "./resources/js/event_bus.js");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -41456,39 +41455,73 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-md-7 p-0" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.producto.tamaño,
-                                  expression: "producto.tamaño"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                id: "tamaño_modificar",
-                                placeholder: "Ej: S",
-                                type: "text",
-                                name: "tamaño_modificar",
-                                required: "",
-                                autocomplete: "tamaño_modificar",
-                                autofocus: ""
-                              },
-                              domProps: { value: _vm.producto.tamaño },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.producto.tamaño,
+                                    expression: "producto.tamaño"
                                   }
-                                  _vm.$set(
-                                    _vm.producto,
-                                    "tamaño",
-                                    $event.target.value
-                                  )
+                                ],
+                                staticClass: "custom-select form-control",
+                                attrs: {
+                                  id: "tamaño",
+                                  name: "tamaño",
+                                  required: "",
+                                  autocomplete: "tamaño"
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.producto,
+                                      "tamaño",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
                                 }
-                              }
-                            })
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { disabled: "", value: "" } },
+                                  [_vm._v("Escoge una opción")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "S" } }, [
+                                  _vm._v("S")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "M" } }, [
+                                  _vm._v("M")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "L" } }, [
+                                  _vm._v("L")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "XS" } }, [
+                                  _vm._v("XS")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "XL" } }, [
+                                  _vm._v("XL")
+                                ])
+                              ]
+                            )
                           ])
                         ])
                       : _vm._e(),
@@ -43552,39 +43585,73 @@ var render = function() {
                         ),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-7 p-0" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.producto.tamaño,
-                                expression: "producto.tamaño"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              id: "tamaño",
-                              placeholder: "Ej: S",
-                              type: "text",
-                              name: "tamaño",
-                              required: "",
-                              autocomplete: "tamaño",
-                              autofocus: ""
-                            },
-                            domProps: { value: _vm.producto.tamaño },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.producto.tamaño,
+                                  expression: "producto.tamaño"
                                 }
-                                _vm.$set(
-                                  _vm.producto,
-                                  "tamaño",
-                                  $event.target.value
-                                )
+                              ],
+                              staticClass: "custom-select form-control",
+                              attrs: {
+                                id: "tamaño",
+                                name: "tamaño",
+                                required: "",
+                                autocomplete: "tamaño"
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.producto,
+                                    "tamaño",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
                               }
-                            }
-                          })
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { disabled: "", value: "" } },
+                                [_vm._v("Escoge una opción")]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "S" } }, [
+                                _vm._v("S")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "M" } }, [
+                                _vm._v("M")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "L" } }, [
+                                _vm._v("L")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "XS" } }, [
+                                _vm._v("XS")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "XL" } }, [
+                                _vm._v("XL")
+                              ])
+                            ]
+                          )
                         ])
                       ])
                     : _vm._e(),
@@ -43926,7 +43993,7 @@ var render = function() {
             staticClass: "nav-link waves-effect waves-light",
             attrs: { href: _vm.inicioLink }
           },
-          [_vm._v("\n            INICIO\n        ")]
+          [_vm._v("\r\n            INICIO\r\n        ")]
         )
       ]),
       _vm._v(" "),
@@ -43938,7 +44005,7 @@ var render = function() {
                 staticClass: "nav-link waves-effect waves-light",
                 attrs: { href: _vm.quienes_somosLink }
               },
-              [_vm._v("\n            ¿QUIÉNES SOMOS?\n        ")]
+              [_vm._v("\r\n            ¿QUIÉNES SOMOS?\r\n        ")]
             )
           ])
         : _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
@@ -43948,7 +44015,7 @@ var render = function() {
                 staticClass: "nav-link waves-effect waves-light",
                 attrs: { href: _vm.actualizarLink }
               },
-              [_vm._v("\n            ACTUALIZAR DATOS\n        ")]
+              [_vm._v("\r\n            ACTUALIZAR DATOS\r\n        ")]
             )
           ]),
       _vm._v(" "),
@@ -43968,7 +44035,7 @@ var render = function() {
                     "aria-expanded": "false"
                   }
                 },
-                [_vm._v("\n            PRODUCTOS\n        ")]
+                [_vm._v("\r\n            PRODUCTOS\r\n        ")]
               ),
               _vm._v(" "),
               _c(
@@ -44016,7 +44083,7 @@ var render = function() {
                 staticClass: "nav-link waves-effect waves-light",
                 attrs: { href: _vm.inventarioLink }
               },
-              [_vm._v("\n            INVENTARIO\n        ")]
+              [_vm._v("\r\n            INVENTARIO\r\n        ")]
             )
           ]),
       _vm._v(" "),
@@ -44027,7 +44094,7 @@ var render = function() {
             staticClass: "nav-link waves-effect waves-light",
             attrs: { href: _vm.tips_cultivoLink }
           },
-          [_vm._v("\n            TIPS DE CULTIVOS\n        ")]
+          [_vm._v("\r\n            TIPS DE CULTIVOS\r\n        ")]
         )
       ]),
       _vm._v(" "),
@@ -44035,7 +44102,7 @@ var render = function() {
         ? _c(
             "li",
             {
-              staticClass: "nav-item opcion-menu-DS",
+              staticClass: "nav-item opcion-menu-DS bordes-DS",
               attrs: { id: "contactanos" }
             },
             [
@@ -44045,18 +44112,18 @@ var render = function() {
                   staticClass: "nav-link waves-effect waves-light",
                   attrs: { href: _vm.contactanosLink }
                 },
-                [_vm._v("\n            CONTÁCTANOS\n        ")]
+                [_vm._v("\r\n            CONTÁCTANOS\r\n        ")]
               )
             ]
           )
-        : _c("li", { staticClass: "nav-item opcion-menu-DS" }, [
+        : _c("li", { staticClass: "nav-item opcion-menu-DS bordes-DS" }, [
             _c(
               "a",
               {
                 staticClass: "nav-link waves-effect waves-light",
                 attrs: { href: _vm.pedidosLink }
               },
-              [_vm._v("\n            PEDIDOS\n        ")]
+              [_vm._v("\r\n            PEDIDOS\r\n        ")]
             )
           ])
     ]
@@ -59488,8 +59555,8 @@ $hiddenDiv.css('width',$textarea.is(':visible')?$textarea.width():$(window).widt
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\D\Desktop\carnivorous_land\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\D\Desktop\carnivorous_land\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\ENVY 14-J008LA\Desktop\carnivorous_land\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\ENVY 14-J008LA\Desktop\carnivorous_land\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
