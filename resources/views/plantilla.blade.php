@@ -65,10 +65,10 @@
                         REGISTRARSE
                     </a>
                 </li>
-           
+
 
                 @else
-              
+
                <li class="nav-item dropdown text-uppercase datos_usuario">
                     <a class="nav-link dropdown-toggle pl-5 pr-5 pb-1 href="producto" id="navbarDropdownMenuLink-333"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -83,9 +83,9 @@
                             <img  src="{{ asset('img/logout.png') }}" alt="Cerrar Sesión"  width="23">
                             Cerrar sesión</a>
                     </div>
-                </li> 
-          
-          
+                </li>
+
+
 
                 @endif
             </ul>
@@ -237,7 +237,7 @@
     <!-- Scripts -->
     @routes
     <script src="{{ asset('js/app.js') }}"></script>
-
+    @yield('script')
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
@@ -278,7 +278,7 @@
 
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 method: 'POST',
-            
+
 
                 url: url,
                     success: function(result){
