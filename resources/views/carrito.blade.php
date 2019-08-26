@@ -73,11 +73,11 @@
                     </p>
                 {{-- submit--}}
 
-                <input name="merchantId"    type="hidden"  value="508029"   >
+                <input name="merchantId"    type="hidden"  value=@{{merchantId}}   >
                 <input name="accountId"     type="hidden"  value="512321" >
                 <input name="description"   type="hidden"  value="Test PAYU"  >
                 <input name="referenceCode" type="hidden"  value="TestPayU" >
-                <input name="amount"        type="hidden"  id="preciop"  >
+                <input name="amount"        type="hidden"  value="20000" id="preciop"  >
                 <input name="tax"           type="hidden"  value="3193"  >
                 <input name="taxReturnBase" type="hidden"  value="16806" >
                 <input name="currency"      type="hidden"  value="COP" >
@@ -95,10 +95,21 @@
   </table>
   @section('script')
     <script>
+
         $('#departamento').html("<option>{{ auth()->user()->departamento}}</option>");
+        var merchantId= 508029;
+        var ApiKey= "4Vj8eK4rloUd272L48hsrarnUA";
+        var referenceCode= "TestPayU";
+        var amount=20000;
+        var currency= "COP";
+        var accountId=512326;
+        var buyerEmail= "test@test.com";
+        var signature=md5(ApiKey+"~"+merchantId+"~"+referenceCode+"~"+amount+"~"+currency);
         var p=$("#precio").html().split("$");
-        console.log(p[1]);
-        $('#preciop').val(p[1]);
+        var p1=p[1].split(".");
+        console.log(signature);
+        //$('#preciop').val(p1[0]+p1[1]);
+
     </script>
   @endsection
 
