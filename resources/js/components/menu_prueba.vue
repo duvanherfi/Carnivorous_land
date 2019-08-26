@@ -36,12 +36,12 @@
             TIPS DE CULTIVOS
         </a>
     </li>
-    <li id="contactanos" class="nav-item opcion-menu-DS" v-if="isAdmin==='cliente' || isAdmin===null">
+    <li id="contactanos" class="nav-item opcion-menu-DS bordes-DS" v-if="isAdmin==='cliente' || isAdmin===null">
         <a class="nav-link waves-effect waves-light" v-bind:href="contactanosLink">
             CONTÁCTANOS
         </a>
     </li>
-    <li class="nav-item opcion-menu-DS" v-else>
+    <li class="nav-item opcion-menu-DS bordes-DS" v-else>
         <a class="nav-link waves-effect waves-light" v-bind:href="pedidosLink">
             PEDIDOS
         </a>

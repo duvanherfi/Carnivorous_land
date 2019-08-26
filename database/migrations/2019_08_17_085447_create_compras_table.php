@@ -19,13 +19,15 @@ class CreateComprasTable extends Migration
             $table->Integer('cantidad');
             $table->double('valor', 8, 2);
             $table->string('imagen');
+            $table->integer('id_pedido')->unsigned();
+
             $table->timestamps();
+        });   
+
+
+        Schema::table('compras', function (Blueprint $table) {
+            $table->foreign('id_pedido')->references('id')->on('pedidos');
         });
-
-        
-        
-
-        
     }
 
     /**

@@ -14,7 +14,6 @@
             <th scope="col">Entregado</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
-            <th scope="col">Nombre producto</th>
             <th scope="col">Ciudad</th>
             <th scope="col">Estado</th>
             <th scope="col">Detalle</th>
@@ -26,11 +25,10 @@
        	@foreach ( $pedido_pendiente as $pendiente)
     		<tr>
       			
+            <td></td>
             <td>{{$pendiente->fecha}}</td>
-            <td>{{$pendiente->fecha}}</td>
             <td>{{$pendiente->nombre_cliente}}</td>
-            <td>{{$pendiente->nombre_cliente}}</td>
-            <td>{{$pendiente->nombre_cliente}}</td>
+            <td>{{$pendiente->ciudad}}</td>
             <td>{{$pendiente->estado}}</td>
             <td><input data-id="{{$pendiente->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
       			
@@ -51,7 +49,6 @@
             <th scope="col">Entregado</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
-            <th scope="col">Nombre producto</th>
             <th scope="col">Ciudad</th>
             <th scope="col">Estado</th>
             <th scope="col">Detalle</th>
@@ -61,11 +58,10 @@
       <tbody class="cuerpo_pedidos">
         @foreach ( $pedido_entregado as $entregado)
         <tr>
+            <td></td>
             <td>{{$entregado->fecha}}</td>
-            <td>{{$entregado->fecha}}</td>
             <td>{{$entregado->nombre_cliente}}</td>
-            <td>{{$entregado->nombre_cliente}}</td>
-            <td>{{$entregado->nombre_cliente}}</td>
+            <td>{{$entregado->ciudad}}</td>
             <td>{{$entregado->estado}}</td>
             <td><input data-id="{{$entregado->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
         </tr>
@@ -109,10 +105,24 @@
                  
                   
                   <tr>
-                    <td id="producto_name"></td>
-                    <td id="cantidad"></td>
-                    <td id="subtotal"></td>
-                    <td id="imagen"></td>             
+                    <td id="articulo_name0"></td>
+                    <td id="cantidad0"></td>
+                    <td id="valor0"></td>
+                    <td id="imagen0"></td>             
+                  </tr>
+
+                  <tr>
+                    <td id="articulo_name1"></td>
+                    <td id="cantidad1"></td>
+                    <td id="valor1"></td>
+                    <td id="imagen1"></td>             
+                  </tr>
+
+                  <tr>
+                    <td id="articulo_name2"></td>
+                    <td id="cantidad2"></td>
+                    <td id="valor2"></td>
+                    <td id="imagen2"></td>             
                   </tr>
                                                
                 </tbody>

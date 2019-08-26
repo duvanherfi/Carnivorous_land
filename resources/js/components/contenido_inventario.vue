@@ -11,7 +11,7 @@
             <img v-if="imagen != ''" class="imagen-subtitulo-DS" id="imagen_inventario" v-bind:src="'/img/generos/' + imagen" alt="Fondo titulo inventario">
         </div>
         <pre class="mt-4" id="descripcion_inventario">{{ descripcion }}</pre>
-        <div class="d-flex justify-content-between" id="opciones_inventario">
+        <div v-if="categoria != ''" class="d-flex justify-content-between" id="opciones_inventario">
             <div class="d-flex">
                 <label for="ordenar" class="d-inline-flex col-form-label pr-0">Ordenar:</label>
 
@@ -76,7 +76,7 @@
                     <form class="ml-3" method="POST" action="">
                         <div class="form-group row">
                             <label for="imagen" class="col-md-3 col-form-label">Imagen:</label>
-                            <div class="custom-file col-md-8">
+                            <div class="archivos col-md-8">
                                 <input @change="obtenerImagen" type="file" class="custom-file-input" name="imagen_modificar" id="imagen_modificar" lang="es">
                                 <label class="custom-file-label" for="imagen_modificar" v-if="this.genero.imagennombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen_modificar" v-else>{{ this.genero.imagennombre }}</label>
@@ -196,43 +196,38 @@ export default {
         eliminarGenero() {
             axios.delete(`/tiposControl/${this.id}/${this.categoria}`).then(response => {
                 // console.log(response.data);
-                var merchandising = false;
-                var implementos = false;
                 axios.get('/tiposControl/plantas').then(response => {
-                    if (!(isNullOrUndefined(response.data))) {
+                    if (response.data.length > 0) {
+
                         const params = {
                             genero: response.data[0].genero,
                             categoria: 'plantas'
                         };
                         EventBus.$emit('articulos', params);
                     } else {
-                        merchandising = true;
+                        axios.get('/tiposControl/merchandising').then(response => {
+                            if (response.data.length > 0) {
+                                const params = {
+                                    genero: response.data[0].tipo,
+                                    categoria: 'merchandising'
+                                };
+                                EventBus.$emit('articulos', params);
+                            } else {
+                                axios.get('/tiposControl/implementos').then(response => {
+                                    if (response.data.length > 0) {
+                                        const params = {
+                                            genero: response.data[0].tipo,
+                                            categoria: 'implementos'
+                                        };
+                                        EventBus.$emit('articulos', params);
+                                    } else {
+                                        this.id = '';
+                                    }
+                                });
+                            }
+                        });
                     }
-                });
-                if (merchandising == true) {
-                    axios.get('/tiposControl/merchandising').then(response => {
-                        if (!(isNullOrUndefined(response.data))) {
-                            const params = {
-                                genero: response.data[0].genero,
-                                categoria: 'merchandising'
-                            };
-                            EventBus.$emit('articulos', params);
-                        } else {
-                            implementos = true;
-                        }
-                    });
-                }
-                if (implementos == true) {
-                    axios.get('/tiposControl/implementos').then(response => {
-                        if (!(isNullOrUndefined(response.data))) {
-                            const params = {
-                                genero: response.data[0].genero,
-                                categoria: 'implementos'
-                            };
-                            EventBus.$emit('articulos', params);
-                        }
-                    });
-                }
+                })
             })
             const param = {
                 activar: true,

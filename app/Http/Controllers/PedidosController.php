@@ -18,10 +18,10 @@ class PedidosController extends Controller
 		$pedido_entregado = DB::table('pedidos')->where('entregado', 'si')->get();
 		//$pedidos = Pedido::all();
 		//$pedidos = DB::table('pedidos')
-		//->join('compras', 'compras.id_compra', '=', 'pedidos.id_compra')
+		//->join('compras', 'compras.id_pedido', '=', 'pedidos.id')
 		//->get();
 		
-		return view('pedidos',compact('pedido_pendiente', 'pedido_entregado' ));
+		return view('pedidos',compact('pedido_pendiente', 'pedido_entregado'));
 		
 	}
 
@@ -30,10 +30,14 @@ class PedidosController extends Controller
     public function detalles($id){
     	
     	
-		$pedido= Pedido::findOrFail($id);
-
+		//$pedido= Pedido::find($id);
+		$pedido = DB::table('pedidos')
+		->join('compras', 'compras.id_pedido', '=', 'pedidos.id')
+		->where('compras.id_pedido', $id)
+		->get();
 
     	return response()->json(['success' => $pedido]);
+
     	
     }
 

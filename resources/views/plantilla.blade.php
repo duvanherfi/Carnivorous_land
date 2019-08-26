@@ -278,25 +278,62 @@
 
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 method: 'POST',
+                dataType: 'JSON',
 
 
                 url: url,
                     success: function(result){
                         console.log(result.success);
 
-                        $('#nombre_cli').html(result.success.nombre_cliente);
-                        $('#ciudad').html(result.success.ciudad);
-                        $('#direccion').html(result.success.direccion);
-                        $('#tipo_entrega').html(result.success.tipo_entrega);
-                        $('#estado').html(result.success.estado);
-                        $('#cantidad').html(result.success.cantidad);
-                        $('#producto_name').html(result.success.nombre_producto);
-                        $('#cantidad').html(result.success.cantidad);
-                        $('#subtotal').html(result.success.subtotal);
-                        $('#imagen').html(result.success.imagen);
-                        $('#total').html(result.success.total);
-
                         $('#modal_pedidos').modal('show');
+
+
+
+                        $('#nombre_cli').html(result.success[0].nombre_cliente);
+                        $('#ciudad').html(result.success[0].ciudad);
+                        $('#direccion').html(result.success[0].direccion);
+                        $('#tipo_entrega').html(result.success[0].tipo_entrega);
+                        $('#estado').html(result.success[0].estado);
+
+                        for (i=0 ; i<result.success.length; i++){
+
+                        $('#articulo_name'+[i]).html(result.success[i].nombre_articulo);
+                        $('#cantidad'+[i]).html(result.success[i].cantidad);
+                        $('#valor'+[i]).html(result.success[i].valor);
+                        $('#imagen'+[i]).html(result.success[i].imagen);
+
+                        }
+
+                        if(result.success.length == 2){
+
+
+
+                            $('#articulo_name'+[2]).html("");
+                            $('#cantidad'+[2]).html(" ");
+                            $('#valor'+[2]).html(" ");
+                            $('#imagen'+[2]).html(" ");
+
+
+                        }
+
+                        if(result.success.length == 1){
+
+
+                            for (i=1 ; i<3; i++){
+
+                            $('#articulo_name'+[i]).html("");
+                            $('#cantidad'+[i]).html(" ");
+                            $('#valor'+[i]).html(" ");
+                            $('#imagen'+[i]).html(" ");
+
+                        }
+
+
+
+
+                        }
+
+
 
 
                     },

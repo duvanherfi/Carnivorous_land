@@ -60,30 +60,59 @@ class TiposControlador extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->categoria == 'plantas') {
+            $tipo_genero = DB::table('generos')
+                ->where('generos.habilitado', 'false')
+                ->where('genero', $request->genero);
+        } else if ($request->categoria == 'merchandising') {
+            $tipo_genero = DB::table('tipo_merchandisings')
+                ->where('tipo_merchandisings.habilitado', 'false')
+                ->where('tipo', $request->genero);
+        } else if ($request->categoria == 'implementos') {
+            $tipo_genero = DB::table('tipo_implementos')
+                ->where('tipo_implementos.habilitado', 'false')
+                ->where('tipo', $request->genero);
+        }
+        $tipo_generos = $tipo_genero->get();
+        
+        if (count($tipo_generos, 1) == 1) {
+            if ($request->categoria == 'plantas') {
+                $tipo_genero = $tipo_genero->update(['generos.habilitado' => 'true']);
+            }else if ($request->categoria == 'merchandising'){
+                $tipo_genero = $tipo_genero->update(['tipo_merchandisings.habilitado' => 'true']);
+            }else if ($request->categoria == 'implementos'){
+                $tipo_genero = $tipo_genero->update(['tipo_implementos.habilitado' => 'true']);
+            }
+            return response()->json([
+                'imagen' => $tipo_generos[0]->imagen,
+                'id' => $tipo_generos[0]->id,
+                'modificar' => 'modificar'
+            ]);
+        }
 
-        if ($request->hasFile('imagen_tipo')) {
-            $file = $request->file('imagen_tipo');
+        if ($request->hasFile('imagen')) {
+            $file = $request->file('imagen');
             $imagen_tipo = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/generos/', $imagen_tipo);
         }
         if ($request->categoria == 'plantas') {
             $genero = new Genero();
             $genero->imagen = $imagen_tipo;
-            $genero->genero = $request->nombre;
+            $genero->genero = $request->genero;
             $genero->descripcion = $request->descripcion;
             $genero->save();
             return $genero;
         } else if ($request->categoria == 'merchandising') {
             $merchandising = new Tipo_merchandising();
             $merchandising->imagen = $imagen_tipo;
-            $merchandising->tipo = $request->nombre;
+            $merchandising->tipo = $request->genero;
             $merchandising->descripcion = $request->descripcion;
             $merchandising->save();
             return $merchandising;
         } else if ($request->categoria == 'implementos') {
             $implemento = new Tipo_implemento();
             $implemento->imagen = $imagen_tipo;
-            $implemento->tipo = $request->nombre;
+            $implemento->tipo = $request->genero;
             $implemento->descripcion = $request->descripcion;
             $implemento->save();
             return $implemento;
@@ -229,7 +258,7 @@ class TiposControlador extends Controller
                 ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')
                 ->where('tipo_implementos.id', $id)
                 ->where('productos.habilitado', 'true');
-                
+
             $enviar = $implementos->get();
 
             if (count($enviar, 1) == 0) {
