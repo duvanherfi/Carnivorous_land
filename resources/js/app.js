@@ -2,6 +2,7 @@ require('./bootstrap');
 require('./mdb');
 var AOS = require('aos');
 AOS.init();
+window.md5 = require('md5');
 
 import bsCustomFileInput from 'bs-custom-file-input';
 

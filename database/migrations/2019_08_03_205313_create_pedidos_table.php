@@ -14,26 +14,18 @@ class CreatePedidosTable extends Migration
     public function up()
     {
         Schema::create('pedidos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integerIncrements('id')->unsigned();
             $table->string('fecha');
             $table->string('nombre_cliente');
-            $table->string('nombre_producto');
             $table->string('ciudad');
             $table->string('direccion');
             $table->string('tipo_entrega');
-            $table->Integer('cantidad');
-            $table->Integer('subtotal');
-            $table->Integer('imagen');
             $table->string('estado');
             $table->string('entregado');
-            $table->Integer('total');
-            $table->integer('id_compra')->unsigned();
             $table->timestamps();
         });
 
-        Schema::table('pedidos', function (Blueprint $table) {
-            $table->foreign('id_compra')->references('id_compra')->on('compras');
-        });
+        
     }
 
     /**

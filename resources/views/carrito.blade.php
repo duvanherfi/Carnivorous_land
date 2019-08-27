@@ -9,7 +9,7 @@
     <thead>
       <tr>
         <th class="total_compra" scope="col">Total de la compra</th>
-        <th class="total_compra" scope="col">$150.000</th>
+        <th class="total_compra" id="precio" scope="col">$150.000</th>
       </tr>
     </thead>
     <tbody>
@@ -18,18 +18,18 @@
             <p class="ml-5">Entrega</p>
         </td>
         <td>
-            <form>
+            <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
 
                 {{--Select1 --}}
                 <div class="form-group col-md-4">
                         <label for="inputState">Departamento</label>
-                        <select id="inputState" class="form-control">
-                          <option selected>Escoge</option>
-                          <option>Valle del cauca</option>
+                        <select id="departamento" class="form-control">
+                          <option selected></option>
+
                         </select>
                       </div>
 
-                
+
                 {{--Select2 --}}
                 <div class="form-group col-md-4">
                         <label for="inputState">Ciudad</label>
@@ -37,9 +37,9 @@
                           <option selected>Escoge</option>
                           <option>Cali</option>
                         </select>
-                      </div>      
+                      </div>
 
-                 
+
                 {{--Checkbox --}}
                 <div class="form-group">
                         <div class="form-check">
@@ -48,11 +48,11 @@
                            Servicio a domicilio
                           </label>
                         </div>
-                      </div>   
-                      <p>Costo adicicional de $5.000</p>  
+                      </div>
+                      <p>Costo adicicional de $5.000</p>
 
                 {{-- text --}}
-                
+
                 <div class="form-group">
                   <label for="inputAddress">Dirección</label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="Calle 13CN #..">
@@ -66,20 +66,52 @@
                            Entrega personal
                           </label>
                         </div>
-                      </div>   
+                      </div>
                       <p>Las entregas personales se hacen el sótano de la 14 de Calima <br>
                             en la sección de muebles, un almacén llamado Galería Multimuebles.<br>
                             Cali, Valle del cauca.
-                    </p> 
-                  
-                
-
+                    </p>
                 {{-- submit--}}
-                <button type="submit" class="btn bg-success" id="terminar_compra">TERMINAR COMPRA</button>
+
+                <input name="merchantId"    type="hidden"  value=@{{merchantId}}   >
+                <input name="accountId"     type="hidden"  value="512321" >
+                <input name="description"   type="hidden"  value="Test PAYU"  >
+                <input name="referenceCode" type="hidden"  value="TestPayU" >
+                <input name="amount"        type="hidden"  value="20000" id="preciop"  >
+                <input name="tax"           type="hidden"  value="3193"  >
+                <input name="taxReturnBase" type="hidden"  value="16806" >
+                <input name="currency"      type="hidden"  value="COP" >
+                <input name="signature"     type="hidden"  value="7ee7cf808ce6a39b17481c54f2c57acc"  >
+                <input name="test"          type="hidden"  value="1" >
+                <input name="buyerEmail"    type="hidden"  value="test@test.com" >
+                <input name="responseUrl"    type="hidden"  value="http://www.test.com/response" >
+                <input name="confirmationUrl"    type="hidden"  value="http://www.test.com/confirmation" >
+                <input name="Submit"    class="btn bg-success" id="terminar_compra"  type="submit"  value="TERMINAR COMPRA" >
               </form>
         </td>
       </tr>
-     
+
     </tbody>
   </table>
+  @section('script')
+    <script>
+
+        $('#departamento').html("<option>{{ auth()->user()->departamento}}</option>");
+        var merchantId= 508029;
+        var ApiKey= "4Vj8eK4rloUd272L48hsrarnUA";
+        var referenceCode= "TestPayU";
+        var amount=20000;
+        var currency= "COP";
+        var accountId=512326;
+        var buyerEmail= "test@test.com";
+        var signature=md5(ApiKey+"~"+merchantId+"~"+referenceCode+"~"+amount+"~"+currency);
+        var p=$("#precio").html().split("$");
+        var p1=p[1].split(".");
+        console.log(signature);
+        //$('#preciop').val(p1[0]+p1[1]);
+
+    </script>
+  @endsection
+
 @endsection
+
