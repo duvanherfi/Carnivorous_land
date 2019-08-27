@@ -19,7 +19,7 @@ Vue.use(VueCurrencyFilter, {
     symbolSpacing: false
 });
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('boton-arriba', require('./components/boton-arriba.vue').default);
 Vue.component('productos', require('./components/cartas_productos.vue').default);
 Vue.component('menu-producto-tips', require('./components/productos_y_tips/menu_productos_tips.vue').default);
 Vue.component('contenido-productos', require('./components/productos_y_tips/contenido_productos.vue').default);
@@ -36,4 +36,8 @@ const app = new Vue({
 
 const app2 = new Vue({
     el: '#app2',
+});
+
+const app3 = new Vue({
+    el: '#app3',
 });
