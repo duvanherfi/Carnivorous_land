@@ -33,6 +33,9 @@
 
 
 <body>
+    <div id="app3">
+        <boton-arriba></boton-arriba>
+    </div>
     <!--Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-DS lol">
         <a class="navbar-brand sincursor-DS" href="#">¡Bienvenido a Canivorous Land, déjate atrapar!</a>
@@ -43,18 +46,14 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="navbar-nav ml-auto bordes-externo-DS">
-                @if(auth()->user() == null)
+
                 <li class="nav-item bordes-DS">
                     <p class="nav-link">
                         <i class="fab fa-whatsapp"></i>
                         +57 316 7973829
                     </p>
                 </li>
-                <li class="nav-item bordes-DS">
-                    <p class="nav-link">
-                        LUN - DOM | 9:00 AM - 7:30 PM
-                    </p>
-                </li>
+                @if(auth()->user() == null)
                 <li class="nav-item bordes-DS">
                     <a class="nav-link waves-effect waves-light" href="{{ route('login') }}">
                         INICIAR SESIÓN
@@ -69,18 +68,18 @@
 
                 @else
 
-               <li class="nav-item dropdown text-uppercase datos_usuario">
-                    <a class="nav-link dropdown-toggle pl-5 pr-5 pb-1 href="producto" id="navbarDropdownMenuLink-333"
+                <li class="nav-item dropdown text-uppercase datos_usuario">
+                    <a class="nav-link dropdown-toggle pl-4 pr-4 pb-1 href="producto" id="navbarDropdownMenuLink-333"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        {{ auth()->user()->nombre }}
+                        <i class="fas fa-user-alt"></i> {{ auth()->user()->nombre }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-default col-4 minimenu-DS"
                         aria-labelledby="navbarDropdownMenuLink-333">
                         <a class="dropdown-item" href="{{route('mis_datos')}}">
-                            <img  src="{{ asset('img/user.png') }}" alt="Icono de usuario"  width="23">
+                            <img src="{{ asset('img/user.png') }}" alt="Icono de usuario" width="23">
                             Mi perfil</a>
                         <a class="dropdown-item" href="{{route('cerrar_sesion')}}">
-                            <img  src="{{ asset('img/logout.png') }}" alt="Cerrar Sesión"  width="23">
+                            <img src="{{ asset('img/logout.png') }}" alt="Cerrar Sesión" width="23">
                             Cerrar sesión</a>
                     </div>
                 </li>
@@ -120,8 +119,7 @@
             <div class="redes-sociales-compra d-flex align-items-md-center justify-content-end">
                 <a href="https://www.facebook.com/CarnivorousLandPlantasCarnivorasColombia/?epa=SEARCH_BOX"
                     target="_blank">
-                    <img class="p-1" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook"
-                        width="45">
+                    <img class="p-1" src="{{ asset('img/redes-sociales/facebook.png') }}" alt="Facebook" width="45">
                 </a>
                 <a href="https://www.instagram.com/carnivorousland" target="_blank">
                     <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/instagram.png') }}" alt="Instagram"
@@ -139,13 +137,13 @@
                 @if(auth()->user()==null)
 
                 <a href="{{ route('carrito') }}">
-                    <img class="bordes-left-DS ml-4" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
+                    <img class="bordes-left-DS ml-3" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
                     <span class="badge badge-primary badge-pill counter" style="z-index:4;">0</span>
                 </a>
                 @elseif(auth()->user()->rol=='cliente')
                 <a href="{{ route('carrito') }}">
-                    <img class="bordes-left-DS ml-4" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
+                    <img class="bordes-left-DS ml-3" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
                     <span class="badge badge-primary badge-pill counter" style="z-index:4;">0</span>
                 </a>
