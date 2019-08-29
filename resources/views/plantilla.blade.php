@@ -283,54 +283,44 @@
                     success: function(result){
                         console.log(result.success);
 
+
+
+
+
+                        for (i=0 ; i<5; i++){
+
+                        $('#articulo_name'+[i]).html("");
+                        $('#cantidad'+[i]).html("");
+                        $('#tamaño'+[i]).html("");
+                        $('#valor'+[i]).html("");
+                        $('#imagen'+[i]).html("");
+
+                        }
+
+
+                        
                         $('#modal_pedidos').modal('show');
-
-
+                        
 
                         $('#nombre_cli').html(result.success[0].nombre_cliente);
                         $('#ciudad').html(result.success[0].ciudad);
                         $('#direccion').html(result.success[0].direccion);
                         $('#tipo_entrega').html(result.success[0].tipo_entrega);
                         $('#estado').html(result.success[0].estado);
+                        $('#total').html(result.success[0].total);
+
+
+
 
                         for (i=0 ; i<result.success.length; i++){
 
                         $('#articulo_name'+[i]).html(result.success[i].nombre_articulo);
                         $('#cantidad'+[i]).html(result.success[i].cantidad);
+                        $('#tamaño'+[i]).html(result.success[i].tamaño);
                         $('#valor'+[i]).html(result.success[i].valor);
                         $('#imagen'+[i]).html(result.success[i].imagen);
 
                         }
-
-                        if(result.success.length == 2){
-
-
-
-                            $('#articulo_name'+[2]).html("");
-                            $('#cantidad'+[2]).html(" ");
-                            $('#valor'+[2]).html(" ");
-                            $('#imagen'+[2]).html(" ");
-
-
-                        }
-
-                        if(result.success.length == 1){
-
-
-                            for (i=1 ; i<3; i++){
-
-                            $('#articulo_name'+[i]).html("");
-                            $('#cantidad'+[i]).html(" ");
-                            $('#valor'+[i]).html(" ");
-                            $('#imagen'+[i]).html(" ");
-
-                        }
-
-
-
-
-                        }
-
 
 
 
@@ -340,6 +330,38 @@
                     }
             })
         })
+
+
+
+
+        jQuery(document).on("click", "#enviarr", function(){
+
+            var url = 'http://127.0.0.1:8000/pedidos/'+$(this).attr('data-id');
+            
+            $.ajax({
+
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                method: 'PUT',
+                dataType: 'JSON',
+
+
+                url: url,
+                    success: function(result){
+                        console.log(result.success);
+
+                        name = result.success.nombre_cliente;
+                        alert("El pedido de " + name + " fue enviado a la lista de entregados exitosamente");
+                        
+                        location.reload();
+
+
+                    },
+                    error: function (result){
+                         console.log(result)
+                    }
+            })
+        })
+        
     </script>
 
 

@@ -25,7 +25,7 @@
        	@foreach ( $pedido_pendiente as $pendiente)
     		<tr>
       			
-            <td></td>
+            <td><button data-id="{{$pendiente->id}}" id="enviarr" type="button" class="btn botones" data-dismiss="modal">Entregar</button></td>
             <td>{{$pendiente->fecha}}</td>
             <td>{{$pendiente->nombre_cliente}}</td>
             <td>{{$pendiente->ciudad}}</td>
@@ -46,7 +46,6 @@
 
       <thead class="cabecera_pedidos">
         <tr>
-            <th scope="col">Entregado</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
             <th scope="col">Ciudad</th>
@@ -58,7 +57,6 @@
       <tbody class="cuerpo_pedidos">
         @foreach ( $pedido_entregado as $entregado)
         <tr>
-            <td></td>
             <td>{{$entregado->fecha}}</td>
             <td>{{$entregado->nombre_cliente}}</td>
             <td>{{$entregado->ciudad}}</td>
@@ -94,6 +92,7 @@
                   
                   <tr>
                     <th scope="col">Nombre del producto</th>
+                    <th scope="col">Tamaño</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Subtotal</th>
                     <th scope="col">Imagen</th>
@@ -106,6 +105,7 @@
                   
                   <tr>
                     <td id="articulo_name0"></td>
+                    <td id="tamaño0"></td>
                     <td id="cantidad0"></td>
                     <td id="valor0"></td>
                     <td id="imagen0"></td>             
@@ -113,6 +113,7 @@
 
                   <tr>
                     <td id="articulo_name1"></td>
+                    <td id="tamaño1"></td>
                     <td id="cantidad1"></td>
                     <td id="valor1"></td>
                     <td id="imagen1"></td>             
@@ -120,9 +121,26 @@
 
                   <tr>
                     <td id="articulo_name2"></td>
+                    <td id="tamaño2"></td>
                     <td id="cantidad2"></td>
                     <td id="valor2"></td>
                     <td id="imagen2"></td>             
+                  </tr>
+
+                  <tr>
+                    <td id="articulo_name3"></td>
+                    <td id="tamaño3"></td>
+                    <td id="cantidad3"></td>
+                    <td id="valor3"></td>
+                    <td id="imagen3"></td>             
+                  </tr>
+
+                  <tr>
+                    <td id="articulo_name4"></td>
+                    <td id="tamaño4"></td>
+                    <td id="cantidad4"></td>
+                    <td id="valor4"></td>
+                    <td id="imagen4"></td>             
                   </tr>
                                                
                 </tbody>
@@ -132,13 +150,14 @@
                     <th scope="col">TOTAL</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                     <th scope="col" id="total"></th>
                   </tr>
                 </thead>
               </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
+        <button  type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

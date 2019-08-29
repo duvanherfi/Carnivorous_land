@@ -88,6 +88,8 @@ Route::delete('/productosControl/{id}', 'ProductoControlador@destroy')->name('pr
 Route::get('/comprobarSiAdmin','usuarioControlador@isAdmin');
 
 
-Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos');
+Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');
 
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
+
+Route::put('/pedidos/{id}', "PedidosController@cambiar")->name('cambiar');
