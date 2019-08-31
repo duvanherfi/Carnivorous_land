@@ -61,7 +61,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Señor(a) usuario, para poder añadir un prodcuto al carrito necesita haber iniciado sesión primero.</p>
+                    <p>Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>

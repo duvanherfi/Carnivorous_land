@@ -42616,7 +42616,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "modal-body" }, [
                 _c("p", [
                   _vm._v(
-                    "Señor(a) usuario, para poder añadir un prodcuto al carrito necesita haber iniciado sesión primero."
+                    "Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero."
                   )
                 ])
               ]),

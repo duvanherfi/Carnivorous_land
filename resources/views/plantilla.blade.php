@@ -145,7 +145,10 @@
                 <a href="{{ route('carrito') }}">
                     <img class="bordes-left-DS ml-3" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
-                    <span id="contadorCarrito" class="badge badge-primary badge-pill counter position-absolute" style="z-index:4; top:14%; right:2%;">0</span>
+                    @php
+                        $cantidad = Session::get('cantidad');
+                    @endphp
+                    <span id="contadorCarrito" class="badge badge-primary badge-pill counter position-absolute" style="z-index:4; top:14%; right:2%;"><?= $cantidad?></span>
                 </a>
                 @endif
 

@@ -13,11 +13,6 @@ class CarritoControlador extends Controller
     {
         if ($request->ajax()) {
             $id = $request->session()->get('id');
-            $todo = Session::all();
-            // $producto = array_keys($todo);
-            // $producto = $producto[5];
-            // $id = 1;
-            // $producto = $request->session()->get("producto", 2);
             $productos = (array)[];
             for ($i = 0; $i < count($id); $i++) {
                 $producto = $request->session()->get('producto'.$id[$i]);
@@ -45,7 +40,7 @@ class CarritoControlador extends Controller
             array_push($id, $request->id);
             Session::put('id', $id);
         }
-
+        Session::put('cantidad', count($id));
         $producto = (object) [
             'id' => $request->id,
             'nombre' => $request->nombre,
@@ -53,15 +48,17 @@ class CarritoControlador extends Controller
             'valor' => $request->valor
         ];
         $request->session()->push('producto' . $request->id, $producto);
+        return Session::all();
     }
 
     public function eliminar($id)
     {
-        Session::forget($id);
+        $cantidad = Session::get('cantidad');
+        Session::put('cantidad', $cantidad - 1);
+        Session::forget('producto'.$id);
         $sesion = Session::get('id');
         $sesion = array_diff($sesion, array($id));
         Session::put('id', $sesion);
-        // $hola = Session::all();
-        // return $hola;
+        return Session::all();
     }
 }

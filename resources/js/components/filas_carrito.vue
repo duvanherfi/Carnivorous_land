@@ -58,7 +58,6 @@ export default {
             });
             this.total = sum;
             console.log(response.data);
-            
         })
     },
     updated(){

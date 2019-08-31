@@ -38,23 +38,24 @@ class ProductoControlador extends Controller
                     ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)->where('productos.habilitado', 'true')
                     ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
             }
-            $sesion = $request->session()->get('producto');
+            $sesion = $request->session()->get('id');
 
-            for ($i = 0; $i < count($productos); $i++) {
-                $productos[$i]->opcionCancelar = false;
+            if (empty($sesion)) {
+                for ($i = 0; $i < count($productos); $i++) {
+                    $productos[$i]->opcionCancelar = false;
+                }
+            } else {
+                for ($i = 0; $i < count($productos); $i++) {
+                    if (in_array($productos[$i]->id_producto, $sesion)) {
+
+                        $productos[$i]->opcionCancelar = true;
+                    } else {
+                        $productos[$i]->opcionCancelar = false;
+                    }
+                }
             }
-
-            // for ($i = 0; $i < count($productos); $i++) {
-            //     // var_dump($productos[$i]->id_producto);
-            //     if (property_exists((object) $sesion, (String) $productos[$i]->id_producto)) {
-            //         $productos[$i]->opcionCancelar = true;
-            //     } else {
-            //         $productos[$i]->opcionCancelar = false;
-            //     }
-            // }
-            // $a = ['a','b'=>'c'];
-            // var_dump( property_exists((object) $sesion[0]->, 'id'));
             return $productos;
+            // property_exists((object) $sesion, (String) $productos[$i]->id_producto)
         } else {
             return view('inicio');
         }
