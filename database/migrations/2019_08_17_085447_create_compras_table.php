@@ -16,6 +16,7 @@ class CreateComprasTable extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->integerIncrements('id_compra')->unsigned();
             $table->string('nombre_articulo');
+            $table->string('tamaño');
             $table->Integer('cantidad');
             $table->double('valor', 8, 2);
             $table->string('imagen');

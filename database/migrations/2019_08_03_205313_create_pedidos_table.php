@@ -21,6 +21,7 @@ class CreatePedidosTable extends Migration
             $table->string('direccion');
             $table->string('tipo_entrega');
             $table->string('estado');
+            $table->double('total', 8, 2);
             $table->string('entregado');
             $table->timestamps();
         });

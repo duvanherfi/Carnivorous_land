@@ -92,6 +92,9 @@ Route::get('/carritoControl', 'CarritoControlador@obtener')->name('carro.obtener
 //llamada al metodo isAdmin del controlador usuario para hacer el menú
 Route::get('/comprobarSiAdmin','usuarioControlador@isAdmin');
 
-Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos');
+
+Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');
 
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
+
+Route::put('/pedidos/{id}', "PedidosController@cambiar")->name('cambiar');
