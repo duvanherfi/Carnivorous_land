@@ -72,7 +72,8 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+            <h2 class="row subtitulo-DS pt-3 w-100 m-0">
+                <img class="" src="/img/precaucion.png" alt="Icono de precaucion" width="30">¡ADVERTENCIA!</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -81,12 +82,14 @@
         ¿Está seguro que desea actualizar sus datos?
         </div>
         <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Avanzar</button>
           <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-success">Avanzar</button>
+        
         </div>
       </div>
     </div>
   </div>    
+  
     </form>
     
 

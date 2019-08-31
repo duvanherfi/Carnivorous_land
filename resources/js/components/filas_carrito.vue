@@ -22,7 +22,7 @@
             </td>
             <td data-th="Precio" class="text-center">{{ item[0].valor | currency}}</td>
             <td data-th="Cantidad">
-                <input @change="subtotal(item[0].valor, item[0].cantidad, index)" v-model="item[0].cantidad" type="number" class="form-control text-center">
+                <input @change="subtotal(item[0].valor, item[0].cantidad, index)" v-model="item[0].cantidad" type="number"  min="1" max="5" class="form-control text-center">
             </td>
             <td data-th="Subtotal" class="text-center">{{ item[0].subtotal | currency }}</td>
             <td class="actions" data-th="">
@@ -32,7 +32,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="2"><a href="#" id="continuar_comprando" class="btn">Continuar comprando</a></td>
+            <td colspan="2"><a href="#" id="continuar_comprando" class="btn btn-success">Continuar comprando</a></td>
             <td colspan="2" class="hidden-xs text-center">Total:</td>
             <td class="hidden-xs text-center"><strong id="total">{{ total | currency }}</strong></td>
             <td></td>
