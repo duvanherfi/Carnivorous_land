@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Producto;
 use App\Planta;
@@ -24,7 +25,7 @@ class ProductoControlador extends Controller
     {
         if ($request->ajax()) {
             if ($categoria == 'plantas') {
-                
+
                 $productos = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
                     ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('genero', $tipo)->where('productos.habilitado', 'true')
                     ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
@@ -37,6 +38,22 @@ class ProductoControlador extends Controller
                     ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)->where('productos.habilitado', 'true')
                     ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
             }
+            $sesion = $request->session()->get('producto');
+
+            for ($i = 0; $i < count($productos); $i++) {
+                $productos[$i]->opcionCancelar = false;
+            }
+
+            // for ($i = 0; $i < count($productos); $i++) {
+            //     // var_dump($productos[$i]->id_producto);
+            //     if (property_exists((object) $sesion, (String) $productos[$i]->id_producto)) {
+            //         $productos[$i]->opcionCancelar = true;
+            //     } else {
+            //         $productos[$i]->opcionCancelar = false;
+            //     }
+            // }
+            // $a = ['a','b'=>'c'];
+            // var_dump( property_exists((object) $sesion[0]->, 'id'));
             return $productos;
         } else {
             return view('inicio');
@@ -70,7 +87,7 @@ class ProductoControlador extends Controller
                 ->where('tamaño', $request->tamaño)
                 ->where('genero', $request->genero)
                 ->select('*', 'productos.id as id_producto');
-        }else if ($request->categoria == 'merchandising') {
+        } else if ($request->categoria == 'merchandising') {
             $producto = DB::table('productos')
                 ->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
                 ->join('tipo_merchandisings', 'merchandisings.id_tipo', '=', 'tipo_merchandisings.id')
@@ -78,7 +95,7 @@ class ProductoControlador extends Controller
                 ->where('nombre', $request->nombre)
                 ->where('tipo', $request->genero)
                 ->select('*', 'productos.id as id_producto');
-        }else if ($request->categoria == 'implementos') {
+        } else if ($request->categoria == 'implementos') {
             $producto = DB::table('productos')
                 ->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
                 ->join('tipo_implementos', 'implemento_cultivos.id_tipo', '=', 'tipo_implementos.id')
@@ -88,7 +105,7 @@ class ProductoControlador extends Controller
                 ->select('*', 'productos.id as id_producto');
         }
         $productos = $producto->get();
-        
+
         if (count($productos, 1) == 1) {
             $producto = $producto->update([
                 'opcion_catalogo' => $request->opcion_catalogo,
@@ -102,7 +119,7 @@ class ProductoControlador extends Controller
                 'categoria' => $request->categoria
             ]);
         }
-        
+
         if ($request->hasFile('imagen_principal')) {
             $file = $request->file('imagen_principal');
             $imagen_principal = time() . $file->getClientOriginalName();
@@ -188,7 +205,7 @@ class ProductoControlador extends Controller
     public static function update(Request $request, $id, $categoria)
     {
         $producto = Producto::find($id);
-        
+
         if ($request->hasFile('imagen_principal')) {
             $file = $request->file('imagen_principal');
             $imagen_principal = time() . $file->getClientOriginalName();

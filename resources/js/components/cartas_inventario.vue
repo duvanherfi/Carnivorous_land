@@ -1,0 +1,409 @@
+<template lang="es">
+<!--Cartas-->
+<div id="todos_los_productos">
+    <!--Card-->
+    <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
+        <!--Card image-->
+        <div class="img-sombra-producto-DS">
+            <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" />
+        </div>
+        <div class="btn-gestion">
+            <button @click="modalModificar(item)" class="btn color-verde d-inline" data-toggle="modal" data-target="#modal_modificar_articulo">Modificar</button>
+            <button @click="modaleliminarProducto(item.id_producto)" class="btn botones ml-1 d-inline" data-toggle="modal" data-target="#verificar_eliminar_producto">Eliminar</button>
+        </div>
+        <!-- /Imagen -->
+
+        <!-- Contenido Inventario -->
+        <div class="card-body card-body-cascade" v-if="gestion == 'gestion'">
+            <div v-if="producto.categoria == 'merchandising'
+                || producto.categoria == 'implementos'" class="my-2"></div>
+            <!-- Nombre -->
+            <h5 class="font-weight-bold mb-0 text-center">{{ item.nombre }}</h5>
+            <hr class="my-1">
+            <!-- Valor -->
+            <p class="mb-0 text-center">Valor: {{ item.valor | currency}} COP</p>
+            <!-- Cantidad -->
+            <p class="mb-0 text-center">Cantidad: {{ item.cantidad }}</p>
+            <!-- Stock minimo -->
+            <p class="mb-0 text-center">Stock mínimo: {{ item.stock_minimo }}</p>
+            <!-- Tamaño -->
+            <p v-if="producto.categoria == 'plantas'" class="mb-0 text-center">Tamaño: {{ item.tamaño }}</p>
+            <hr class="my-1">
+            <!-- Opcion catalogo -->
+            <div class="custom-control custom-switch pl-5" v-if="item.opcion_catalogo == 'true'">
+                <label class="opcion_catalogo">Enviar a catálogo:</label>
+                <input @change="guardarOpcionCatalogo(item.id_producto, item.opcion_catalogo, index)" type="checkbox" class="custom-control-input" :id="item.nombre" checked>
+                <label class="custom-control-label" :for="item.nombre"></label>
+            </div>
+            <div class="custom-control custom-switch pl-5" v-else>
+                <label class="opcion_catalogo">Enviar a catálogo:</label>
+                <input @change="guardarOpcionCatalogo(item.id_producto, item.opcion_catalogo, index)" type="checkbox" class="custom-control-input" :id="item.nombre" name="check">
+                <label class="custom-control-label" :for="item.nombre"></label>
+            </div>
+        </div>
+    </div>
+    <!--/.Card-->
+
+    <!-- Verificar eliminar -->
+    <div class="modal fade" id="verificar_eliminar_producto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">
+                        <img class="" src="/img/precaucion.png" alt="Icono de precaucion" width="30">¡ADVERTENCIA!</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Esta seguro de desea eliminar el artículo?</p>
+                </div>
+                <div class="modal-footer">
+                    <button @click="eliminarProducto(producto.id)" type="button" class="btn color-verde" data-dismiss="modal">Si</button>
+                    <button type="button" class="btn botones" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal modificar articulo -->
+    <div class="modal fade" id="modal_modificar_articulo" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">MODIFICAR ARTÍCULO</h2><br>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="ml-3">
+                        <div class="form-group row">
+                            <label for="imagen_principal_modificar" class="col-md-4 col-form-label pr-0">Imagen principal:</label>
+                            <div class="archivos col-md-7">
+                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal_modificar" id="imagen_principal_modificar" lang="es">
+                                <label class="custom-file-label" for="imagen_principal_modificar" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="imagen_principal_modificar" v-else>{{ this.producto.imagen_principalnombre }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="imagen2_modificar" class="col-md-4 col-form-label">Imagen #2:</label>
+                            <div class="archivos col-md-7">
+                                <input @change="obtenerImagen2" type="file" class="custom-file-input" name="imagen2_modificar" id="imagen2_modificar" lang="es">
+                                <label class="custom-file-label" for="imagen2_modificar" v-if="this.producto.imagen2nombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="imagen2_modificar" v-else>{{ this.producto.imagen2nombre }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="imagen3_modificar" class="col-md-4 col-form-label">Imagen #3:</label>
+                            <div class="archivos col-md-7">
+                                <input @change="obtenerImagen3" type="file" class="custom-file-input" name="imagen3_modificar" id="imagen3_modificar" lang="es">
+                                <label class="custom-file-label" for="imagen3_modificar" v-if="this.producto.imagen3nombre == ''">Seleccionar Archivo</label>
+                                <label class="custom-file-label" for="imagen3_modificar" v-else>{{ this.producto.imagen3nombre }}</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="nombre_modificar" class="col-md-4 col-form-label">Nombre:</label>
+                            <div class="col-md-7 p-0">
+                                <input v-model="producto.nombre" id="nombre_modificar" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_modificar" required autocomplete="nombre_modificar" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="valor_modificar" class="col-md-4 col-form-label">Valor:</label>
+                            <div class="col-md-7 p-0">
+                                <input v-model="producto.valor" id="valor_modificar" placeholder="Ej: 50000" type="number" class="form-control" name="valor_modificar" required autocomplete="valor_modificar" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cantidad_modificar" class="col-md-4 col-form-label">Cantidad:</label>
+                            <div class="col-md-7 p-0">
+                                <input v-model="producto.cantidad" id="cantidad_modificar" placeholder="Ej: 43" type="number" class="form-control" name="cantidad_modificar" required autocomplete="cantidad_modificar" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="stock_minimo_modificar" class="col-md-4 col-form-label">Stock mínimo:</label>
+                            <div class="col-md-7 p-0">
+                                <input v-model="producto.stock_minimo" id="stock_minimo_modificar" placeholder="Ej: 10" type="number" class="form-control" name="stock_minimo_modificar" required autocomplete="stock_minimo_modificar" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" v-if="this.producto.categoria=='plantas'">
+                            <label for="tamaño_modificar" class="col-md-4 col-form-label">Tamaño:</label>
+                            <div class="col-md-7 p-0">
+                                <select v-model="producto.tamaño" class="custom-select form-control" id="tamaño" name="tamaño" required autocomplete="tamaño">
+                                    <option disabled value="">Escoge una opción</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XS">XS</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group mr-4">
+                            <label for="descripcion_modificar" class="d-inline-flex col-form-label">Descripción:</label>
+                            <textarea v-model="producto.descripcion" class="form-control" id="descripcion_modificar" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button @click="modificarProducto(producto.id)" type="button" class="btn color-verde" data-dismiss="modal">Modificar</button>
+                    <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/Cartas-->
+</template>
+
+<script>
+import EventBus from '../event_bus'
+import {
+    isNullOrUndefined
+} from 'util';
+export default {
+    data() {
+        return {
+            productos: [],
+            tipos: [],
+            producto: {
+                id: '',
+                imagen_principal: '',
+                imagen_principalnombre: '',
+                imagen_principalnombreAntiguo: '',
+                imagen2: '',
+                imagen2nombre: '',
+                imagen2nombreAntiguo: '',
+                imagen3: '',
+                imagen3nombre: '',
+                imagen3nombreAntiguo: '',
+                nombre: '',
+                valor: '',
+                cantidad: '',
+                stock_minimo: '',
+                categoria: 'plantas',
+                genero: '',
+                tamaño: '',
+                opcion_catalogo: '',
+                descripcion: ''
+            },
+            activar: true
+        };
+    },
+    created() {
+        EventBus.$on('articulos', data => {
+            $('#todos_los_productos').css('visibility', 'hidden');
+            this.producto.categoria = data.categoria;
+            this.producto.genero = data.genero;
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+                this.productos = response.data;
+                $('#todos_los_productos').css('visibility', 'visible');
+            })
+        })
+    },
+    beforeUpdate() {
+        EventBus.$on('activarUpdate', data => {
+            this.activar = data;
+            if (this.activar == true) {
+                this.actualizarProductos();
+            }
+        })
+
+        EventBus.$on('ordenar', data => {
+            if (data == 'ninguno') {
+                this.actualizarProductos();
+            } else if (data == 'alfabeticamente') {
+                this.productos.sort(function comparar(a, b) {
+                    if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+                });
+            } else if (data == 'ascendente') {
+                this.productos.sort(function comparar(a, b) {
+                    return b.valor - a.valor;
+                });
+            } else if (data == 'descendente') {
+                this.productos.sort(function comparar(a, b) {
+                    return a.valor - b.valor;
+                });
+            }
+        })
+    },
+    updated() {
+        this.activar = false;
+    },
+    methods: {
+        obtenerImagenPrincipal(e) {
+            let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen_principalnombre = '';
+            } else {
+                this.producto.imagen_principalnombre = file.name;
+            }
+            this.producto.imagen_principal = file;
+        },
+        obtenerImagen2(e) {
+            let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen2nombre = '';
+            } else {
+                this.producto.imagen2nombre = file.name;
+            }
+            this.producto.imagen2 = file;
+        },
+        obtenerImagen3(e) {
+            let file = e.target.files[0];
+            if (isNullOrUndefined(file)) {
+                this.producto.imagen3nombre = '';
+            } else {
+                this.producto.imagen3nombre = file.name;
+            }
+            this.producto.imagen3 = file;
+        },
+        actualizarProductos() {
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+                this.productos = response.data;
+            });
+        },
+        generarTipos() {
+            axios.get(`/tiposControl/${this.producto.categoria}`).then(response => {
+                this.tipos = response.data;
+            })
+        },
+        modalModificar(item) {
+            this.generarTipos();
+
+            this.producto.imagen_principalnombre = this.producto.imagen_principalnombreAntiguo = item.imagen_principal;
+            this.producto.imagen2nombre = this.producto.imagen2nombreAntiguo = item.imagen2;
+            this.producto.imagen3nombre = this.producto.imagen3nombreAntiguo = item.imagen3;
+            this.producto.nombre = item.nombre;
+            this.producto.valor = item.valor;
+            this.producto.cantidad = item.cantidad;
+            this.producto.stock_minimo = item.stock_minimo;
+            this.producto.tamaño = item.tamaño;
+            this.producto.descripcion = item.descripcion;
+
+            this.producto.id = item.id_producto;
+
+            $('#imagen_principal_modificar').val(null);
+            $('#imagen2_modificar').val(null);
+            $('#imagen3_modificar').val(null);
+        },
+        modificarProducto(id) {
+            let formData = new FormData();
+            formData.append('imagen_principal', this.producto.imagen_principal);
+            formData.append('imagen_principalnombreAntiguo', this.producto.imagen_principalnombreAntiguo);
+            formData.append('imagen2', this.producto.imagen2);
+            formData.append('imagen2nombreAntiguo', this.producto.imagen2nombreAntiguo);
+            formData.append('imagen3', this.producto.imagen3);
+            formData.append('imagen3nombreAntiguo', this.producto.imagen3nombreAntiguo);
+            formData.append('nombre', this.producto.nombre);
+            formData.append('valor', this.producto.valor);
+            formData.append('cantidad', this.producto.cantidad);
+            formData.append('stock_minimo', this.producto.stock_minimo);
+            formData.append('tamaño', this.producto.tamaño);
+            formData.append('descripcion', this.producto.descripcion);
+
+            axios.post(`/productosControl/${id}/${this.producto.categoria}`, formData).then(response => {
+                this.actualizarProductos();
+            })
+        },
+        guardarOpcionCatalogo(id_producto, opcion_catalogo, index) {
+            if (opcion_catalogo == 'true') {
+                this.productos[index].opcion_catalogo = 'false';
+            } else {
+                this.productos[index].opcion_catalogo = 'true';
+            }
+
+            axios.put(`/productosControl/${this.productos[index].opcion_catalogo}/${id_producto}`).then(response => {})
+        },
+        modaleliminarProducto(id) {
+            this.producto.id = id;
+        },
+        eliminarProducto(id) {
+            axios.delete(`/productosControl/${id}`).then(response => {
+                this.actualizarProductos();
+            })
+        }
+    },
+    props: ['gestion']
+};
+</script>
+
+<style>
+.btn-gestion {
+    position: absolute;
+}
+
+.tamaño-estrellas {
+    height: 29px;
+}
+
+.custom-control {
+    margin-right: 39px;
+}
+
+.opcion_catalogo {
+    margin-right: 36px;
+}
+
+.card-body {
+    font-family: 'Montserrat', sans-serif;
+    padding: 16px;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    cursor: default;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    color: #434343;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.color-verde {
+    background-color: #86a74d;
+    color: white;
+}
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    width: 84px;
+    height: 30px;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.carta-DS {
+    color: #434343;
+}
+
+label:hover,
+label:hover~label {
+    color: orange;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked~label {
+    color: orange;
+}
+
+.img-sombra-producto-DS {
+    -webkit-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    height: 185px;
+}
+</style>

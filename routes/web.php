@@ -84,9 +84,13 @@ Route::post('/productosControl/{id}/{categoria}', 'ProductoControlador@update')-
 Route::put('/productosControl/{opcion_catalogo}/{id}', 'ProductoControlador@actualizarOpcionCatalogo')->name('productos.opcion_catalogo');
 Route::delete('/productosControl/{id}', 'ProductoControlador@destroy')->name('productos.destroy');
 
+// Carrito de compra
+Route::post('/carritoControl', 'CarritoControlador@agregar')->name('carro.agregar');
+Route::delete('/carritoControl/{nombre}', 'CarritoControlador@eliminar')->name('carro.eliminar');
+Route::get('/carritoControl', 'CarritoControlador@obtener')->name('carro.obtener');
+
 //llamada al metodo isAdmin del controlador usuario para hacer el menú
 Route::get('/comprobarSiAdmin','usuarioControlador@isAdmin');
-
 
 Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos');
 

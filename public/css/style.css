@@ -8,6 +8,7 @@ pre{
     text-align: justify;
     font-size: 14.4px;
     color: #434343;
+    white-space: pre-wrap;
 }
 
 h2 {
@@ -106,7 +107,7 @@ body {
 }
 
 .z-index-sup {
-    z-index: 3;
+    z-index: 2;
 }
 
 /* Logo */
@@ -196,6 +197,7 @@ body {
     width: 27%;
     height: 100%;
     float: left;
+    padding-right: 15px;
 }
 
 .redes-sociales-administrador {

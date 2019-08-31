@@ -1,8 +1,10 @@
 <template lang="es">
 <div class="contenido-productos-DS">
-    <div v-if="id == ''" class="text-center spinner">
-        <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
+    <div v-if="id == ''" class="d-flex w-100 h-100">
+        <div class="text-center col align-self-center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
     </div>
     <div v-else>
@@ -37,7 +39,7 @@
     </div>
 
     <div>
-        <productos :gestion="gestion"></productos>
+        <productos-inventario :gestion="gestion"></productos-inventario>
     </div>
 
     <!-- Verificar eliminar -->
@@ -45,7 +47,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">¡ADVERTENCIA!</h2>
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">
+                        <img class="" src="/img/precaucion.png" alt="Icono de precaucion" width="30">¡ADVERTENCIA!</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -136,6 +139,7 @@ export default {
             this.categoria = data.categoria;
             axios.get(`/tiposControl/${data.genero}/${data.categoria}`).then(response => {
                 this.imagen = response.data.imagen;
+                this.tipoOrden = 'ninguno';
                 if (this.categoria == 'plantas') {
                     this.nombre = response.data.genero;
                 } else {
@@ -244,10 +248,6 @@ export default {
 </script>
 
 <style scoped>
-.spinner {
-    margin-top: 150px;
-}
-
 .imagen-subtitulo-DS {
     width: 100%;
     height: 150px;

@@ -7,6 +7,7 @@ use App\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class UsuarioControlador extends Controller
 {
@@ -70,6 +71,7 @@ class UsuarioControlador extends Controller
   //Método que le permite a un usuario cerrar la sesión
   public function cerrar_sesion(){
     Auth::logout();
+    Session::flush();
     return redirect()->route('inicio');
   }
 

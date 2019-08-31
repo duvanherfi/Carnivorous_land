@@ -73,7 +73,7 @@ export default {
         }
     },
     beforeCreate() {
-        axios.get('comprobarSiAdmin')
+        axios.get('/comprobarSiAdmin')
             .then(response => {
                 if (response.data === 'administrador' || response.data === 'cliente') {
                     this.isAdmin = response.data;
