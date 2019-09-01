@@ -69,7 +69,7 @@
                 @else
 
                 <li class="nav-item dropdown text-uppercase datos_usuario">
-                    <a class="nav-link dropdown-toggle pl-4 pr-4 pb-1 href="producto" id="navbarDropdownMenuLink-333"
+                    <a class="nav-link dropdown-toggle pl-4 pr-4 pb-1 href=" producto" id="navbarDropdownMenuLink-333"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <i class="fas fa-user-alt"></i> {{ auth()->user()->nombre }}
                     </a>
@@ -134,21 +134,22 @@
                     <img class="ml-2 p-1" src="{{ asset('img/redes-sociales/whatsapp.png') }}" alt="Whatsapp"
                         width="45">
                 </a>
+                @php
+                $cantidad = Session::get('cantidad');
+                @endphp
                 @if(auth()->user()==null)
-
                 <a href="{{ route('carrito') }}">
                     <img class="bordes-left-DS ml-3" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
-                    <span class="badge badge-primary badge-pill counter" style="z-index:4;">0</span>
+                    <span id="contadorCarrito" class="badge badge-primary badge-pill counter position-absolute"
+                        style="z-index:4; top:14%; right:2%;"><?= $cantidad?></span>
                 </a>
                 @elseif(auth()->user()->rol=='cliente')
                 <a href="{{ route('carrito') }}">
                     <img class="bordes-left-DS ml-3" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
-                    @php
-                        $cantidad = Session::get('cantidad');
-                    @endphp
-                    <span id="contadorCarrito" class="badge badge-primary badge-pill counter position-absolute" style="z-index:4; top:14%; right:2%;"><?= $cantidad?></span>
+                    <span id="contadorCarrito" class="badge badge-primary badge-pill counter position-absolute"
+                        style="z-index:4; top:14%; right:2%;"><?= $cantidad?></span>
                 </a>
                 @endif
 

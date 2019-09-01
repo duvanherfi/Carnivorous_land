@@ -111,7 +111,7 @@ export default {
             this.producto.genero = data.genero;
             axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
                 this.productos = response.data;
-                console.log(response.data);
+                // console.log(response.data);
                 
                 $('#todos_los_productos_vista').css('visibility', 'visible');
             })
@@ -159,7 +159,7 @@ export default {
                     formData.append('valor', item.valor);
 
                     axios.post('/carritoControl', formData).then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                     })
                 }
             })
@@ -170,7 +170,7 @@ export default {
             contadorCarrito -= 1;
             $('#contadorCarrito').html(contadorCarrito);
             axios.delete(`/carritoControl/${id}`).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
             })
         }
     },

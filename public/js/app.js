@@ -2218,8 +2218,8 @@ __webpack_require__.r(__webpack_exports__);
       _this.producto.categoria = data.categoria;
       _this.producto.genero = data.genero;
       axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria)).then(function (response) {
-        _this.productos = response.data;
-        console.log(response.data);
+        _this.productos = response.data; // console.log(response.data);
+
         $('#todos_los_productos_vista').css('visibility', 'visible');
       });
     });
@@ -2266,8 +2266,7 @@ __webpack_require__.r(__webpack_exports__);
           formData.append('nombre', item.nombre);
           formData.append('imagen', item.imagen_principal);
           formData.append('valor', item.valor);
-          axios.post('/carritoControl', formData).then(function (response) {
-            console.log(response.data);
+          axios.post('/carritoControl', formData).then(function (response) {// console.log(response.data);
           });
         }
       });
@@ -2277,8 +2276,7 @@ __webpack_require__.r(__webpack_exports__);
       var contadorCarrito = Number($('#contadorCarrito').html());
       contadorCarrito -= 1;
       $('#contadorCarrito').html(contadorCarrito);
-      axios["delete"]("/carritoControl/".concat(id)).then(function (response) {
-        console.log(response.data);
+      axios["delete"]("/carritoControl/".concat(id)).then(function (response) {// console.log(response.data);
       });
     }
   },
@@ -2729,8 +2727,7 @@ __webpack_require__.r(__webpack_exports__);
         sum += Number(element[0].subtotal);
       });
 
-      _this.total = sum;
-      console.log(response.data);
+      _this.total = sum; // console.log(response.data);
     });
   },
   updated: function updated() {
@@ -2746,6 +2743,26 @@ __webpack_require__.r(__webpack_exports__);
         sum += Number(element[0].subtotal);
       });
       this.total = sum;
+    },
+    cancelarProductoCarrito: function cancelarProductoCarrito(id) {
+      var _this2 = this;
+
+      var contadorCarrito = Number($('#contadorCarrito').html());
+      contadorCarrito -= 1;
+      $('#contadorCarrito').html(contadorCarrito);
+      axios["delete"]("/carritoControl/".concat(id)).then(function (response) {
+        // console.log(response.data);
+        axios.get('/carritoControl').then(function (response) {
+          _this2.productos = response.data;
+          var sum = 0;
+
+          _this2.productos.forEach(function (element) {
+            sum += Number(element[0].subtotal);
+          });
+
+          _this2.total = sum; // console.log(response.data);
+        });
+      });
     }
   }
 });
@@ -8378,7 +8395,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.imagen_carrito[data-v-1773e147]{\r\n    width: 220px;\r\n    height: 110px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\r\n", ""]);
+exports.push([module.i, "\n.imagen_carrito[data-v-1773e147] {\r\n    width: 220px;\r\n    height: 110px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\r\n", ""]);
 
 // exports
 
@@ -43684,7 +43701,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control text-center",
-                attrs: { type: "number" },
+                attrs: { type: "number", min: "1", max: "5" },
                 domProps: { value: item[0].cantidad },
                 on: {
                   change: function($event) {
@@ -43706,7 +43723,28 @@ var render = function() {
               [_vm._v(_vm._s(_vm._f("currency")(item[0].subtotal)))]
             ),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", { staticClass: "actions", attrs: { "data-th": "" } }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger btn-sm",
+                  on: {
+                    click: function($event) {
+                      return _vm.cancelarProductoCarrito(item[0].id)
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    attrs: {
+                      src: "/img/carrito/eliminar.png",
+                      alt: "eliminar producto",
+                      width: "25"
+                    }
+                  })
+                ]
+              )
+            ])
           ])
         }),
         0
@@ -43714,7 +43752,7 @@ var render = function() {
       _vm._v(" "),
       _c("tfoot", [
         _c("tr", [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "td",
@@ -43767,26 +43805,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "actions", attrs: { "data-th": "" } }, [
-      _c("button", { staticClass: "btn btn-danger btn-sm" }, [
-        _c("img", {
-          attrs: {
-            src: "/img/carrito/eliminar.png",
-            alt: "eliminar producto",
-            width: "25"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("td", { attrs: { colspan: "2" } }, [
       _c(
         "a",
-        { staticClass: "btn", attrs: { href: "#", id: "continuar_comprando" } },
+        {
+          staticClass: "btn btn-success",
+          attrs: { href: "#", id: "continuar_comprando" }
+        },
         [_vm._v("Continuar comprando")]
       )
     ])

@@ -13,12 +13,14 @@ class CarritoControlador extends Controller
     {
         if ($request->ajax()) {
             $id = $request->session()->get('id');
-            $productos = (array)[];
-            for ($i = 0; $i < count($id); $i++) {
-                $producto = $request->session()->get('producto'.$id[$i]);
+            $productos = (array) [];
+            
+            foreach ($id as $posicion => $jugador) {
+                $producto = $request->session()->get('producto' . $jugador);
                 array_push($productos, $producto);
             }
-            for ($i=0; $i < count($productos); $i++) { 
+
+            for ($i = 0; $i < count($productos); $i++) {
                 $productos[$i][0]->subtotal = $productos[$i][0]->valor;
                 $productos[$i][0]->cantidad = 1;
             }
@@ -55,7 +57,7 @@ class CarritoControlador extends Controller
     {
         $cantidad = Session::get('cantidad');
         Session::put('cantidad', $cantidad - 1);
-        Session::forget('producto'.$id);
+        Session::forget('producto' . $id);
         $sesion = Session::get('id');
         $sesion = array_diff($sesion, array($id));
         Session::put('id', $sesion);

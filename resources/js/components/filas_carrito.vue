@@ -22,11 +22,11 @@
             </td>
             <td data-th="Precio" class="text-center">{{ item[0].valor | currency}}</td>
             <td data-th="Cantidad">
-                <input @change="subtotal(item[0].valor, item[0].cantidad, index)" v-model="item[0].cantidad" type="number"  min="1" max="5" class="form-control text-center">
+                <input @change="subtotal(item[0].valor, item[0].cantidad, index)" v-model="item[0].cantidad" type="number" min="1" max="5" class="form-control text-center">
             </td>
             <td data-th="Subtotal" class="text-center">{{ item[0].subtotal | currency }}</td>
             <td class="actions" data-th="">
-                <button class="btn btn-danger btn-sm"><img src="/img/carrito/eliminar.png" alt="eliminar producto" width="25"></button>
+                <button @click="cancelarProductoCarrito(item[0].id)" class="btn btn-danger btn-sm"><img src="/img/carrito/eliminar.png" alt="eliminar producto" width="25"></button>
             </td>
         </tr>
     </tbody>
@@ -43,13 +43,13 @@
 
 <script>
 export default {
-    data(){
-        return{
+    data() {
+        return {
             productos: [],
             total: 0
         }
     },
-    created(){
+    created() {
         axios.get('/carritoControl').then(response => {
             this.productos = response.data;
             var sum = 0;
@@ -57,29 +57,46 @@ export default {
                 sum += Number(element[0].subtotal);
             });
             this.total = sum;
-            console.log(response.data);
+            // console.log(response.data);
         })
     },
-    updated(){
+    updated() {
         var total = $('#total').html();
         $('#precio').html(total);
     },
-    methods:{
-        subtotal(valor, cantidad, index){
+    methods: {
+        subtotal(valor, cantidad, index) {
             var subtotal = valor * cantidad;
-            this.productos[index][0].subtotal = subtotal; 
+            this.productos[index][0].subtotal = subtotal;
             var sum = 0;
             this.productos.forEach(element => {
                 sum += Number(element[0].subtotal);
             });
             this.total = sum;
+        },
+        cancelarProductoCarrito(id) {
+            var contadorCarrito = Number($('#contadorCarrito').html());
+            contadorCarrito -= 1;
+            $('#contadorCarrito').html(contadorCarrito);
+            axios.delete(`/carritoControl/${id}`).then(response => {
+                // console.log(response.data);
+                axios.get('/carritoControl').then(response => {
+                    this.productos = response.data;
+                    var sum = 0;
+                    this.productos.forEach(element => {
+                        sum += Number(element[0].subtotal);
+                    });
+                    this.total = sum;
+                    // console.log(response.data);
+                })
+            })
         }
     }
 }
 </script>
 
 <style scoped>
-.imagen_carrito{
+.imagen_carrito {
     width: 220px;
     height: 110px;
     object-fit: cover;
