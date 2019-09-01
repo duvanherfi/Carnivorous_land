@@ -27,7 +27,7 @@ class UsuarioControlador extends Controller
             'departamento'=>'required|string',
             'ciudad'=>'required|string',
             'barrio'=>'required|string',
-            'via'=>'required|string'
+            'direccion'=>'required|string'
         ]);
         if($datos->fails()){
             return redirect()->back()->withInput()->withErrors($datos->errors());

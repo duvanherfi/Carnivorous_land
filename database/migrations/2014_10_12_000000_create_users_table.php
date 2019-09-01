@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('departamento');
             $table->string('ciudad');
             $table->string('barrio');
-            $table->string('via');
+            $table->string('direccion');
             $table->string('rol')->default('cliente');
             $table->rememberToken();
             $table->timestamps();

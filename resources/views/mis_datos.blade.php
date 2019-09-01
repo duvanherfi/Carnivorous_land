@@ -95,8 +95,8 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="via">Vía</label>
-                <input type="text" class="form-control" id="via" name="via" value="{{ $user->via }}" placeholder="tu vía" required>
+                <label for="via">Dirección</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" value="{{ $user->direccion }}" placeholder="tu dirección" required>
             </div>
         </div>
 
