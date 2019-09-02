@@ -186,11 +186,11 @@
 
 
                         <div class="form-group row">
-                                <label for="via" class="col-md-4 col-form-label text-md-right">{{ __('Vía') }}</label>
+                                <label for="direccion" class="col-md-4 col-form-label text-md-right">{{ __('Dirección') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="via" type="text" class="form-control @error('via') is-invalid @enderror" name="via" value="{{ old('via') }}" autocomplete="via" placeholder="Ej: Calle 13Cn # 13N40">
-                                    @error('via')
+                                    <input id="direccion" type="text" class="form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{ old('direccion') }}" autocomplete="direccion" placeholder="Ej: Calle 13Cn # 13N40">
+                                    @error('direccion')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
