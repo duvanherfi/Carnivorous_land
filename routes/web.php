@@ -98,3 +98,9 @@ Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
 
 Route::put('/pedidos/{id}', "PedidosController@cambiar")->name('cambiar');
+
+
+
+//Rutas correo
+Route::post('/correo', "CorreoControlador@escribenos")
+->name('correo');

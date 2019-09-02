@@ -67,26 +67,23 @@
         <div id="texto-mapa" class="col pt-3 pb-3">
             <h3 class="pb-3">Ubicados en Cali, Colombia. Realizamos envíos a todo el país</h3>
             <!-- Default form subscription -->
-            <form class="text-center  bg-success form-ubicacion border-light p-4" action="#!">
-
+        <form method="POST"  class="text-center  bg-success form-ubicacion border-light p-4" action="{{ route('correo') }}">
+            @csrf
                 <p class="h4 mb-4">Escríbenos</p>
 
                 <p>Puedes enviarnos una recomendación, queja, reclamo o lo que desees!</p>
 
-                <!-- Name -->
-                <input type="text" id="defaultSubscriptionFormPassword" class="form-control form-ubicacion mb-4"
-                    placeholder="Name">
+                <!-- Nombre -->
+                <input type="text" id="nombre" name="nombre" class="form-control  mb-4" placeholder="Nombre" required>
 
-                <!-- Email -->
-                <input type="email" id="defaultSubscriptionFormEmail" class="form-control form-ubicacion bicacion mb-4"
-                    placeholder="E-mail">
+                <!-- Correo -->
+                <input type="correo" id="correo" name="correo" class="form-control  mb-4" placeholder="Tu correo" required>
 
-                <!-- Textp -->
-                <input type="text" id="texto" class="form-control form-ubicacion bicacion mb-4"
-                    placeholder="Tu mensaje">
+                <!-- Texto -->
+                <input type="text" id="mensaje" name="mensaje" class="form-control  mb-4" required>
 
                 <!-- Sign in button -->
-                <button class="btn btn-block" type="submit">Enviar</button>
+                <button type="submit" class="btn btn-block" >Enviar</button>
             </form>
             <!-- Default form subscription -->
         </div>
