@@ -77,7 +77,7 @@ export default {
             .then(response => {
                 if (response.data === 'administrador' || response.data === 'cliente') {
                     this.isAdmin = response.data;
-                    toastr.info(response.data);
+                    // toastr.info(response.data);
                     // toastr.optionsOverride = 'positionclass = "toast-bottom-full-width"';
                     // toastr.options.positionClass = 'toast-bottom-full-width';
                     // //show when the button is clicked 

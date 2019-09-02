@@ -144,19 +144,20 @@ export default {
                 if (response.data == '') {
                     $('#verificar_carrito').modal('show');
                 } else {
-                    $('[data-toggle="popover"]').popover("show");
-                    setTimeout("$('#añadirCarrito').popover('hide');", 5000);
-
                     this.productos[index].opcionCancelar = true;
                     var contadorCarrito = Number($('#contadorCarrito').html());
                     contadorCarrito += 1;
                     $('#contadorCarrito').html(contadorCarrito);
+
+                    $('[data-toggle="popover"]').popover("show");
+                    setTimeout("$('#añadirCarrito').popover('hide');", 5000);
 
                     let formData = new FormData();
                     formData.append('id', item.id_producto);
                     formData.append('nombre', item.nombre);
                     formData.append('imagen', item.imagen_principal);
                     formData.append('valor', item.valor);
+                    formData.append('tamaño', item.tamaño);
 
                     axios.post('/carritoControl', formData).then(response => {
                         // console.log(response.data);
@@ -177,3 +178,49 @@ export default {
     props: ['tipo']
 }
 </script>
+
+<style scoped>
+.card-body {
+    font-family: 'Montserrat', sans-serif;
+    padding: 16px;
+}
+
+.custom-control {
+    margin-right: 39px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    color: #434343;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    width: 84px;
+    height: 30px;
+    margin: 0;
+    font-size: 1rem;
+}
+
+label:hover,
+label:hover~label {
+    color: orange;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked~label {
+    color: orange;
+}
+
+.img-sombra-producto-DS {
+    -webkit-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    height: 185px;
+}
+</style>

@@ -47,7 +47,8 @@ class CarritoControlador extends Controller
             'id' => $request->id,
             'nombre' => $request->nombre,
             'imagen' => $request->imagen,
-            'valor' => $request->valor
+            'valor' => $request->valor,
+            'tamaño' => $request->tamaño
         ];
         $request->session()->push('producto' . $request->id, $producto);
         return Session::all();

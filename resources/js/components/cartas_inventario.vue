@@ -336,7 +336,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .btn-gestion {
     position: absolute;
 }
@@ -363,10 +363,6 @@ p {
     cursor: default;
 }
 
-input[type="radio"] {
-    display: none;
-}
-
 label {
     color: #434343;
     font-family: 'Montserrat', sans-serif;
@@ -377,33 +373,7 @@ label {
     color: white;
 }
 
-.clasificacion {
-    direction: rtl;
-    unicode-bidi: bidi-override;
-    width: 84px;
-    height: 30px;
-    margin: 0;
-    font-size: 1rem;
-}
-
 .carta-DS {
     color: #434343;
-}
-
-label:hover,
-label:hover~label {
-    color: orange;
-    cursor: pointer;
-}
-
-input[type="radio"]:checked~label {
-    color: orange;
-}
-
-.img-sombra-producto-DS {
-    -webkit-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
-    height: 185px;
 }
 </style>
