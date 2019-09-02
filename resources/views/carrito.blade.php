@@ -42,7 +42,7 @@
                   <pre class="m-0"><b>Departamento:</b> {{ auth()->user()->departamento }}</pre>
                   <pre class="m-0"><b>Ciudad:</b> {{ auth()->user()->ciudad }}</pre>
                   <pre class="m-0"><b>Barrio:</b> {{ auth()->user()->barrio }}</pre>
-                  <pre class="m-0"><b>Dirección:</b> {{ auth()->user()->via }}</pre>
+                  <pre class="m-0"><b>Dirección:</b> {{ auth()->user()->direccion }}</pre>
                 </div>
               </div>
               {{-- /Opcion 1 Utiliar direccion de la cuenta --}}
