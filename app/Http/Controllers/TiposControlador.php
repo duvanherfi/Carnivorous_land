@@ -18,8 +18,8 @@ class TiposControlador extends Controller
     public function index(Request $request, $categoria)
     {
         if ($request->ajax()) {
-            if ($categoria == 'plantas') {
-                return Genero::select('genero')->where('habilitado', 'true')->orderby('genero')->get();
+            if ($categoria == 'plantas' || $categoria == 'tips_cultivo') {
+                return Genero::select('genero', 'tips_de_cultivo')->where('habilitado', 'true')->orderby('genero')->get();
             } else if ($categoria == 'merchandising') {
                 return Tipo_merchandising::select('tipo')->where('habilitado', 'true')->orderby('tipo')->get();
             } else if ($categoria == 'implementos') {
@@ -139,6 +139,12 @@ class TiposControlador extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function modificarTipCultivo($id, $tip){
+        $genero = Genero::find($id);
+        $genero->tips_de_cultivo = $tip;
+        $genero->save();
     }
 
     /**

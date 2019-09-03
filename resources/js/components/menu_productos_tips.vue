@@ -9,6 +9,18 @@
         <hr align="left" class="izquierda-DS ml-0 mr-2" noshade="noshade" style="width:100px;">✻
         <hr align="left" class="derecha-DS ml-2 mr-0" noshade="noshade" style="width:100px;">
     </div>
+    <div class="row justify-content-center" v-if="tipo=='tips_cultivo' && isAdmin == 'administrador'">
+        <div class="col-9 borde-menu-DS"></div>
+        <div @click="mostrarPlantas(item.genero)" v-for="(item, index) in generos" :key="index" class="col-9 text-center py-1 opcion-menu-DS">
+            {{ item.genero }}
+        </div>
+    </div>
+    <div class="row justify-content-center" v-if="tipo=='tips_cultivo' && isAdmin == 'Cliente_con_o_sin_registrar'">
+        <div class="col-9 borde-menu-DS"></div>
+        <div @click="mostrarPlantas(item.genero)" v-for="(item, index) in tip_genero" :key="index" class="col-9 text-center py-1 opcion-menu-DS">
+            {{ item.genero }}
+        </div>
+    </div>
     <div class="row justify-content-center" v-if="tipo=='plantas'">
         <div class="col-9 borde-menu-DS"></div>
         <div @click="mostrarPlantas(item.genero)" v-for="(item, index) in generos" :key="index" class="col-9 text-center py-1 opcion-menu-DS">
@@ -32,17 +44,48 @@
 
 <script>
 import EventBus from '../event_bus'
+import {
+    isNullOrUndefined
+} from 'util';
 export default {
     data() {
         return {
-            generos: []
+            generos: [],
+            isAdmin: ''
         }
+    },
+    beforeCreate(){
+        axios.get('/comprobarSiAdmin').then(response => {
+            if (response.data == 'administrador') {
+                this.isAdmin = response.data;
+            }else{
+                this.isAdmin = 'Cliente_con_o_sin_registrar';
+            }
+            EventBus.$emit('tip', this.isAdmin);
+        })
     },
     created() {
         axios.get(`/tiposControl/${this.tipo}`).then(response => {
             // console.log(response.data);
             this.generos = response.data;
-            if (this.tipo == 'plantas') {
+            if (this.tipo == 'tips_cultivo' && this.isAdmin == 'administrador') {
+                const params = {
+                    genero: response.data[0].genero,
+                    categoria: 'plantas'
+                };
+                EventBus.$emit('articulos_productos', params);
+            } else if (this.tipo == 'tips_cultivo' && this.isAdmin == 'Cliente_con_o_sin_registrar') {
+                var posicion = "";
+                for (var pos in this.tip_genero) {
+                    posicion = pos;
+                    break;
+                }
+                const params = {
+                    genero: this.tip_genero[posicion].genero,
+                    categoria: 'plantas'
+                };
+                EventBus.$emit('articulos_productos', params);
+            } else if (this.tipo == 'plantas') {
                 const params = {
                     genero: response.data[0].genero,
                     categoria: 'plantas'
@@ -86,7 +129,14 @@ export default {
             EventBus.$emit('articulos_productos', params);
         }
     },
-    props: ['tipo']
+    props: ['tipo'],
+    computed: {
+        tip_genero: function () {
+            return _.pickBy(this.generos, function (g) {
+                return g.tips_de_cultivo != '';
+            });
+        },
+    }
 }
 </script>
 
