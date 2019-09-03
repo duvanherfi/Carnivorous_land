@@ -11,19 +11,15 @@ class CorreoControlador extends Controller
     
     public function escribenos(Request $request){
 
-        $destinatario = $request->correo;
+        $correo = $request->correo;
         $nombre = $request->nombre;
         $mensaje = $request->mensaje;
+    
 
-      //  Mail::to('kevin777b@gmail.com')->send(new Comentarios());
+      Mail::to('kevin777b@gmail.com')->send(new Comentarios($mensaje,$correo,$nombre));
+
+      return redirect()->route('inicio');
        
-        return view('correo')
-        ->with($mensaje);
-       
-        
-
-      
-
         
     }
 }
