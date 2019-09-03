@@ -12,9 +12,11 @@ Route::get('/productos/{tipo}', function ($tipo) {
     return view('productos', compact('tipo'));
 })->name('productos');
 
-Route::get('/descripcion_producto', function () {
-    return view('descripcion_producto');
+Route::get('/{categoria}/descripcion_producto/{id}', function ($categoria, $id) {
+    return view('descripcion_producto', compact('categoria', 'id'));
 })->name('descripcion_producto');
+
+Route::get('/descripcion/{id}/{categoria}', 'ProductoControlador@descripcion')->name('descripcion');
 
 Route::get('/contactanos', function () {
     return view('contactanos');

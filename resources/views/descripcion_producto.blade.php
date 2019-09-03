@@ -3,7 +3,7 @@
 @section('contenido')
 <div class="descripcion-producto">
     <div id="app" class="container">
-        <carrousel-descripcion></carrousel-descripcion>
+        <carrousel-descripcion categoria="{{ $categoria }}" id="{{ $id }}"></carrousel-descripcion>
         <contenido-descripcion></contenido-descripcion>
         {{-- Subtitulo --}}
         <br><br>

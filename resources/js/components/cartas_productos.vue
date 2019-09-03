@@ -5,7 +5,7 @@
     <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
         <!--Card image-->
         <div class="img-sombra-producto-DS">
-            <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" />
+            <a @click="descripcion(item)" v-bind:href="descripcionProducto"><img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" /></a>
         </div>
         <!-- /Imagen -->
 
@@ -29,10 +29,10 @@
                 <p v-if="tipo == 'plantas'" class="col-4 align-self-center mb-0 px-0">Tamaño: {{ item.tamaño }}</p>
             </div>
             <!-- Género -->
-            <h5 v-if="tipo == 'plantas'" class="font-weight-bold card-title mb-1">{{ item.genero }}</h5>
+            <h5 v-if="tipo == 'plantas'" class="font-weight-bold card-title mb-1">{{ item.nombre }}</h5>
             <h5 v-else class="font-weight-bold card-title mb-1">{{ item.tipo }}</h5>
             <!-- Nombre -->
-            <p class="mb-1">{{ item.nombre }}</p>
+            <p class="mb-1">Disponible: {{ item.cantidad }}</p>
             <!-- Valor -->
             <h5 class="font-weight-bold mb-1">{{ item.valor | currency}} COP</h5>
             <!-- Button -->
@@ -78,6 +78,7 @@ import EventBus from '../event_bus'
 export default {
     data() {
         return {
+            descripcionProducto: '',
             productos: [],
             tipos: [],
             producto: {
@@ -173,6 +174,13 @@ export default {
             axios.delete(`/carritoControl/${id}`).then(response => {
                 // console.log(response.data);
             })
+        },
+        descripcion(item){
+            const params={
+                categoria: this.tipo,
+                id: item.id_producto
+            }
+            this.descripcionProducto = route('descripcion_producto', params);
         }
     },
     props: ['tipo']
