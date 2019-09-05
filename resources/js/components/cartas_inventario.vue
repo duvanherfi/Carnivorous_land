@@ -203,7 +203,7 @@ export default {
             $('#todos_los_productos').css('visibility', 'hidden');
             this.producto.categoria = data.categoria;
             this.producto.genero = data.genero;
-            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.gestion}`).then(response => {
                 this.productos = response.data;
                 $('#todos_los_productos').css('visibility', 'visible');
             })
@@ -267,7 +267,7 @@ export default {
             this.producto.imagen3 = file;
         },
         actualizarProductos() {
-            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.gestion}`).then(response => {
                 this.productos = response.data;
             });
         },

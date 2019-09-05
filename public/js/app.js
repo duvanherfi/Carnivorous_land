@@ -2016,7 +2016,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#todos_los_productos').css('visibility', 'hidden');
       _this.producto.categoria = data.categoria;
       _this.producto.genero = data.genero;
-      axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria)).then(function (response) {
+      axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria, "/").concat(_this.gestion)).then(function (response) {
         _this.productos = response.data;
         $('#todos_los_productos').css('visibility', 'visible');
       });
@@ -2090,7 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
     actualizarProductos: function actualizarProductos() {
       var _this3 = this;
 
-      axios.get("/productosControl/".concat(this.producto.genero, "/").concat(this.producto.categoria)).then(function (response) {
+      axios.get("/productosControl/".concat(this.producto.genero, "/").concat(this.producto.categoria, "/").concat(this.gestion)).then(function (response) {
         _this3.productos = response.data;
       });
     },
@@ -2285,7 +2285,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#todos_los_productos_vista').css('visibility', 'hidden');
       _this.producto.categoria = data.categoria;
       _this.producto.genero = data.genero;
-      axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria)).then(function (response) {
+      axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria, "/").concat(_this.tipo)).then(function (response) {
         _this.productos = response.data; // console.log(response.data);
 
         $('#todos_los_productos_vista').css('visibility', 'visible');
@@ -2297,7 +2297,7 @@ __webpack_require__.r(__webpack_exports__);
 
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('ordenar', function (data) {
       if (data == 'ninguno') {
-        axios.get("/productosControl/".concat(_this2.producto.genero, "/").concat(_this2.producto.categoria)).then(function (response) {
+        axios.get("/productosControl/".concat(_this2.producto.genero, "/").concat(_this2.producto.categoria, "/").concat(_this2.tipo)).then(function (response) {
           _this2.productos = response.data;
         });
       } else if (data == 'alfabeticamente') {

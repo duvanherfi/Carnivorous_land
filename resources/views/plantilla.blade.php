@@ -69,7 +69,7 @@
                 @else
 
                 <li class="nav-item dropdown text-uppercase datos_usuario">
-                    <a class="nav-link dropdown-toggle pl-4 pr-4 pb-1 href=" producto" id="navbarDropdownMenuLink-333"
+                    <a class="nav-link dropdown-toggle pl-5 pr-5 pb-1 href=" producto" id="navbarDropdownMenuLink-333"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <i class="fas fa-user-alt"></i> {{ auth()->user()->nombre }}
                     </a>
