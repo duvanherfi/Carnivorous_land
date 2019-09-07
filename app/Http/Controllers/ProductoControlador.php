@@ -21,44 +21,81 @@ class ProductoControlador extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $tipo, $categoria)
+    public function index(Request $request, $tipo, $categoria, $lugar)
     {
         if ($request->ajax()) {
             if ($categoria == 'plantas') {
-
                 $productos = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
                     ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('genero', $tipo)->where('productos.habilitado', 'true')
-                    ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
+                    ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion');
             } else if ($categoria == 'merchandising') {
                 $productos = DB::table('productos')->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
                     ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('tipo', $tipo)->where('productos.habilitado', 'true')
-                    ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
+                    ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion');
             } else if ($categoria == 'implementos') {
                 $productos = DB::table('productos')->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
                     ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)->where('productos.habilitado', 'true')
-                    ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
+                    ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion');
             }
-            $sesion = $request->session()->get('id');
 
-            if (empty($sesion)) {
-                for ($i = 0; $i < count($productos); $i++) {
-                    $productos[$i]->opcionCancelar = false;
-                }
-            } else {
-                for ($i = 0; $i < count($productos); $i++) {
-                    if (in_array($productos[$i]->id_producto, $sesion)) {
+            if ($lugar != 'gestion') {
+                $productos = $productos->where('opcion_catalogo', 'true')->get();
+                
+                $sesion = $request->session()->get('id');
 
-                        $productos[$i]->opcionCancelar = true;
-                    } else {
+                if (empty($sesion)) {
+                    for ($i = 0; $i < count($productos); $i++) {
                         $productos[$i]->opcionCancelar = false;
                     }
+                } else {
+                    for ($i = 0; $i < count($productos); $i++) {
+                        if (in_array($productos[$i]->id_producto, $sesion)) {
+                            $productos[$i]->opcionCancelar = true;
+                        } else {
+                            $productos[$i]->opcionCancelar = false;
+                        }
+                    }
                 }
+            }else{
+                $productos = $productos->get();
             }
             return $productos;
-            // property_exists((object) $sesion, (String) $productos[$i]->id_producto)
         } else {
             return view('inicio');
         }
+    }
+
+    public function descripcion($id, $categoria)
+    {
+        if ($categoria == 'plantas') {
+            $productos = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+                ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('productos.id', $id)->where('productos.habilitado', 'true')
+                ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
+        } else if ($categoria == 'merchandising') {
+            $productos = DB::table('productos')->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
+                ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('productos.id', $id)->where('productos.habilitado', 'true')
+                ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
+        } else if ($categoria == 'implementos') {
+            $productos = DB::table('productos')->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
+                ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('productos.id', $id)->where('productos.habilitado', 'true')
+                ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion')->get();
+        }
+        $sesion = Session::get('id');
+
+        if (empty($sesion)) {
+            for ($i = 0; $i < count($productos); $i++) {
+                $productos[$i]->opcionCancelar = false;
+            }
+        } else {
+            for ($i = 0; $i < count($productos); $i++) {
+                if (in_array($productos[$i]->id_producto, $sesion)) {
+                    $productos[$i]->opcionCancelar = true;
+                } else {
+                    $productos[$i]->opcionCancelar = false;
+                }
+            }
+        }
+        return $productos;
     }
 
     /**

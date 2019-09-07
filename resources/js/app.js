@@ -20,13 +20,14 @@ Vue.use(VueCurrencyFilter, {
     symbolSpacing: false
 });
 
+Vue.component('utilizar-otros-datos', require('./components/utilizar_otros_datos_carrito.vue').default);
 Vue.component('boton-arriba', require('./components/boton-arriba.vue').default);
 Vue.component('productos', require('./components/cartas_productos.vue').default);
 Vue.component('productos-inventario', require('./components/cartas_inventario.vue').default);
 Vue.component('menu-producto-tips', require('./components/menu_productos_tips.vue').default);
 Vue.component('contenido-productos', require('./components/contenido_productos.vue').default);
-Vue.component('carrousel-descripcion', require('./components/descripcion_producto/carrousel_descripcion_producto.vue').default);
-Vue.component('contenido-descripcion', require('./components/descripcion_producto/contenido_descripcion_producto.vue').default);
+Vue.component('carrousel-descripcion', require('./components/carrousel_descripcion_producto.vue').default);
+Vue.component('contenido-descripcion', require('./components/contenido_descripcion_producto.vue').default);
 Vue.component('menu-inventario', require('./components/menu_inventario.vue').default);
 Vue.component('contenido-inventario', require('./components/contenido_inventario.vue').default);
 Vue.component('filas-carrito', require('./components/filas_carrito.vue').default);

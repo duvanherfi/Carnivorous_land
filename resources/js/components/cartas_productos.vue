@@ -5,7 +5,7 @@
     <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
         <!--Card image-->
         <div class="img-sombra-producto-DS">
-            <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" />
+            <a @click="descripcion(item)" v-bind:href="descripcionProducto"><img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" /></a>
         </div>
         <!-- /Imagen -->
 
@@ -29,10 +29,10 @@
                 <p v-if="tipo == 'plantas'" class="col-4 align-self-center mb-0 px-0">Tamaño: {{ item.tamaño }}</p>
             </div>
             <!-- Género -->
-            <h5 v-if="tipo == 'plantas'" class="font-weight-bold card-title mb-1">{{ item.genero }}</h5>
+            <h5 v-if="tipo == 'plantas'" class="font-weight-bold card-title mb-1">{{ item.nombre }}</h5>
             <h5 v-else class="font-weight-bold card-title mb-1">{{ item.tipo }}</h5>
             <!-- Nombre -->
-            <p class="mb-1">{{ item.nombre }}</p>
+            <p class="mb-1">Disponible: {{ item.cantidad }}</p>
             <!-- Valor -->
             <h5 class="font-weight-bold mb-1">{{ item.valor | currency}} COP</h5>
             <!-- Button -->
@@ -78,6 +78,7 @@ import EventBus from '../event_bus'
 export default {
     data() {
         return {
+            descripcionProducto: '',
             productos: [],
             tipos: [],
             producto: {
@@ -109,7 +110,7 @@ export default {
             $('#todos_los_productos_vista').css('visibility', 'hidden');
             this.producto.categoria = data.categoria;
             this.producto.genero = data.genero;
-            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.tipo}`).then(response => {
                 this.productos = response.data;
                 // console.log(response.data);
                 
@@ -120,7 +121,7 @@ export default {
     beforeUpdate() {
         EventBus.$on('ordenar', data => {
             if (data == 'ninguno') {
-                axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+                axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.tipo}`).then(response => {
                     this.productos = response.data;
                 })
             } else if (data == 'alfabeticamente') {
@@ -144,19 +145,20 @@ export default {
                 if (response.data == '') {
                     $('#verificar_carrito').modal('show');
                 } else {
-                    $('[data-toggle="popover"]').popover("show");
-                    setTimeout("$('#añadirCarrito').popover('hide');", 5000);
-
                     this.productos[index].opcionCancelar = true;
                     var contadorCarrito = Number($('#contadorCarrito').html());
                     contadorCarrito += 1;
                     $('#contadorCarrito').html(contadorCarrito);
+
+                    $('[data-toggle="popover"]').popover("show");
+                    setTimeout("$('#añadirCarrito').popover('hide');", 5000);
 
                     let formData = new FormData();
                     formData.append('id', item.id_producto);
                     formData.append('nombre', item.nombre);
                     formData.append('imagen', item.imagen_principal);
                     formData.append('valor', item.valor);
+                    formData.append('tamaño', item.tamaño);
 
                     axios.post('/carritoControl', formData).then(response => {
                         // console.log(response.data);
@@ -172,8 +174,61 @@ export default {
             axios.delete(`/carritoControl/${id}`).then(response => {
                 // console.log(response.data);
             })
+        },
+        descripcion(item){
+            const params={
+                categoria: this.tipo,
+                id: item.id_producto
+            }
+            this.descripcionProducto = route('descripcion_producto', params);
         }
     },
     props: ['tipo']
 }
 </script>
+
+<style scoped>
+.card-body {
+    font-family: 'Montserrat', sans-serif;
+    padding: 16px;
+}
+
+.custom-control {
+    margin-right: 39px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    color: #434343;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    width: 84px;
+    height: 30px;
+    margin: 0;
+    font-size: 1rem;
+}
+
+label:hover,
+label:hover~label {
+    color: orange;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked~label {
+    color: orange;
+}
+
+.img-sombra-producto-DS {
+    -webkit-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    height: 185px;
+}
+</style>

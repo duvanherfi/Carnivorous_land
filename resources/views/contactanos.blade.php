@@ -61,32 +61,39 @@
         <div class="col pt-3" data-aos="fade-right" data-aos-duration="2000">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254900.13120968675!2d-76.66575507688069!3d3.395397032954704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a6f0cc4bb3f1%3A0x1f0fb5e952ae6168!2sCali%2C+Valle+del+Cauca!5e0!3m2!1ses!2sco!4v1564714432895!5m2!1ses!2sco"
-                width="600" height="462" frameborder="0" style="border:0" allowfullscreen></iframe>
+                width="600" height="510" frameborder="0" style="border:0" allowfullscreen></iframe>
 
         </div>
         <div id="texto-mapa" class="col pt-3 pb-3">
             <h3 class="pb-3">Ubicados en Cali, Colombia. Realizamos envíos a todo el país</h3>
             <!-- Default form subscription -->
-            <form class="text-center  bg-success form-ubicacion border-light p-4" action="#!">
-
+        <form method="POST"  class="text-center  bg-success form-ubicacion border-light p-4" action="{{ route('correo') }}">
+            @csrf
                 <p class="h4 mb-4">Escríbenos</p>
 
                 <p>Puedes enviarnos una recomendación, queja, reclamo o lo que desees!</p>
 
-                <!-- Name -->
-                <input type="text" id="defaultSubscriptionFormPassword" class="form-control form-ubicacion mb-4"
-                    placeholder="Name">
+                   <!-- PQR -->
+                <select class="form-control mb-4" id="motivo" name="motivo">
+                    <option selected>Escoge el motivo de tu mensaje</option>
+                    <option value="Queja">Queja</option>
+                    <option value="Reclamo">Reclamo</option>
+                    <option value="Sugerencia">Sugerencia</option>
+                    <option value="Duda">Duda</option>
+                </select>
 
-                <!-- Email -->
-                <input type="email" id="defaultSubscriptionFormEmail" class="form-control form-ubicacion bicacion mb-4"
-                    placeholder="E-mail">
+                <!-- Nombre -->
+                <input type="text" id="nombre" name="nombre" class="form-control  mb-4" placeholder="Tu nombre" required>
 
-                <!-- Textp -->
-                <input type="text" id="texto" class="form-control form-ubicacion bicacion mb-4"
-                    placeholder="Tu mensaje">
+           
+                <!-- Correo -->
+                <input type="correo" id="correo" name="correo" class="form-control  mb-4" placeholder="Tu correo" required>
+
+                <!-- Texto -->
+                <input type="text" id="mensaje" name="mensaje" class="form-control  mb-4" placeholder="Tu mensaje" required>
 
                 <!-- Sign in button -->
-                <button class="btn btn-block" type="submit">Enviar</button>
+                <button type="submit" class="btn btn-block" >Enviar</button>
             </form>
             <!-- Default form subscription -->
         </div>
