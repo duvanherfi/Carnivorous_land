@@ -61,6 +61,14 @@ Route::get('/inventario/{gestion}', function ($gestion) {
     return view('inventario', compact('gestion'));
 })->name('inventario')->middleware('admin');
 
+//Registrar un administrador
+Route::get('/registrar_admin', 'AdminControlador@mostrar')
+->name('registrar_admin');
+
+Route::post('/registrar_admin', 'AdminControlador@registrar')
+->name('registrar_admin');
+//->middleware('admin');
+
 Route::get('/pedidos', function () {
     return view('pedidos');
 })->name('pedidos')->middleware('admin');
