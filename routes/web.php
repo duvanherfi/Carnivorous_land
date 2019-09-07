@@ -79,9 +79,13 @@ Route::get('/tiposControl/{tipo}/{categoria}', 'TiposControlador@tipoEspecifico'
 Route::post('/tiposControl/{id}', 'TiposControlador@update')->name('tipos.update'); //PUT
 Route::delete('/tiposControl/{id}/{categoria}', 'TiposControlador@destroy')->name('tipos.destroy');
 
+// Modificar Tip cultivo
+
+Route::post('/tiposControl/{id}/{tip}', 'TiposControlador@modificarTipCultivo')->name('tipos.modificarTipCultivo');
+
 // Productos
 Route::post('/productosControl', 'ProductoControlador@store')->name('productos.store');
-Route::get('/productosControl/{tipo}/{categoria}', 'ProductoControlador@index')->name('productos.index');
+Route::get('/productosControl/{tipo}/{categoria}/{lugar}', 'ProductoControlador@index')->name('productos.index');
 Route::post('/productosControl/{id}/{categoria}', 'ProductoControlador@update')->name('productos.update'); // PUT
 Route::put('/productosControl/{opcion_catalogo}/{id}', 'ProductoControlador@actualizarOpcionCatalogo')->name('productos.opcion_catalogo');
 Route::delete('/productosControl/{id}', 'ProductoControlador@destroy')->name('productos.destroy');

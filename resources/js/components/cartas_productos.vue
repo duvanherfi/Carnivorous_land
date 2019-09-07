@@ -110,7 +110,7 @@ export default {
             $('#todos_los_productos_vista').css('visibility', 'hidden');
             this.producto.categoria = data.categoria;
             this.producto.genero = data.genero;
-            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.tipo}`).then(response => {
                 this.productos = response.data;
                 // console.log(response.data);
                 
@@ -121,7 +121,7 @@ export default {
     beforeUpdate() {
         EventBus.$on('ordenar', data => {
             if (data == 'ninguno') {
-                axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}`).then(response => {
+                axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.tipo}`).then(response => {
                     this.productos = response.data;
                 })
             } else if (data == 'alfabeticamente') {

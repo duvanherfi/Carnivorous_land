@@ -1,11 +1,5 @@
 <template>
 <div class="contenido-productos-DS">
-    <!-- <div class="position-absolute subtitulo-producto-DS">
-        <h1>SARRACENIA</h1>
-    </div>
-    <img class="imagen-subtitulo-DS" src="/img/productos/fondo_productos.jpg" alt="Fondo productos">
-    <div class="mask rgba-black-strong"></div>
-    <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, quas eaque veniam harum nostrum non pariatur! Non quidem adipisci pariatur eius provident impedit tenetur, quibusdam molestias culpa doloribus quam aliquam necessitatibus? Hic vel dolor quae ad veniam totam tempore culpa, omnis aut et doloremque laudantium. Incidunt labore alias libero aspernatur exercitationem sit tempora modi aliquid nesciunt ab atque minima, quos, dignissimos eos harum voluptates dicta! Vero eaque qui odit quo. Tempora et enim officiis dolore, eaque minima, quos voluptatum rerum velit officia assumenda praesentium tenetur quidem autem commodi culpa natus laudantium! Cupiditate voluptas est iure cumque enim perspiciatis id quasi nisi recusandae aliquam, labore numquam quod fugit temporibus distinctio omnis! Laboriosam explicabo consequatur nisi vitae neque tempore architecto blanditiis autem voluptatum sunt itaque magnam asperiores debitis dolor odit, accusantium nobis nulla fugiat totam odio reiciendis veritatis modi velit? Est accusantium blanditiis autem praesentium culpa? Similique libero quia natus est error voluptas sed et nobis ab sint accusantium, esse provident a in temporibus voluptate. Iure incidunt corporis dolorem aliquam quia rerum sit laudantium, debitis culpa maxime voluptatum doloribus, necessitatibus optio ea sequi alias laboriosam neque temporibus quis possimus inventore iusto aut impedit nemo. Amet nam iste at? Atque magni itaque quasi?</p> -->
     <div v-if="id == ''" class="d-flex w-100 h-100">
         <div class="text-center col align-self-center">
             <div class="spinner-border" role="status">
@@ -18,8 +12,16 @@
             <h1 id="titulo_productos" class="text-uppercase">{{ nombre }}</h1>
             <img v-if="imagen != ''" class="imagen-subtitulo-DS" id="imagen_productos" v-bind:src="'/img/generos/' + imagen" alt="Fondo titulo inventario">
         </div>
-        <pre class="mt-4 text-break">{{ descripcion }}</pre>
-        <div v-if="categoria != ''" class="d-flex justify-content-between" id="opciones_productos">
+        <div v-if="tipo == 'tips_cultivo' && isAdmin == 'administrador'" class="mt-2">
+            <button @click="modificarTip" v-if="modificar == false" class="btn color-verde d-inline ml-0">Modificar Tip</button>
+            <button @click="guardarTip" v-if="modificar == true" class="btn color-verde d-inline ml-0">Guardar Tip</button>
+            <button @click="cancelarTip" v-if="modificar == true" class="btn botones d-inline">Cancelar</button>
+            <p>Si desea que el tip no sea visto por el cliente, deje el tip vacio.</p>
+        </div>
+        <textarea v-model="tips_de_cultivo_nuevo" class="form-control z-depth-1 shadow-textarea mt-4" v-if="tipo == 'tips_cultivo' && modificar == true" rows="10" placeholder="Escribe el tip de cultivo..."></textarea>
+        <pre v-else-if="tipo == 'tips_cultivo' && modificar == false" class="mt-4 text-break">{{ tips_de_cultivo }}</pre>
+        <pre v-else class="mt-4 text-break">{{ descripcion }}</pre>
+        <div v-if="categoria != '' && tipo!='tips_cultivo'" class="d-flex justify-content-between" id="opciones_productos">
             <div class="d-flex">
                 <label for="ordenar" class="d-inline-flex col-form-label pr-0">Ordenar:</label>
                 <div class="col-md-10">
@@ -49,6 +51,8 @@ export default {
             id: '',
             imagen: '',
             descripcion: '',
+            tips_de_cultivo: '',
+            tips_de_cultivo_nuevo: '',
             nombre: '',
             categoria: '',
             genero: {
@@ -58,11 +62,18 @@ export default {
                 nombre: '',
                 descripcion: ''
             },
-            tipoOrden: 'ninguno'
+            tipoOrden: 'ninguno',
+            modificar: false,
+            isAdmin: ''
         }
     },
     created() {
+        EventBus.$on('tip', data => {
+            this.isAdmin = data;
+        })
+
         EventBus.$on('articulos_productos', data => {
+            this.modificar = false;
             this.id = '';
             this.categoria = data.categoria;
             axios.get(`/tiposControl/${data.genero}/${data.categoria}`).then(response => {
@@ -73,6 +84,7 @@ export default {
                     this.nombre = response.data.tipo;
                 }
                 this.descripcion = response.data.descripcion;
+                this.tips_de_cultivo = this.tips_de_cultivo_nuevo = response.data.tips_de_cultivo;
                 this.id = response.data.id;
             })
         })
@@ -80,6 +92,18 @@ export default {
     methods: {
         ordenar() {
             EventBus.$emit('ordenar', this.tipoOrden);
+        },
+        modificarTip(){
+            this.modificar = true;
+        },
+        guardarTip(){
+            this.tips_de_cultivo = this.tips_de_cultivo_nuevo;
+            this.modificar = false;
+            axios.post(`/tiposControl/${this.id}/${this.tips_de_cultivo_nuevo}`).then(response => {})
+        },
+        cancelarTip(){
+            this.modificar = false;
+            this.tips_de_cultivo_nuevo = this.tips_de_cultivo;
         }
     },
     props: ['tipo']

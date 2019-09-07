@@ -2016,7 +2016,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#todos_los_productos').css('visibility', 'hidden');
       _this.producto.categoria = data.categoria;
       _this.producto.genero = data.genero;
-      axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria)).then(function (response) {
+      axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria, "/").concat(_this.gestion)).then(function (response) {
         _this.productos = response.data;
         $('#todos_los_productos').css('visibility', 'visible');
       });
@@ -2090,7 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
     actualizarProductos: function actualizarProductos() {
       var _this3 = this;
 
-      axios.get("/productosControl/".concat(this.producto.genero, "/").concat(this.producto.categoria)).then(function (response) {
+      axios.get("/productosControl/".concat(this.producto.genero, "/").concat(this.producto.categoria, "/").concat(this.gestion)).then(function (response) {
         _this3.productos = response.data;
       });
     },
@@ -2285,7 +2285,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#todos_los_productos_vista').css('visibility', 'hidden');
       _this.producto.categoria = data.categoria;
       _this.producto.genero = data.genero;
-      axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria)).then(function (response) {
+      axios.get("/productosControl/".concat(_this.producto.genero, "/").concat(_this.producto.categoria, "/").concat(_this.tipo)).then(function (response) {
         _this.productos = response.data; // console.log(response.data);
 
         $('#todos_los_productos_vista').css('visibility', 'visible');
@@ -2297,7 +2297,7 @@ __webpack_require__.r(__webpack_exports__);
 
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('ordenar', function (data) {
       if (data == 'ninguno') {
-        axios.get("/productosControl/".concat(_this2.producto.genero, "/").concat(_this2.producto.categoria)).then(function (response) {
+        axios.get("/productosControl/".concat(_this2.producto.genero, "/").concat(_this2.producto.categoria, "/").concat(_this2.tipo)).then(function (response) {
           _this2.productos = response.data;
         });
       } else if (data == 'alfabeticamente') {
@@ -2812,6 +2812,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2819,6 +2821,8 @@ __webpack_require__.r(__webpack_exports__);
       id: '',
       imagen: '',
       descripcion: '',
+      tips_de_cultivo: '',
+      tips_de_cultivo_nuevo: '',
       nombre: '',
       categoria: '',
       genero: {
@@ -2828,13 +2832,19 @@ __webpack_require__.r(__webpack_exports__);
         nombre: '',
         descripcion: ''
       },
-      tipoOrden: 'ninguno'
+      tipoOrden: 'ninguno',
+      modificar: false,
+      isAdmin: ''
     };
   },
   created: function created() {
     var _this = this;
 
+    _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('tip', function (data) {
+      _this.isAdmin = data;
+    });
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('articulos_productos', function (data) {
+      _this.modificar = false;
       _this.id = '';
       _this.categoria = data.categoria;
       axios.get("/tiposControl/".concat(data.genero, "/").concat(data.categoria)).then(function (response) {
@@ -2847,6 +2857,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         _this.descripcion = response.data.descripcion;
+        _this.tips_de_cultivo = _this.tips_de_cultivo_nuevo = response.data.tips_de_cultivo;
         _this.id = response.data.id;
       });
     });
@@ -2854,6 +2865,18 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     ordenar: function ordenar() {
       _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('ordenar', this.tipoOrden);
+    },
+    modificarTip: function modificarTip() {
+      this.modificar = true;
+    },
+    guardarTip: function guardarTip() {
+      this.tips_de_cultivo = this.tips_de_cultivo_nuevo;
+      this.modificar = false;
+      axios.post("/tiposControl/".concat(this.id, "/").concat(this.tips_de_cultivo_nuevo)).then(function (response) {});
+    },
+    cancelarTip: function cancelarTip() {
+      this.modificar = false;
+      this.tips_de_cultivo_nuevo = this.tips_de_cultivo;
     }
   },
   props: ['tipo']
@@ -3491,6 +3514,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../event_bus */ "./resources/js/event_bus.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! util */ "./node_modules/util/util.js");
+/* harmony import */ var util__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(util__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -3523,38 +3548,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      generos: []
+      generos: [],
+      isAdmin: ''
     };
   },
-  created: function created() {
+  beforeCreate: function beforeCreate() {
     var _this = this;
+
+    axios.get('/comprobarSiAdmin').then(function (response) {
+      if (response.data == 'administrador') {
+        _this.isAdmin = response.data;
+      } else {
+        _this.isAdmin = 'Cliente_con_o_sin_registrar';
+      }
+
+      _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('tip', _this.isAdmin);
+    });
+  },
+  created: function created() {
+    var _this2 = this;
 
     axios.get("/tiposControl/".concat(this.tipo)).then(function (response) {
       // console.log(response.data);
-      _this.generos = response.data;
+      _this2.generos = response.data;
 
-      if (_this.tipo == 'plantas') {
+      if (_this2.tipo == 'tips_cultivo' && _this2.isAdmin == 'administrador') {
         var params = {
           genero: response.data[0].genero,
           categoria: 'plantas'
         };
         _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos_productos', params);
-      } else if (_this.tipo == 'merchandising') {
+      } else if (_this2.tipo == 'tips_cultivo' && _this2.isAdmin == 'Cliente_con_o_sin_registrar') {
+        var posicion = "";
+
+        for (var pos in _this2.tip_genero) {
+          posicion = pos;
+          break;
+        }
+
         var _params = {
+          genero: _this2.tip_genero[posicion].genero,
+          categoria: 'plantas'
+        };
+        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos_productos', _params);
+      } else if (_this2.tipo == 'plantas') {
+        var _params2 = {
+          genero: response.data[0].genero,
+          categoria: 'plantas'
+        };
+        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos_productos', _params2);
+      } else if (_this2.tipo == 'merchandising') {
+        var _params3 = {
           genero: response.data[0].tipo,
           categoria: 'merchandising'
         };
-        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos_productos', _params);
-      } else if (_this.tipo == 'implementos') {
-        var _params2 = {
+        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos_productos', _params3);
+      } else if (_this2.tipo == 'implementos') {
+        var _params4 = {
           genero: response.data[0].tipo,
           categoria: 'implementos'
         };
-        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos_productos', _params2);
+        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos_productos', _params4);
       }
     });
   },
@@ -3581,7 +3652,14 @@ __webpack_require__.r(__webpack_exports__);
       _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('articulos_productos', params);
     }
   },
-  props: ['tipo']
+  props: ['tipo'],
+  computed: {
+    tip_genero: function tip_genero() {
+      return _.pickBy(this.generos, function (g) {
+        return g.tips_de_cultivo != '';
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -44037,11 +44115,83 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("pre", { staticClass: "mt-4 text-break" }, [
-            _vm._v(_vm._s(_vm.descripcion))
-          ]),
+          _vm.tipo == "tips_cultivo" && _vm.isAdmin == "administrador"
+            ? _c("div", { staticClass: "mt-2" }, [
+                _vm.modificar == false
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn color-verde d-inline ml-0",
+                        on: { click: _vm.modificarTip }
+                      },
+                      [_vm._v("Modificar Tip")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.modificar == true
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn color-verde d-inline ml-0",
+                        on: { click: _vm.guardarTip }
+                      },
+                      [_vm._v("Guardar Tip")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.modificar == true
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn botones d-inline",
+                        on: { click: _vm.cancelarTip }
+                      },
+                      [_vm._v("Cancelar")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Si desea que el tip no sea visto por el cliente, deje el tip vacio."
+                  )
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _vm.categoria != ""
+          _vm.tipo == "tips_cultivo" && _vm.modificar == true
+            ? _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tips_de_cultivo_nuevo,
+                    expression: "tips_de_cultivo_nuevo"
+                  }
+                ],
+                staticClass: "form-control z-depth-1 shadow-textarea mt-4",
+                attrs: {
+                  rows: "10",
+                  placeholder: "Escribe el tip de cultivo..."
+                },
+                domProps: { value: _vm.tips_de_cultivo_nuevo },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.tips_de_cultivo_nuevo = $event.target.value
+                  }
+                }
+              })
+            : _vm.tipo == "tips_cultivo" && _vm.modificar == false
+            ? _c("pre", { staticClass: "mt-4 text-break" }, [
+                _vm._v(_vm._s(_vm.tips_de_cultivo))
+              ])
+            : _c("pre", { staticClass: "mt-4 text-break" }, [
+                _vm._v(_vm._s(_vm.descripcion))
+              ]),
+          _vm._v(" "),
+          _vm.categoria != "" && _vm.tipo != "tips_cultivo"
             ? _c(
                 "div",
                 {
@@ -45721,6 +45871,68 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm._m(0),
+    _vm._v(" "),
+    _vm.tipo == "tips_cultivo" && _vm.isAdmin == "administrador"
+      ? _c(
+          "div",
+          { staticClass: "row justify-content-center" },
+          [
+            _c("div", { staticClass: "col-9 borde-menu-DS" }),
+            _vm._v(" "),
+            _vm._l(_vm.generos, function(item, index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass: "col-9 text-center py-1 opcion-menu-DS",
+                  on: {
+                    click: function($event) {
+                      return _vm.mostrarPlantas(item.genero)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\r\n            " + _vm._s(item.genero) + "\r\n        "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.tipo == "tips_cultivo" && _vm.isAdmin == "Cliente_con_o_sin_registrar"
+      ? _c(
+          "div",
+          { staticClass: "row justify-content-center" },
+          [
+            _c("div", { staticClass: "col-9 borde-menu-DS" }),
+            _vm._v(" "),
+            _vm._l(_vm.tip_genero, function(item, index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass: "col-9 text-center py-1 opcion-menu-DS",
+                  on: {
+                    click: function($event) {
+                      return _vm.mostrarPlantas(item.genero)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\r\n            " + _vm._s(item.genero) + "\r\n        "
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        )
+      : _vm._e(),
     _vm._v(" "),
     _vm.tipo == "plantas"
       ? _c(
@@ -58958,15 +59170,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/js/components/cartas_productos.vue ***!
   \******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cartas_productos_vue_vue_type_template_id_3d385c9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cartas_productos.vue?vue&type=template&id=3d385c9e&scoped=true& */ "./resources/js/components/cartas_productos.vue?vue&type=template&id=3d385c9e&scoped=true&");
 /* harmony import */ var _cartas_productos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cartas_productos.vue?vue&type=script&lang=js& */ "./resources/js/components/cartas_productos.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _cartas_productos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _cartas_productos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _cartas_productos_vue_vue_type_style_index_0_id_3d385c9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cartas_productos.vue?vue&type=style&index=0&id=3d385c9e&scoped=true&lang=css& */ "./resources/js/components/cartas_productos.vue?vue&type=style&index=0&id=3d385c9e&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _cartas_productos_vue_vue_type_style_index_0_id_3d385c9e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cartas_productos.vue?vue&type=style&index=0&id=3d385c9e&scoped=true&lang=css& */ "./resources/js/components/cartas_productos.vue?vue&type=style&index=0&id=3d385c9e&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -58998,7 +59209,7 @@ component.options.__file = "resources/js/components/cartas_productos.vue"
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/cartas_productos.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

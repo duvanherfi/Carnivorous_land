@@ -15,8 +15,8 @@ class CarritoControlador extends Controller
             $id = $request->session()->get('id');
             $productos = (array) [];
             
-            foreach ($id as $posicion => $jugador) {
-                $producto = $request->session()->get('producto' . $jugador);
+            foreach ($id as $posicion => $valor) {
+                $producto = $request->session()->get('producto' . $valor);
                 array_push($productos, $producto);
             }
 
