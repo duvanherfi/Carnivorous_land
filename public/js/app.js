@@ -57731,7 +57731,7 @@ __webpack_require__(/*! ./mdb */ "./resources/js/mdb.js");
 var AOS = __webpack_require__(/*! aos */ "./node_modules/aos/dist/aos.js");
 
 AOS.init();
-window.md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
+global.md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
 
 global.bsCustomFileInput = bs_custom_file_input__WEBPACK_IMPORTED_MODULE_0___default.a;
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -60911,8 +60911,8 @@ $hiddenDiv.css('width',$textarea.is(':visible')?$textarea.width():$(window).widt
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ENVY 14-J008LA\Desktop\carnivorous_land\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ENVY 14-J008LA\Desktop\carnivorous_land\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\D\Desktop\carnivorous_land\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\D\Desktop\carnivorous_land\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

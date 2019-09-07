@@ -3,13 +3,14 @@
 @section('content')
 <div class="container">
     <hr>
-    @if (session()->has('flash'))
-        <div class="alert alert-light" role="alert">
-           {{ session('flash') }}
-        </div>
-    @endif
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        @if (session()->has('flash'))
+            <div class="alert alert-light col-md-8" role="alert">
+            {{ session('flash') }}
+            </div>
+        @endif
+    <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Inicio De Sesión') }}</div>
 

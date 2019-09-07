@@ -14,7 +14,7 @@ class CarritoControlador extends Controller
         if ($request->ajax()) {
             $id = $request->session()->get('id');
             $productos = (array) [];
-            
+
             foreach ($id as $posicion => $jugador) {
                 $producto = $request->session()->get('producto' . $jugador);
                 array_push($productos, $producto);
@@ -62,5 +62,24 @@ class CarritoControlador extends Controller
         $sesion = array_diff($sesion, array($id));
         Session::put('id', $sesion);
         return Session::all();
+    }
+
+    public function ingresarpago(Request $request){
+
+        $transaction_date="2015-05-27 13:07:35";
+        $cc_number="";
+        $cc_holder=test_buyer;
+        $billing_country=CO;
+        $description=test_payu_01;
+        $value=100.00;
+        $payment_method_type=2;
+        $email_buyer="test@payulatam.com";
+        $response_message_pol="ENTITY_DECLINED";
+        $error_message_bank="";
+        $transaction_id="f5e668f1-7ecc-4b83-a4d1-0aaa68260862";
+        $currency="USD";
+        $ip="190.242.116.98";
+        $billing_city="Bogota";
+
     }
 }

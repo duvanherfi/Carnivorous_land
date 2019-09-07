@@ -90,7 +90,7 @@ Route::delete('/carritoControl/{nombre}', 'CarritoControlador@eliminar')->name('
 Route::get('/carritoControl', 'CarritoControlador@obtener')->name('carro.obtener');
 
 //llamada al metodo isAdmin del controlador usuario para hacer el menú
-Route::get('/comprobarSiAdmin','usuarioControlador@isAdmin');
+Route::get('/comprobarSiAdmin', 'usuarioControlador@isAdmin');
 
 
 Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');
@@ -98,3 +98,8 @@ Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
 
 Route::put('/pedidos/{id}', "PedidosController@cambiar")->name('cambiar');
+Route::get('/pagRespuesta', function () {
+    return view('pagRespuesta');
+})->name('pagRespuesta');
+
+Route::get('/pagconfirmacion', "CarritoControlador@ingresarpago");
