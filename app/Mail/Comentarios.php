@@ -11,18 +11,19 @@ class Comentarios extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $mensaje, $correo, $nombre;
+    public $mensaje, $correo, $nombre, $motivo;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($mensaje, $correo, $nombre)
+    public function __construct($mensaje, $correo, $nombre, $motivo)
     {
         $this->mensaje = $mensaje;
         $this->correo = $correo;
         $this->nombre = $nombre;
+        $this->motivo = $motivo;
     }
 
     /**
@@ -32,7 +33,8 @@ class Comentarios extends Mailable
      */
     public function build()
     {
-        return $this->from('andres18@gmail.com')
+        return $this->from($this->correo)
+       ->subject($this->motivo)
         ->view('correo');
       
     }

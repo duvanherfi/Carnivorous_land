@@ -61,7 +61,7 @@
         <div class="col pt-3" data-aos="fade-right" data-aos-duration="2000">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254900.13120968675!2d-76.66575507688069!3d3.395397032954704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a6f0cc4bb3f1%3A0x1f0fb5e952ae6168!2sCali%2C+Valle+del+Cauca!5e0!3m2!1ses!2sco!4v1564714432895!5m2!1ses!2sco"
-                width="600" height="462" frameborder="0" style="border:0" allowfullscreen></iframe>
+                width="600" height="510" frameborder="0" style="border:0" allowfullscreen></iframe>
 
         </div>
         <div id="texto-mapa" class="col pt-3 pb-3">
@@ -73,14 +73,24 @@
 
                 <p>Puedes enviarnos una recomendación, queja, reclamo o lo que desees!</p>
 
-                <!-- Nombre -->
-                <input type="text" id="nombre" name="nombre" class="form-control  mb-4" placeholder="Nombre" required>
+                   <!-- PQR -->
+                <select class="form-control mb-4" id="motivo" name="motivo">
+                    <option selected>Escoge el motivo de tu mensaje</option>
+                    <option value="Queja">Queja</option>
+                    <option value="Reclamo">Reclamo</option>
+                    <option value="Sugerencia">Sugerencia</option>
+                    <option value="Duda">Duda</option>
+                </select>
 
+                <!-- Nombre -->
+                <input type="text" id="nombre" name="nombre" class="form-control  mb-4" placeholder="Tu nombre" required>
+
+           
                 <!-- Correo -->
                 <input type="correo" id="correo" name="correo" class="form-control  mb-4" placeholder="Tu correo" required>
 
                 <!-- Texto -->
-                <input type="text" id="mensaje" name="mensaje" class="form-control  mb-4" required>
+                <input type="text" id="mensaje" name="mensaje" class="form-control  mb-4" placeholder="Tu mensaje" required>
 
                 <!-- Sign in button -->
                 <button type="submit" class="btn btn-block" >Enviar</button>

@@ -14,11 +14,13 @@ class CorreoControlador extends Controller
         $correo = $request->correo;
         $nombre = $request->nombre;
         $mensaje = $request->mensaje;
+        $motivo = $request->motivo;
+
     
+      Mail::to('cifuentes.kevin@correounivalle.edu.co')
+      ->send(new Comentarios($mensaje,$correo,$nombre,$motivo));
 
-      Mail::to('kevin777b@gmail.com')->send(new Comentarios($mensaje,$correo,$nombre));
-
-      return redirect()->route('inicio');
+      return redirect()->route('contactanos');
        
         
     }
