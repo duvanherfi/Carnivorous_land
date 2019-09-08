@@ -134,6 +134,10 @@ export default {
         }
     },
     created() {
+        EventBus.$on('reiniciarTipoOrden', data => {
+            this.tipoOrden = data;
+        })
+
         EventBus.$on('articulos', data => {
             this.id = '';
             this.categoria = data.categoria;

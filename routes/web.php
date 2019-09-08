@@ -95,6 +95,9 @@ Route::post('/carritoControl', 'CarritoControlador@agregar')->name('carro.agrega
 Route::delete('/carritoControl/{nombre}', 'CarritoControlador@eliminar')->name('carro.eliminar');
 Route::get('/carritoControl', 'CarritoControlador@obtener')->name('carro.obtener');
 
+// Calificar productos
+Route::post('/calificarControl', 'CalificarControlador@registrar')->name('calificar.registrar');
+
 //llamada al metodo isAdmin del controlador usuario para hacer el menú
 Route::get('/comprobarSiAdmin', 'usuarioControlador@isAdmin');
 
@@ -105,7 +108,27 @@ Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
 
 Route::put('/pedidos/{id}', "PedidosController@cambiar")->name('cambiar');
 Route::get('/pagRespuesta', function () {
-    return view('pagRespuesta');
+    $transactionState = $_REQUEST['transactionState'];
+
+    if ($_REQUEST['transactionState'] == 4 ) {
+        $estadoTx = "Transacción aprobada";
+    }
+    else if ($_REQUEST['transactionState'] == 6 ) {
+        $estadoTx = "Transacción rechazada";
+        return redirect()->route('inicio');
+    }
+    else if ($_REQUEST['transactionState'] == 104 ) {
+        $estadoTx = "Error";
+        return redirect()->route('inicio');
+    }
+    else if ($_REQUEST['transactionState'] == 7 ) {
+        $estadoTx = "Transacción pendiente";
+    }
+    else {
+        $estadoTx=$_REQUEST['mensaje'];
+        return redirect()->route('inicio');
+    }
+    return view('pagRespuesta', compact('estadoTx'));
 })->name('pagRespuesta');
 
 Route::get('/pagconfirmacion', "CarritoControlador@ingresarpago");

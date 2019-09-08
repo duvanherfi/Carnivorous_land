@@ -68,6 +68,10 @@ export default {
         }
     },
     created() {
+        EventBus.$on('reiniciarTipoOrden', data => {
+            this.tipoOrden = data;
+        })
+
         EventBus.$on('tip', data => {
             this.isAdmin = data;
         })

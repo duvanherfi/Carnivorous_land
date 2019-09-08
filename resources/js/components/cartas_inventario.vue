@@ -44,6 +44,23 @@
     </div>
     <!--/.Card-->
 
+    <!-- Paginacion -->
+    <div class="d-inline">
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item" v-if="paginacion.current_page > 1">
+                    <a @click.prevent="changePage(paginacion.current_page - 1)" class="page-link borde-gris" href="#" v-bind:class="[page == isActived ? 'letra-blanca bordes-paginacion' : '']">
+                        Atras</a></li>
+                <li class="page-item" v-for="page in pagesNumber" v-bind:class="[page == isActived ? 'botones bordes-paginacion' : '']">
+                    <a @click.prevent="changePage(page)" class="page-link borde-gris" href="#" v-bind:class="[page == isActived ? 'letra-blanca bordes-paginacion' : '']">{{ page }}</a></li>
+                <li class="page-item" v-if="paginacion.current_page < paginacion.last_page">
+                    <a @click.prevent="changePage(paginacion.current_page + 1)" class="page-link borde-gris" href="#" v-bind:class="[page == isActived ? 'letra-blanca bordes-paginacion' : '']">
+                        Siguiente</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- /Paginacion -->
+
     <!-- Verificar eliminar -->
     <div class="modal fade" id="verificar_eliminar_producto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -138,10 +155,10 @@
                             <div class="col-md-7 p-0">
                                 <select v-model="producto.tamaño" class="custom-select form-control" id="tamaño" name="tamaño" required autocomplete="tamaño">
                                     <option disabled value="">Escoge una opción</option>
+                                    <option value="XS">XS</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
                                     <option value="L">L</option>
-                                    <option value="XS">XS</option>
                                     <option value="XL">XL</option>
                                 </select>
                             </div>
@@ -195,7 +212,18 @@ export default {
                 opcion_catalogo: '',
                 descripcion: ''
             },
-            activar: true
+            activar: true,
+            offset: 3,
+            paginacion: {
+                total: 0,
+                current_page: 0,
+                per_page: 0,
+                last_page: 0,
+                next_page_url: 0,
+                prev_page_url: 0,
+                from: 0,
+                to: 0
+            }
         };
     },
     created() {
@@ -203,8 +231,9 @@ export default {
             $('#todos_los_productos').css('visibility', 'hidden');
             this.producto.categoria = data.categoria;
             this.producto.genero = data.genero;
-            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.gestion}`).then(response => {
-                this.productos = response.data;
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.gestion}?page=1`).then(response => {
+                this.productos = response.data.data;
+                this.hacerPaginacion(response.data);
                 $('#todos_los_productos').css('visibility', 'visible');
             })
         })
@@ -213,13 +242,13 @@ export default {
         EventBus.$on('activarUpdate', data => {
             this.activar = data;
             if (this.activar == true) {
-                this.actualizarProductos();
+                this.actualizarProductos(this.paginacion.current_page);
             }
         })
 
         EventBus.$on('ordenar', data => {
             if (data == 'ninguno') {
-                this.actualizarProductos();
+                this.actualizarProductos(this.paginacion.current_page);
             } else if (data == 'alfabeticamente') {
                 this.productos.sort(function comparar(a, b) {
                     if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
@@ -232,13 +261,59 @@ export default {
                 this.productos.sort(function comparar(a, b) {
                     return a.valor - b.valor;
                 });
+            } else if (data == 'destacados') {
+                this.productos.sort(function comparar(a, b) {
+                    return b.calificacion - a.calificacion;
+                });
             }
         })
     },
     updated() {
         this.activar = false;
     },
+    computed: {
+        isActived() {
+            return this.paginacion.current_page;
+        },
+        pagesNumber() {
+            if (!this.paginacion.to) {
+                return [];
+            }
+
+            var from = this.paginacion.current_page - this.offset;
+            if (from < 1) {
+                from = 1;
+            }
+
+            var to = from + (this.offset * 2);
+            if (to >= this.paginacion.last_page) {
+                to = this.paginacion.last_page;
+            }
+
+            var pagesArray = [];
+            while (from <= to) {
+                pagesArray.push(from);
+                from++;
+            }
+            return pagesArray;
+        }
+    },
     methods: {
+        hacerPaginacion(data) {
+            this.paginacion.total = data.total;
+            this.paginacion.current_page = data.current_page;
+            this.paginacion.per_page = data.per_page;
+            this.paginacion.last_page = data.last_page;
+            this.paginacion.next_page_url = data.next_page_url;
+            this.paginacion.prev_page_url = data.prev_page_url;
+            this.paginacion.from = data.from;
+            this.paginacion.to = data.to;
+        },
+        changePage(page) {
+            EventBus.$emit('reiniciarTipoOrden', 'ninguno');
+            this.paginacion.current_page = page;
+            this.actualizarProductos(page);
+        },
         obtenerImagenPrincipal(e) {
             let file = e.target.files[0];
             if (isNullOrUndefined(file)) {
@@ -266,9 +341,11 @@ export default {
             }
             this.producto.imagen3 = file;
         },
-        actualizarProductos() {
-            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.gestion}`).then(response => {
-                this.productos = response.data;
+        actualizarProductos(page) {
+            axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.gestion}?page=` + page).then(response => {
+                this.productos = response.data.data;
+                this.hacerPaginacion(response.data);
+                $('#todos_los_productos').css('visibility', 'visible');
             });
         },
         generarTipos() {
@@ -337,6 +414,40 @@ export default {
 </script>
 
 <style scoped>
+.page-item:last-child .page-link:hover {
+    background-color: #434343 !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    color: white !important;
+}
+
+.page-item:first-child .page-link:hover {
+    background-color: #434343 !important;
+    border-top-left-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+    color: white !important;
+}
+
+.borde-gris {
+    border: 1px solid #434343 !important;
+    color: #434343 !important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.letra-blanca {
+    color: white !important;
+}
+
+.bordes-paginacion:last-child {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.bordes-paginacion:first-child {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
 .btn-gestion {
     position: absolute;
 }

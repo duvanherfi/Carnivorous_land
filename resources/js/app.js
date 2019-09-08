@@ -1,5 +1,6 @@
 require('./bootstrap');
 require('./mdb');
+require('./event_bus');
 var AOS = require('aos');
 AOS.init();
 global.md5 = require('md5');
@@ -31,6 +32,7 @@ Vue.component('contenido-descripcion', require('./components/contenido_descripci
 Vue.component('menu-inventario', require('./components/menu_inventario.vue').default);
 Vue.component('contenido-inventario', require('./components/contenido_inventario.vue').default);
 Vue.component('filas-carrito', require('./components/filas_carrito.vue').default);
+Vue.component('filas-pagrespuesta', require('./components/filas_pagRespuesta.vue').default);
 Vue.component('menu_prueba', require('./components/menu_prueba.vue').default);
 
 const app = new Vue({

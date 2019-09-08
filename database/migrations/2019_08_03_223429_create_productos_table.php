@@ -22,6 +22,8 @@ class CreateProductosTable extends Migration
             $table->integer('valor');
             $table->integer('cantidad');
             $table->integer('stock_minimo');
+            $table->integer('calificacion');
+            $table->float('calificacionDecimal');
             $table->string('opcion_catalogo');
             $table->text('descripcion');
             $table->string('habilitado')->default('true');

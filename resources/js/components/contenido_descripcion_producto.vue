@@ -3,16 +3,16 @@
     <h1>{{ producto.genero }}</h1>
     <h3>{{ producto.nombre }}</h3>
     <p class="clasificacion">
-        <input id="radio1" type="radio" name="estrellas" value="5">
-        <label for="radio1">★</label>
-        <input id="radio2" type="radio" name="estrellas" value="4">
-        <label for="radio2">★</label>
-        <input id="radio3" type="radio" name="estrellas" value="3">
-        <label for="radio3">★</label>
-        <input id="radio4" type="radio" name="estrellas" value="2">
-        <label for="radio4">★</label>
-        <input id="radio5" type="radio" name="estrellas" value="1">
-        <label for="radio5">★</label>
+        <input v-model="producto.calificacion" type="radio" name="estrellas" value="5">
+        <label>★</label>
+        <input v-model="producto.calificacion" type="radio" name="estrellas" value="4">
+        <label>★</label>
+        <input v-model="producto.calificacion" type="radio" name="estrellas" value="3">
+        <label>★</label>
+        <input v-model="producto.calificacion" type="radio" name="estrellas" value="2">
+        <label>★</label>
+        <input v-model="producto.calificacion" type="radio" name="estrellas" value="1">
+        <label>★</label>
     </p>
     <h1>{{ producto.valor | currency }} COP</h1>
     <h4 class="font-weight-bold">Tamaño: {{ producto.tamaño }}</h4>
@@ -78,7 +78,7 @@ export default {
         });
     },
     methods: {
-        añadirCarrito(){
+        añadirCarrito() {
             axios.get('/comprobarSiAdmin').then(response => {
                 if (response.data == '') {
                     $('#verificar_carrito_descripcion').modal('show');
@@ -90,6 +90,12 @@ export default {
 
                     $('[data-toggle="popover"]').popover("show");
                     setTimeout("$('#añadirCarrito').popover('hide');", 5000);
+
+                    const params = {
+                        id: this.producto.id_producto,
+                        accion: 'añadir'
+                    };
+                    EventBus.$emit('actualizarOpcionCancelar', params);
 
                     let formData = new FormData();
                     formData.append('id', this.producto.id_producto);
@@ -108,6 +114,11 @@ export default {
             this.producto.opcionCancelar = false;
             var contadorCarrito = Number($('#contadorCarrito').html());
             contadorCarrito -= 1;
+            const params = {
+                id: this.producto.id_producto,
+                accion: 'cancelar'
+            };
+            EventBus.$emit('actualizarOpcionCancelar', params);
             $('#contadorCarrito').html(contadorCarrito);
             axios.delete(`/carritoControl/${this.producto.id_producto}`).then(response => {
                 // console.log(response.data);
@@ -118,7 +129,7 @@ export default {
 </script>
 
 <style scoped>
-.icono_carnivorousland{
+.icono_carnivorousland {
     border-radius: 50px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
 }
@@ -169,17 +180,11 @@ label {
 .clasificacion {
     direction: rtl;
     unicode-bidi: bidi-override;
-    width: 84px;
+    width: 105px;
     height: 30px;
     margin: 0;
-    font-size: 1rem;
+    font-size: 20px;
     cursor: default;
-}
-
-label:hover,
-label:hover~label {
-    color: orange;
-    cursor: pointer;
 }
 
 input[type="radio"]:checked~label {

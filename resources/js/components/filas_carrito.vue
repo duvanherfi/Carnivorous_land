@@ -19,7 +19,7 @@
                     <h4 class="nomargin m-0 text-break">{{ item[0].nombre }}</h4>
                 </div>
             </td>
-            <td class="text-center" v-if="item[0].tamaño == 'undefined'"></td>
+            <td class="text-center" v-if="item[0].tamaño == 'undefined' || item[0].tamaño == 'null'"></td>
             <td class="text-center" v-else>{{ item[0].tamaño }}</td>
             <td data-th="Precio" class="text-center">{{ item[0].valor | currency}}</td>
             <td data-th="Cantidad">
@@ -89,7 +89,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .imagen_carrito {
     width: 220px;
     height: 110px;

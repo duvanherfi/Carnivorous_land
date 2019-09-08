@@ -237,7 +237,7 @@ body {
 }
 
 .carta-DS {
-    float: left;
+    display: inline-flex;
     margin: 0.9rem;
 }
 

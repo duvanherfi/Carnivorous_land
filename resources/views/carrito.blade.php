@@ -15,8 +15,6 @@
           <p class="text-center">Entrega</p>
         </td>
         <td>
-          <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu">
-
             <div class="form-group">
               <h5 class="font-weight-bold">Datos del destinatario</h5>
               <p>Los siguientes datos son obligatorios para envios:</p>
@@ -77,7 +75,7 @@
                 entrega, dicho valor varia entre los $10.000 COP y $25.000 COP según peso y tamaño del paquete.</p>
               <p>Los tiempos de despacho se realizan de dos a tres días hábiles.</p>
             </div>
-
+          <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu">
             <input name="merchantId" type="hidden" id="merchantId">
             <input name="accountId" type="hidden" id="accountId">
             <input name="description" type="hidden" id="description">
@@ -87,7 +85,7 @@
             <input name="taxReturnBase" type="hidden" id="taxReturnBase">
             <input name="currency" type="hidden" value="COP">
             <input name="signature" type="hidden" id="signature">
-            <input name="test" type="hidden" value="0">
+            <input name="test" type="hidden" value="1">
             <input name="buyerEmail" type="hidden" id="buyerEmail">
             <input name="responseUrl" type="hidden" value="{{ route('pagRespuesta') }}">
             <input name="confirmationUrl" type="hidden" value="">
@@ -121,14 +119,14 @@
       cont2 = 2;
     }
   }
-
-        var merchantId= 508029;
-        var ApiKey= "4Vj8eK4rloUd272L48hsrarnUA";
-        var referenceCode= "PAgo2";
-        var amount=20000;
-        var tax=0;
-        var taxReturnBase=0;
-        var currency= "COP";
+  $(document).ready(function(){
+    var merchantId= 508029;
+    var ApiKey= "4Vj8eK4rloUd272L48hsrarnUA";
+    var referenceCode= "PAgo2";
+    var amount=20000;
+    var tax=0;
+    var taxReturnBase=0;
+    var currency= "COP";
         var accountId=512321;
         var buyerEmail= "{{ auth()->user()->correo }}";
         var description="Test PAYU";
@@ -147,7 +145,7 @@
         $('#buyerEmail').val(buyerEmail);
         console.log(signature);
         //$('#preciop').val(p1[0]+p1[1]);
-
+  })
 </script>
 @endsection
 

@@ -23,6 +23,7 @@ class CarritoControlador extends Controller
             for ($i = 0; $i < count($productos); $i++) {
                 $productos[$i][0]->subtotal = $productos[$i][0]->valor;
                 $productos[$i][0]->cantidad = 1;
+                $productos[$i][0]->calificacion = 0;
             }
             return $productos;
         } else {

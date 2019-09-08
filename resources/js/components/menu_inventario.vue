@@ -198,10 +198,10 @@
                             <div class="col-md-7 p-0">
                                 <select v-model="producto.tamaño" class="custom-select form-control" id="tamaño" name="tamaño" required autocomplete="tamaño">
                                     <option disabled value="">Escoge una opción</option>
+                                    <option value="XS">XS</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
                                     <option value="L">L</option>
-                                    <option value="XS">XS</option>
                                     <option value="XL">XL</option>
                                 </select>
                             </div>

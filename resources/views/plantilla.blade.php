@@ -44,6 +44,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        @if (!isset($estadoTx))
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="navbar-nav ml-auto bordes-externo-DS">
 
@@ -89,9 +90,11 @@
                 @endif
             </ul>
         </div>
+        @endif
     </nav>
     <!--/.Navbar -->
 
+    @if (!isset($estadoTx))
     <div class="container">
         {{-- Logo --}}
         <div>
@@ -154,11 +157,13 @@
                 @endif
 
             </div>
+            
 
 
         </nav>
         {{-- /.Menu --}}
     </div>
+    @endif
 
     @yield('contenido')
 
