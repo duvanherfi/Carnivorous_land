@@ -79,6 +79,11 @@
                         <a class="dropdown-item" href="{{route('mis_datos')}}">
                             <img src="{{ asset('img/user.png') }}" alt="Icono de usuario" width="23">
                             Mi perfil</a>
+
+                        <a class="dropdown-item" href="{{route('registrar_admin')}}">
+                            <img src="{{ asset('img/admin.png') }}" alt="Icono de registrar administrador" width="23">
+                            Crear admin</a>
+
                         <a class="dropdown-item" href="{{route('cerrar_sesion')}}">
                             <img src="{{ asset('img/logout.png') }}" alt="Cerrar Sesión" width="23">
                             Cerrar sesión</a>
