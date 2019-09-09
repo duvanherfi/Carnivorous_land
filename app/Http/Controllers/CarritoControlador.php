@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\DB;
 
 
 class CarritoControlador extends Controller
@@ -67,21 +67,23 @@ class CarritoControlador extends Controller
     }
 
     public function ingresarpago(Request $request){
+        dd('Hola');
+        // DB::table('pedidos')->where('id', 1)->update(['nombre_cliente' => 'Camilo']);
 
-        $transaction_date="2015-05-27 13:07:35";
-        $cc_number="";
-        $cc_holder=test_buyer;
-        $billing_country=CO;
-        $description=test_payu_01;
-        $value=100.00;
-        $payment_method_type=2;
-        $email_buyer="test@payulatam.com";
-        $response_message_pol="ENTITY_DECLINED";
-        $error_message_bank="";
-        $transaction_id="f5e668f1-7ecc-4b83-a4d1-0aaa68260862";
-        $currency="USD";
-        $ip="190.242.116.98";
-        $billing_city="Bogota";
+        // $transaction_date="2015-05-27 13:07:35";
+        // $cc_number="";
+        // $cc_holder=test_buyer;
+        // $billing_country=CO;
+        // $description=test_payu_01;
+        // $value=100.00;
+        // $payment_method_type=2;
+        // $email_buyer="test@payulatam.com";
+        // $response_message_pol="ENTITY_DECLINED";
+        // $error_message_bank="";
+        // $transaction_id="f5e668f1-7ecc-4b83-a4d1-0aaa68260862";
+        // $currency="USD";
+        // $ip="190.242.116.98";
+        // $billing_city="Bogota";
 
     }
 }

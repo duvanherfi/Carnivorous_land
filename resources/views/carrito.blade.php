@@ -75,11 +75,12 @@
                 entrega, dicho valor varia entre los $10.000 COP y $25.000 COP según peso y tamaño del paquete.</p>
               <p>Los tiempos de despacho se realizan de dos a tres días hábiles.</p>
             </div>
+
           <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu">
             <input name="merchantId" type="hidden" id="merchantId">
             <input name="accountId" type="hidden" id="accountId">
             <input name="description" type="hidden" id="description">
-            <input name="referenceCode" type="hidden" id="referenceCode">
+            <input name="referenceCode" type="hidden" value="{{ $id_ultPedido }}">
             <input name="amount" type="hidden" id="amount">
             <input name="tax" type="hidden" id="tax">
             <input name="taxReturnBase" type="hidden" id="taxReturnBase">
@@ -88,8 +89,8 @@
             <input name="test" type="hidden" value="1">
             <input name="buyerEmail" type="hidden" id="buyerEmail">
             <input name="responseUrl" type="hidden" value="{{ route('pagRespuesta') }}">
-            <input name="confirmationUrl" type="hidden" value="">
-            <input name="Submit" class="btn bg-success" id="terminar_compra" type="submit" value="TERMINAR COMPRA">
+            <input name="confirmationUrl" type="hidden" value="{{ route('pagConfirmacion') }}">
+            <input name="Submit" onclick="llenar()" class="btn bg-success" id="terminar_compra" type="submit" value="TERMINAR COMPRA">
           </form>
         </td>
       </tr>
@@ -119,32 +120,37 @@
       cont2 = 2;
     }
   }
-  $(document).ready(function(){
+
+  function llenar(){
     var merchantId= 508029;
     var ApiKey= "4Vj8eK4rloUd272L48hsrarnUA";
-    var referenceCode= "PAgo2";
-    var amount=20000;
+    var referenceCode= @json($id_ultPedido);
+    var amount=$('#amount').val();
     var tax=0;
     var taxReturnBase=0;
     var currency= "COP";
-        var accountId=512321;
-        var buyerEmail= "{{ auth()->user()->correo }}";
-        var description="Test PAYU";
-        var signature=md5(ApiKey+"~"+merchantId+"~"+referenceCode+"~"+amount+"~"+currency);
-        //var p=$("#precio").html().split("$");
-        //var p1=p[1].split(".");
+    var accountId=512321;
+    var buyerEmail= "{{ auth()->user()->correo }}";
+    var description=$('#description').val();
+    var signature=md5(ApiKey+"~"+merchantId+"~"+referenceCode+"~"+amount+"~"+currency);
+    //var p=$("#precio").html().split("$");
+    //var p1=p[1].split(".");
 
-        $('#merchantId').val(merchantId);
-        $('#accountId').val(accountId);
-        $('#description').val(description);
-        $('#referenceCode').val(referenceCode);
-        $('#amount').val(amount);
-        $('#tax').val(tax);
-        $('#taxReturnBase').val(taxReturnBase);
-        $('#signature').val(signature);
-        $('#buyerEmail').val(buyerEmail);
-        console.log(signature);
-        //$('#preciop').val(p1[0]+p1[1]);
+    $('#merchantId').val(merchantId);
+    $('#accountId').val(accountId);
+    $('#description').val(description);
+    // $('#referenceCode').val(referenceCode);
+    $('#amount').val(amount);
+    $('#tax').val(tax);
+    $('#taxReturnBase').val(taxReturnBase);
+    $('#signature').val(signature);
+    $('#buyerEmail').val(buyerEmail);
+    // console.log(signature);
+    //$('#preciop').val(p1[0]+p1[1]);
+  }
+
+  $(document).ready(function(){
+    
   })
 </script>
 @endsection

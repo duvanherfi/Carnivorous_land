@@ -3174,6 +3174,16 @@ __webpack_require__.r(__webpack_exports__);
   updated: function updated() {
     var total = $('#total').html();
     $('#precio').html(total);
+    $('#amount').val(this.total);
+    var descripcion = '';
+    this.productos.forEach(function (element, index, array) {
+      if (index == this.productos.length - 1) {
+        descripcion += element[0].nombre;
+      } else {
+        descripcion += element[0].nombre + ' - ';
+      }
+    }, this);
+    $('#description').val(descripcion);
   },
   methods: {
     subtotal: function subtotal(valor, cantidad, index) {
@@ -3188,6 +3198,7 @@ __webpack_require__.r(__webpack_exports__);
     cancelarProductoCarrito: function cancelarProductoCarrito(id, index) {
       var contadorCarrito = Number($('#contadorCarrito').html());
       contadorCarrito -= 1;
+      this.total = this.total - this.productos[index][0].subtotal;
       $('#contadorCarrito').html(contadorCarrito);
       this.productos.splice(index, 1);
       axios["delete"]("/carritoControl/".concat(id)).then(function (response) {// console.log(response.data);

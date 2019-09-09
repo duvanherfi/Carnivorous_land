@@ -4,7 +4,7 @@
 
 <div class="pedido">
 
-	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS PENDIENTES</h2><br>
+	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS</h2><br>
 	
 
 	<table class="table tabla">

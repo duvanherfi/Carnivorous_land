@@ -40,14 +40,17 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 
 Route::get('/carrito_compra', function () {
-    return view('carrito');
+    $id_ultPedido = App\Pedido::select('id')->get();
+    $id_ultPedido = $id_ultPedido->last();
+    $id_ultPedido = ($id_ultPedido->id+1) . auth()->user()->cedula;
+    return view('carrito', compact('id_ultPedido'));
 })->name('carrito')->middleware('auth');
 
-Route::get('/mis_datos','UsuarioControlador@mostrar_datos')
-->name('mis_datos')->middleware('auth');
+Route::get('/mis_datos', 'UsuarioControlador@mostrar_datos')
+    ->name('mis_datos')->middleware('auth');
 
-Route::put('/actualizar/{user}','UsuarioControlador@actualizar')
-->name('actualizar');
+Route::put('/actualizar/{user}', 'UsuarioControlador@actualizar')
+    ->name('actualizar');
 
 Route::post('register', 'UsuarioControlador@registrar');
 
@@ -63,10 +66,10 @@ Route::get('/inventario/{gestion}', function ($gestion) {
 
 //Registrar un administrador
 Route::get('/registrar_admin', 'AdminControlador@mostrar')
-->name('registrar_admin')->middleware('admin');
+    ->name('registrar_admin')->middleware('admin');
 
 Route::post('/registrar_admin', 'AdminControlador@registrar')
-->name('registrar_admin')->middleware('admin');
+    ->name('registrar_admin')->middleware('admin');
 //->middleware('admin');
 
 Route::get('/pedidos', function () {
@@ -75,10 +78,10 @@ Route::get('/pedidos', function () {
 
 
 Route::get('/actualizar_datos', 'EmpresaControlador@actualizar')
-->name('actualizar_datos')->middleware('admin');
+    ->name('actualizar_datos')->middleware('admin');
 
 Route::put('/guardar', 'EmpresaControlador@guardar')
-->name('guardar');
+    ->name('guardar');
 
 // Tipos o generos
 Route::get('/tiposControl/{tipo}', 'TiposControlador@index')->name('tipos.index');
@@ -118,31 +121,27 @@ Route::put('/pedidos/{id}', "PedidosController@cambiar")->name('cambiar');
 Route::get('/pagRespuesta', function () {
     $transactionState = $_REQUEST['transactionState'];
 
-    if ($_REQUEST['transactionState'] == 4 ) {
+    if ($_REQUEST['transactionState'] == 4) {
         $estadoTx = "Transacción aprobada";
-    }
-    else if ($_REQUEST['transactionState'] == 6 ) {
+    } else if ($_REQUEST['transactionState'] == 6) {
         $estadoTx = "Transacción rechazada";
         return redirect()->route('inicio');
-    }
-    else if ($_REQUEST['transactionState'] == 104 ) {
+    } else if ($_REQUEST['transactionState'] == 104) {
         $estadoTx = "Error";
         return redirect()->route('inicio');
-    }
-    else if ($_REQUEST['transactionState'] == 7 ) {
+    } else if ($_REQUEST['transactionState'] == 7) {
         $estadoTx = "Transacción pendiente";
-    }
-    else {
-        $estadoTx=$_REQUEST['mensaje'];
+    } else {
+        $estadoTx = $_REQUEST['mensaje'];
         return redirect()->route('inicio');
     }
     return view('pagRespuesta', compact('estadoTx'));
 })->name('pagRespuesta');
 
-Route::get('/pagconfirmacion', "CarritoControlador@ingresarpago");
+Route::get('/pagconfirmacion', "CarritoControlador@ingresarpago")->name('pagConfirmacion');
 
 
 
 //Rutas correo
 Route::post('/correo', "CorreoControlador@escribenos")
-->name('correo');
+    ->name('correo');
