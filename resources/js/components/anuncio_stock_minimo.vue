@@ -1,6 +1,6 @@
 <template>
-<div v-if="tamañoProductos != 0">
-    <div class="pr-3"><img id="campana" src="/img/campana.png" alt="campana" width="33" data-toggle="popover" data-placement="bottom">
+<div>
+    <div v-if="tamañoProductos != 0" class="pr-3"><img id="campana" src="/img/campana.png" alt="campana" width="33" data-toggle="popover" data-placement="bottom">
         <span class="badge badge-primary badge-pill counter position-absolute" style="z-index:4; right:25.5%;">{{ tamañoProductos }}</span></div>
 
     <div id="pop-title" style="display: none">Productos prontos a acabar</div>
@@ -29,7 +29,7 @@ export default {
             // console.log(response.data);
         })
     },
-    mounted() {
+    updated() {
         $(document).ready(function () {
             $('[data-toggle="popover"]').popover({
                 html: true,
@@ -39,13 +39,13 @@ export default {
                 content: function () {
                     return $('#popover-content').html();
                 }
-            });
+            })
             $('body').click(function (ev) {
                 var target = $(ev.target);
                 if (target.not('#campana').length) {
                     $('#campana').popover('hide');
                 }
-            });
+            })
         });
     }
 }

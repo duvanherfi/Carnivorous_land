@@ -12,7 +12,7 @@
     <tbody>
       <tr>
         <td id="entrega-compra" class="ml-5">
-          <p class="text-center">Entrega</p>
+          <p class="text-center">Entrega a domicilio</p>
         </td>
         <td>
             <div class="form-group">
@@ -26,7 +26,7 @@
               <div class="custom-control custom-radio">
                 <input onclick="deseleccionarOpcion1(this)" class="custom-control-input" type="radio" name="opciones"
                   id="entregaDatosPropiosCheck" data-toggle="collapse" href="#entregaDatosPropios" aria-expanded="false"
-                  aria-controls="entregaDatosPropios">
+                  aria-controls="entregaDatosPropios" value="miDireccion">
                 <label class="custom-control-label" for="entregaDatosPropiosCheck">
                   Utilizar la dirección registrada en mi cuenta
                 </label>
@@ -49,7 +49,7 @@
               <div class="custom-control custom-radio">
                 <input onclick="deseleccionarOpcion2(this)" class="custom-control-input" type="radio" name="opciones"
                   id="entregaOtrosDatosCheck" data-toggle="collapse" href="#entregaOtrosDatos" aria-expanded="false"
-                  aria-controls="entregaOtrosDatos">
+                  aria-controls="entregaOtrosDatos" value="otraDireccion">
                 <label class="custom-control-label" for="entregaOtrosDatosCheck">
                   Utilizar otra dirección diferente a la registrada en mi cuenta
                 </label>
@@ -64,7 +64,8 @@
             {{-- /Opcion 2 Utilizar otros datos --}}
 
             <div class="form-group">
-              Copia el texto del cuadro y envialo al whatsapp al siguiente número: &nbsp
+              Si desea saber algo sobre el domicilio copia el texto del cuadro,<br>
+              ademas de añadir su mensaje y envialo al whatsapp al siguiente número: &nbsp
               <a class="btn btn-success" href="https://api.whatsapp.com/send?phone=573167973829" target="_blank">
                 <i class="fab fa-whatsapp"></i> +57 316 7973829</a>
               <p>Recuerde enviar el mensaje si va a comprar el(los) producto(s).</p>
@@ -88,7 +89,7 @@
             <input name="signature" type="hidden" id="signature">
             <input name="test" type="hidden" value="1">
             <input name="buyerEmail" type="hidden" id="buyerEmail">
-            <input name="responseUrl" type="hidden" value="{{ route('pagRespuesta') }}">
+            <input name="responseUrl" type="hidden" value="{{ route('pagRespuestaPuente') }}">
             <input name="confirmationUrl" type="hidden" value="{{ route('pagConfirmacion') }}">
             <input name="Submit" onclick="llenar()" class="btn bg-success" id="terminar_compra" type="submit" value="TERMINAR COMPRA">
           </form>
@@ -106,9 +107,11 @@
     if (cont == 2) {
       input.checked = false;
       cont = 1;
+      
     }else{
       cont = 2;
     }
+    botonTerminarCompra();
   }
 
   function deseleccionarOpcion2(input){
@@ -119,9 +122,38 @@
     }else{
       cont2 = 2;
     }
+    botonTerminarCompra();
+  }
+
+  function botonTerminarCompra(){
+    if (cont == 1 && cont2 == 1) {
+      $('#terminar_compra').hide();
+    }else{
+      $('#terminar_compra').show();
+    }
   }
 
   function llenar(){
+    valorInput = $('input:radio[name=opciones]:checked').val()
+    if (valorInput == 'miDireccion') {
+      const params = {
+        'valorTotal': $('#amount').val()
+      }
+      axios.post(`/carritoControl/${valorInput}`, params).then(response => {})
+    }else if (valorInput == 'otraDireccion'){
+      const params = {
+        'valorTotal': $('#amount').val(),
+        'nombre': $('#nombre_carrito').val(),
+        'cedula': $('#cedula_carrito').val(),
+        'telefono': $('#telefono_carrito').val(),
+        'departamento': $('#departamento_carrito').val(),
+        'ciudad': $('#ciudad_carrito').val(),
+        'barrio': $('#barrio_carrito').val(),
+        'direccion': $('#direccion_carrito').val()
+      }
+      axios.post(`/carritoControl/${valorInput}`, params).then(response => {})
+    }
+
     var merchantId= 508029;
     var ApiKey= "4Vj8eK4rloUd272L48hsrarnUA";
     var referenceCode= @json($id_ultPedido);
@@ -150,7 +182,7 @@
   }
 
   $(document).ready(function(){
-    
+    botonTerminarCompra();
   })
 </script>
 @endsection

@@ -7,6 +7,9 @@
         <div class="img-sombra-producto-DS">
             <a @click="descripcion(item)" v-bind:href="descripcionProducto"><img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" /></a>
         </div>
+        <div v-if="item.cantidad == 0" class="position-absolute tamaño_agotado d-flex align-items-center">
+            <h1 class="col text-dark text-center font-weight-bold">AGOTADO</h1>
+        </div>
         <!-- /Imagen -->
 
         <!-- Contenido -->
@@ -35,7 +38,12 @@
             <!-- Valor -->
             <h5 class="font-weight-bold mb-1">{{ item.valor | currency}} COP</h5>
             <!-- Button -->
-            <button @click="añadirCarrito(item, index)" v-if="item.opcionCancelar == false" class="btn btn-block color-verde añadirCarritoBtn">
+            <button @click="añadirCarrito(item, index)" v-if="item.opcionCancelar == false && item.cantidad != 0" class="btn btn-block color-verde añadirCarritoBtn">
+                <i class="fas fa-cart-plus"></i>
+                Añadir al carro
+            </button>
+            <button @click="advertencia('Señor(a) usuario, este producto no se puede añadir al carrito debido a que se encuentra agotado.')"
+                v-else-if="item.opcionCancelar == false && item.cantidad == 0" class="btn btn-block color-verde añadirCarritoBtn">
                 <i class="fas fa-cart-plus"></i>
                 Añadir al carro
             </button>
@@ -77,7 +85,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero.</p>
+                    <p>{{ mensajeAdvertencia }}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
@@ -94,6 +102,7 @@ import EventBus from '../event_bus'
 export default {
     data() {
         return {
+            mensajeAdvertencia: '',
             descripcionProducto: '',
             productos: [],
             tipos: [],
@@ -166,9 +175,7 @@ export default {
     beforeUpdate() {
         EventBus.$on('ordenar', data => {
             if (data == 'ninguno') {
-                axios.get(`/productosControl/${this.producto.genero}/${this.producto.categoria}/${this.tipo}`).then(response => {
-                    this.productos = response.data;
-                })
+                this.actualizarProductos(this.paginacion.current_page);
             } else if (data == 'alfabeticamente') {
                 this.productos.sort(function comparar(a, b) {
                     if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
@@ -239,10 +246,14 @@ export default {
                 $('#todos_los_productos_vista').css('visibility', 'visible');
             })
         },
+        advertencia(mensaje){
+            this.mensajeAdvertencia = mensaje;
+            $('#verificar_carrito').modal('show');
+        },
         añadirCarrito(item, index) {
             axios.get('/comprobarSiAdmin').then(response => {
                 if (response.data == '') {
-                    $('#verificar_carrito').modal('show');
+                    this.advertencia('Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero.');
                 } else {
                     this.productos[index].opcionCancelar = true;
                     var contadorCarrito = Number($('#contadorCarrito').html());
@@ -258,6 +269,7 @@ export default {
                     formData.append('imagen', item.imagen_principal);
                     formData.append('valor', item.valor);
                     formData.append('tamaño', item.tamaño);
+                    formData.append('cantidad', item.cantidad);
 
                     axios.post('/carritoControl', formData).then(response => {
                         // console.log(response.data);
@@ -287,6 +299,15 @@ export default {
 </script>
 
 <style scoped>
+.tamaño_agotado{
+    width: 95%;
+    height: 45%;;
+    margin: 10px 8px;
+    background-color: white;
+    opacity: 0.6;
+    border-radius: 5px;
+}
+
 .page-item:last-child .page-link:hover {
     background-color: #434343 !important;
     border-top-right-radius: 0.25rem !important;

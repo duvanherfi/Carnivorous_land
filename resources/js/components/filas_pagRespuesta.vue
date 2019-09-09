@@ -101,7 +101,7 @@ export default {
     methods: {
         calificarCadaUno() {
             axios.post('/calificarControl', this.productos).then(response => {
-                // console.log(response.data);
+                // // console.log(response.data);
             })
         },
         calificarTodo(){

@@ -19,6 +19,11 @@
     <h4 class="font-weight-bold">Disponible: {{ producto.cantidad }}</h4>
     <button @click="cancelarCarrito()" v-if="producto.opcionCancelar == true" class="btn btn-lg botones w-50 m-0">
         <i class="fas fa-ban"></i> Cancelar</button>
+    <button @click="advertencia('Señor(a) usuario, este producto no se puede añadir al carrito debido a que se encuentra agotado.')"
+        v-else-if="producto.opcionCancelar == false && producto.cantidad == 0" class="btn btn-lg color-verde w-50">
+        <i class="fas fa-cart-plus"></i>
+        Añadir al carro
+    </button>
     <button @click="añadirCarrito()" v-else class="btn btn-lg color-verde w-50">
         <i class="fas fa-cart-plus"></i> Añadir al carro</button>
     <pre class="mt-2">{{ producto.descripcion }}</pre>
@@ -53,7 +58,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero.</p>
+                    <p>{{ mensajeAdvertencia }}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
@@ -69,6 +74,7 @@ import EventBus from '../event_bus'
 export default {
     data() {
         return {
+            mensajeAdvertencia: '',
             producto: []
         }
     },
@@ -78,10 +84,14 @@ export default {
         });
     },
     methods: {
+        advertencia(mensaje){
+            this.mensajeAdvertencia = mensaje;
+            $('#verificar_carrito_descripcion').modal('show');
+        },
         añadirCarrito() {
             axios.get('/comprobarSiAdmin').then(response => {
                 if (response.data == '') {
-                    $('#verificar_carrito_descripcion').modal('show');
+                    this.advertencia('Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero.');
                 } else {
                     this.producto.opcionCancelar = true;
                     var contadorCarrito = Number($('#contadorCarrito').html());
@@ -103,6 +113,7 @@ export default {
                     formData.append('imagen', this.producto.imagen_principal);
                     formData.append('valor', this.producto.valor);
                     formData.append('tamaño', this.producto.tamaño);
+                    formData.append('cantidad', item.cantidad);
 
                     axios.post('/carritoControl', formData).then(response => {
                         // console.log(response.data);

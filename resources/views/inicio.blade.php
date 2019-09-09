@@ -8,7 +8,7 @@
         <h1>CARNIVOROUS LAND</h1>
         <h3>¡DÉJATE ATRAPAR!</h3>
         <h5>ENVIOS A TODO COLOMBIA</h5>
-        <button type="button" class="btn btn-light-green">¡COMPRAR AHORA!</button>
+        <a type="button" class="btn btn-light-green" href="{{ route('productos', 'plantas') }}">¡COMPRAR AHORA!</a>
     </div>
     <!--Indicators-->
     <ol class="carousel-indicators">

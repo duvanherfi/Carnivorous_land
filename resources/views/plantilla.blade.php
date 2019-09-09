@@ -48,9 +48,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
 
             <ul class="navbar-nav ml-auto bordes-externo-DS">
-                <div id="app">
+                @if (auth()->user() == null)
+                @elseif (auth()->user()->rol == 'administrador')
+                <div id="app4">
                     <anuncio-stock-min></anuncio-stock-min>
                 </div>
+                @endif
                 <li class="nav-item bordes-DS bordes-izq-DS">
                     <p class="nav-link">
                         <i class="fab fa-whatsapp"></i>
@@ -299,7 +302,7 @@
 
                 url: url,
                     success: function(result){
-                        console.log(result.success);
+                        // console.log(result.success);
 
 
 
@@ -344,11 +347,10 @@
 
                     },
                     error: function (result){
-                         console.log(result)
+                        //  console.log(result)
                     }
             })
         })
-
 
 
 
@@ -365,7 +367,7 @@
 
                 url: url,
                     success: function(result){
-                        console.log(result.success);
+                        // console.log(result.success);
 
                         name = result.success.nombre_cliente;
                         alert("El pedido de " + name + " fue enviado a la lista de entregados exitosamente");
@@ -375,7 +377,7 @@
 
                     },
                     error: function (result){
-                         console.log(result)
+                        //  console.log(result)
                     }
             })
         })

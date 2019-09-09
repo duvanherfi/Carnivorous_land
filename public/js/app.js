@@ -1739,7 +1739,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.tamañoProductos = _this.productos.length; // console.log(response.data);
     });
   },
-  mounted: function mounted() {
+  updated: function updated() {
     $(document).ready(function () {
       $('[data-toggle="popover"]').popover({
         html: true,
@@ -2412,10 +2412,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      mensajeAdvertencia: '',
       descripcionProducto: '',
       productos: [],
       tipos: [],
@@ -2495,9 +2504,7 @@ __webpack_require__.r(__webpack_exports__);
 
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('ordenar', function (data) {
       if (data == 'ninguno') {
-        axios.get("/productosControl/".concat(_this2.producto.genero, "/").concat(_this2.producto.categoria, "/").concat(_this2.tipo)).then(function (response) {
-          _this2.productos = response.data;
-        });
+        _this2.actualizarProductos(_this2.paginacion.current_page);
       } else if (data == 'alfabeticamente') {
         _this2.productos.sort(function comparar(a, b) {
           if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
@@ -2576,12 +2583,16 @@ __webpack_require__.r(__webpack_exports__);
         $('#todos_los_productos_vista').css('visibility', 'visible');
       });
     },
+    advertencia: function advertencia(mensaje) {
+      this.mensajeAdvertencia = mensaje;
+      $('#verificar_carrito').modal('show');
+    },
     añadirCarrito: function aAdirCarrito(item, index) {
       var _this4 = this;
 
       axios.get('/comprobarSiAdmin').then(function (response) {
         if (response.data == '') {
-          $('#verificar_carrito').modal('show');
+          _this4.advertencia('Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero.');
         } else {
           _this4.productos[index].opcionCancelar = true;
           var contadorCarrito = Number($('#contadorCarrito').html());
@@ -2595,6 +2606,7 @@ __webpack_require__.r(__webpack_exports__);
           formData.append('imagen', item.imagen_principal);
           formData.append('valor', item.valor);
           formData.append('tamaño', item.tamaño);
+          formData.append('cantidad', item.cantidad);
           axios.post('/carritoControl', formData).then(function (response) {// console.log(response.data);
           });
         }
@@ -2697,10 +2709,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      mensajeAdvertencia: '',
       producto: []
     };
   },
@@ -2712,12 +2730,16 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    advertencia: function advertencia(mensaje) {
+      this.mensajeAdvertencia = mensaje;
+      $('#verificar_carrito_descripcion').modal('show');
+    },
     añadirCarrito: function aAdirCarrito() {
       var _this2 = this;
 
       axios.get('/comprobarSiAdmin').then(function (response) {
         if (response.data == '') {
-          $('#verificar_carrito_descripcion').modal('show');
+          _this2.advertencia('Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero.');
         } else {
           _this2.producto.opcionCancelar = true;
           var contadorCarrito = Number($('#contadorCarrito').html());
@@ -2736,6 +2758,7 @@ __webpack_require__.r(__webpack_exports__);
           formData.append('imagen', _this2.producto.imagen_principal);
           formData.append('valor', _this2.producto.valor);
           formData.append('tamaño', _this2.producto.tamaño);
+          formData.append('cantidad', item.cantidad);
           axios.post('/carritoControl', formData).then(function (response) {// console.log(response.data);
           });
         }
@@ -3250,7 +3273,7 @@ __webpack_require__.r(__webpack_exports__);
     $('#description').val(descripcion);
   },
   methods: {
-    subtotal: function subtotal(valor, cantidad, index) {
+    subtotal: function subtotal(valor, cantidad, index, id) {
       var subtotal = valor * cantidad;
       this.productos[index][0].subtotal = subtotal;
       var sum = 0;
@@ -3258,6 +3281,7 @@ __webpack_require__.r(__webpack_exports__);
         sum += Number(element[0].subtotal);
       });
       this.total = sum;
+      axios.post("/carritoControl/".concat(cantidad, "/").concat(subtotal, "/").concat(id)).then(function (respoense) {});
     },
     cancelarProductoCarrito: function cancelarProductoCarrito(id, index) {
       var contadorCarrito = Number($('#contadorCarrito').html());
@@ -3388,7 +3412,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     calificarCadaUno: function calificarCadaUno() {
-      axios.post('/calificarControl', this.productos).then(function (response) {// console.log(response.data);
+      axios.post('/calificarControl', this.productos).then(function (response) {// // console.log(response.data);
       });
     },
     calificarTodo: function calificarTodo() {
@@ -9129,7 +9153,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.page-item:last-child .page-link[data-v-3d385c9e]:hover {\r\n    background-color: #434343 !important;\r\n    border-top-right-radius: 0.25rem !important;\r\n    border-bottom-right-radius: 0.25rem !important;\r\n    color: white !important;\n}\n.page-item:first-child .page-link[data-v-3d385c9e]:hover {\r\n    background-color: #434343 !important;\r\n    border-top-left-radius: 0.25rem !important;\r\n    border-bottom-left-radius: 0.25rem !important;\r\n    color: white !important;\n}\n.borde-gris[data-v-3d385c9e] {\r\n    border: 1px solid #434343 !important;\r\n    color: #434343 !important;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.letra-blanca[data-v-3d385c9e] {\r\n    color: white !important;\n}\n.bordes-paginacion[data-v-3d385c9e]:last-child {\r\n    border-top-right-radius: 0.25rem;\r\n    border-bottom-right-radius: 0.25rem;\n}\n.bordes-paginacion[data-v-3d385c9e]:first-child {\r\n    border-top-left-radius: 0.25rem;\r\n    border-bottom-left-radius: 0.25rem;\n}\n.card-body[data-v-3d385c9e] {\r\n    font-family: 'Montserrat', sans-serif;\r\n    padding: 16px;\n}\n.custom-control[data-v-3d385c9e] {\r\n    margin-right: 39px;\n}\ninput[type=\"radio\"][data-v-3d385c9e] {\r\n    display: none;\n}\nlabel[data-v-3d385c9e] {\r\n    color: #434343;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.clasificacion[data-v-3d385c9e] {\r\n    direction: rtl;\r\n    unicode-bidi: bidi-override;\r\n    width: 105px;\r\n    height: 30px;\r\n    margin: 0;\r\n    font-size: 20px;\r\n    cursor: default;\n}\ninput[type=\"radio\"]:checked~label[data-v-3d385c9e] {\r\n    color: orange;\n}\n.img-sombra-producto-DS[data-v-3d385c9e] {\r\n    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);\r\n    height: 185px;\n}\r\n", ""]);
+exports.push([module.i, "\n.tamaño_agotado[data-v-3d385c9e]{\r\n    width: 95%;\r\n    height: 45%;;\r\n    margin: 10px 8px;\r\n    background-color: white;\r\n    opacity: 0.6;\r\n    border-radius: 5px;\n}\n.page-item:last-child .page-link[data-v-3d385c9e]:hover {\r\n    background-color: #434343 !important;\r\n    border-top-right-radius: 0.25rem !important;\r\n    border-bottom-right-radius: 0.25rem !important;\r\n    color: white !important;\n}\n.page-item:first-child .page-link[data-v-3d385c9e]:hover {\r\n    background-color: #434343 !important;\r\n    border-top-left-radius: 0.25rem !important;\r\n    border-bottom-left-radius: 0.25rem !important;\r\n    color: white !important;\n}\n.borde-gris[data-v-3d385c9e] {\r\n    border: 1px solid #434343 !important;\r\n    color: #434343 !important;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.letra-blanca[data-v-3d385c9e] {\r\n    color: white !important;\n}\n.bordes-paginacion[data-v-3d385c9e]:last-child {\r\n    border-top-right-radius: 0.25rem;\r\n    border-bottom-right-radius: 0.25rem;\n}\n.bordes-paginacion[data-v-3d385c9e]:first-child {\r\n    border-top-left-radius: 0.25rem;\r\n    border-bottom-left-radius: 0.25rem;\n}\n.card-body[data-v-3d385c9e] {\r\n    font-family: 'Montserrat', sans-serif;\r\n    padding: 16px;\n}\n.custom-control[data-v-3d385c9e] {\r\n    margin-right: 39px;\n}\ninput[type=\"radio\"][data-v-3d385c9e] {\r\n    display: none;\n}\nlabel[data-v-3d385c9e] {\r\n    color: #434343;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.clasificacion[data-v-3d385c9e] {\r\n    direction: rtl;\r\n    unicode-bidi: bidi-override;\r\n    width: 105px;\r\n    height: 30px;\r\n    margin: 0;\r\n    font-size: 20px;\r\n    cursor: default;\n}\ninput[type=\"radio\"]:checked~label[data-v-3d385c9e] {\r\n    color: orange;\n}\n.img-sombra-producto-DS[data-v-3d385c9e] {\r\n    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);\r\n    height: 185px;\n}\r\n", ""]);
 
 // exports
 
@@ -42508,9 +42532,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.tamañoProductos != 0
-    ? _c("div", [
-        _c("div", { staticClass: "pr-3" }, [
+  return _c("div", [
+    _vm.tamañoProductos != 0
+      ? _c("div", { staticClass: "pr-3" }, [
           _c("img", {
             attrs: {
               id: "campana",
@@ -42531,41 +42555,38 @@ var render = function() {
             },
             [_vm._v(_vm._s(_vm.tamañoProductos))]
           )
-        ]),
-        _vm._v(" "),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticStyle: { display: "none" }, attrs: { id: "pop-title" } },
+      [_vm._v("Productos prontos a acabar")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticStyle: { display: "none" }, attrs: { id: "popover-content" } },
+      [
         _c(
-          "div",
-          { staticStyle: { display: "none" }, attrs: { id: "pop-title" } },
-          [_vm._v("Productos prontos a acabar")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticStyle: { display: "none" },
-            attrs: { id: "popover-content" }
-          },
-          [
-            _c(
-              "ul",
-              { staticClass: "list-group custom-popover" },
-              _vm._l(_vm.productos, function(item, index) {
-                return _c(
-                  "li",
-                  {
-                    key: index,
-                    staticClass:
-                      "list-group-item border border-dark border-right-0 border-left-0 text-center"
-                  },
-                  [_vm._v(_vm._s(item.nombre))]
-                )
-              }),
-              0
+          "ul",
+          { staticClass: "list-group custom-popover" },
+          _vm._l(_vm.productos, function(item, index) {
+            return _c(
+              "li",
+              {
+                key: index,
+                staticClass:
+                  "list-group-item border border-dark border-right-0 border-left-0 text-center"
+              },
+              [_vm._v(_vm._s(item.nombre))]
             )
-          ]
+          }),
+          0
         )
-      ])
-    : _vm._e()
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43716,6 +43737,26 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
+            item.cantidad == 0
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "position-absolute tamaño_agotado d-flex align-items-center"
+                  },
+                  [
+                    _c(
+                      "h1",
+                      {
+                        staticClass:
+                          "col text-dark text-center font-weight-bold"
+                      },
+                      [_vm._v("AGOTADO")]
+                    )
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c("div", { staticClass: "card-body card-body-cascade" }, [
               _c(
                 "div",
@@ -43850,7 +43891,7 @@ var render = function() {
                 _vm._v(_vm._s(_vm._f("currency")(item.valor)) + " COP")
               ]),
               _vm._v(" "),
-              item.opcionCancelar == false
+              item.opcionCancelar == false && item.cantidad != 0
                 ? _c(
                     "button",
                     {
@@ -43858,6 +43899,26 @@ var render = function() {
                       on: {
                         click: function($event) {
                           _vm.añadirCarrito(item, index)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-cart-plus" }),
+                      _vm._v(
+                        "\r\n                Añadir al carro\r\n            "
+                      )
+                    ]
+                  )
+                : item.opcionCancelar == false && item.cantidad == 0
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block color-verde añadirCarritoBtn",
+                      on: {
+                        click: function($event) {
+                          _vm.advertencia(
+                            "Señor(a) usuario, este producto no se puede añadir al carrito debido a que se encuentra agotado."
+                          )
                         }
                       }
                     },
@@ -43992,7 +44053,39 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "verificar_carrito",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalCenterTitle",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("p", [_vm._v(_vm._s(_vm.mensajeAdvertencia))])
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ]
+          )
+        ]
+      )
     ],
     2
   )
@@ -44002,80 +44095,46 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "verificar_carrito",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalCenterTitle",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-dialog-centered",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h2", { staticClass: "row subtitulo-DS pt-3 w-100 m-0" }, [
-                  _c("img", {
-                    attrs: {
-                      src: "/img/precaucion.png",
-                      alt: "Icono de precaucion",
-                      width: "30"
-                    }
-                  }),
-                  _vm._v("¡ADVERTENCIA!")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("p", [
-                  _vm._v(
-                    "Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero."
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn botones",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cerrar")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h2", { staticClass: "row subtitulo-DS pt-3 w-100 m-0" }, [
+        _c("img", {
+          attrs: {
+            src: "/img/precaucion.png",
+            alt: "Icono de precaucion",
+            width: "30"
+          }
+        }),
+        _vm._v("¡ADVERTENCIA!")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn botones",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cerrar")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -44229,6 +44288,24 @@ var render = function() {
           },
           [_c("i", { staticClass: "fas fa-ban" }), _vm._v(" Cancelar")]
         )
+      : _vm.producto.opcionCancelar == false && _vm.producto.cantidad == 0
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-lg color-verde w-50",
+            on: {
+              click: function($event) {
+                _vm.advertencia(
+                  "Señor(a) usuario, este producto no se puede añadir al carrito debido a que se encuentra agotado."
+                )
+              }
+            }
+          },
+          [
+            _c("i", { staticClass: "fas fa-cart-plus" }),
+            _vm._v("\r\n        Añadir al carro\r\n    ")
+          ]
+        )
       : _c(
           "button",
           {
@@ -44283,7 +44360,39 @@ var render = function() {
       _vm._m(3)
     ]),
     _vm._v(" "),
-    _vm._m(4)
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "verificar_carrito_descripcion",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("p", [_vm._v(_vm._s(_vm.mensajeAdvertencia))])
+              ]),
+              _vm._v(" "),
+              _vm._m(5)
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -44378,80 +44487,46 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "verificar_carrito_descripcion",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalCenterTitle",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-dialog-centered",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h2", { staticClass: "row subtitulo-DS pt-3 w-100 m-0" }, [
-                  _c("img", {
-                    attrs: {
-                      src: "/img/precaucion.png",
-                      alt: "Icono de precaucion",
-                      width: "30"
-                    }
-                  }),
-                  _vm._v("¡ADVERTENCIA!")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("p", [
-                  _vm._v(
-                    "Señor(a) usuario, para poder añadir un producto al carrito necesita haber iniciado sesión primero."
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn botones",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cerrar")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h2", { staticClass: "row subtitulo-DS pt-3 w-100 m-0" }, [
+        _c("img", {
+          attrs: {
+            src: "/img/precaucion.png",
+            alt: "Icono de precaucion",
+            width: "30"
+          }
+        }),
+        _vm._v("¡ADVERTENCIA!")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn botones",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cerrar")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -45287,11 +45362,20 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control text-center",
-                attrs: { type: "number", min: "1", max: "5" },
+                attrs: {
+                  type: "number",
+                  min: "1",
+                  max: item[0].cantidadProducto
+                },
                 domProps: { value: item[0].cantidad },
                 on: {
                   change: function($event) {
-                    return _vm.subtotal(item[0].valor, item[0].cantidad, index)
+                    return _vm.subtotal(
+                      item[0].valor,
+                      item[0].cantidad,
+                      index,
+                      item[0].id
+                    )
                   },
                   input: function($event) {
                     if ($event.target.composing) {
@@ -60170,6 +60254,7 @@ var AOS = __webpack_require__(/*! aos */ "./node_modules/aos/dist/aos.js");
 
 AOS.init();
 global.md5 = __webpack_require__(/*! md5 */ "./node_modules/md5/md5.js");
+global.toastr = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
 
 global.bsCustomFileInput = bs_custom_file_input__WEBPACK_IMPORTED_MODULE_0___default.a;
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -60204,6 +60289,9 @@ var app2 = new Vue({
 });
 var app3 = new Vue({
   el: '#app3'
+});
+var app4 = new Vue({
+  el: '#app4'
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 

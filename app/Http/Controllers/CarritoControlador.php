@@ -49,7 +49,8 @@ class CarritoControlador extends Controller
             'nombre' => $request->nombre,
             'imagen' => $request->imagen,
             'valor' => $request->valor,
-            'tamaño' => $request->tamaño
+            'tamaño' => $request->tamaño,
+            'cantidadProducto' => $request->cantidad
         ];
         $request->session()->push('producto' . $request->id, $producto);
         return Session::all();
@@ -63,6 +64,41 @@ class CarritoControlador extends Controller
         $sesion = Session::get('id');
         $sesion = array_diff($sesion, array($id));
         Session::put('id', $sesion);
+        return Session::all();
+    }
+
+    public function actualizarCantSubt($cantidad, $subtotal, $id){
+        $producto = Session::get('producto' . $id);
+        $producto[0]->cantidad = $cantidad;
+        $producto[0]->subtotal = $subtotal;
+    }
+
+    public function agregarDireccion(Request $request, $valorInput){
+        Session::put('valorTotal', $request->valorTotal);
+
+        if ($valorInput == 'miDireccion') {
+            $direccion = (object) [
+                'nombre' => auth()->user()->nombre . ' ' . auth()->user()->apellido,
+                'telefono' => auth()->user()->telefono,
+                'cedula' => auth()->user()->cedula,
+                'departamento' => auth()->user()->departamento,
+                'ciudad' => auth()->user()->ciudad,
+                'barrio' => auth()->user()->barrio,
+                'direccion' => auth()->user()->direccion
+            ];
+            Session::put('datosDireccion', $direccion);
+        }else if ($valorInput == 'otraDireccion'){
+            $direccion = (object) [
+                'nombre' => $request->nombre,
+                'telefono' => $request->telefono,
+                'cedula' => $request->cedula,
+                'departamento' => $request->departamento,
+                'ciudad' => $request->ciudad,
+                'barrio' => $request->barrio,
+                'direccion' => $request->direccion
+            ];
+            Session::put('datosDireccion', $direccion);
+        }
         return Session::all();
     }
 

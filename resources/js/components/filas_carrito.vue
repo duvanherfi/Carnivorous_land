@@ -23,7 +23,7 @@
             <td class="text-center" v-else>{{ item[0].tamaño }}</td>
             <td data-th="Precio" class="text-center">{{ item[0].valor | currency}}</td>
             <td data-th="Cantidad">
-                <input @change="subtotal(item[0].valor, item[0].cantidad, index)" v-model="item[0].cantidad" type="number" min="1" max="5" class="form-control text-center">
+                <input @change="subtotal(item[0].valor, item[0].cantidad, index, item[0].id)" v-model="item[0].cantidad" type="number" min="1" :max="item[0].cantidadProducto" class="form-control text-center">
             </td>
             <td data-th="Subtotal" class="text-center">{{ item[0].subtotal | currency }}</td>
             <td class="actions" data-th="">
@@ -77,7 +77,7 @@ export default {
         $('#description').val(descripcion);
     },
     methods: {
-        subtotal(valor, cantidad, index) {
+        subtotal(valor, cantidad, index, id) {
             var subtotal = valor * cantidad;
             this.productos[index][0].subtotal = subtotal;
             var sum = 0;
@@ -85,6 +85,7 @@ export default {
                 sum += Number(element[0].subtotal);
             });
             this.total = sum;
+            axios.post(`/carritoControl/${cantidad}/${subtotal}/${id}`).then(respoense =>{});
         },
         cancelarProductoCarrito(id, index) {
             var contadorCarrito = Number($('#contadorCarrito').html());

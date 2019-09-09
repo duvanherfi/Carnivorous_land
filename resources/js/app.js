@@ -4,6 +4,7 @@ require('./event_bus');
 var AOS = require('aos');
 AOS.init();
 global.md5 = require('md5');
+global.toastr = require('toastr');
 
 import bsCustomFileInput from 'bs-custom-file-input';
 
@@ -46,4 +47,8 @@ const app2 = new Vue({
 
 const app3 = new Vue({
     el: '#app3',
+});
+
+const app4 = new Vue({
+    el: '#app4',
 });

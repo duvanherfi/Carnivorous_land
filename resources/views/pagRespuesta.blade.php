@@ -10,7 +10,19 @@
 		<p class="text-center w-50">Si desea calificar todos sus productos con el mismo puntaje hazlo en la siguiente
 			tabla, sino califica cada producto en la segunda tabla.</p>
 	</div>
-	<a class="btn btn-success m-0 mb-2" href="{{ route('inicio') }}"><i class="fas fa-angle-left"></i> Volver al inicio</a>
+	<a class="btn btn-success m-0 mb-2" onclick="hacerFlush()" href="{{ route('inicio') }}"><i class="fas fa-angle-left"></i> Volver al inicio</a>
 	<filas-pagrespuesta estado="{{ $estadoTx }}"></filas-pagrespuesta>
 </div>
+@section('script')
+	<script>
+		function hacerFlush(){
+			const params = {
+				'hacerFlush': 'flush'
+			}
+			axios.post('/calificarControl', params).then(response => {
+                // console.log(response.data);
+            })
+		}
+	</script>
+@endsection
 @endsection
