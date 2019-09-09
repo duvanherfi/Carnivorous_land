@@ -103,6 +103,11 @@ class ProductoControlador extends Controller
         return $productos;
     }
 
+    public function productosStockMinimo(){
+        $productos = DB::table('productos')->whereColumn('cantidad', '<=', 'stock_minimo')->get();
+        return $productos;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

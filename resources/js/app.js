@@ -21,6 +21,7 @@ Vue.use(VueCurrencyFilter, {
     symbolSpacing: false
 });
 
+Vue.component('anuncio-stock-min', require('./components/anuncio_stock_minimo.vue').default);
 Vue.component('utilizar-otros-datos', require('./components/utilizar_otros_datos_carrito.vue').default);
 Vue.component('boton-arriba', require('./components/boton-arriba.vue').default);
 Vue.component('productos', require('./components/cartas_productos.vue').default);

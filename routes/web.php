@@ -100,6 +100,7 @@ Route::get('/productosControl/{tipo}/{categoria}/{lugar}', 'ProductoControlador@
 Route::post('/productosControl/{id}/{categoria}', 'ProductoControlador@update')->name('productos.update'); // PUT
 Route::put('/productosControl/{opcion_catalogo}/{id}', 'ProductoControlador@actualizarOpcionCatalogo')->name('productos.opcion_catalogo');
 Route::delete('/productosControl/{id}', 'ProductoControlador@destroy')->name('productos.destroy');
+Route::get('/productosControl', 'ProductoControlador@productosStockMinimo')->name('productos.productosStockMinimo');
 
 // Carrito de compra
 Route::post('/carritoControl', 'CarritoControlador@agregar')->name('carro.agregar');
