@@ -15,11 +15,12 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->integerIncrements('id')->unsigned();
+            $table->string('referencia');
             $table->string('fecha');
             $table->string('nombre_cliente');
             $table->string('ciudad');
             $table->string('direccion');
-            $table->string('tipo_entrega');
+            $table->string('telefono');
             $table->string('estado');
             $table->double('total', 8, 2);
             $table->string('entregado');

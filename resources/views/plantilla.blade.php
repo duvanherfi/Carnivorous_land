@@ -318,12 +318,13 @@
 
                         
                         $('#modal_pedidos').modal('show');
-                        
 
+                        
+                        $('#referencia').html(result.success[0].referencia);
                         $('#nombre_cli').html(result.success[0].nombre_cliente);
                         $('#ciudad').html(result.success[0].ciudad);
                         $('#direccion').html(result.success[0].direccion);
-                        $('#tipo_entrega').html(result.success[0].tipo_entrega);
+                        $('#telefono').html(result.success[0].telefono);
                         $('#estado').html(result.success[0].estado);
                         $('#total').html(result.success[0].total);
 
@@ -368,7 +369,7 @@
                         console.log(result.success);
 
                         name = result.success.nombre_cliente;
-                        alert("El pedido de " + name + " fue enviado a la lista de entregados exitosamente");
+                        alert("El pedido de " + name + " fue enviado a la lista de entregados, exitosamente");
                         
                         location.reload();
 
