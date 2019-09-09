@@ -116,7 +116,7 @@ Route::post('/calificarControl', 'CalificarControlador@registrar')->name('califi
 Route::get('/comprobarSiAdmin', 'usuarioControlador@isAdmin');
 
 
-Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');
+Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos');
 
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
 

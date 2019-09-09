@@ -4,7 +4,7 @@
 
 <div class="pedido">
 
-	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS</h2><br>
+	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS EN PROCESO</h2><br>
 	
 
 	<table class="table tabla">
@@ -12,6 +12,7 @@
     		<tr>
       		
             <th scope="col">Entregado</th>
+            <th scope="col">Referencia</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
             <th scope="col">Ciudad</th>
@@ -26,6 +27,7 @@
     		<tr>
       			
             <td><button data-id="{{$pendiente->id}}" id="enviarr" type="button" class="btn botones" data-dismiss="modal">Entregar</button></td>
+            <td>{{$pendiente->referencia}}</td>
             <td>{{$pendiente->fecha}}</td>
             <td>{{$pendiente->nombre_cliente}}</td>
             <td>{{$pendiente->ciudad}}</td>
@@ -46,6 +48,7 @@
 
       <thead class="cabecera_pedidos">
         <tr>
+            <th scope="col">Referencia</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
             <th scope="col">Ciudad</th>
@@ -57,6 +60,7 @@
       <tbody class="cuerpo_pedidos">
         @foreach ( $pedido_entregado as $entregado)
         <tr>
+            <td>{{$entregado->referencia}}</td>
             <td>{{$entregado->fecha}}</td>
             <td>{{$entregado->nombre_cliente}}</td>
             <td>{{$entregado->ciudad}}</td>
@@ -82,10 +86,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <br>Nombre: <label id="nombre_cli" name="nombre_cli" class="font-weight-bold"></label><br>
+        <br>Referencia <label id="referencia" name="referencia" class="font-weight-bold"></label><br>
+            Nombre: <label id="nombre_cli" name="nombre_cli" class="font-weight-bold"></label><br>
             Destino: <label id="ciudad" name="ciudad" class="font-weight-bold"></label><br>
             Direccion: <label id="direccion" name="direccion" class="font-weight-bold"></label><br>
-            Tipo de entrega: <label id="tipo_entrega" name="tipo_entrega" class="font-weight-bold"></label><br>
+            Telefono: <label id="telefono" name="telefono" class="font-weight-bold"></label><br>
             Estado: <label id="estado" name="estado" class="font-weight-bold"></label><br><br>
               <table class="table">
                 <thead class="cabecera_pedidos">
