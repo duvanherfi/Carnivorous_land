@@ -374,14 +374,13 @@ export default {
             formData.append('descripcion', this.tipo.descripcion);
             formData.append('categoria', this.producto.categoria);
             axios.post('/tiposControl', formData).then(response => {
-                console.log(response.data);
-                console.log(response.data.modificar);
+                // console.log(response.data);
                 if (response.data.modificar == 'modificar') {
                     if (!(isNullOrUndefined(response.data.imagen))) {
                         formData.append('imagennombreAntiguo', response.data.imagen);
-                        console.log(formData);
+                        // console.log(formData);
                         axios.post(`/tiposControl/${response.data.id}`, formData).then(response => {
-                            console.log(response.data);
+                            // console.log(response.data);
                             this.tipos.push(response.data);
                         })
                     }
@@ -420,7 +419,7 @@ export default {
 
             axios.post('/productosControl', formData).then(response => {
                 EventBus.$emit('activarUpdate', true);
-                // console.log(response.data);
+                console.log(response.data);
                 if (!(isNullOrUndefined(response.data.imagen_principal))) {
                     formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
                     formData.append('imagen2nombreAntiguo', response.data.imagen2);

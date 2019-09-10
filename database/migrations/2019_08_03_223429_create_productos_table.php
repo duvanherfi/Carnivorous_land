@@ -19,11 +19,11 @@ class CreateProductosTable extends Migration
             $table->string('imagen2');
             $table->string('imagen3');
             $table->string('nombre');
-            $table->integer('valor');
+            $table->bigInteger('valor');
             $table->integer('cantidad');
             $table->integer('stock_minimo');
-            $table->integer('calificacion');
-            $table->float('calificacionDecimal');
+            $table->integer('calificacion')->default(0);
+            $table->float('calificacionDecimal')->default(0.00);
             $table->string('opcion_catalogo');
             $table->text('descripcion');
             $table->string('habilitado')->default('true');

@@ -19,7 +19,6 @@ class CreateComprasTable extends Migration
             $table->string('tamaño');
             $table->Integer('cantidad');
             $table->bigInteger('valor');
-            $table->string('imagen');
             $table->integer('id_pedido')->unsigned();
 
             $table->timestamps();

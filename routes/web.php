@@ -42,7 +42,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('/carrito_compra', function () {
     $id_ultPedido = App\Pedido::select('id')->get();
     $id_ultPedido = $id_ultPedido->last();
-    $id_ultPedido = ($id_ultPedido->id+1) . mt_rand(1000, 9999);
+    if ($id_ultPedido == null) {
+        $id_ultPedido = 1 . mt_rand(1000, 9999);
+    }else{
+        $id_ultPedido = ($id_ultPedido->id+1) . mt_rand(1000, 9999);
+    }
     return view('carrito', compact('id_ultPedido'));
 })->name('carrito')->middleware('auth');
 
@@ -75,7 +79,6 @@ Route::post('/registrar_admin', 'AdminControlador@registrar')
 Route::get('/pedidos', function () {
     return view('pedidos');
 })->name('pedidos')->middleware('admin');
-
 
 Route::get('/actualizar_datos', 'EmpresaControlador@actualizar')
     ->name('actualizar_datos')->middleware('admin');
@@ -116,7 +119,7 @@ Route::post('/calificarControl', 'CalificarControlador@registrar')->name('califi
 Route::get('/comprobarSiAdmin', 'usuarioControlador@isAdmin');
 
 
-Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos');
+Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');;
 
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
 

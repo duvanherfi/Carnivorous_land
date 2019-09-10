@@ -183,7 +183,6 @@ class ProductoControlador extends Controller
             $imagen3 = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen3);
         }
-
         $producto = new Producto();
         $producto->imagen_principal = $imagen_principal;
         $producto->imagen2 = $imagen2;
@@ -195,7 +194,7 @@ class ProductoControlador extends Controller
         $producto->opcion_catalogo = $request->input('opcion_catalogo');
         $producto->descripcion = $request->input('descripcion');
         $producto->save();
-
+        
         if ($request->categoria == 'plantas') {
             $plantas = new Planta();
             $id = Producto::all()->last();

@@ -325,9 +325,10 @@
                         
                         $('#referencia').html(result.success[0].referencia);
                         $('#nombre_cli').html(result.success[0].nombre_cliente);
-                        $('#ciudad').html(result.success[0].ciudad);
-                        $('#direccion').html(result.success[0].direccion);
+                        $('#cedula').html(result.success[0].cedula);
                         $('#telefono').html(result.success[0].telefono);
+                        $('#ciudad').html(result.success[0].departamento + ', ' + result.success[0].ciudad + ', ' + result.success[0].barrio);
+                        $('#direccion').html(result.success[0].direccion);
                         $('#estado').html(result.success[0].estado);
                         $('#total').html(result.success[0].total);
 

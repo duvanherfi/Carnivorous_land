@@ -88,9 +88,10 @@
       <div class="modal-body">
         <br>Referencia <label id="referencia" name="referencia" class="font-weight-bold"></label><br>
             Nombre: <label id="nombre_cli" name="nombre_cli" class="font-weight-bold"></label><br>
+            Cédula: <label id="cedula" name="cedula" class="font-weight-bold"></label><br>
+            Teléfono: <label id="telefono" name="telefono" class="font-weight-bold"></label><br>
             Destino: <label id="ciudad" name="ciudad" class="font-weight-bold"></label><br>
-            Direccion: <label id="direccion" name="direccion" class="font-weight-bold"></label><br>
-            Telefono: <label id="telefono" name="telefono" class="font-weight-bold"></label><br>
+            Dirección: <label id="direccion" name="direccion" class="font-weight-bold"></label><br>
             Estado: <label id="estado" name="estado" class="font-weight-bold"></label><br><br>
               <table class="table">
                 <thead class="cabecera_pedidos">
@@ -100,7 +101,6 @@
                     <th scope="col">Tamaño</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Subtotal</th>
-                    <th scope="col">Imagen</th>
                   </tr>
                   
                 </thead>
@@ -112,40 +112,35 @@
                     <td id="articulo_name0"></td>
                     <td id="tamaño0"></td>
                     <td id="cantidad0"></td>
-                    <td id="valor0"></td>
-                    <td id="imagen0"></td>             
+                    <td id="valor0"></td>            
                   </tr>
 
                   <tr>
                     <td id="articulo_name1"></td>
                     <td id="tamaño1"></td>
                     <td id="cantidad1"></td>
-                    <td id="valor1"></td>
-                    <td id="imagen1"></td>             
+                    <td id="valor1"></td>            
                   </tr>
 
                   <tr>
                     <td id="articulo_name2"></td>
                     <td id="tamaño2"></td>
                     <td id="cantidad2"></td>
-                    <td id="valor2"></td>
-                    <td id="imagen2"></td>             
+                    <td id="valor2"></td>            
                   </tr>
 
                   <tr>
                     <td id="articulo_name3"></td>
                     <td id="tamaño3"></td>
                     <td id="cantidad3"></td>
-                    <td id="valor3"></td>
-                    <td id="imagen3"></td>             
+                    <td id="valor3"></td>             
                   </tr>
 
                   <tr>
                     <td id="articulo_name4"></td>
                     <td id="tamaño4"></td>
                     <td id="cantidad4"></td>
-                    <td id="valor4"></td>
-                    <td id="imagen4"></td>             
+                    <td id="valor4"></td>            
                   </tr>
                                                
                 </tbody>
@@ -153,7 +148,6 @@
                 <thead class="final_pedido">
                   <tr>
                     <th scope="col">TOTAL</th>
-                    <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col" id="total"></th>

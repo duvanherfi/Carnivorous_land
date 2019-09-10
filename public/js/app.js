@@ -3828,16 +3828,13 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('descripcion', this.tipo.descripcion);
       formData.append('categoria', this.producto.categoria);
       axios.post('/tiposControl', formData).then(function (response) {
-        console.log(response.data);
-        console.log(response.data.modificar);
-
+        // console.log(response.data);
         if (response.data.modificar == 'modificar') {
           if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen)) {
-            formData.append('imagennombreAntiguo', response.data.imagen);
-            console.log(formData);
-            axios.post("/tiposControl/".concat(response.data.id), formData).then(function (response) {
-              console.log(response.data);
+            formData.append('imagennombreAntiguo', response.data.imagen); // console.log(formData);
 
+            axios.post("/tiposControl/".concat(response.data.id), formData).then(function (response) {
+              // console.log(response.data);
               _this3.tipos.push(response.data);
             });
           }
@@ -3876,7 +3873,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('opcion_catalogo', this.producto.opcion_catalogo);
       formData.append('descripcion', this.producto.descripcion);
       axios.post('/productosControl', formData).then(function (response) {
-        _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true); // console.log(response.data);
+        _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true);
+        console.log(response.data);
 
         if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen_principal)) {
           formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
