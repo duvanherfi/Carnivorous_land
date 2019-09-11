@@ -302,9 +302,9 @@
                         }
 
 
-                        
+
                         $('#modal_pedidos').modal('show');
-                        
+
 
                         $('#nombre_cli').html(result.success[0].nombre_cliente);
                         $('#ciudad').html(result.success[0].ciudad);
@@ -341,7 +341,7 @@
         jQuery(document).on("click", "#enviarr", function(){
 
             var url = 'http://127.0.0.1:8000/pedidos/'+$(this).attr('data-id');
-            
+
             $.ajax({
 
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -355,7 +355,7 @@
 
                         name = result.success.nombre_cliente;
                         alert("El pedido de " + name + " fue enviado a la lista de entregados exitosamente");
-                        
+
                         location.reload();
 
 
@@ -365,7 +365,7 @@
                     }
             })
         })
-        
+
     </script>
 
 

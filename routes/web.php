@@ -110,8 +110,12 @@ Route::get('/pagRespuesta', function () {
 
 Route::get('/pagconfirmacion', "CarritoControlador@ingresarpago");
 
-
+//ruta que es llamada desde la app android
+Route::get('/android','usuarioControlador@mostraralgo');
 
 //Rutas correo
 Route::post('/correo', "CorreoControlador@escribenos")
 ->name('correo');
+
+//rutas ppdf
+Route::get('/informe',"PedidosController@pdf")->name('pedido.pdf');

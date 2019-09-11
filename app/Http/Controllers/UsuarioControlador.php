@@ -92,4 +92,9 @@ class UsuarioControlador extends Controller
     }
     return $permiso;
   }
+
+    public function mostraralgo(){
+        $user=User::all();
+        return response()->json($user);
+    }
 }

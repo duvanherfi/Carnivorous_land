@@ -5,12 +5,12 @@
 <div class="pedido">
 
 	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS PENDIENTES</h2><br>
-	
+
 
 	<table class="table tabla">
   		<thead class="cabecera_pedidos">
     		<tr>
-      		
+
             <th scope="col">Entregado</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
@@ -24,21 +24,25 @@
   		<tbody class="cuerpo_pedidos">
        	@foreach ( $pedido_pendiente as $pendiente)
     		<tr>
-      			
+
             <td><button data-id="{{$pendiente->id}}" id="enviarr" type="button" class="btn botones" data-dismiss="modal">Entregar</button></td>
             <td>{{$pendiente->fecha}}</td>
             <td>{{$pendiente->nombre_cliente}}</td>
             <td>{{$pendiente->ciudad}}</td>
             <td>{{$pendiente->estado}}</td>
             <td><input data-id="{{$pendiente->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
-      			
+
     		</tr>
 
   		@endforeach()
-        
+
   		</tbody>
 	</table>
-
+<p>
+    <a href="{{ route('pedido.pdf') }}" class="btn btn-sm btn-primary">
+        Descargar Informe de pedidos en PDF
+    </a>
+</p>
 
   <br><br><h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS ENTREGADOS</h2><br>
 
@@ -89,7 +93,7 @@
             Estado: <label id="estado" name="estado" class="font-weight-bold"></label><br><br>
               <table class="table">
                 <thead class="cabecera_pedidos">
-                  
+
                   <tr>
                     <th scope="col">Nombre del producto</th>
                     <th scope="col">Tamaño</th>
@@ -97,18 +101,18 @@
                     <th scope="col">Subtotal</th>
                     <th scope="col">Imagen</th>
                   </tr>
-                  
+
                 </thead>
 
                 <tbody class="cuerpo_pedidos">
-                 
-                  
+
+
                   <tr>
                     <td id="articulo_name0"></td>
                     <td id="tamaño0"></td>
                     <td id="cantidad0"></td>
                     <td id="valor0"></td>
-                    <td id="imagen0"></td>             
+                    <td id="imagen0"></td>
                   </tr>
 
                   <tr>
@@ -116,7 +120,7 @@
                     <td id="tamaño1"></td>
                     <td id="cantidad1"></td>
                     <td id="valor1"></td>
-                    <td id="imagen1"></td>             
+                    <td id="imagen1"></td>
                   </tr>
 
                   <tr>
@@ -124,7 +128,7 @@
                     <td id="tamaño2"></td>
                     <td id="cantidad2"></td>
                     <td id="valor2"></td>
-                    <td id="imagen2"></td>             
+                    <td id="imagen2"></td>
                   </tr>
 
                   <tr>
@@ -132,7 +136,7 @@
                     <td id="tamaño3"></td>
                     <td id="cantidad3"></td>
                     <td id="valor3"></td>
-                    <td id="imagen3"></td>             
+                    <td id="imagen3"></td>
                   </tr>
 
                   <tr>
@@ -140,9 +144,9 @@
                     <td id="tamaño4"></td>
                     <td id="cantidad4"></td>
                     <td id="valor4"></td>
-                    <td id="imagen4"></td>             
+                    <td id="imagen4"></td>
                   </tr>
-                                               
+
                 </tbody>
 
                 <thead class="final_pedido">
@@ -163,4 +167,4 @@
   </div>
 </div>
 
-@endsection 
+@endsection

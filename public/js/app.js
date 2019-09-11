@@ -3379,6 +3379,7 @@ __webpack_require__.r(__webpack_exports__);
     registrarTipo: function registrarTipo() {
       var _this3 = this;
 
+      alert("Confirme los datos");
       var formData = new FormData();
       formData.append('imagen', this.tipo.imagen_tipo);
       formData.append('genero', this.tipo.nombre);
@@ -3414,6 +3415,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     registrarProducto: function registrarProducto() {
+      alert("Verifique sus datos");
       var formData = new FormData();
       formData.append('imagen_principal', this.producto.imagen_principal);
       formData.append('imagen2', this.producto.imagen2);
@@ -8786,7 +8788,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.borde-menu-DS[data-v-5bac3354] {\r\n    border-top: #434343 3px solid;\r\n    width: 230px;\n}\n.opcion-menu-DS[data-v-5bac3354] {\r\n    border-bottom: #434343 3px solid;\r\n    font-family: 'Montserrat', sans-serif;\r\n    width: 261px;\n}\n.contenedor-submenu-DS[data-v-5bac3354] {\r\n    width: 261px;\n}\n.opcion-menu-DS[data-v-5bac3354]:hover {\r\n    background-color: #9DCE5B;\r\n    color: white;\r\n    cursor: pointer;\n}\nlabel[data-v-5bac3354] {\r\n    font-family: 'Montserrat', sans-serif;\n}\n.btn-registrar-genero[data-v-5bac3354] {\r\n    margin-left: 147px;\r\n    margin-bottom: 16px;\n}\n.form-registrar-genero[data-v-5bac3354] {\r\n    margin-right: 27px;\r\n    margin-bottom: 16px;\n}\r\n\r\n/* Collapse */\n.flecha[data-v-5bac3354]:after {\r\n    display: inline-block;\r\n    display: inline-block;\r\n    font: normal normal normal 14px/1 FontAwesome;\r\n    font-size: inherit;\r\n    text-rendering: auto;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    content: \"\\25BC\";\r\n    transform: rotate(-90deg);\r\n    transition: all linear 0.25s;\n}\n.flecha.collapsed[data-v-5bac3354]:after {\r\n    transform: rotate(0deg);\n}\r\n", ""]);
+exports.push([module.i, "\n.borde-menu-DS[data-v-5bac3354] {\n    border-top: #434343 3px solid;\n    width: 230px;\n}\n.opcion-menu-DS[data-v-5bac3354] {\n    border-bottom: #434343 3px solid;\n    font-family: 'Montserrat', sans-serif;\n    width: 261px;\n}\n.contenedor-submenu-DS[data-v-5bac3354] {\n    width: 261px;\n}\n.opcion-menu-DS[data-v-5bac3354]:hover {\n    background-color: #9DCE5B;\n    color: white;\n    cursor: pointer;\n}\nlabel[data-v-5bac3354] {\n    font-family: 'Montserrat', sans-serif;\n}\n.btn-registrar-genero[data-v-5bac3354] {\n    margin-left: 147px;\n    margin-bottom: 16px;\n}\n.form-registrar-genero[data-v-5bac3354] {\n    margin-right: 27px;\n    margin-bottom: 16px;\n}\n\n/* Collapse */\n.flecha[data-v-5bac3354]:after {\n    display: inline-block;\n    display: inline-block;\n    font: normal normal normal 14px/1 FontAwesome;\n    font-size: inherit;\n    text-rendering: auto;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    content: \"\\25BC\";\n    transform: rotate(-90deg);\n    transition: all linear 0.25s;\n}\n.flecha.collapsed[data-v-5bac3354]:after {\n    transform: rotate(0deg);\n}\n", ""]);
 
 // exports
 
@@ -44557,9 +44559,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\r\n                " +
-                    _vm._s(item.genero) +
-                    "\r\n            "
+                  "\n                " + _vm._s(item.genero) + "\n            "
                 )
               ]
             )
@@ -44594,9 +44594,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\r\n                " +
-                    _vm._s(item.tipo) +
-                    "\r\n            "
+                  "\n                " + _vm._s(item.tipo) + "\n            "
                 )
               ]
             )
@@ -44631,9 +44629,7 @@ var render = function() {
               },
               [
                 _vm._v(
-                  "\r\n                " +
-                    _vm._s(item.tipo) +
-                    "\r\n            "
+                  "\n                " + _vm._s(item.tipo) + "\n            "
                 )
               ]
             )
@@ -44664,7 +44660,7 @@ var render = function() {
           },
           on: { click: _vm.limpiarRegistraProducto }
         },
-        [_vm._v("\r\n            Registrar artículo\r\n        ")]
+        [_vm._v("\n            Registrar artículo\n        ")]
       )
     ]),
     _vm._v(" "),
@@ -44707,7 +44703,8 @@ var render = function() {
                           type: "file",
                           name: "imagen_principal",
                           id: "imagen_principal",
-                          lang: "es"
+                          lang: "es",
+                          required: ""
                         },
                         on: { change: _vm.obtenerImagenPrincipal }
                       }),
@@ -45686,7 +45683,7 @@ var staticRenderFns = [
           staticStyle: { width: "100px" },
           attrs: { align: "left", noshade: "noshade" }
         }),
-        _vm._v("✻\r\n        "),
+        _vm._v("✻\n        "),
         _c("hr", {
           staticClass: "derecha-DS ml-2 mr-0",
           staticStyle: { width: "100px" },
@@ -45717,7 +45714,7 @@ var staticRenderFns = [
               "aria-controls": "collapseOne"
             }
           },
-          [_vm._v("\r\n                Plantas\r\n            ")]
+          [_vm._v("\n                Plantas\n            ")]
         )
       ]
     )
@@ -45744,7 +45741,7 @@ var staticRenderFns = [
               "aria-controls": "collapseTwo"
             }
           },
-          [_vm._v("\r\n                Merchandising\r\n            ")]
+          [_vm._v("\n                Merchandising\n            ")]
         )
       ]
     )
@@ -45771,7 +45768,7 @@ var staticRenderFns = [
               "aria-controls": "collapseThree"
             }
           },
-          [_vm._v("\r\n                Implementos de cultivo\r\n            ")]
+          [_vm._v("\n                Implementos de cultivo\n            ")]
         )
       ]
     )
@@ -45792,7 +45789,7 @@ var staticRenderFns = [
           staticStyle: { width: "100px" },
           attrs: { align: "left", noshade: "noshade" }
         }),
-        _vm._v("✻\r\n        "),
+        _vm._v("✻\n        "),
         _c("hr", {
           staticClass: "derecha-DS ml-2 mr-0",
           staticStyle: { width: "100px" },

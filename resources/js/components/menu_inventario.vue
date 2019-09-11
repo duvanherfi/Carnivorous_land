@@ -73,7 +73,7 @@
                         <div class="form-group row">
                             <label for="imagen_principal" class="col-md-4 col-form-label pr-0">Imagen principal*:</label>
                             <div class="archivos col-md-7">
-                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal" id="imagen_principal" lang="es">
+                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal" id="imagen_principal" lang="es" required>
                                 <label class="custom-file-label" for="imagen_principal" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen_principal" v-else>{{ this.producto.imagen_principalnombre }}</label>
                                 <!-- <label class="custom-file-label" for="imagen_principal" id="Nombre_imagenprincipal"></label> -->
@@ -368,6 +368,7 @@ export default {
             this.tipo.imagen_tipo = file;
         },
         registrarTipo() {
+            alert("Confirme los datos");
             let formData = new FormData();
             formData.append('imagen', this.tipo.imagen_tipo);
             formData.append('genero', this.tipo.nombre);
@@ -401,6 +402,7 @@ export default {
             })
         },
         registrarProducto() {
+            alert("Verifique sus datos");
             let formData = new FormData();
             formData.append('imagen_principal', this.producto.imagen_principal);
             formData.append('imagen2', this.producto.imagen2);

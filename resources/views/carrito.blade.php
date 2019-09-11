@@ -87,7 +87,7 @@
             <input name="taxReturnBase" type="hidden" id="taxReturnBase">
             <input name="currency" type="hidden" value="COP">
             <input name="signature" type="hidden" id="signature">
-            <input name="test" type="hidden" value="0">
+            <input name="test" type="hidden" value="1">
             <input name="buyerEmail" type="hidden" id="buyerEmail">
             <input name="responseUrl" type="hidden" value="{{ route('pagRespuesta') }}">
             <input name="confirmationUrl" type="hidden" value="">
