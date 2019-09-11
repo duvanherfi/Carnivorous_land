@@ -4,14 +4,20 @@
 
 <div class="pedido">
 
+<<<<<<< HEAD
 	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS PENDIENTES</h2><br>
 
+=======
+	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS EN PROCESO</h2><br>
+	
+>>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
 
 	<table class="table tabla">
   		<thead class="cabecera_pedidos">
     		<tr>
 
             <th scope="col">Entregado</th>
+            <th scope="col">Referencia</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
             <th scope="col">Ciudad</th>
@@ -26,6 +32,7 @@
     		<tr>
 
             <td><button data-id="{{$pendiente->id}}" id="enviarr" type="button" class="btn botones" data-dismiss="modal">Entregar</button></td>
+            <td>{{$pendiente->referencia}}</td>
             <td>{{$pendiente->fecha}}</td>
             <td>{{$pendiente->nombre_cliente}}</td>
             <td>{{$pendiente->ciudad}}</td>
@@ -50,6 +57,7 @@
 
       <thead class="cabecera_pedidos">
         <tr>
+            <th scope="col">Referencia</th>
             <th scope="col">Fecha</th>
             <th scope="col">Nombre cliente</th>
             <th scope="col">Ciudad</th>
@@ -61,6 +69,7 @@
       <tbody class="cuerpo_pedidos">
         @foreach ( $pedido_entregado as $entregado)
         <tr>
+            <td>{{$entregado->referencia}}</td>
             <td>{{$entregado->fecha}}</td>
             <td>{{$entregado->nombre_cliente}}</td>
             <td>{{$entregado->ciudad}}</td>
@@ -86,10 +95,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <br>Nombre: <label id="nombre_cli" name="nombre_cli" class="font-weight-bold"></label><br>
+        <br>Referencia <label id="referencia" name="referencia" class="font-weight-bold"></label><br>
+            Nombre: <label id="nombre_cli" name="nombre_cli" class="font-weight-bold"></label><br>
+            Cédula: <label id="cedula" name="cedula" class="font-weight-bold"></label><br>
+            Teléfono: <label id="telefono" name="telefono" class="font-weight-bold"></label><br>
             Destino: <label id="ciudad" name="ciudad" class="font-weight-bold"></label><br>
-            Direccion: <label id="direccion" name="direccion" class="font-weight-bold"></label><br>
-            Tipo de entrega: <label id="tipo_entrega" name="tipo_entrega" class="font-weight-bold"></label><br>
+            Dirección: <label id="direccion" name="direccion" class="font-weight-bold"></label><br>
             Estado: <label id="estado" name="estado" class="font-weight-bold"></label><br><br>
               <table class="table">
                 <thead class="cabecera_pedidos">
@@ -99,7 +110,6 @@
                     <th scope="col">Tamaño</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Subtotal</th>
-                    <th scope="col">Imagen</th>
                   </tr>
 
                 </thead>
@@ -111,40 +121,60 @@
                     <td id="articulo_name0"></td>
                     <td id="tamaño0"></td>
                     <td id="cantidad0"></td>
+<<<<<<< HEAD
                     <td id="valor0"></td>
                     <td id="imagen0"></td>
+=======
+                    <td id="valor0"></td>            
+>>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
                   </tr>
 
                   <tr>
                     <td id="articulo_name1"></td>
                     <td id="tamaño1"></td>
                     <td id="cantidad1"></td>
+<<<<<<< HEAD
                     <td id="valor1"></td>
                     <td id="imagen1"></td>
+=======
+                    <td id="valor1"></td>            
+>>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
                   </tr>
 
                   <tr>
                     <td id="articulo_name2"></td>
                     <td id="tamaño2"></td>
                     <td id="cantidad2"></td>
+<<<<<<< HEAD
                     <td id="valor2"></td>
                     <td id="imagen2"></td>
+=======
+                    <td id="valor2"></td>            
+>>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
                   </tr>
 
                   <tr>
                     <td id="articulo_name3"></td>
                     <td id="tamaño3"></td>
                     <td id="cantidad3"></td>
+<<<<<<< HEAD
                     <td id="valor3"></td>
                     <td id="imagen3"></td>
+=======
+                    <td id="valor3"></td>             
+>>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
                   </tr>
 
                   <tr>
                     <td id="articulo_name4"></td>
                     <td id="tamaño4"></td>
                     <td id="cantidad4"></td>
+<<<<<<< HEAD
                     <td id="valor4"></td>
                     <td id="imagen4"></td>
+=======
+                    <td id="valor4"></td>            
+>>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
                   </tr>
 
                 </tbody>
@@ -152,7 +182,6 @@
                 <thead class="final_pedido">
                   <tr>
                     <th scope="col">TOTAL</th>
-                    <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col" id="total"></th>

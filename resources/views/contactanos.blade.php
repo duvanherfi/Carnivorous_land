@@ -2,9 +2,16 @@
 @section('contenido')
 
 
+
 <div class="d-flex titulo">
     <h1 id="titulo_contactanos">CONTÁCTANOS</h1>
 </div>
+@if (session()->has('act'))
+<div class="alert alert-success" role="alert">
+    {{ session('act') }}
+   datos actualizados con exito
+</div>
+@endif
 
 <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/contactanos/fondo_contactanos.jpg') }}"
     alt="fondo_contactanos">

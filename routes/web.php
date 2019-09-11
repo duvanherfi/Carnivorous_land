@@ -40,14 +40,21 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 
 Route::get('/carrito_compra', function () {
-    return view('carrito');
+    $id_ultPedido = App\Pedido::select('id')->get();
+    $id_ultPedido = $id_ultPedido->last();
+    if ($id_ultPedido == null) {
+        $id_ultPedido = 1 . mt_rand(1000, 9999);
+    }else{
+        $id_ultPedido = ($id_ultPedido->id+1) . mt_rand(1000, 9999);
+    }
+    return view('carrito', compact('id_ultPedido'));
 })->name('carrito')->middleware('auth');
 
-Route::get('/mis_datos','UsuarioControlador@mostrar_datos')
-->name('mis_datos')->middleware('auth');
+Route::get('/mis_datos', 'UsuarioControlador@mostrar_datos')
+    ->name('mis_datos')->middleware('auth');
 
-Route::put('/actualizar/{user}','UsuarioControlador@actualizar')
-->name('actualizar');
+Route::put('/actualizar/{user}', 'UsuarioControlador@actualizar')
+    ->name('actualizar');
 
 Route::post('register', 'UsuarioControlador@registrar');
 
@@ -61,16 +68,23 @@ Route::get('/inventario/{gestion}', function ($gestion) {
     return view('inventario', compact('gestion'));
 })->name('inventario')->middleware('admin');
 
+//Registrar un administrador
+Route::get('/registrar_admin', 'AdminControlador@mostrar')
+    ->name('registrar_admin')->middleware('admin');
+
+Route::post('/registrar_admin', 'AdminControlador@registrar')
+    ->name('registrar_admin')->middleware('admin');
+//->middleware('admin');
+
 Route::get('/pedidos', function () {
     return view('pedidos');
 })->name('pedidos')->middleware('admin');
 
-
 Route::get('/actualizar_datos', 'EmpresaControlador@actualizar')
-->name('actualizar_datos')->middleware('admin');
+    ->name('actualizar_datos')->middleware('admin');
 
 Route::put('/guardar', 'EmpresaControlador@guardar')
-->name('guardar');
+    ->name('guardar');
 
 // Tipos o generos
 Route::get('/tiposControl/{tipo}', 'TiposControlador@index')->name('tipos.index');
@@ -89,26 +103,38 @@ Route::get('/productosControl/{tipo}/{categoria}/{lugar}', 'ProductoControlador@
 Route::post('/productosControl/{id}/{categoria}', 'ProductoControlador@update')->name('productos.update'); // PUT
 Route::put('/productosControl/{opcion_catalogo}/{id}', 'ProductoControlador@actualizarOpcionCatalogo')->name('productos.opcion_catalogo');
 Route::delete('/productosControl/{id}', 'ProductoControlador@destroy')->name('productos.destroy');
+Route::get('/productosControl', 'ProductoControlador@productosStockMinimo')->name('productos.productosStockMinimo');
 
 // Carrito de compra
 Route::post('/carritoControl', 'CarritoControlador@agregar')->name('carro.agregar');
 Route::delete('/carritoControl/{nombre}', 'CarritoControlador@eliminar')->name('carro.eliminar');
 Route::get('/carritoControl', 'CarritoControlador@obtener')->name('carro.obtener');
+Route::post('/carritoControl/{valorInput}', 'CarritoControlador@agregarDireccion')->name('carro.agregarDireccion');
+Route::post('/carritoControl/{cantidad}/{subtotal}/{id}', 'CarritoControlador@actualizarCantSubt')->name('carro.actualizarCantSubt');
+
+// Calificar productos
+Route::post('/calificarControl', 'CalificarControlador@registrar')->name('calificar.registrar');
 
 //llamada al metodo isAdmin del controlador usuario para hacer el menú
 Route::get('/comprobarSiAdmin', 'usuarioControlador@isAdmin');
 
 
-Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');
+Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');;
 
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
 
 Route::put('/pedidos/{id}', "PedidosController@cambiar")->name('cambiar');
-Route::get('/pagRespuesta', function () {
-    return view('pagRespuesta');
-})->name('pagRespuesta');
 
-Route::get('/pagconfirmacion', "CarritoControlador@ingresarpago");
+Route::get('/pagRespuesta/{estado}', function ($estado) {
+    if ($estado == 4) {
+        $estadoTx = "Transacción aprobada";
+    } else if ($estado == 7) {
+        $estadoTx = "Transacción pendiente";
+    } else {
+        return redirect()->route('inicio');
+    }
+    return view('pagRespuesta', compact('estadoTx'));
+})->name('pagRespuesta');
 
 //ruta que es llamada desde la app android
 Route::get('/android','usuarioControlador@mostraralgo');
@@ -119,3 +145,11 @@ Route::post('/correo', "CorreoControlador@escribenos")
 
 //rutas ppdf
 Route::get('/informe',"PedidosController@pdf")->name('pedido.pdf');
+
+Route::get('/pagRespuestaPuente', "PagRespuestaControlador@puente")->name('pagRespuestaPuente');
+
+Route::get('/pagConfirmacion', "CarritoControlador@ingresarpago")->name('pagConfirmacion');
+
+//Rutas correo
+Route::post('/correo', "CorreoControlador@escribenos")
+    ->name('correo');

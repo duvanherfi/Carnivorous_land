@@ -16,7 +16,7 @@
         <!--Cartas-->
         <div id="app" class="row justify-content-center w-100 m-0" data-aos="fade-up"
             data-aos-anchor-placement="top-center">
-            <productos></productos>
+            <productos tipo="calificacion"></productos>
         </div>
         <!--/Cartas-->
     </div>

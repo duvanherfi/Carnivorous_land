@@ -8,7 +8,7 @@
         <h1>CARNIVOROUS LAND</h1>
         <h3>¡DÉJATE ATRAPAR!</h3>
         <h5>ENVIOS A TODO COLOMBIA</h5>
-        <button type="button" class="btn btn-light-green">¡COMPRAR AHORA!</button>
+        <a type="button" class="btn btn-light-green" href="{{ route('productos', 'plantas') }}">¡COMPRAR AHORA!</a>
     </div>
     <!--Indicators-->
     <ol class="carousel-indicators">
@@ -73,8 +73,8 @@
 <br>
 <h2 class="row justify-content-center subtitulo-DS w-100 m-0">¿POR QUÉ COMPRAR CON NOSOTROS?</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
-    <hr  class="izquierda-DS ml-0 mr-2"  style="width:300px;">✻
-    <hr  class="derecha-DS ml-2 mr-0"  style="width:300px;">
+    <hr class="izquierda-DS ml-0 mr-2" style="width:300px;">✻
+    <hr class="derecha-DS ml-2 mr-0" style="width:300px;">
 </div>
 
 {{-- /Subtitulo --}}
@@ -115,14 +115,14 @@
 <br>
 <h2 class="row justify-content-center subtitulo-DS w-100 m-0">LO MÁS DESTACADO</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
-    <hr  class="izquierda-DS ml-0 mr-2" style="width:200px;">✻
-    <hr  class="derecha-DS ml-2 mr-0"  style="width:200px;">
+    <hr class="izquierda-DS ml-0 mr-2" style="width:200px;">✻
+    <hr class="derecha-DS ml-2 mr-0" style="width:200px;">
 </div>
 {{-- /Subtitulo --}}
 
 <!--Cartas-->
 <div id="app" class="row justify-content-center w-100 m-0" data-aos="fade-up" data-aos-anchor-placement="top-center">
-    <productos></productos>
+    <productos tipo="calificacion"></productos>
 </div>
 <!--/Cartas-->
 
@@ -130,8 +130,8 @@
 <br>
 <h2 class="row justify-content-center subtitulo-DS w-100 m-0">EVENTOS</h2>
 <div class="row align-items-center row justify-content-center w-100 m-0">
-    <hr class="izquierda-DS ml-0 mr-2"  style="width:150px;">✻
-    <hr  class="derecha-DS ml-2 mr-0"  style="width:150px;">
+    <hr class="izquierda-DS ml-0 mr-2" style="width:150px;">✻
+    <hr class="derecha-DS ml-2 mr-0" style="width:150px;">
 </div>
 {{-- /Subtitulo --}}
 

@@ -45,7 +45,7 @@ body {
 }
 
 .bordes-externo-DS {
-    border-left: 2px solid white;
+    /* border-left: 2px solid white; */
     border-right: 2px solid white;
     height: 35px;
     font-size: 110%;
@@ -53,6 +53,10 @@ body {
 
 .bordes-DS {
     border-right: 2px solid white;
+}
+
+.bordes-izq-DS {
+    border-left: 2px solid white;
 }
 
 .sincursor-DS {
@@ -237,7 +241,7 @@ body {
 }
 
 .carta-DS {
-    float: left;
+    display: inline-flex;
     margin: 0.9rem;
 }
 

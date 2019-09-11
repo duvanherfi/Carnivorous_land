@@ -44,10 +44,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        @if (!isset($estadoTx))
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-            <ul class="navbar-nav ml-auto bordes-externo-DS">
 
-                <li class="nav-item bordes-DS">
+            <ul class="navbar-nav ml-auto bordes-externo-DS">
+                @if (auth()->user() == null)
+                @elseif (auth()->user()->rol == 'administrador')
+                <div id="app4">
+                    <anuncio-stock-min></anuncio-stock-min>
+                </div>
+                @endif
+                <li class="nav-item bordes-DS bordes-izq-DS">
                     <p class="nav-link">
                         <i class="fab fa-whatsapp"></i>
                         +57 316 7973829
@@ -78,6 +85,12 @@
                         <a class="dropdown-item" href="{{route('mis_datos')}}">
                             <img src="{{ asset('img/user.png') }}" alt="Icono de usuario" width="23">
                             Mi perfil</a>
+                        @if (auth()->user()->rol == 'administrador')
+                        <a class="dropdown-item" href="{{route('registrar_admin')}}">
+                            <img src="{{ asset('img/admin.png') }}" alt="Icono de registrar administrador" width="23">
+                            Crear admin</a>
+                        @endif
+
                         <a class="dropdown-item" href="{{route('cerrar_sesion')}}">
                             <img src="{{ asset('img/logout.png') }}" alt="Cerrar Sesión" width="23">
                             Cerrar sesión</a>
@@ -89,9 +102,11 @@
                 @endif
             </ul>
         </div>
+        @endif
     </nav>
     <!--/.Navbar -->
 
+    @if (!isset($estadoTx))
     <div class="container">
         {{-- Logo --}}
         <div>
@@ -156,9 +171,11 @@
             </div>
 
 
+
         </nav>
         {{-- /.Menu --}}
     </div>
+    @endif
 
     @yield('contenido')
 
@@ -285,7 +302,7 @@
 
                 url: url,
                     success: function(result){
-                        console.log(result.success);
+                        // console.log(result.success);
 
 
 
@@ -304,12 +321,18 @@
 
 
                         $('#modal_pedidos').modal('show');
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
 
+                        
+                        $('#referencia').html(result.success[0].referencia);
                         $('#nombre_cli').html(result.success[0].nombre_cliente);
-                        $('#ciudad').html(result.success[0].ciudad);
+                        $('#cedula').html(result.success[0].cedula);
+                        $('#telefono').html(result.success[0].telefono);
+                        $('#ciudad').html(result.success[0].departamento + ', ' + result.success[0].ciudad + ', ' + result.success[0].barrio);
                         $('#direccion').html(result.success[0].direccion);
-                        $('#tipo_entrega').html(result.success[0].tipo_entrega);
                         $('#estado').html(result.success[0].estado);
                         $('#total').html(result.success[0].total);
 
@@ -330,11 +353,10 @@
 
                     },
                     error: function (result){
-                         console.log(result)
+                        //  console.log(result)
                     }
             })
         })
-
 
 
 
@@ -351,17 +373,22 @@
 
                 url: url,
                     success: function(result){
-                        console.log(result.success);
+                        // console.log(result.success);
 
                         name = result.success.nombre_cliente;
+<<<<<<< HEAD
                         alert("El pedido de " + name + " fue enviado a la lista de entregados exitosamente");
 
+=======
+                        alert("El pedido de " + name + " fue enviado a la lista de entregados, exitosamente");
+                        
+>>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
                         location.reload();
 
 
                     },
                     error: function (result){
-                         console.log(result)
+                        //  console.log(result)
                     }
             })
         })

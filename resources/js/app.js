@@ -1,8 +1,10 @@
 require('./bootstrap');
 require('./mdb');
+require('./event_bus');
 var AOS = require('aos');
 AOS.init();
 global.md5 = require('md5');
+global.toastr = require('toastr');
 
 import bsCustomFileInput from 'bs-custom-file-input';
 
@@ -20,6 +22,7 @@ Vue.use(VueCurrencyFilter, {
     symbolSpacing: false
 });
 
+Vue.component('anuncio-stock-min', require('./components/anuncio_stock_minimo.vue').default);
 Vue.component('utilizar-otros-datos', require('./components/utilizar_otros_datos_carrito.vue').default);
 Vue.component('boton-arriba', require('./components/boton-arriba.vue').default);
 Vue.component('productos', require('./components/cartas_productos.vue').default);
@@ -31,6 +34,7 @@ Vue.component('contenido-descripcion', require('./components/contenido_descripci
 Vue.component('menu-inventario', require('./components/menu_inventario.vue').default);
 Vue.component('contenido-inventario', require('./components/contenido_inventario.vue').default);
 Vue.component('filas-carrito', require('./components/filas_carrito.vue').default);
+Vue.component('filas-pagrespuesta', require('./components/filas_pagRespuesta.vue').default);
 Vue.component('menu_prueba', require('./components/menu_prueba.vue').default);
 
 const app = new Vue({
@@ -43,4 +47,8 @@ const app2 = new Vue({
 
 const app3 = new Vue({
     el: '#app3',
+});
+
+const app4 = new Vue({
+    el: '#app4',
 });

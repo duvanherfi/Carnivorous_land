@@ -18,8 +18,7 @@ class CreateComprasTable extends Migration
             $table->string('nombre_articulo');
             $table->string('tamaño');
             $table->Integer('cantidad');
-            $table->double('valor', 8, 2);
-            $table->string('imagen');
+            $table->bigInteger('valor');
             $table->integer('id_pedido')->unsigned();
 
             $table->timestamps();

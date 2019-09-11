@@ -36,28 +36,33 @@ class ProductoControlador extends Controller
                 $productos = DB::table('productos')->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
                     ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)->where('productos.habilitado', 'true')
                     ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion');
+            } else if ($categoria == 'productosPorCalificacion') {
+                $productos = DB::table('productos')->leftJoin('plantas', 'plantas.id_planta', '=', 'productos.id')->orderBy('calificacion', 'desc')
+                    ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion');
             }
 
             if ($lugar != 'gestion') {
-                $productos = $productos->where('opcion_catalogo', 'true')->get();
-                
-                $sesion = $request->session()->get('id');
-
-                if (empty($sesion)) {
-                    for ($i = 0; $i < count($productos); $i++) {
-                        $productos[$i]->opcionCancelar = false;
-                    }
+                if ($categoria == 'productosPorCalificacion') {
+                    $productos = $productos->where('opcion_catalogo', 'true')->paginate(3);
                 } else {
-                    for ($i = 0; $i < count($productos); $i++) {
-                        if (in_array($productos[$i]->id_producto, $sesion)) {
-                            $productos[$i]->opcionCancelar = true;
+                    $productos = $productos->where('opcion_catalogo', 'true')->paginate(15);
+                }
+
+                $productos->getCollection()->transform(function ($value) {
+                    $sesion = Session::get('id');
+                    if (empty($sesion)) {
+                        $value->opcionCancelar = false;
+                    } else {
+                        if (in_array($value->id_producto, $sesion)) {
+                            $value->opcionCancelar = true;
                         } else {
-                            $productos[$i]->opcionCancelar = false;
+                            $value->opcionCancelar = false;
                         }
                     }
-                }
-            }else{
-                $productos = $productos->get();
+                    return $value;
+                });
+            } else {
+                $productos = $productos->paginate(15);
             }
             return $productos;
         } else {
@@ -95,6 +100,11 @@ class ProductoControlador extends Controller
                 }
             }
         }
+        return $productos;
+    }
+
+    public function productosStockMinimo(){
+        $productos = DB::table('productos')->whereColumn('cantidad', '<=', 'stock_minimo')->get();
         return $productos;
     }
 
@@ -173,7 +183,6 @@ class ProductoControlador extends Controller
             $imagen3 = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen3);
         }
-
         $producto = new Producto();
         $producto->imagen_principal = $imagen_principal;
         $producto->imagen2 = $imagen2;
@@ -185,7 +194,7 @@ class ProductoControlador extends Controller
         $producto->opcion_catalogo = $request->input('opcion_catalogo');
         $producto->descripcion = $request->input('descripcion');
         $producto->save();
-
+        
         if ($request->categoria == 'plantas') {
             $plantas = new Planta();
             $id = Producto::all()->last();

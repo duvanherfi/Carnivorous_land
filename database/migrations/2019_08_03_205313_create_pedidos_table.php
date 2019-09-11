@@ -15,14 +15,18 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->integerIncrements('id')->unsigned();
-            $table->string('fecha');
+            $table->bigInteger('referencia');
+            $table->date('fecha');
             $table->string('nombre_cliente');
+            $table->integer('telefono');
+            $table->integer('cedula');
+            $table->string('departamento');
             $table->string('ciudad');
+            $table->string('barrio');
             $table->string('direccion');
-            $table->string('tipo_entrega');
             $table->string('estado');
-            $table->double('total', 8, 2);
-            $table->string('entregado');
+            $table->bigInteger('total');
+            $table->string('entregado')->default('no');
             $table->timestamps();
         });
 
