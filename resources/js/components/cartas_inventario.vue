@@ -235,12 +235,14 @@ export default {
                 imagen3nombre: '',
                 imagen3nombreAntiguo: '',
                 nombre: '',
+                nombreAntiguo: '',
                 valor: '',
                 cantidad: '',
                 stock_minimo: '',
                 categoria: '',
                 genero: '',
                 tamaño: '',
+                tamañoAntiguo: '',
                 opcion_catalogo: '',
                 descripcion: ''
             },
@@ -395,7 +397,7 @@ export default {
             this.mensajeErrorProducto.imagen2 = undefined;
             this.producto.imagen3nombre = this.producto.imagen3nombreAntiguo = item.imagen3;
             this.mensajeErrorProducto.imagen3 = undefined;
-            this.producto.nombre = item.nombre;
+            this.producto.nombre = this.producto.nombreAntiguo = item.nombre;
             this.mensajeErrorProducto.nombre = undefined;
             this.producto.valor = item.valor;
             this.mensajeErrorProducto.valor = undefined;
@@ -403,7 +405,7 @@ export default {
             this.mensajeErrorProducto.cantidad = undefined;
             this.producto.stock_minimo = item.stock_minimo;
             this.mensajeErrorProducto.stock_minimo = undefined;
-            this.producto.tamaño = item.tamaño;
+            this.producto.tamaño = this.producto.tamañoAntiguo = item.tamaño;
             this.mensajeErrorProducto.tamaño = undefined;
             this.producto.descripcion = item.descripcion;
             this.mensajeErrorProducto.descripcion = undefined;
@@ -426,10 +428,12 @@ export default {
             formData.append('imagen3nombre', this.producto.imagen3nombre);
             formData.append('imagen3nombreAntiguo', this.producto.imagen3nombreAntiguo);
             formData.append('nombre', this.producto.nombre);
+            formData.append('nombreAntiguo', this.producto.nombreAntiguo);
             formData.append('valor', this.producto.valor);
             formData.append('cantidad', this.producto.cantidad);
             formData.append('stock_minimo', this.producto.stock_minimo);
             formData.append('tamaño', this.producto.tamaño);
+            formData.append('tamañoAntiguo', this.producto.tamañoAntiguo);
             formData.append('genero', this.producto.genero);
             formData.append('descripcion', this.producto.descripcion);
 
@@ -548,5 +552,12 @@ label {
 
 .carta-DS {
     color: #434343;
+}
+
+.img-sombra-producto-DS {
+    -webkit-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    height: 185px;
 }
 </style>

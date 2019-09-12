@@ -26,7 +26,7 @@
                 <div class="mask rgba-black-light"></div>
             </div>
             <div class="carousel-caption letras-DS">
-                <h3 class="h3-responsive">Light mask</h3>
+                <h3 class="h3-responsive pb-4">Darlingtonia</h3>
                 {{-- <p class="texto-DS">First text</p> --}}
             </div>
         </div>
@@ -35,11 +35,11 @@
             <div class="view">
                 <img class="d-block w-100 ajuste-imagen-DS" src="{{ asset('img/fotos-carrousel/2.png') }}"
                     alt="Second slide">
-                <div class="mask rgba-black-strong"></div>
+                {{-- <div class="mask rgba-black-strong"></div> --}}
             </div>
             <div class="carousel-caption letras-DS">
-                <h3 class="h3-responsive">Strong mask</h3>
-                <p class="texto-DS">Secondary text</p>
+                <h3 class="h3-responsive pb-4">Drosera</h3>
+                {{-- <p class="texto-DS">Secondary text</p> --}}
             </div>
         </div>
 
@@ -52,8 +52,8 @@
                 <div class="mask rgba-black-slight"></div>
             </div>
             <div class="carousel-caption letras-DS">
-                <h3 class="h3-responsive">Slight mask</h3>
-                <p class="texto-DS">Third text</p>
+                <h3 class="h3-responsive pb-4">Dionaea</h3>
+                {{-- <p class="texto-DS">Third text</p> --}}
             </div>
         </div>
     </div>

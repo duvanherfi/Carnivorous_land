@@ -10,34 +10,34 @@
     <div id="accordion" class="row justify-content-center" role="tablist">
         <div class="col-9 borde-menu-DS"></div>
         <!-- Opcion Plantas -->
-        <div role="tab" class="text-center py-1 opcion-menu-DS">
+        <div role="tab" class="col-9 text-center py-1 opcion-menu-DS">
             <div class="collapsed flecha" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 Plantas
             </div>
         </div>
-        <div id="collapseOne" class="collapse contenedor-submenu-DS" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id="collapseOne" class="col-9 collapse contenedor-submenu-DS p-0" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
             <div @click="mostrarPlantas(item.genero)" v-for="(item, index) in generos" :key="index" class="text-center py-1 w-100 opcion-menu-DS">
                 {{ item.genero }}
             </div>
         </div>
         <!-- Opcion Merchandising -->
-        <div role="tab" class="text-center py-1 opcion-menu-DS">
+        <div role="tab" class="col-9 text-center py-1 opcion-menu-DS">
             <div class="collapsed flecha" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 Merchandising
             </div>
         </div>
-        <div id="collapseTwo" class="collapse contenedor-submenu-DS" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div id="collapseTwo" class="col-9 collapse contenedor-submenu-DS p-0" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
             <div @click="mostrarMerchandising(item.tipo)" v-for="(item, index) in merchandising" :key="index" class="text-center py-1 w-100 opcion-menu-DS">
                 {{ item.tipo }}
             </div>
         </div>
         <!-- Opcion Implementos -->
-        <div role="tab" class="text-center py-1 opcion-menu-DS">
+        <div role="tab" class="col-9 text-center py-1 opcion-menu-DS">
             <div class="collapsed flecha" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 Implementos de cultivo
             </div>
         </div>
-        <div id="collapseThree" class="collapse contenedor-submenu-DS" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+        <div id="collapseThree" class="col-9 collapse contenedor-submenu-DS p-0" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
             <div @click="mostrarImplementos(item.tipo)" v-for="(item, index) in implementos" :key="index" class="text-center py-1 w-100 opcion-menu-DS">
                 {{ item.tipo }}
             </div>
@@ -55,6 +55,31 @@
         <div @click="limpiarRegistraProducto" class="col-9 text-center py-1 opcion-menu-DS" data-toggle="modal" data-target="#modal_registrar_articulo">
             Registrar artículo
         </div>
+    </div>
+
+    <div class="container">
+        <table id="tabla_cantidad_productos" class="table table-hover table-condensed mt-5">
+            <thead id="carrito_tabla">
+                <tr class="text-center">
+                    <th>Termino</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center">
+                    <td data-th="Termino">Artículos</td>
+                    <td data-th="Cantidad">{{ cantidadesTerminos.cantidadProductos }}</td>
+                </tr>
+                <tr class="text-center">
+                    <td data-th="Termino">Géneros</td>
+                    <td data-th="Cantidad">{{ cantidadesTerminos.cantidadGeneros }}</td>
+                </tr>
+                <tr class="text-center">
+                    <td data-th="Termino">Plantas</td>
+                    <td data-th="Cantidad">{{ cantidadesTerminos.cantidadPlantas }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- Modal registrar articulo -->
@@ -318,7 +343,8 @@ export default {
             implementos: [],
             activar: true,
             mensajeErrorProducto: [],
-            mensajeErrorTipo: []
+            mensajeErrorTipo: [],
+            cantidadesTerminos: []
         }
     },
     created() {
@@ -355,6 +381,15 @@ export default {
             }
         });
 
+        axios.get('/tiposControl').then(response => {
+            this.cantidadesTerminos = response.data;
+        });
+
+        EventBus.$on('actualizarCantidadTerminos', data => {
+            axios.get('/tiposControl').then(response => {
+                this.cantidadesTerminos = response.data;
+            });
+        });
     },
     beforeUpdate() {
         EventBus.$on('actualizarMenuInventario', data => {
@@ -434,6 +469,7 @@ export default {
                     toastr.error('El registro fue rechazado, por favor revise el formulario');
                 } else {
                     $('#registrar_genero').collapse('hide');
+                    EventBus.$emit('actualizarCantidadTerminos', true);
                     if (response.data.modificar == 'modificar') {
                         if (!(isNullOrUndefined(response.data.imagen))) {
                             formData.append('imagennombreAntiguo', response.data.imagen);
@@ -482,6 +518,8 @@ export default {
             formData.append('descripcion', this.producto.descripcion);
 
             axios.post('/productosControl', formData).then(response => {
+                console.log(response.data);
+                
                 if (!isNullOrUndefined(response.data.existenErrores)) {
                     this.mensajeErrorProducto = response.data.errores;
                     if (this.producto.imagen_principalnombre == '')
@@ -497,6 +535,7 @@ export default {
                 } else {
                     $('#modal_registrar_articulo').modal('hide');
                     EventBus.$emit('activarUpdate', true);
+                    EventBus.$emit('actualizarCantidadTerminos', true);
                     // console.log(response.data);
                     if (!(isNullOrUndefined(response.data.imagen_principal))) {
                         formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
@@ -585,6 +624,10 @@ export default {
 </script>
 
 <style scoped>
+#tabla_cantidad_productos {
+    font-family: "Montserrat", sans-serif;
+}
+
 .mensaje-invalido {
     width: 100%;
     margin-top: 0.25rem;
