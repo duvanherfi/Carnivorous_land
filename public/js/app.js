@@ -2216,12 +2216,14 @@ __webpack_require__.r(__webpack_exports__);
         imagen3nombre: '',
         imagen3nombreAntiguo: '',
         nombre: '',
+        nombreAntiguo: '',
         valor: '',
         cantidad: '',
         stock_minimo: '',
         categoria: '',
         genero: '',
         tamaño: '',
+        tamañoAntiguo: '',
         opcion_catalogo: '',
         descripcion: ''
       },
@@ -2397,7 +2399,7 @@ __webpack_require__.r(__webpack_exports__);
       this.mensajeErrorProducto.imagen2 = undefined;
       this.producto.imagen3nombre = this.producto.imagen3nombreAntiguo = item.imagen3;
       this.mensajeErrorProducto.imagen3 = undefined;
-      this.producto.nombre = item.nombre;
+      this.producto.nombre = this.producto.nombreAntiguo = item.nombre;
       this.mensajeErrorProducto.nombre = undefined;
       this.producto.valor = item.valor;
       this.mensajeErrorProducto.valor = undefined;
@@ -2405,7 +2407,7 @@ __webpack_require__.r(__webpack_exports__);
       this.mensajeErrorProducto.cantidad = undefined;
       this.producto.stock_minimo = item.stock_minimo;
       this.mensajeErrorProducto.stock_minimo = undefined;
-      this.producto.tamaño = item.tamaño;
+      this.producto.tamaño = this.producto.tamañoAntiguo = item.tamaño;
       this.mensajeErrorProducto.tamaño = undefined;
       this.producto.descripcion = item.descripcion;
       this.mensajeErrorProducto.descripcion = undefined;
@@ -2428,10 +2430,12 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('imagen3nombre', this.producto.imagen3nombre);
       formData.append('imagen3nombreAntiguo', this.producto.imagen3nombreAntiguo);
       formData.append('nombre', this.producto.nombre);
+      formData.append('nombreAntiguo', this.producto.nombreAntiguo);
       formData.append('valor', this.producto.valor);
       formData.append('cantidad', this.producto.cantidad);
       formData.append('stock_minimo', this.producto.stock_minimo);
       formData.append('tamaño', this.producto.tamaño);
+      formData.append('tamañoAntiguo', this.producto.tamañoAntiguo);
       formData.append('genero', this.producto.genero);
       formData.append('descripcion', this.producto.descripcion);
       axios.post("/productosControl/".concat(id, "/").concat(this.producto.categoria), formData).then(function (response) {
@@ -3922,6 +3926,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3956,7 +3985,8 @@ __webpack_require__.r(__webpack_exports__);
       implementos: [],
       activar: true,
       mensajeErrorProducto: [],
-      mensajeErrorTipo: []
+      mensajeErrorTipo: [],
+      cantidadesTerminos: []
     };
   },
   created: function created() {
@@ -3993,6 +4023,14 @@ __webpack_require__.r(__webpack_exports__);
         };
         _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('articulos', params);
       }
+    });
+    axios.get('/tiposControl').then(function (response) {
+      _this.cantidadesTerminos = response.data;
+    });
+    _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$on('actualizarCantidadTerminos', function (data) {
+      axios.get('/tiposControl').then(function (response) {
+        _this.cantidadesTerminos = response.data;
+      });
     });
   },
   beforeUpdate: function beforeUpdate() {
@@ -4087,6 +4125,7 @@ __webpack_require__.r(__webpack_exports__);
           toastr.error('El registro fue rechazado, por favor revise el formulario');
         } else {
           $('#registrar_genero').collapse('hide');
+          _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('actualizarCantidadTerminos', true);
 
           if (response.data.modificar == 'modificar') {
             if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen)) {
@@ -4139,6 +4178,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('opcion_catalogo', this.producto.opcion_catalogo);
       formData.append('descripcion', this.producto.descripcion);
       axios.post('/productosControl', formData).then(function (response) {
+        console.log(response.data);
+
         if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.existenErrores)) {
           _this4.mensajeErrorProducto = response.data.errores;
           if (_this4.producto.imagen_principalnombre == '') _this4.mensajeErrorProducto.imagen_principal = ['El campo es obligatorio.'];
@@ -4152,7 +4193,8 @@ __webpack_require__.r(__webpack_exports__);
           toastr.error('El registro fue rechazado, por favor revise el formulario');
         } else {
           $('#modal_registrar_articulo').modal('hide');
-          _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true); // console.log(response.data);
+          _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true);
+          _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('actualizarCantidadTerminos', true); // console.log(response.data);
 
           if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen_principal)) {
             formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
@@ -9470,7 +9512,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.page-item:last-child .page-link[data-v-34a270c3]:hover {\r\n    background-color: #434343 !important;\r\n    border-top-right-radius: 0.25rem !important;\r\n    border-bottom-right-radius: 0.25rem !important;\r\n    color: white !important;\n}\n.page-item:first-child .page-link[data-v-34a270c3]:hover {\r\n    background-color: #434343 !important;\r\n    border-top-left-radius: 0.25rem !important;\r\n    border-bottom-left-radius: 0.25rem !important;\r\n    color: white !important;\n}\n.borde-gris[data-v-34a270c3] {\r\n    border: 1px solid #434343 !important;\r\n    color: #434343 !important;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.letra-blanca[data-v-34a270c3] {\r\n    color: white !important;\n}\n.bordes-paginacion[data-v-34a270c3]:last-child {\r\n    border-top-right-radius: 0.25rem;\r\n    border-bottom-right-radius: 0.25rem;\n}\n.bordes-paginacion[data-v-34a270c3]:first-child {\r\n    border-top-left-radius: 0.25rem;\r\n    border-bottom-left-radius: 0.25rem;\n}\n.btn-gestion[data-v-34a270c3] {\r\n    position: absolute;\n}\n.tamaño-estrellas[data-v-34a270c3] {\r\n    height: 29px;\n}\n.custom-control[data-v-34a270c3] {\r\n    margin-right: 39px;\n}\n.opcion_catalogo[data-v-34a270c3] {\r\n    margin-right: 36px;\n}\n.card-body[data-v-34a270c3] {\r\n    font-family: 'Montserrat', sans-serif;\r\n    padding: 16px;\n}\np[data-v-34a270c3] {\r\n    font-family: 'Montserrat', sans-serif;\r\n    cursor: default;\n}\nlabel[data-v-34a270c3] {\r\n    color: #434343;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.color-verde[data-v-34a270c3] {\r\n    background-color: #86a74d;\r\n    color: white;\n}\n.carta-DS[data-v-34a270c3] {\r\n    color: #434343;\n}\r\n", ""]);
+exports.push([module.i, "\n.page-item:last-child .page-link[data-v-34a270c3]:hover {\r\n    background-color: #434343 !important;\r\n    border-top-right-radius: 0.25rem !important;\r\n    border-bottom-right-radius: 0.25rem !important;\r\n    color: white !important;\n}\n.page-item:first-child .page-link[data-v-34a270c3]:hover {\r\n    background-color: #434343 !important;\r\n    border-top-left-radius: 0.25rem !important;\r\n    border-bottom-left-radius: 0.25rem !important;\r\n    color: white !important;\n}\n.borde-gris[data-v-34a270c3] {\r\n    border: 1px solid #434343 !important;\r\n    color: #434343 !important;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.letra-blanca[data-v-34a270c3] {\r\n    color: white !important;\n}\n.bordes-paginacion[data-v-34a270c3]:last-child {\r\n    border-top-right-radius: 0.25rem;\r\n    border-bottom-right-radius: 0.25rem;\n}\n.bordes-paginacion[data-v-34a270c3]:first-child {\r\n    border-top-left-radius: 0.25rem;\r\n    border-bottom-left-radius: 0.25rem;\n}\n.btn-gestion[data-v-34a270c3] {\r\n    position: absolute;\n}\n.tamaño-estrellas[data-v-34a270c3] {\r\n    height: 29px;\n}\n.custom-control[data-v-34a270c3] {\r\n    margin-right: 39px;\n}\n.opcion_catalogo[data-v-34a270c3] {\r\n    margin-right: 36px;\n}\n.card-body[data-v-34a270c3] {\r\n    font-family: 'Montserrat', sans-serif;\r\n    padding: 16px;\n}\np[data-v-34a270c3] {\r\n    font-family: 'Montserrat', sans-serif;\r\n    cursor: default;\n}\nlabel[data-v-34a270c3] {\r\n    color: #434343;\r\n    font-family: 'Montserrat', sans-serif;\n}\n.color-verde[data-v-34a270c3] {\r\n    background-color: #86a74d;\r\n    color: white;\n}\n.carta-DS[data-v-34a270c3] {\r\n    color: #434343;\n}\n.img-sombra-producto-DS[data-v-34a270c3] {\r\n    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);\r\n    height: 185px;\n}\r\n", ""]);
 
 // exports
 
@@ -9603,7 +9645,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mensaje-invalido[data-v-5bac3354] {\r\n    width: 100%;\r\n    margin-top: 0.25rem;\r\n    font-size: 80%;\r\n    color: #e3342f;\n}\n.borde-menu-DS[data-v-5bac3354] {\r\n    border-top: #434343 3px solid;\r\n    width: 230px;\n}\n.opcion-menu-DS[data-v-5bac3354] {\r\n    border-bottom: #434343 3px solid;\r\n    font-family: 'Montserrat', sans-serif;\r\n    width: 261px;\n}\n.contenedor-submenu-DS[data-v-5bac3354] {\r\n    width: 261px;\n}\n.opcion-menu-DS[data-v-5bac3354]:hover {\r\n    background-color: #9DCE5B;\r\n    color: white;\r\n    cursor: pointer;\n}\nlabel[data-v-5bac3354] {\r\n    font-family: 'Montserrat', sans-serif;\n}\n.btn-registrar-genero[data-v-5bac3354] {\r\n    margin-left: 147px;\r\n    margin-bottom: 16px;\n}\n.form-registrar-genero[data-v-5bac3354] {\r\n    margin-right: 27px;\r\n    margin-bottom: 16px;\n}\r\n\r\n/* Collapse */\n.flecha[data-v-5bac3354]:after {\r\n    display: inline-block;\r\n    display: inline-block;\r\n    font: normal normal normal 14px/1 FontAwesome;\r\n    font-size: inherit;\r\n    text-rendering: auto;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    content: \"\\25BC\";\r\n    transform: rotate(-90deg);\r\n    transition: all linear 0.25s;\n}\n.flecha.collapsed[data-v-5bac3354]:after {\r\n    transform: rotate(0deg);\n}\r\n", ""]);
+exports.push([module.i, "\n#tabla_cantidad_productos[data-v-5bac3354] {\r\n    font-family: \"Montserrat\", sans-serif;\n}\n.mensaje-invalido[data-v-5bac3354] {\r\n    width: 100%;\r\n    margin-top: 0.25rem;\r\n    font-size: 80%;\r\n    color: #e3342f;\n}\n.borde-menu-DS[data-v-5bac3354] {\r\n    border-top: #434343 3px solid;\r\n    width: 230px;\n}\n.opcion-menu-DS[data-v-5bac3354] {\r\n    border-bottom: #434343 3px solid;\r\n    font-family: 'Montserrat', sans-serif;\r\n    width: 261px;\n}\n.contenedor-submenu-DS[data-v-5bac3354] {\r\n    width: 261px;\n}\n.opcion-menu-DS[data-v-5bac3354]:hover {\r\n    background-color: #9DCE5B;\r\n    color: white;\r\n    cursor: pointer;\n}\nlabel[data-v-5bac3354] {\r\n    font-family: 'Montserrat', sans-serif;\n}\n.btn-registrar-genero[data-v-5bac3354] {\r\n    margin-left: 147px;\r\n    margin-bottom: 16px;\n}\n.form-registrar-genero[data-v-5bac3354] {\r\n    margin-right: 27px;\r\n    margin-bottom: 16px;\n}\r\n\r\n/* Collapse */\n.flecha[data-v-5bac3354]:after {\r\n    display: inline-block;\r\n    display: inline-block;\r\n    font: normal normal normal 14px/1 FontAwesome;\r\n    font-size: inherit;\r\n    text-rendering: auto;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    content: \"\\25BC\";\r\n    transform: rotate(-90deg);\r\n    transition: all linear 0.25s;\n}\n.flecha.collapsed[data-v-5bac3354]:after {\r\n    transform: rotate(0deg);\n}\r\n", ""]);
 
 // exports
 
@@ -42870,7 +42912,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.tamañoProductos != 0
-      ? _c("div", { staticClass: "pr-3" }, [
+      ? _c("div", { staticClass: "pr-3 position-relative" }, [
           _c("img", {
             attrs: {
               id: "campana",
@@ -42887,7 +42929,7 @@ var render = function() {
             {
               staticClass:
                 "badge badge-primary badge-pill counter position-absolute",
-              staticStyle: { "z-index": "4", right: "25.5%" }
+              staticStyle: { "z-index": "4", right: "10px" }
             },
             [_vm._v(_vm._s(_vm.tamañoProductos))]
           )
@@ -46672,7 +46714,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "collapse contenedor-submenu-DS",
+            staticClass: "col-9 collapse contenedor-submenu-DS p-0",
             attrs: {
               id: "collapseOne",
               role: "tabpanel",
@@ -46709,7 +46751,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "collapse contenedor-submenu-DS",
+            staticClass: "col-9 collapse contenedor-submenu-DS p-0",
             attrs: {
               id: "collapseTwo",
               role: "tabpanel",
@@ -46746,7 +46788,7 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "collapse contenedor-submenu-DS",
+            staticClass: "col-9 collapse contenedor-submenu-DS p-0",
             attrs: {
               id: "collapseThree",
               role: "tabpanel",
@@ -46805,6 +46847,51 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "table",
+        {
+          staticClass: "table table-hover table-condensed mt-5",
+          attrs: { id: "tabla_cantidad_productos" }
+        },
+        [
+          _vm._m(5),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", { staticClass: "text-center" }, [
+              _c("td", { attrs: { "data-th": "Termino" } }, [
+                _vm._v("Artículos")
+              ]),
+              _vm._v(" "),
+              _c("td", { attrs: { "data-th": "Cantidad" } }, [
+                _vm._v(_vm._s(_vm.cantidadesTerminos.cantidadProductos))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", { staticClass: "text-center" }, [
+              _c("td", { attrs: { "data-th": "Termino" } }, [
+                _vm._v("Géneros")
+              ]),
+              _vm._v(" "),
+              _c("td", { attrs: { "data-th": "Cantidad" } }, [
+                _vm._v(_vm._s(_vm.cantidadesTerminos.cantidadGeneros))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", { staticClass: "text-center" }, [
+              _c("td", { attrs: { "data-th": "Termino" } }, [
+                _vm._v("Plantas")
+              ]),
+              _vm._v(" "),
+              _c("td", { attrs: { "data-th": "Cantidad" } }, [
+                _vm._v(_vm._s(_vm.cantidadesTerminos.cantidadPlantas))
+              ])
+            ])
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -46821,7 +46908,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(5),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("form", { staticClass: "ml-3" }, [
@@ -48191,7 +48278,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "text-center py-1 opcion-menu-DS",
+        staticClass: "col-9 text-center py-1 opcion-menu-DS",
         attrs: { role: "tab" }
       },
       [
@@ -48218,7 +48305,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "text-center py-1 opcion-menu-DS",
+        staticClass: "col-9 text-center py-1 opcion-menu-DS",
         attrs: { role: "tab" }
       },
       [
@@ -48245,7 +48332,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "text-center py-1 opcion-menu-DS",
+        staticClass: "col-9 text-center py-1 opcion-menu-DS",
         attrs: { role: "tab" }
       },
       [
@@ -48289,6 +48376,18 @@ var staticRenderFns = [
         })
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { attrs: { id: "carrito_tabla" } }, [
+      _c("tr", { staticClass: "text-center" }, [
+        _c("th", [_vm._v("Termino")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Cantidad")])
+      ])
+    ])
   },
   function() {
     var _vm = this

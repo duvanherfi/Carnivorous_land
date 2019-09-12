@@ -1,7 +1,7 @@
 <template>
 <div>
-    <div v-if="tamañoProductos != 0" class="pr-3"><img id="campana" src="/img/campana.png" alt="campana" width="33" data-toggle="popover" data-placement="bottom">
-        <span class="badge badge-primary badge-pill counter position-absolute" style="z-index:4; right:25.5%;">{{ tamañoProductos }}</span></div>
+    <div v-if="tamañoProductos != 0" class="pr-3 position-relative"><img id="campana" src="/img/campana.png" alt="campana" width="33" data-toggle="popover" data-placement="bottom">
+        <span class="badge badge-primary badge-pill counter position-absolute" style="z-index:4; right:10px;">{{ tamañoProductos }}</span></div>
 
     <div id="pop-title" style="display: none">Productos prontos a acabar</div>
     <!-- loaded popover content -->

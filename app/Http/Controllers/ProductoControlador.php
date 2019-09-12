@@ -37,7 +37,7 @@ class ProductoControlador extends Controller
                     ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('tipo', $tipo)->where('productos.habilitado', 'true')
                     ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion');
             } else if ($categoria == 'productosPorCalificacion') {
-                $productos = DB::table('productos')->leftJoin('plantas', 'plantas.id_planta', '=', 'productos.id')->orderBy('calificacion', 'desc')
+                $productos = DB::table('productos')->leftJoin('plantas', 'plantas.id_planta', '=', 'productos.id')->where('productos.habilitado', 'true')->orderBy('calificacion', 'desc')
                     ->select('*', 'productos.id as id_producto', 'productos.descripcion as descripcion');
             }
 
@@ -157,7 +157,7 @@ class ProductoControlador extends Controller
         }
         $nombreUnico = '';
         if ($request->categoria == 'plantas') {
-            
+
             $plantas = DB::table('productos')
                 ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
                 ->join('generos', 'generos.id', '=', 'plantas.id_genero')
@@ -197,7 +197,7 @@ class ProductoControlador extends Controller
                 'existenErrores' => 'si'
             ]);
         }
-
+        
         if ($request->categoria == 'plantas') {
             $producto = DB::table('productos')
                 ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
@@ -255,6 +255,7 @@ class ProductoControlador extends Controller
             $imagen3 = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen3);
         }
+        
         $producto = new Producto();
         $producto->imagen_principal = $imagen_principal;
         $producto->imagen2 = $imagen2;
@@ -335,7 +336,7 @@ class ProductoControlador extends Controller
                 'tamaño' => 'required',
                 'descripcion' => 'required'
             ]);
-        }else{
+        } else {
             $datos = \Validator::make($request->all(), [
                 'imagen_principalnombre' => 'required',
                 'imagen2nombre' => 'required',
@@ -348,36 +349,39 @@ class ProductoControlador extends Controller
             ]);
         }
         $nombreUnico = '';
-        if ($categoria == 'plantas') {
-            $plantas = DB::table('productos')
-                ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
-                ->join('generos', 'generos.id', '=', 'plantas.id_genero')
-                ->where('nombre', $request->nombre)
-                ->where('tamaño', $request->tamaño)
-                ->where('genero', $request->genero)
-                ->where('productos.habilitado', 'true')->get();
-            if (count($plantas) > 0) {
-                $nombreUnico = 'El valor del campo nombre ya está en uso.';
-            }
-        } else if ($categoria == 'merchandising') {
-            $tipo_merchandisings = DB::table('productos')
-                ->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
-                ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')
-                ->where('nombre', $request->nombre)
-                ->where('tipo', $request->genero)
-                ->where('productos.habilitado', 'true')->get();
-            if (count($tipo_merchandisings) > 0) {
-                $nombreUnico = 'El valor del campo nombre ya está en uso.';
-            }
-        } else if ($categoria == 'implementos') {
-            $tipo_implementos = DB::table('productos')
-                ->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
-                ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')
-                ->where('nombre', $request->nombre)
-                ->where('tipo', $request->genero)
-                ->where('productos.habilitado', 'true')->get();
-            if (count($tipo_implementos) > 0) {
-                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+        if ($request->nombreAntiguo != $request->nombre &&
+            $request->tamañoAntiguo != $request->tamaño) {
+            if ($categoria == 'plantas') {
+                $plantas = DB::table('productos')
+                    ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+                    ->join('generos', 'generos.id', '=', 'plantas.id_genero')
+                    ->where('nombre', $request->nombre)
+                    ->where('tamaño', $request->tamaño)
+                    ->where('genero', $request->genero)
+                    ->where('productos.habilitado', 'true')->get();
+                if (count($plantas) > 0) {
+                    $nombreUnico = 'El valor del campo nombre ya está en uso.';
+                }
+            } else if ($categoria == 'merchandising') {
+                $tipo_merchandisings = DB::table('productos')
+                    ->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
+                    ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')
+                    ->where('nombre', $request->nombre)
+                    ->where('tipo', $request->genero)
+                    ->where('productos.habilitado', 'true')->get();
+                if (count($tipo_merchandisings) > 0) {
+                    $nombreUnico = 'El valor del campo nombre ya está en uso.';
+                }
+            } else if ($categoria == 'implementos') {
+                $tipo_implementos = DB::table('productos')
+                    ->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
+                    ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')
+                    ->where('nombre', $request->nombre)
+                    ->where('tipo', $request->genero)
+                    ->where('productos.habilitado', 'true')->get();
+                if (count($tipo_implementos) > 0) {
+                    $nombreUnico = 'El valor del campo nombre ya está en uso.';
+                }
             }
         }
         $arrayNombreUnico = [$nombreUnico];

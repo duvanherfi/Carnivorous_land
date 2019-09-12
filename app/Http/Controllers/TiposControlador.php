@@ -158,6 +158,20 @@ class TiposControlador extends Controller
         }
     }
 
+    public function cantidadTerminos(){
+        $productos = DB::table('productos')->get();
+        $cantidadProductos = count($productos);
+        $generos = DB::table('generos')->get();
+        $cantidadGeneros = count($generos);
+        $plantas = DB::table('plantas')->get();
+        $cantidadPlantas = count($plantas);
+        return response()->json([
+            'cantidadProductos' => $cantidadProductos,
+            'cantidadGeneros' => $cantidadGeneros,
+            'cantidadPlantas' => $cantidadPlantas
+        ]);
+    }
+
     /**
      * Display the specified resource.
      *
