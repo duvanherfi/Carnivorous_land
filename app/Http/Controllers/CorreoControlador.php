@@ -24,4 +24,16 @@ class CorreoControlador extends Controller
        
         
     }
+
+    public function pedidos(){
+
+   
+  
+    Mail::to('cifuentes.kevin@correounivalle.edu.co')
+    ->send(new Comentarios($mensaje,$correo,$nombre,$motivo));
+
+    return redirect()->route('contactanos')->with('act','Usuario registrado con exito.');
+     
+      
+  }
 }
