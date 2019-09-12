@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('apellido');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('cedula');
-            $table->string('telefono');
+            $table->bigInteger('cedula');
+            $table->bigInteger('telefono');
             $table->date('fecha_nacimiento');
             $table->string('sexo');
             $table->string('departamento');

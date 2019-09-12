@@ -103,7 +103,8 @@ class ProductoControlador extends Controller
         return $productos;
     }
 
-    public function productosStockMinimo(){
+    public function productosStockMinimo()
+    {
         $productos = DB::table('productos')->whereColumn('cantidad', '<=', 'stock_minimo')->get();
         return $productos;
     }
@@ -126,6 +127,77 @@ class ProductoControlador extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->categoria == 'plantas') {
+            $datos = \Validator::make($request->all(), [
+                'imagen_principalnombre' => 'required',
+                'imagen2nombre' => 'required',
+                'imagen3nombre' => 'required',
+                'nombre' => 'required|string|max:255',
+                'valor' => 'required|numeric|max:999999999999999',
+                'cantidad' => 'required|numeric|max:2147483647',
+                'stock_minimo' => 'required|numeric|max:2147483647|lt:cantidad',
+                'categoria' => 'required',
+                'genero' => 'required',
+                'tamaño' => 'required',
+                'descripcion' => 'required'
+            ]);
+        } else {
+            $datos = \Validator::make($request->all(), [
+                'imagen_principalnombre' => 'required',
+                'imagen2nombre' => 'required',
+                'imagen3nombre' => 'required',
+                'nombre' => 'required|string|max:255',
+                'valor' => 'required|numeric|max:9999999999999999999',
+                'cantidad' => 'required|numeric|max:99999999999',
+                'stock_minimo' => 'required|numeric|max:99999999999|lt:cantidad',
+                'categoria' => 'required',
+                'genero' => 'required',
+                'descripcion' => 'required'
+            ]);
+        }
+        $nombreUnico = '';
+        if ($request->categoria == 'plantas') {
+            
+            $plantas = DB::table('productos')
+                ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+                ->join('generos', 'generos.id', '=', 'plantas.id_genero')
+                ->where('nombre', $request->nombre)
+                ->where('tamaño', $request->tamaño)
+                ->where('genero', $request->genero)
+                ->where('productos.habilitado', 'true')->get();
+            if (count($plantas) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        } else if ($request->categoria == 'merchandising') {
+            $tipo_merchandisings = DB::table('productos')
+                ->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
+                ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')
+                ->where('nombre', $request->nombre)
+                ->where('tipo', $request->genero)
+                ->where('productos.habilitado', 'true')->get();
+            if (count($tipo_merchandisings) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        } else if ($request->categoria == 'implementos') {
+            $tipo_implementos = DB::table('productos')
+                ->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
+                ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')
+                ->where('nombre', $request->nombre)
+                ->where('tipo', $request->genero)
+                ->where('productos.habilitado', 'true')->get();
+            if (count($tipo_implementos) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        }
+        $arrayNombreUnico = [$nombreUnico];
+        if ($datos->fails() || $nombreUnico != '') {
+            return response()->json([
+                'errores' => $datos->errors(),
+                'nombreUnico' => $arrayNombreUnico,
+                'existenErrores' => 'si'
+            ]);
+        }
+
         if ($request->categoria == 'plantas') {
             $producto = DB::table('productos')
                 ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
@@ -194,7 +266,7 @@ class ProductoControlador extends Controller
         $producto->opcion_catalogo = $request->input('opcion_catalogo');
         $producto->descripcion = $request->input('descripcion');
         $producto->save();
-        
+
         if ($request->categoria == 'plantas') {
             $plantas = new Planta();
             $id = Producto::all()->last();
@@ -251,6 +323,72 @@ class ProductoControlador extends Controller
      */
     public static function update(Request $request, $id, $categoria)
     {
+        if ($categoria == 'plantas') {
+            $datos = \Validator::make($request->all(), [
+                'imagen_principalnombre' => 'required',
+                'imagen2nombre' => 'required',
+                'imagen3nombre' => 'required',
+                'nombre' => 'required|string|max:255',
+                'valor' => 'required|numeric|max:999999999999999',
+                'cantidad' => 'required|numeric|max:2147483647',
+                'stock_minimo' => 'required|numeric|max:2147483647|lt:cantidad',
+                'tamaño' => 'required',
+                'descripcion' => 'required'
+            ]);
+        }else{
+            $datos = \Validator::make($request->all(), [
+                'imagen_principalnombre' => 'required',
+                'imagen2nombre' => 'required',
+                'imagen3nombre' => 'required',
+                'nombre' => 'required|string|max:255',
+                'valor' => 'required|numeric|max:999999999999999',
+                'cantidad' => 'required|numeric|max:2147483647',
+                'stock_minimo' => 'required|numeric|max:2147483647|lt:cantidad',
+                'descripcion' => 'required'
+            ]);
+        }
+        $nombreUnico = '';
+        if ($categoria == 'plantas') {
+            $plantas = DB::table('productos')
+                ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+                ->join('generos', 'generos.id', '=', 'plantas.id_genero')
+                ->where('nombre', $request->nombre)
+                ->where('tamaño', $request->tamaño)
+                ->where('genero', $request->genero)
+                ->where('productos.habilitado', 'true')->get();
+            if (count($plantas) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        } else if ($categoria == 'merchandising') {
+            $tipo_merchandisings = DB::table('productos')
+                ->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
+                ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')
+                ->where('nombre', $request->nombre)
+                ->where('tipo', $request->genero)
+                ->where('productos.habilitado', 'true')->get();
+            if (count($tipo_merchandisings) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        } else if ($categoria == 'implementos') {
+            $tipo_implementos = DB::table('productos')
+                ->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
+                ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')
+                ->where('nombre', $request->nombre)
+                ->where('tipo', $request->genero)
+                ->where('productos.habilitado', 'true')->get();
+            if (count($tipo_implementos) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        }
+        $arrayNombreUnico = [$nombreUnico];
+        if ($datos->fails() || $nombreUnico != '') {
+            return response()->json([
+                'errores' => $datos->errors(),
+                'nombreUnico' => $arrayNombreUnico,
+                'existenErrores' => 'si'
+            ]);
+        }
+
         $producto = Producto::find($id);
 
         if ($request->hasFile('imagen_principal')) {
@@ -287,18 +425,6 @@ class ProductoControlador extends Controller
                 ->where('id_planta', $id)
                 ->update(['tamaño' => $request->input('tamaño')]);
         }
-        //     $mezcla = DB::table('productos')->join('plantas', 'plantas.id_planta', '=', 'productos.id')
-        //         ->join('generos', 'generos.id', '=', 'plantas.id_genero')->where('productos.id', $id)
-        //         ->select('*', 'productos.id as id_producto')->get();
-        // } else if ($categoria == 'merchandising') {
-        //     $mezcla = DB::table('productos')->join('merchandisings', 'merchandisings.id_merchandising', '=', 'productos.id')
-        //         ->join('tipo_merchandisings', 'tipo_merchandisings.id', '=', 'merchandisings.id_tipo')->where('productos.id', $id)
-        //         ->select('*', 'productos.id as id_producto')->get();
-        // } else if ($categoria == 'implementos') {
-        //     $mezcla = DB::table('productos')->join('implemento_cultivos', 'implemento_cultivos.id_implemento', '=', 'productos.id')
-        //         ->join('tipo_implementos', 'tipo_implementos.id', '=', 'implemento_cultivos.id_tipo')->where('productos.id', $id)
-        //         ->select('*', 'productos.id as id_producto')->get();
-        // }
 
         return $producto;
     }

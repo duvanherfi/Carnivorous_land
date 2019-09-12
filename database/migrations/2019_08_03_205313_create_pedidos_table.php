@@ -18,8 +18,8 @@ class CreatePedidosTable extends Migration
             $table->bigInteger('referencia');
             $table->date('fecha');
             $table->string('nombre_cliente');
-            $table->integer('telefono');
-            $table->integer('cedula');
+            $table->bigInteger('telefono');
+            $table->bigInteger('cedula');
             $table->string('departamento');
             $table->string('ciudad');
             $table->string('barrio');

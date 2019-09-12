@@ -18,7 +18,7 @@ class CreateGenerosTable extends Migration
             $table->string('genero');
             $table->string('imagen');
             $table->text('descripcion');
-            $table->text('tips_de_cultivo')->default('');
+            $table->text('tips_de_cultivo');
             $table->string('habilitado')->default('true');
             $table->timestamps();
         });

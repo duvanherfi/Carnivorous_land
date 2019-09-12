@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
+                        <p class="text-center">Los siguientes campos son obligatorios</p>
                         <div class="form-group row">
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
@@ -129,7 +129,7 @@
 
                             <div class="col-md-6">
                                     <select class="custom-select form-control @error('sexo') is-invalid @enderror" id="sexo" name="sexo" value="{{ old('sexo') }}" autocomplete="sexo">
-                                            <option selected>Escoge una opción</option>
+                                            <option selected value="">Escoge una opción</option>
                                             <option value="Masculino">Masculino</option>
                                             <option value="Femenino">Femenino</option>
                                     </select>

@@ -1797,6 +1797,112 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/boton_terminar_compra.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/boton_terminar_compra.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../event_bus */ "./resources/js/event_bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      rutaPagRespuesta: route('pagRespuestaPuente'),
+      rutaPagConfirmacion: route('pagConfirmacion')
+    };
+  },
+  methods: {
+    llenar: function llenar() {
+      var _this = this;
+
+      var valorInput = $('input:radio[name=opciones]:checked').val();
+
+      if (valorInput == 'miDireccion') {
+        var params = {
+          'valorTotal': $('#amount').val()
+        };
+        axios.post("/carritoControl/".concat(valorInput), params).then(function (response) {
+          _this.valores();
+
+          $('#PayU').submit();
+        });
+      } else if (valorInput == 'otraDireccion') {
+        var _params = {
+          'valorTotal': $('#amount').val(),
+          'nombre': $('#nombre_carrito').val(),
+          'cedula': $('#cedula_carrito').val(),
+          'telefono': $('#telefono_carrito').val(),
+          'departamento': $('#departamento_carrito').val(),
+          'ciudad': $('#ciudad_carrito').val(),
+          'barrio': $('#barrio_carrito').val(),
+          'direccion': $('#direccion_carrito').val()
+        };
+        axios.post("/carritoControl/".concat(valorInput), _params).then(function (response) {
+          if (response.data.errores != undefined) {
+            _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('errores', response.data.errores);
+            toastr.error('Los datos de la entrega fueron rechazados, por favor revisarlos');
+          } else {
+            _this.valores();
+
+            $('#PayU').submit();
+          }
+        });
+      }
+    },
+    valores: function valores() {
+      var merchantId = 508029;
+      var ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
+      var referenceCode = this.id_ultpedido;
+      var amount = $('#amount').val();
+      var tax = 0;
+      var taxReturnBase = 0;
+      var currency = "COP";
+      var accountId = 512321; // var buyerEmail = "{{ auth()->user()->correo }}";
+
+      var description = $('#description').val();
+      var signature = md5(ApiKey + "~" + merchantId + "~" + referenceCode + "~" + amount + "~" + currency); //var p=$("#precio").html().split("$");
+      //var p1=p[1].split(".");
+
+      $('#merchantId').val(merchantId);
+      $('#accountId').val(accountId);
+      $('#description').val(description); // $('#referenceCode').val(referenceCode);
+
+      $('#amount').val(amount);
+      $('#tax').val(tax);
+      $('#taxReturnBase').val(taxReturnBase);
+      $('#signature').val(signature); // $('#buyerEmail').val(buyerEmail);
+      // console.log(signature);
+      //$('#preciop').val(p1[0]+p1[1]);
+    }
+  },
+  props: ['id_ultpedido', 'correo']
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/carrousel_descripcion_producto.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/carrousel_descripcion_producto.vue?vue&type=script&lang=js& ***!
@@ -2059,6 +2165,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2081,7 +2219,7 @@ __webpack_require__.r(__webpack_exports__);
         valor: '',
         cantidad: '',
         stock_minimo: '',
-        categoria: 'plantas',
+        categoria: '',
         genero: '',
         tamaño: '',
         opcion_catalogo: '',
@@ -2098,7 +2236,8 @@ __webpack_require__.r(__webpack_exports__);
         prev_page_url: 0,
         from: 0,
         to: 0
-      }
+      },
+      mensajeErrorProducto: []
     };
   },
   created: function created() {
@@ -2253,14 +2392,23 @@ __webpack_require__.r(__webpack_exports__);
     modalModificar: function modalModificar(item) {
       this.generarTipos();
       this.producto.imagen_principalnombre = this.producto.imagen_principalnombreAntiguo = item.imagen_principal;
+      this.mensajeErrorProducto.imagen_principal = undefined;
       this.producto.imagen2nombre = this.producto.imagen2nombreAntiguo = item.imagen2;
+      this.mensajeErrorProducto.imagen2 = undefined;
       this.producto.imagen3nombre = this.producto.imagen3nombreAntiguo = item.imagen3;
+      this.mensajeErrorProducto.imagen3 = undefined;
       this.producto.nombre = item.nombre;
+      this.mensajeErrorProducto.nombre = undefined;
       this.producto.valor = item.valor;
+      this.mensajeErrorProducto.valor = undefined;
       this.producto.cantidad = item.cantidad;
+      this.mensajeErrorProducto.cantidad = undefined;
       this.producto.stock_minimo = item.stock_minimo;
+      this.mensajeErrorProducto.stock_minimo = undefined;
       this.producto.tamaño = item.tamaño;
+      this.mensajeErrorProducto.tamaño = undefined;
       this.producto.descripcion = item.descripcion;
+      this.mensajeErrorProducto.descripcion = undefined;
       this.producto.id = item.id_producto;
       $('#imagen_principal_modificar').val(null);
       $('#imagen2_modificar').val(null);
@@ -2271,19 +2419,40 @@ __webpack_require__.r(__webpack_exports__);
 
       var formData = new FormData();
       formData.append('imagen_principal', this.producto.imagen_principal);
+      formData.append('imagen_principalnombre', this.producto.imagen_principalnombre);
       formData.append('imagen_principalnombreAntiguo', this.producto.imagen_principalnombreAntiguo);
       formData.append('imagen2', this.producto.imagen2);
+      formData.append('imagen2nombre', this.producto.imagen2nombre);
       formData.append('imagen2nombreAntiguo', this.producto.imagen2nombreAntiguo);
       formData.append('imagen3', this.producto.imagen3);
+      formData.append('imagen3nombre', this.producto.imagen3nombre);
       formData.append('imagen3nombreAntiguo', this.producto.imagen3nombreAntiguo);
       formData.append('nombre', this.producto.nombre);
       formData.append('valor', this.producto.valor);
       formData.append('cantidad', this.producto.cantidad);
       formData.append('stock_minimo', this.producto.stock_minimo);
       formData.append('tamaño', this.producto.tamaño);
+      formData.append('genero', this.producto.genero);
       formData.append('descripcion', this.producto.descripcion);
       axios.post("/productosControl/".concat(id, "/").concat(this.producto.categoria), formData).then(function (response) {
-        _this5.actualizarProductos();
+        if (!Object(util__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(response.data.existenErrores)) {
+          _this5.mensajeErrorProducto = response.data.errores;
+          if (_this5.producto.imagen_principalnombre == '') _this5.mensajeErrorProducto.imagen_principal = ['El campo es obligatorio.'];
+          if (_this5.producto.imagen2nombre == '') _this5.mensajeErrorProducto.imagen2 = ['El campo es obligatorio.'];
+          if (_this5.producto.imagen3nombre == '') _this5.mensajeErrorProducto.imagen3 = ['El campo es obligatorio.'];
+
+          if (response.data.nombreUnico != '') {
+            _this5.mensajeErrorProducto.nombre = response.data.nombreUnico;
+          }
+
+          toastr.error('La modificación fue rechazada, por favor revise el formulario');
+        } else {
+          $('#modal_modificar_articulo').modal('hide');
+
+          _this5.actualizarProductos();
+
+          toastr.success('La modificación se realizo con éxito');
+        }
       });
     },
     guardarOpcionCatalogo: function guardarOpcionCatalogo(id_producto, opcion_catalogo, index) {
@@ -2905,6 +3074,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2922,7 +3102,8 @@ __webpack_require__.r(__webpack_exports__);
         nombre: '',
         descripcion: ''
       },
-      tipoOrden: 'ninguno'
+      tipoOrden: 'ninguno',
+      mensajeErrorTipo: []
     };
   },
   created: function created() {
@@ -2979,8 +3160,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     modalModificarTipo: function modalModificarTipo() {
       this.genero.imagennombre = this.genero.imagennombreAntiguo = this.imagen;
+      this.mensajeErrorTipo.imagen = undefined;
       this.genero.nombre = this.nombre;
+      this.mensajeErrorTipo.genero = undefined;
       this.genero.descripcion = this.descripcion;
+      this.mensajeErrorTipo.descripcion = undefined;
       $('#imagen_modificar').val(null);
     },
     modificarTipo: function modificarTipo() {
@@ -2988,19 +3172,33 @@ __webpack_require__.r(__webpack_exports__);
 
       var formData = new FormData();
       formData.append('imagen', this.genero.imagen);
+      formData.append('imagennombre', this.genero.imagennombre);
       formData.append('imagennombreAntiguo', this.genero.imagennombreAntiguo);
       formData.append('genero', this.genero.nombre);
       formData.append('descripcion', this.genero.descripcion);
       formData.append('categoria', this.categoria);
       axios.post("/tiposControl/".concat(this.id), formData).then(function (response) {
-        // console.log(response.data);
-        _this3.actualizar();
+        if (!Object(util__WEBPACK_IMPORTED_MODULE_1__["isNullOrUndefined"])(response.data.existenErrores)) {
+          _this3.mensajeErrorTipo = response.data.errores;
+          if (_this3.genero.imagennombre == '') _this3.mensajeErrorTipo.imagen = ['El campo es obligatorio.'];
 
-        var params = {
-          activar: true,
-          categoria: _this3.categoria
-        };
-        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('actualizarMenuInventario', params);
+          if (response.data.nombreUnico != '') {
+            _this3.mensajeErrorTipo.genero = response.data.nombreUnico;
+          }
+
+          toastr.error('La modificación fue rechazada, por favor revise el formulario');
+        } else {
+          $('#modal_modificar_genero').modal('hide');
+
+          _this3.actualizar();
+
+          var params = {
+            activar: true,
+            categoria: _this3.categoria
+          };
+          _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('actualizarMenuInventario', params);
+          toastr.success('La modificación se realizo con éxito');
+        }
       });
     },
     eliminarGenero: function eliminarGenero() {
@@ -3677,6 +3875,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3709,7 +3954,9 @@ __webpack_require__.r(__webpack_exports__);
       generos: [],
       merchandising: [],
       implementos: [],
-      activar: true
+      activar: true,
+      mensajeErrorProducto: [],
+      mensajeErrorTipo: []
     };
   },
   created: function created() {
@@ -3824,40 +4071,59 @@ __webpack_require__.r(__webpack_exports__);
 
       var formData = new FormData();
       formData.append('imagen', this.tipo.imagen_tipo);
+      formData.append('imagennombre', this.tipo.imagen_tiponombre);
       formData.append('genero', this.tipo.nombre);
       formData.append('descripcion', this.tipo.descripcion);
       formData.append('categoria', this.producto.categoria);
       axios.post('/tiposControl', formData).then(function (response) {
-        // console.log(response.data);
-        if (response.data.modificar == 'modificar') {
-          if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen)) {
-            formData.append('imagennombreAntiguo', response.data.imagen); // console.log(formData);
+        if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.existenErrores)) {
+          _this3.mensajeErrorTipo = response.data.errores;
+          if (_this3.tipo.imagen_tiponombre == '') _this3.mensajeErrorTipo.imagen = ['El campo es obligatorio.'];
 
-            axios.post("/tiposControl/".concat(response.data.id), formData).then(function (response) {
-              // console.log(response.data);
-              _this3.tipos.push(response.data);
-            });
+          if (response.data.nombreUnico != '') {
+            _this3.mensajeErrorTipo.genero = response.data.nombreUnico;
           }
+
+          toastr.error('El registro fue rechazado, por favor revise el formulario');
         } else {
-          _this3.tipos.push(response.data);
-        }
+          $('#registrar_genero').collapse('hide');
 
-        axios.get("/tiposControl/".concat(_this3.producto.categoria)).then(function (response) {
-          if (_this3.producto.categoria == 'plantas') {
-            _this3.generos = response.data;
-          } else if (_this3.producto.categoria == 'merchandising') {
-            _this3.merchandising = response.data;
-          } else if (_this3.producto.categoria == 'implementos') {
-            _this3.implementos = response.data;
+          if (response.data.modificar == 'modificar') {
+            if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen)) {
+              formData.append('imagennombreAntiguo', response.data.imagen); // console.log(formData);
+
+              axios.post("/tiposControl/".concat(response.data.id), formData).then(function (response) {
+                // console.log(response.data);
+                _this3.tipos.push(response.data);
+              });
+            }
+          } else {
+            _this3.tipos.push(response.data);
           }
-        });
+
+          axios.get("/tiposControl/".concat(_this3.producto.categoria)).then(function (response) {
+            if (_this3.producto.categoria == 'plantas') {
+              _this3.generos = response.data;
+            } else if (_this3.producto.categoria == 'merchandising') {
+              _this3.merchandising = response.data;
+            } else if (_this3.producto.categoria == 'implementos') {
+              _this3.implementos = response.data;
+            }
+          });
+          toastr.success('El registro se realizo con éxito');
+        }
       });
     },
     registrarProducto: function registrarProducto() {
+      var _this4 = this;
+
       var formData = new FormData();
       formData.append('imagen_principal', this.producto.imagen_principal);
+      formData.append('imagen_principalnombre', this.producto.imagen_principalnombre);
       formData.append('imagen2', this.producto.imagen2);
+      formData.append('imagen2nombre', this.producto.imagen2nombre);
       formData.append('imagen3', this.producto.imagen3);
+      formData.append('imagen3nombre', this.producto.imagen3nombre);
       formData.append('nombre', this.producto.nombre);
       formData.append('valor', this.producto.valor);
       formData.append('cantidad', this.producto.cantidad);
@@ -3873,26 +4139,43 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('opcion_catalogo', this.producto.opcion_catalogo);
       formData.append('descripcion', this.producto.descripcion);
       axios.post('/productosControl', formData).then(function (response) {
-        _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true);
-        console.log(response.data);
+        if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.existenErrores)) {
+          _this4.mensajeErrorProducto = response.data.errores;
+          if (_this4.producto.imagen_principalnombre == '') _this4.mensajeErrorProducto.imagen_principal = ['El campo es obligatorio.'];
+          if (_this4.producto.imagen2nombre == '') _this4.mensajeErrorProducto.imagen2 = ['El campo es obligatorio.'];
+          if (_this4.producto.imagen3nombre == '') _this4.mensajeErrorProducto.imagen3 = ['El campo es obligatorio.'];
 
-        if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen_principal)) {
-          formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
-          formData.append('imagen2nombreAntiguo', response.data.imagen2);
-          formData.append('imagen3nombreAntiguo', response.data.imagen3); // console.log(formData);
+          if (response.data.nombreUnico != '') {
+            _this4.mensajeErrorProducto.nombre = response.data.nombreUnico;
+          }
 
-          axios.post("/productosControl/".concat(response.data.id, "/").concat(response.data.categoria), formData).then(function (response) {
-            // console.log(response.data);
-            _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true);
-          });
+          toastr.error('El registro fue rechazado, por favor revise el formulario');
+        } else {
+          $('#modal_registrar_articulo').modal('hide');
+          _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true); // console.log(response.data);
+
+          if (!Object(util__WEBPACK_IMPORTED_MODULE_0__["isNullOrUndefined"])(response.data.imagen_principal)) {
+            formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
+            formData.append('imagen2nombreAntiguo', response.data.imagen2);
+            formData.append('imagen3nombreAntiguo', response.data.imagen3); // console.log(formData);
+
+            axios.post("/productosControl/".concat(response.data.id, "/").concat(response.data.categoria), formData).then(function (response) {
+              // console.log(response.data);
+              _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('activarUpdate', true);
+            });
+          }
+
+          toastr.success('El registro se realizo con éxito');
         }
       });
     },
     generarTipos: function generarTipos() {
-      var _this4 = this;
+      var _this5 = this;
 
+      this.mensajeErrorProducto.genero = undefined;
+      this.producto.genero = '';
       axios.get("/tiposControl/".concat(this.producto.categoria)).then(function (response) {
-        _this4.tipos = response.data;
+        _this5.tipos = response.data;
       });
     },
     mostrarPlantas: function mostrarPlantas(genero) {
@@ -3919,26 +4202,42 @@ __webpack_require__.r(__webpack_exports__);
     limpiarRegistrarTipo: function limpiarRegistrarTipo() {
       $('#imagen').val(null);
       this.tipo.imagen_tiponombre = '';
+      this.mensajeErrorTipo.imagen = undefined;
       this.tipo.nombre = '';
+      this.mensajeErrorTipo.genero = undefined;
       this.tipo.descripcion = '';
+      this.mensajeErrorTipo.descripcion = undefined;
     },
     limpiarRegistraProducto: function limpiarRegistraProducto() {
+      this.mensajeErrorTipo.categoria = undefined;
+      $('#registrar_genero').collapse('hide');
       this.producto.imagen_principalnombre = '';
+      this.mensajeErrorProducto.imagen_principal = undefined;
       $('#imagen_principal').val(null);
       $('#imagen2').val(null);
       this.producto.imagen2nombre = '';
+      this.mensajeErrorProducto.imagen2 = undefined;
       $('#imagen3').val(null);
       this.producto.imagen3nombre = '';
+      this.mensajeErrorProducto.imagen3 = undefined;
       this.producto.nombre = '';
+      this.mensajeErrorProducto.nombre = undefined;
       this.producto.valor = '';
+      this.mensajeErrorProducto.valor = undefined;
       this.producto.cantidad = '';
+      this.mensajeErrorProducto.cantidad = undefined;
       this.producto.stock_minimo = '';
+      this.mensajeErrorProducto.stock_minimo = undefined;
       this.producto.categoria = '';
+      this.mensajeErrorProducto.categoria = undefined;
       this.producto.genero = '';
+      this.mensajeErrorProducto.genero = undefined;
+      this.mensajeErrorProducto.tipo = undefined;
       this.producto.tamaño = '';
+      this.mensajeErrorProducto.tamaño = undefined;
       this.producto.opcion_catalogo = '';
       this.producto.descripcion = '';
-      console.log(this.producto.imagen_principalnombre);
+      this.mensajeErrorProducto.descripcion = undefined;
     }
   }
 });
@@ -4237,6 +4536,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../event_bus */ "./resources/js/event_bus.js");
 //
 //
 //
@@ -4293,6 +4593,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4302,8 +4632,16 @@ __webpack_require__.r(__webpack_exports__);
       departamento: '',
       ciudad: '',
       barrio: '',
-      direccion: ''
+      direccion: '',
+      mensajesError: []
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('errores', function (data) {
+      _this.mensajesError = data;
+    });
   }
 });
 
@@ -9265,7 +9603,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.borde-menu-DS[data-v-5bac3354] {\r\n    border-top: #434343 3px solid;\r\n    width: 230px;\n}\n.opcion-menu-DS[data-v-5bac3354] {\r\n    border-bottom: #434343 3px solid;\r\n    font-family: 'Montserrat', sans-serif;\r\n    width: 261px;\n}\n.contenedor-submenu-DS[data-v-5bac3354] {\r\n    width: 261px;\n}\n.opcion-menu-DS[data-v-5bac3354]:hover {\r\n    background-color: #9DCE5B;\r\n    color: white;\r\n    cursor: pointer;\n}\nlabel[data-v-5bac3354] {\r\n    font-family: 'Montserrat', sans-serif;\n}\n.btn-registrar-genero[data-v-5bac3354] {\r\n    margin-left: 147px;\r\n    margin-bottom: 16px;\n}\n.form-registrar-genero[data-v-5bac3354] {\r\n    margin-right: 27px;\r\n    margin-bottom: 16px;\n}\r\n\r\n/* Collapse */\n.flecha[data-v-5bac3354]:after {\r\n    display: inline-block;\r\n    display: inline-block;\r\n    font: normal normal normal 14px/1 FontAwesome;\r\n    font-size: inherit;\r\n    text-rendering: auto;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    content: \"\\25BC\";\r\n    transform: rotate(-90deg);\r\n    transition: all linear 0.25s;\n}\n.flecha.collapsed[data-v-5bac3354]:after {\r\n    transform: rotate(0deg);\n}\r\n", ""]);
+exports.push([module.i, "\n.mensaje-invalido[data-v-5bac3354] {\r\n    width: 100%;\r\n    margin-top: 0.25rem;\r\n    font-size: 80%;\r\n    color: #e3342f;\n}\n.borde-menu-DS[data-v-5bac3354] {\r\n    border-top: #434343 3px solid;\r\n    width: 230px;\n}\n.opcion-menu-DS[data-v-5bac3354] {\r\n    border-bottom: #434343 3px solid;\r\n    font-family: 'Montserrat', sans-serif;\r\n    width: 261px;\n}\n.contenedor-submenu-DS[data-v-5bac3354] {\r\n    width: 261px;\n}\n.opcion-menu-DS[data-v-5bac3354]:hover {\r\n    background-color: #9DCE5B;\r\n    color: white;\r\n    cursor: pointer;\n}\nlabel[data-v-5bac3354] {\r\n    font-family: 'Montserrat', sans-serif;\n}\n.btn-registrar-genero[data-v-5bac3354] {\r\n    margin-left: 147px;\r\n    margin-bottom: 16px;\n}\n.form-registrar-genero[data-v-5bac3354] {\r\n    margin-right: 27px;\r\n    margin-bottom: 16px;\n}\r\n\r\n/* Collapse */\n.flecha[data-v-5bac3354]:after {\r\n    display: inline-block;\r\n    display: inline-block;\r\n    font: normal normal normal 14px/1 FontAwesome;\r\n    font-size: inherit;\r\n    text-rendering: auto;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-osx-font-smoothing: grayscale;\r\n    content: \"\\25BC\";\r\n    transform: rotate(-90deg);\r\n    transition: all linear 0.25s;\n}\n.flecha.collapsed[data-v-5bac3354]:after {\r\n    transform: rotate(0deg);\n}\r\n", ""]);
 
 // exports
 
@@ -42626,6 +42964,101 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/boton_terminar_compra.vue?vue&type=template&id=2b841172&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/boton_terminar_compra.vue?vue&type=template&id=2b841172& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      attrs: {
+        id: "PayU",
+        method: "post",
+        action: "https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu"
+      }
+    },
+    [
+      _c("input", {
+        attrs: { name: "merchantId", type: "hidden", id: "merchantId" }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "accountId", type: "hidden", id: "accountId" }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "description", type: "hidden", id: "description" }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "referenceCode", type: "hidden" },
+        domProps: { value: _vm.id_ultpedido }
+      }),
+      _vm._v(" "),
+      _c("input", { attrs: { name: "amount", type: "hidden", id: "amount" } }),
+      _vm._v(" "),
+      _c("input", { attrs: { name: "tax", type: "hidden", id: "tax" } }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "taxReturnBase", type: "hidden", id: "taxReturnBase" }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "currency", type: "hidden", value: "COP" }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "signature", type: "hidden", id: "signature" }
+      }),
+      _vm._v(" "),
+      _c("input", { attrs: { name: "test", type: "hidden", value: "1" } }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "buyerEmail", type: "hidden", id: "buyerEmail" },
+        domProps: { value: _vm.correo }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "responseUrl", type: "hidden" },
+        domProps: { value: _vm.rutaPagRespuesta }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { name: "confirmationUrl", type: "hidden" },
+        domProps: { value: _vm.rutaPagConfirmacion }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "btn bg-success",
+        attrs: {
+          name: "Submit",
+          id: "terminar_compra",
+          type: "button",
+          value: "TERMINAR COMPRA"
+        },
+        on: { click: _vm.llenar }
+      })
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/carrousel_descripcion_producto.vue?vue&type=template&id=7865b0f4&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/carrousel_descripcion_producto.vue?vue&type=template&id=7865b0f4&scoped=true& ***!
@@ -43151,13 +43584,19 @@ var render = function() {
                         [_vm._v("Imagen principal:")]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "archivos col-md-7" }, [
+                      _c("div", { staticClass: "archivos col-md-7 p-0" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
+                          class:
+                            _vm.mensajeErrorProducto.imagen_principal !=
+                            undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             type: "file",
                             name: "imagen_principal_modificar",
                             id: "imagen_principal_modificar",
+                            accept: "image/*",
                             lang: "es"
                           },
                           on: { change: _vm.obtenerImagenPrincipal }
@@ -43183,7 +43622,28 @@ var render = function() {
                                   _vm._s(this.producto.imagen_principalnombre)
                                 )
                               ]
+                            ),
+                        _vm._v(" "),
+                        _vm.mensajeErrorProducto.imagen_principal != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.mensajeErrorProducto
+                                        .imagen_principal[0]
+                                    )
+                                  )
+                                ])
+                              ]
                             )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -43197,13 +43657,18 @@ var render = function() {
                         [_vm._v("Imagen #2:")]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "archivos col-md-7" }, [
+                      _c("div", { staticClass: "archivos col-md-7 p-0" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
+                          class:
+                            _vm.mensajeErrorProducto.imagen2 != undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             type: "file",
                             name: "imagen2_modificar",
                             id: "imagen2_modificar",
+                            accept: "image/*",
                             lang: "es"
                           },
                           on: { change: _vm.obtenerImagen2 }
@@ -43225,7 +43690,25 @@ var render = function() {
                                 attrs: { for: "imagen2_modificar" }
                               },
                               [_vm._v(_vm._s(this.producto.imagen2nombre))]
+                            ),
+                        _vm._v(" "),
+                        _vm.mensajeErrorProducto.imagen2 != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(_vm.mensajeErrorProducto.imagen2[0])
+                                  )
+                                ])
+                              ]
                             )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -43239,13 +43722,18 @@ var render = function() {
                         [_vm._v("Imagen #3:")]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "archivos col-md-7" }, [
+                      _c("div", { staticClass: "archivos col-md-7 p-0" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
+                          class:
+                            _vm.mensajeErrorProducto.imagen3 != undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             type: "file",
                             name: "imagen3_modificar",
                             id: "imagen3_modificar",
+                            accept: "image/*",
                             lang: "es"
                           },
                           on: { change: _vm.obtenerImagen3 }
@@ -43267,7 +43755,25 @@ var render = function() {
                                 attrs: { for: "imagen3_modificar" }
                               },
                               [_vm._v(_vm._s(this.producto.imagen3nombre))]
+                            ),
+                        _vm._v(" "),
+                        _vm.mensajeErrorProducto.imagen3 != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(_vm.mensajeErrorProducto.imagen3[0])
+                                  )
+                                ])
+                              ]
                             )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -43292,6 +43798,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class:
+                            _vm.mensajeErrorProducto.nombre != undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             id: "nombre_modificar",
                             placeholder: "Ej: Drosera",
@@ -43314,7 +43824,25 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.mensajeErrorProducto.nombre != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(_vm.mensajeErrorProducto.nombre[0])
+                                  )
+                                ])
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -43339,6 +43867,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class:
+                            _vm.mensajeErrorProducto.valor != undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             id: "valor_modificar",
                             placeholder: "Ej: 50000",
@@ -43361,7 +43893,25 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.mensajeErrorProducto.valor != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(_vm.mensajeErrorProducto.valor[0])
+                                  )
+                                ])
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -43386,6 +43936,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class:
+                            _vm.mensajeErrorProducto.cantidad != undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             id: "cantidad_modificar",
                             placeholder: "Ej: 43",
@@ -43408,7 +43962,25 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.mensajeErrorProducto.cantidad != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(_vm.mensajeErrorProducto.cantidad[0])
+                                  )
+                                ])
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -43433,6 +44005,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class:
+                            _vm.mensajeErrorProducto.stock_minimo != undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             id: "stock_minimo_modificar",
                             placeholder: "Ej: 10",
@@ -43455,7 +44031,27 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.mensajeErrorProducto.stock_minimo != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.mensajeErrorProducto.stock_minimo[0]
+                                    )
+                                  )
+                                ])
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -43483,6 +44079,10 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "custom-select form-control",
+                                class:
+                                  _vm.mensajeErrorProducto.tamaño != undefined
+                                    ? "is-invalid"
+                                    : "",
                                 attrs: {
                                   id: "tamaño",
                                   name: "tamaño",
@@ -43537,7 +44137,27 @@ var render = function() {
                                   _vm._v("XL")
                                 ])
                               ]
-                            )
+                            ),
+                            _vm._v(" "),
+                            _vm.mensajeErrorProducto.tamaño != undefined
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "invalid-feedback",
+                                    staticStyle: { display: "flex" },
+                                    attrs: { role: "alert" }
+                                  },
+                                  [
+                                    _c("strong", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.mensajeErrorProducto.tamaño[0]
+                                        )
+                                      )
+                                    ])
+                                  ]
+                                )
+                              : _vm._e()
                           ])
                         ])
                       : _vm._e(),
@@ -43562,7 +44182,15 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { id: "descripcion_modificar", rows: "5" },
+                        class:
+                          _vm.mensajeErrorProducto.descripcion != undefined
+                            ? "is-invalid"
+                            : "",
+                        attrs: {
+                          name: "descripcion_modificar",
+                          id: "descripcion_modificar",
+                          rows: "5"
+                        },
                         domProps: { value: _vm.producto.descripcion },
                         on: {
                           input: function($event) {
@@ -43576,7 +44204,27 @@ var render = function() {
                             )
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.descripcion != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.mensajeErrorProducto.descripcion[0]
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 ]),
@@ -43586,7 +44234,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn color-verde",
-                      attrs: { type: "button", "data-dismiss": "modal" },
+                      attrs: { type: "button" },
                       on: {
                         click: function($event) {
                           return _vm.modificarProducto(_vm.producto.id)
@@ -44826,13 +45474,18 @@ var render = function() {
                         [_vm._v("Imagen:")]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "archivos col-md-8" }, [
+                      _c("div", { staticClass: "archivos col-md-8 p-0" }, [
                         _c("input", {
                           staticClass: "custom-file-input",
+                          class:
+                            _vm.mensajeErrorTipo.imagen != undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             type: "file",
                             name: "imagen_modificar",
                             id: "imagen_modificar",
+                            accept: "image/*",
                             lang: "es"
                           },
                           on: { change: _vm.obtenerImagen }
@@ -44854,7 +45507,23 @@ var render = function() {
                                 attrs: { for: "imagen_modificar" }
                               },
                               [_vm._v(_vm._s(this.genero.imagennombre))]
+                            ),
+                        _vm._v(" "),
+                        _vm.mensajeErrorTipo.imagen != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(_vm._s(_vm.mensajeErrorTipo.imagen[0]))
+                                ])
+                              ]
                             )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -44879,6 +45548,10 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
+                          class:
+                            _vm.mensajeErrorTipo.genero != undefined
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             id: "nombre_tipo",
                             placeholder: "Ej: Drosera",
@@ -44901,7 +45574,23 @@ var render = function() {
                               )
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.mensajeErrorTipo.genero != undefined
+                          ? _c(
+                              "span",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "flex" },
+                                attrs: { role: "alert" }
+                              },
+                              [
+                                _c("strong", [
+                                  _vm._v(_vm._s(_vm.mensajeErrorTipo.genero[0]))
+                                ])
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ]),
                     _vm._v(" "),
@@ -44925,7 +45614,15 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { id: "descripcion_tipo", rows: "5" },
+                        class:
+                          _vm.mensajeErrorTipo.descripcion != undefined
+                            ? "is-invalid"
+                            : "",
+                        attrs: {
+                          name: "descripcion_tipo",
+                          id: "descripcion_tipo",
+                          rows: "5"
+                        },
                         domProps: { value: _vm.genero.descripcion },
                         on: {
                           input: function($event) {
@@ -44939,7 +45636,25 @@ var render = function() {
                             )
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.mensajeErrorTipo.descripcion != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorTipo.descripcion[0])
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ]
                 )
@@ -44950,7 +45665,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn color-verde",
-                    attrs: { type: "button", "data-dismiss": "modal" },
+                    attrs: { type: "button" },
                     on: { click: _vm.modificarTipo }
                   },
                   [_vm._v("Modificar")]
@@ -46122,13 +46837,18 @@ var render = function() {
                       [_vm._v("Imagen principal*:")]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "archivos col-md-7" }, [
+                    _c("div", { staticClass: "archivos col-md-7 p-0" }, [
                       _c("input", {
                         staticClass: "custom-file-input",
+                        class:
+                          _vm.mensajeErrorProducto.imagen_principal != undefined
+                            ? "is-invalid"
+                            : "",
                         attrs: {
                           type: "file",
                           name: "imagen_principal",
                           id: "imagen_principal",
+                          accept: "image/*",
                           lang: "es"
                         },
                         on: { change: _vm.obtenerImagenPrincipal }
@@ -46154,7 +46874,27 @@ var render = function() {
                                 _vm._s(this.producto.imagen_principalnombre)
                               )
                             ]
+                          ),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.imagen_principal != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.mensajeErrorProducto.imagen_principal[0]
+                                  )
+                                )
+                              ])
+                            ]
                           )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46168,13 +46908,18 @@ var render = function() {
                       [_vm._v("Imagen #2*:")]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "archivos col-md-7" }, [
+                    _c("div", { staticClass: "archivos col-md-7 p-0" }, [
                       _c("input", {
                         staticClass: "custom-file-input",
+                        class:
+                          _vm.mensajeErrorProducto.imagen2 != undefined
+                            ? "is-invalid"
+                            : "",
                         attrs: {
                           type: "file",
                           name: "imagen2",
                           id: "imagen2",
+                          accept: "image/*",
                           lang: "es"
                         },
                         on: { change: _vm.obtenerImagen2 }
@@ -46196,7 +46941,25 @@ var render = function() {
                               attrs: { for: "imagen2" }
                             },
                             [_vm._v(_vm._s(this.producto.imagen2nombre))]
+                          ),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.imagen2 != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorProducto.imagen2[0])
+                                )
+                              ])
+                            ]
                           )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46210,13 +46973,18 @@ var render = function() {
                       [_vm._v("Imagen #3*:")]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "archivos col-md-7" }, [
+                    _c("div", { staticClass: "archivos col-md-7 p-0" }, [
                       _c("input", {
                         staticClass: "custom-file-input",
+                        class:
+                          _vm.mensajeErrorProducto.imagen3 != undefined
+                            ? "is-invalid"
+                            : "",
                         attrs: {
                           type: "file",
                           name: "imagen3",
                           id: "imagen3",
+                          accept: "image/*",
                           lang: "es"
                         },
                         on: { change: _vm.obtenerImagen3 }
@@ -46238,7 +47006,25 @@ var render = function() {
                               attrs: { for: "imagen3" }
                             },
                             [_vm._v(_vm._s(this.producto.imagen3nombre))]
+                          ),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.imagen3 != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorProducto.imagen3[0])
+                                )
+                              ])
+                            ]
                           )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46263,6 +47049,10 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class:
+                          _vm.mensajeErrorProducto.nombre != undefined
+                            ? "is-invalid"
+                            : "",
                         attrs: {
                           id: "nombre",
                           placeholder: "Ej: Drosera",
@@ -46285,7 +47075,25 @@ var render = function() {
                             )
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.nombre != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorProducto.nombre[0])
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46310,6 +47118,10 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class:
+                          _vm.mensajeErrorProducto.valor != undefined
+                            ? "is-invalid"
+                            : "",
                         attrs: {
                           id: "valor",
                           placeholder: "Ej: 50000",
@@ -46328,7 +47140,25 @@ var render = function() {
                             _vm.$set(_vm.producto, "valor", $event.target.value)
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.valor != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorProducto.valor[0])
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46353,6 +47183,10 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class:
+                          _vm.mensajeErrorProducto.cantidad != undefined
+                            ? "is-invalid"
+                            : "",
                         attrs: {
                           id: "cantidad",
                           placeholder: "Ej: 43",
@@ -46375,7 +47209,25 @@ var render = function() {
                             )
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.cantidad != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorProducto.cantidad[0])
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46400,6 +47252,10 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        class:
+                          _vm.mensajeErrorProducto.stock_minimo != undefined
+                            ? "is-invalid"
+                            : "",
                         attrs: {
                           id: "stock_minimo",
                           placeholder: "Ej: 10",
@@ -46422,7 +47278,27 @@ var render = function() {
                             )
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.stock_minimo != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.mensajeErrorProducto.stock_minimo[0]
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46449,6 +47325,11 @@ var render = function() {
                             }
                           ],
                           staticClass: "custom-select form-control",
+                          class:
+                            _vm.mensajeErrorProducto.categoria != undefined ||
+                            _vm.mensajeErrorTipo.categoria
+                              ? "is-invalid"
+                              : "",
                           attrs: {
                             id: "categoria",
                             name: "categoria",
@@ -46495,7 +47376,43 @@ var render = function() {
                             _vm._v("Implementos de cultivo")
                           ])
                         ]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.categoria != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorProducto.categoria[0])
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.mensajeErrorTipo.categoria != undefined
+                        ? _c(
+                            "span",
+                            {
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorTipo.categoria[0])
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46520,114 +47437,144 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-7 p-0" }, [
                       this.producto.categoria == "plantas"
+                        ? _c("div", [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.producto.genero,
+                                    expression: "producto.genero"
+                                  }
+                                ],
+                                staticClass: "custom-select form-control",
+                                class:
+                                  _vm.mensajeErrorProducto.genero != undefined
+                                    ? "is-invalid"
+                                    : "",
+                                attrs: {
+                                  id: "genero",
+                                  name: "genero",
+                                  required: "",
+                                  autocomplete: "tipo"
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.producto,
+                                      "genero",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { disabled: "", value: "" } },
+                                  [_vm._v("Escoge una opción")]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.tipos, function(item, index) {
+                                  return _c("option", { key: index }, [
+                                    _vm._v(_vm._s(item.genero))
+                                  ])
+                                })
+                              ],
+                              2
+                            )
+                          ])
+                        : _c("div", [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.producto.genero,
+                                    expression: "producto.genero"
+                                  }
+                                ],
+                                staticClass: "custom-select form-control",
+                                class:
+                                  _vm.mensajeErrorProducto.genero != undefined
+                                    ? "is-invalid"
+                                    : "",
+                                attrs: {
+                                  id: "tipo",
+                                  name: "tipo",
+                                  required: "",
+                                  autocomplete: "tipo"
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.producto,
+                                      "genero",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { disabled: "", value: "" } },
+                                  [_vm._v("Escoge una opción")]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.tipos, function(item, index) {
+                                  return _c("option", { key: index }, [
+                                    _vm._v(_vm._s(item.tipo))
+                                  ])
+                                })
+                              ],
+                              2
+                            )
+                          ]),
+                      _vm._v(" "),
+                      _vm.mensajeErrorProducto.genero != undefined
                         ? _c(
-                            "select",
+                            "span",
                             {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.producto.genero,
-                                  expression: "producto.genero"
-                                }
-                              ],
-                              staticClass: "custom-select form-control",
-                              attrs: {
-                                id: "tipo",
-                                name: "tipo",
-                                required: "",
-                                autocomplete: "tipo"
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.producto,
-                                    "genero",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
+                              staticClass: "invalid-feedback",
+                              staticStyle: { display: "flex" },
+                              attrs: { role: "alert" }
                             },
                             [
-                              _c(
-                                "option",
-                                { attrs: { disabled: "", value: "" } },
-                                [_vm._v("Escoge una opción")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.tipos, function(item, index) {
-                                return _c("option", { key: index }, [
-                                  _vm._v(_vm._s(item.genero))
-                                ])
-                              })
-                            ],
-                            2
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(_vm.mensajeErrorProducto.genero[0])
+                                )
+                              ])
+                            ]
                           )
-                        : _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.producto.genero,
-                                  expression: "producto.genero"
-                                }
-                              ],
-                              staticClass: "custom-select form-control",
-                              attrs: {
-                                id: "tipo",
-                                name: "tipo",
-                                required: "",
-                                autocomplete: "tipo"
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.producto,
-                                    "genero",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "option",
-                                { attrs: { disabled: "", value: "" } },
-                                [_vm._v("Escoge una opción")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.tipos, function(item, index) {
-                                return _c("option", { key: index }, [
-                                  _vm._v(_vm._s(item.tipo))
-                                ])
-                              })
-                            ],
-                            2
-                          )
+                        : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
@@ -46694,14 +47641,20 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "div",
-                                    { staticClass: "archivos col-md-8" },
+                                    { staticClass: "archivos col-md-8 p-0" },
                                     [
                                       _c("input", {
                                         staticClass: "custom-file-input",
+                                        class:
+                                          _vm.mensajeErrorTipo.imagen !=
+                                          undefined
+                                            ? "is-invalid"
+                                            : "",
                                         attrs: {
                                           type: "file",
                                           name: "imagen",
                                           id: "imagen",
+                                          accept: "image/*",
                                           lang: "es"
                                         },
                                         on: { change: _vm.obtenerImagenTipo }
@@ -46729,7 +47682,28 @@ var render = function() {
                                                 )
                                               )
                                             ]
+                                          ),
+                                      _vm._v(" "),
+                                      _vm.mensajeErrorTipo.imagen != undefined
+                                        ? _c(
+                                            "span",
+                                            {
+                                              staticClass: "invalid-feedback",
+                                              staticStyle: { display: "flex" },
+                                              attrs: { role: "alert" }
+                                            },
+                                            [
+                                              _c("strong", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.mensajeErrorTipo
+                                                      .imagen[0]
+                                                  )
+                                                )
+                                              ])
+                                            ]
                                           )
+                                        : _vm._e()
                                     ]
                                   )
                                 ]),
@@ -46755,6 +47729,10 @@ var render = function() {
                                         }
                                       ],
                                       staticClass: "form-control",
+                                      class:
+                                        _vm.mensajeErrorTipo.genero != undefined
+                                          ? "is-invalid"
+                                          : "",
                                       attrs: {
                                         id: "nombre_tipo",
                                         placeholder: "Ej: Drosera",
@@ -46777,7 +47755,27 @@ var render = function() {
                                           )
                                         }
                                       }
-                                    })
+                                    }),
+                                    _vm._v(" "),
+                                    _vm.mensajeErrorTipo.genero != undefined
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass: "invalid-feedback",
+                                            staticStyle: { display: "flex" },
+                                            attrs: { role: "alert" }
+                                          },
+                                          [
+                                            _c("strong", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.mensajeErrorTipo.genero[0]
+                                                )
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      : _vm._e()
                                   ])
                                 ]),
                                 _vm._v(" "),
@@ -46802,7 +47800,13 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "form-control",
+                                    class:
+                                      _vm.mensajeErrorTipo.descripcion !=
+                                      undefined
+                                        ? "is-invalid"
+                                        : "",
                                     attrs: {
+                                      name: "descripcion_tipo",
                                       id: "descripcion_tipo",
                                       rows: "5"
                                     },
@@ -46819,20 +47823,35 @@ var render = function() {
                                         )
                                       }
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _vm.mensajeErrorTipo.descripcion != undefined
+                                    ? _c(
+                                        "span",
+                                        {
+                                          staticClass: "invalid-feedback",
+                                          staticStyle: { display: "flex" },
+                                          attrs: { role: "alert" }
+                                        },
+                                        [
+                                          _c("strong", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.mensajeErrorTipo
+                                                  .descripcion[0]
+                                              )
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    : _vm._e()
                                 ]),
                                 _vm._v(" "),
                                 _c(
                                   "button",
                                   {
                                     staticClass: "btn btn-md color-verde",
-                                    attrs: {
-                                      type: "button",
-                                      "data-toggle": "collapse",
-                                      "data-target": "#registrar_genero",
-                                      "aria-expanded": "false",
-                                      "aria-controls": "registrar_genero"
-                                    },
+                                    attrs: { type: "button" },
                                     on: { click: _vm.registrarTipo }
                                   },
                                   [_vm._v("Registrar")]
@@ -46884,6 +47903,10 @@ var render = function() {
                                 }
                               ],
                               staticClass: "custom-select form-control",
+                              class:
+                                _vm.mensajeErrorProducto.tamaño != undefined
+                                  ? "is-invalid"
+                                  : "",
                               attrs: {
                                 id: "tamaño",
                                 name: "tamaño",
@@ -46938,7 +47961,25 @@ var render = function() {
                                 _vm._v("XL")
                               ])
                             ]
-                          )
+                          ),
+                          _vm._v(" "),
+                          _vm.mensajeErrorProducto.tamaño != undefined
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "invalid-feedback",
+                                  staticStyle: { display: "flex" },
+                                  attrs: { role: "alert" }
+                                },
+                                [
+                                  _c("strong", [
+                                    _vm._v(
+                                      _vm._s(_vm.mensajeErrorProducto.tamaño[0])
+                                    )
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
                         ])
                       ])
                     : _vm._e(),
@@ -46969,7 +48010,7 @@ var render = function() {
                           staticClass: "custom-control-input",
                           attrs: {
                             type: "checkbox",
-                            id: "customSwitch2",
+                            id: "opcion_catalogo_articulo",
                             checked: ""
                           },
                           domProps: {
@@ -47011,7 +48052,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("label", {
                           staticClass: "custom-control-label",
-                          attrs: { for: "customSwitch2" }
+                          attrs: { for: "opcion_catalogo_articulo" }
                         })
                       ]
                     )
@@ -47037,7 +48078,15 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { id: "descripcion", rows: "5" },
+                      class:
+                        _vm.mensajeErrorProducto.descripcion != undefined
+                          ? "is-invalid"
+                          : "",
+                      attrs: {
+                        id: "descripcion",
+                        name: "descripcion",
+                        rows: "5"
+                      },
                       domProps: { value: _vm.producto.descripcion },
                       on: {
                         input: function($event) {
@@ -47051,7 +48100,25 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.mensajeErrorProducto.descripcion != undefined
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "invalid-feedback",
+                            staticStyle: { display: "flex" },
+                            attrs: { role: "alert" }
+                          },
+                          [
+                            _c("strong", [
+                              _vm._v(
+                                _vm._s(_vm.mensajeErrorProducto.descripcion[0])
+                              )
+                            ])
+                          ]
+                        )
+                      : _vm._e()
                   ])
                 ])
               ]),
@@ -47068,7 +48135,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn color-verde",
-                      attrs: { type: "button", "data-dismiss": "modal" },
+                      attrs: { type: "button" },
                       on: { click: _vm.registrarProducto }
                     },
                     [_vm._v("Registrar")]
@@ -47733,6 +48800,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm._v("\r\n    Los siguientes campos son obligatorios\r\n    "),
     _c("div", { staticClass: "form-group row mt-2" }, [
       _c(
         "label",
@@ -47754,6 +48822,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: _vm.mensajesError.nombre != undefined ? "is-invalid" : "",
           attrs: {
             id: "nombre_carrito",
             placeholder: "Ej: Antonio Jaramillo Cardenas",
@@ -47772,7 +48841,19 @@ var render = function() {
               _vm.nombre = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.mensajesError.nombre != undefined
+          ? _c(
+              "span",
+              {
+                staticClass: "invalid-feedback",
+                staticStyle: { display: "flex" },
+                attrs: { role: "alert" }
+              },
+              [_c("strong", [_vm._v(_vm._s(_vm.mensajesError.nombre[0]))])]
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -47797,6 +48878,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: _vm.mensajesError.cedula != undefined ? "is-invalid" : "",
           attrs: {
             id: "cedula_carrito",
             placeholder: "Ej: 1113693793",
@@ -47815,7 +48897,19 @@ var render = function() {
               _vm.cedula = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.mensajesError.cedula != undefined
+          ? _c(
+              "span",
+              {
+                staticClass: "invalid-feedback",
+                staticStyle: { display: "flex" },
+                attrs: { role: "alert" }
+              },
+              [_c("strong", [_vm._v(_vm._s(_vm.mensajesError.cedula[0]))])]
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -47840,6 +48934,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: _vm.mensajesError.telefono != undefined ? "is-invalid" : "",
           attrs: {
             id: "telefono_carrito",
             placeholder: "Ej: xxx xxx xx xx",
@@ -47858,7 +48953,19 @@ var render = function() {
               _vm.telefono = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.mensajesError.telefono != undefined
+          ? _c(
+              "span",
+              {
+                staticClass: "invalid-feedback",
+                staticStyle: { display: "flex" },
+                attrs: { role: "alert" }
+              },
+              [_c("strong", [_vm._v(_vm._s(_vm.mensajesError.telefono[0]))])]
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -47883,6 +48990,8 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class:
+            _vm.mensajesError.departamento != undefined ? "is-invalid" : "",
           attrs: {
             id: "departamento_carrito",
             placeholder: "Ej: Valle del cauca",
@@ -47901,7 +49010,23 @@ var render = function() {
               _vm.departamento = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.mensajesError.departamento != undefined
+          ? _c(
+              "span",
+              {
+                staticClass: "invalid-feedback",
+                staticStyle: { display: "flex" },
+                attrs: { role: "alert" }
+              },
+              [
+                _c("strong", [
+                  _vm._v(_vm._s(_vm.mensajesError.departamento[0]))
+                ])
+              ]
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -47926,6 +49051,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: _vm.mensajesError.ciudad != undefined ? "is-invalid" : "",
           attrs: {
             id: "ciudad_carrito",
             placeholder: "Ej: Cali",
@@ -47944,7 +49070,19 @@ var render = function() {
               _vm.ciudad = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.mensajesError.ciudad != undefined
+          ? _c(
+              "span",
+              {
+                staticClass: "invalid-feedback",
+                staticStyle: { display: "flex" },
+                attrs: { role: "alert" }
+              },
+              [_c("strong", [_vm._v(_vm._s(_vm.mensajesError.ciudad[0]))])]
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -47969,6 +49107,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: _vm.mensajesError.barrio != undefined ? "is-invalid" : "",
           attrs: {
             id: "barrio_carrito",
             placeholder: "Ej: Petecuy",
@@ -47987,7 +49126,19 @@ var render = function() {
               _vm.barrio = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.mensajesError.barrio != undefined
+          ? _c(
+              "span",
+              {
+                staticClass: "invalid-feedback",
+                staticStyle: { display: "flex" },
+                attrs: { role: "alert" }
+              },
+              [_c("strong", [_vm._v(_vm._s(_vm.mensajesError.barrio[0]))])]
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -48012,6 +49163,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: _vm.mensajesError.direccion != undefined ? "is-invalid" : "",
           attrs: {
             id: "direccion_carrito",
             placeholder: "Ej: Calle 13Cn # 13N40",
@@ -48030,7 +49182,19 @@ var render = function() {
               _vm.direccion = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.mensajesError.direccion != undefined
+          ? _c(
+              "span",
+              {
+                staticClass: "invalid-feedback",
+                staticStyle: { display: "flex" },
+                attrs: { role: "alert" }
+              },
+              [_c("strong", [_vm._v(_vm._s(_vm.mensajesError.direccion[0]))])]
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -60265,6 +61429,7 @@ Vue.use(vue_currency_filter__WEBPACK_IMPORTED_MODULE_1___default.a, {
   symbolPosition: 'front',
   symbolSpacing: false
 });
+Vue.component('boton-terminar-compra', __webpack_require__(/*! ./components/boton_terminar_compra.vue */ "./resources/js/components/boton_terminar_compra.vue")["default"]);
 Vue.component('anuncio-stock-min', __webpack_require__(/*! ./components/anuncio_stock_minimo.vue */ "./resources/js/components/anuncio_stock_minimo.vue")["default"]);
 Vue.component('utilizar-otros-datos', __webpack_require__(/*! ./components/utilizar_otros_datos_carrito.vue */ "./resources/js/components/utilizar_otros_datos_carrito.vue")["default"]);
 Vue.component('boton-arriba', __webpack_require__(/*! ./components/boton-arriba.vue */ "./resources/js/components/boton-arriba.vue")["default"]);
@@ -60357,15 +61522,14 @@ if (token) {
 /*!**********************************************************!*\
   !*** ./resources/js/components/anuncio_stock_minimo.vue ***!
   \**********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _anuncio_stock_minimo_vue_vue_type_template_id_25e132ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./anuncio_stock_minimo.vue?vue&type=template&id=25e132ee&scoped=true& */ "./resources/js/components/anuncio_stock_minimo.vue?vue&type=template&id=25e132ee&scoped=true&");
 /* harmony import */ var _anuncio_stock_minimo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./anuncio_stock_minimo.vue?vue&type=script&lang=js& */ "./resources/js/components/anuncio_stock_minimo.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _anuncio_stock_minimo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _anuncio_stock_minimo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _anuncio_stock_minimo_vue_vue_type_style_index_0_id_25e132ee_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./anuncio_stock_minimo.vue?vue&type=style&index=0&id=25e132ee&scoped=true&lang=css& */ "./resources/js/components/anuncio_stock_minimo.vue?vue&type=style&index=0&id=25e132ee&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _anuncio_stock_minimo_vue_vue_type_style_index_0_id_25e132ee_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./anuncio_stock_minimo.vue?vue&type=style&index=0&id=25e132ee&scoped=true&lang=css& */ "./resources/js/components/anuncio_stock_minimo.vue?vue&type=style&index=0&id=25e132ee&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -60397,7 +61561,7 @@ component.options.__file = "resources/js/components/anuncio_stock_minimo.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/anuncio_stock_minimo.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60505,6 +61669,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_boton_arriba_vue_vue_type_template_id_629442f9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_boton_arriba_vue_vue_type_template_id_629442f9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/boton_terminar_compra.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/boton_terminar_compra.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _boton_terminar_compra_vue_vue_type_template_id_2b841172___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./boton_terminar_compra.vue?vue&type=template&id=2b841172& */ "./resources/js/components/boton_terminar_compra.vue?vue&type=template&id=2b841172&");
+/* harmony import */ var _boton_terminar_compra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./boton_terminar_compra.vue?vue&type=script&lang=js& */ "./resources/js/components/boton_terminar_compra.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _boton_terminar_compra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _boton_terminar_compra_vue_vue_type_template_id_2b841172___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _boton_terminar_compra_vue_vue_type_template_id_2b841172___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/boton_terminar_compra.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/boton_terminar_compra.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/boton_terminar_compra.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_boton_terminar_compra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./boton_terminar_compra.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/boton_terminar_compra.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_boton_terminar_compra_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/boton_terminar_compra.vue?vue&type=template&id=2b841172&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/boton_terminar_compra.vue?vue&type=template&id=2b841172& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_boton_terminar_compra_vue_vue_type_template_id_2b841172___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./boton_terminar_compra.vue?vue&type=template&id=2b841172& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/boton_terminar_compra.vue?vue&type=template&id=2b841172&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_boton_terminar_compra_vue_vue_type_template_id_2b841172___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_boton_terminar_compra_vue_vue_type_template_id_2b841172___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

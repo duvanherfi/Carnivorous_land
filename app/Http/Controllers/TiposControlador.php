@@ -60,6 +60,44 @@ class TiposControlador extends Controller
      */
     public function store(Request $request)
     {
+        $datos = \Validator::make($request->all(), [
+            'imagennombre' => 'required',
+            'genero' => 'required|string|max:255',
+            'descripcion' => 'required',
+            'categoria' => 'required'
+        ]);
+        $nombreUnico = '';
+        if ($request->categoria == 'plantas') {
+            $plantas = DB::table('generos')
+                ->where('genero', $request->genero)
+                ->where('generos.habilitado', 'true')->get();
+            if (count($plantas) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        } else if ($request->categoria == 'merchandising') {
+            $tipo_merchandisings = DB::table('tipo_merchandisings')
+                ->where('tipo', $request->genero)
+                ->where('tipo_merchandisings.habilitado', 'true')->get();
+            if (count($tipo_merchandisings) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        } else if ($request->categoria == 'implementos') {
+            $tipo_implementos = DB::table('tipo_implementos')
+                ->where('tipo', $request->genero)
+                ->where('tipo_implementos.habilitado', 'true')->get();
+            if (count($tipo_implementos) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        }
+        $arrayNombreUnico = [$nombreUnico];
+        if ($datos->fails() || $nombreUnico != '') {
+            return response()->json([
+                'errores' => $datos->errors(),
+                'nombreUnico' => $arrayNombreUnico,
+                'existenErrores' => 'si'
+            ]);
+        }
+
         if ($request->categoria == 'plantas') {
             $tipo_genero = DB::table('generos')
                 ->where('generos.habilitado', 'false')
@@ -74,13 +112,13 @@ class TiposControlador extends Controller
                 ->where('tipo', $request->genero);
         }
         $tipo_generos = $tipo_genero->get();
-        
+
         if (count($tipo_generos, 1) == 1) {
             if ($request->categoria == 'plantas') {
                 $tipo_genero = $tipo_genero->update(['generos.habilitado' => 'true']);
-            }else if ($request->categoria == 'merchandising'){
+            } else if ($request->categoria == 'merchandising') {
                 $tipo_genero = $tipo_genero->update(['tipo_merchandisings.habilitado' => 'true']);
-            }else if ($request->categoria == 'implementos'){
+            } else if ($request->categoria == 'implementos') {
                 $tipo_genero = $tipo_genero->update(['tipo_implementos.habilitado' => 'true']);
             }
             return response()->json([
@@ -99,6 +137,7 @@ class TiposControlador extends Controller
             $genero = new Genero();
             $genero->imagen = $imagen_tipo;
             $genero->genero = $request->genero;
+            $genero->tips_de_cultivo = '';
             $genero->descripcion = $request->descripcion;
             $genero->save();
             return $genero;
@@ -141,7 +180,8 @@ class TiposControlador extends Controller
         //
     }
 
-    public function modificarTipCultivo($id, $tip){
+    public function modificarTipCultivo($id, $tip)
+    {
         $genero = Genero::find($id);
         $genero->tips_de_cultivo = $tip;
         $genero->save();
@@ -156,6 +196,44 @@ class TiposControlador extends Controller
      */
     public function update(Request $request, $id)
     {
+        $datos = \Validator::make($request->all(), [
+            'imagennombre' => 'required',
+            'genero' => 'required|string|max:255',
+            'descripcion' => 'required',
+            'categoria' => 'required'
+        ]);
+        $nombreUnico = '';
+        if ($request->categoria == 'plantas') {
+            $plantas = DB::table('generos')
+                ->where('genero', $request->genero)
+                ->where('generos.habilitado', 'true')->get();
+            if (count($plantas) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        } else if ($request->categoria == 'merchandising') {
+            $tipo_merchandisings = DB::table('tipo_merchandisings')
+                ->where('tipo', $request->genero)
+                ->where('tipo_merchandisings.habilitado', 'true')->get();
+            if (count($tipo_merchandisings) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        } else if ($request->categoria == 'implementos') {
+            $tipo_implementos = DB::table('tipo_implementos')
+                ->where('tipo', $request->genero)
+                ->where('tipo_implementos.habilitado', 'true')->get();
+            if (count($tipo_implementos) > 0) {
+                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+            }
+        }
+        $arrayNombreUnico = [$nombreUnico];
+        if ($datos->fails() || $nombreUnico != '') {
+            return response()->json([
+                'errores' => $datos->errors(),
+                'nombreUnico' => $arrayNombreUnico,
+                'existenErrores' => 'si'
+            ]);
+        }
+
         if ($request->categoria == 'plantas') {
             $genero = Genero::find($id);
             if ($request->hasFile('imagen')) {

@@ -27,7 +27,7 @@
             </div>
             <div class="carousel-caption letras-DS">
                 <h3 class="h3-responsive">Light mask</h3>
-                <p class="texto-DS">First text</p>
+                {{-- <p class="texto-DS">First text</p> --}}
             </div>
         </div>
         <div class="carousel-item">

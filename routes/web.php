@@ -47,7 +47,8 @@ Route::get('/carrito_compra', function () {
     }else{
         $id_ultPedido = ($id_ultPedido->id+1) . mt_rand(1000, 9999);
     }
-    return view('carrito', compact('id_ultPedido'));
+    $correo = auth()->user()->correo;
+    return view('carrito', compact('id_ultPedido', 'correo'));
 })->name('carrito')->middleware('auth');
 
 Route::get('/mis_datos', 'UsuarioControlador@mostrar_datos')

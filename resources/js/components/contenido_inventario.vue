@@ -79,28 +79,39 @@
                     <form class="ml-3" method="POST" action="">
                         <div class="form-group row">
                             <label for="imagen" class="col-md-3 col-form-label">Imagen:</label>
-                            <div class="archivos col-md-8">
-                                <input @change="obtenerImagen" type="file" class="custom-file-input" name="imagen_modificar" id="imagen_modificar" lang="es">
+                            <div class="archivos col-md-8 p-0">
+                                <input @change="obtenerImagen" type="file" class="custom-file-input" :class="mensajeErrorTipo.imagen != undefined ? 'is-invalid' : ''" name="imagen_modificar" id="imagen_modificar" accept="image/*" lang="es">
                                 <label class="custom-file-label" for="imagen_modificar" v-if="this.genero.imagennombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen_modificar" v-else>{{ this.genero.imagennombre }}</label>
+                                <span v-if="mensajeErrorTipo.imagen != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorTipo.imagen[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="nombre_tipo" class="col-md-3 col-form-label">Nombre:</label>
                             <div class="col-md-8 p-0">
-                                <input v-model="genero.nombre" id="nombre_tipo" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_tipo" required autocomplete="nombre_tipo" autofocus>
+                                <input v-model="genero.nombre" id="nombre_tipo" placeholder="Ej: Drosera" type="text" class="form-control" 
+                                :class="mensajeErrorTipo.genero != undefined ? 'is-invalid' : ''" name="nombre_tipo" required autocomplete="nombre_tipo" autofocus>
+                                <span v-if="mensajeErrorTipo.genero != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorTipo.genero[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group mr-4">
                             <label for="descripcion_tipo" class="d-inline-flex col-form-label">Descripción:</label>
-                            <textarea v-model="genero.descripcion" class="form-control" id="descripcion_tipo" rows="5"></textarea>
+                            <textarea v-model="genero.descripcion" class="form-control" :class="mensajeErrorTipo.descripcion != undefined ? 'is-invalid' : ''" 
+                            name="descripcion_tipo" id="descripcion_tipo" rows="5"></textarea>
+                            <span v-if="mensajeErrorTipo.descripcion != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                <strong>{{ mensajeErrorTipo.descripcion[0] }}</strong>
+                            </span>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button @click="modificarTipo" type="button" class="btn color-verde" data-dismiss="modal">Modificar</button>
+                    <button @click="modificarTipo" type="button" class="btn color-verde">Modificar</button>
                     <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -130,7 +141,8 @@ export default {
                 nombre: '',
                 descripcion: ''
             },
-            tipoOrden: 'ninguno'
+            tipoOrden: 'ninguno',
+            mensajeErrorTipo: []
         }
     },
     created() {
@@ -178,27 +190,42 @@ export default {
         },
         modalModificarTipo() {
             this.genero.imagennombre = this.genero.imagennombreAntiguo = this.imagen;
+            this.mensajeErrorTipo.imagen = undefined;
             this.genero.nombre = this.nombre;
+            this.mensajeErrorTipo.genero = undefined;
             this.genero.descripcion = this.descripcion;
+            this.mensajeErrorTipo.descripcion = undefined;
 
             $('#imagen_modificar').val(null);
         },
         modificarTipo() {
             let formData = new FormData();
             formData.append('imagen', this.genero.imagen);
+            formData.append('imagennombre', this.genero.imagennombre);
             formData.append('imagennombreAntiguo', this.genero.imagennombreAntiguo);
             formData.append('genero', this.genero.nombre);
             formData.append('descripcion', this.genero.descripcion);
             formData.append('categoria', this.categoria);
 
             axios.post(`/tiposControl/${this.id}`, formData).then(response => {
-                // console.log(response.data);
-                this.actualizar();
-                const params = {
-                    activar: true,
-                    categoria: this.categoria
+                if (!isNullOrUndefined(response.data.existenErrores)) {
+                    this.mensajeErrorTipo = response.data.errores;
+                    if (this.genero.imagennombre == '')
+                        this.mensajeErrorTipo.imagen = ['El campo es obligatorio.'];
+                    if (response.data.nombreUnico != '') {
+                        this.mensajeErrorTipo.genero = response.data.nombreUnico;
+                    }
+                    toastr.error('La modificación fue rechazada, por favor revise el formulario');
+                } else {
+                    $('#modal_modificar_genero').modal('hide');
+                    this.actualizar();
+                    const params = {
+                        activar: true,
+                        categoria: this.categoria
+                    }
+                    EventBus.$emit('actualizarMenuInventario', params);
+                    toastr.success('La modificación se realizo con éxito');
                 }
-                EventBus.$emit('actualizarMenuInventario', params);
             })
         },
         eliminarGenero() {

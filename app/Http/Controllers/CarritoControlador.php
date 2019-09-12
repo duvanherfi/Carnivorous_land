@@ -67,13 +67,15 @@ class CarritoControlador extends Controller
         return Session::all();
     }
 
-    public function actualizarCantSubt($cantidad, $subtotal, $id){
+    public function actualizarCantSubt($cantidad, $subtotal, $id)
+    {
         $producto = Session::get('producto' . $id);
         $producto[0]->cantidad = $cantidad;
         $producto[0]->subtotal = $subtotal;
     }
 
-    public function agregarDireccion(Request $request, $valorInput){
+    public function agregarDireccion(Request $request, $valorInput)
+    {
         Session::put('valorTotal', $request->valorTotal);
 
         if ($valorInput == 'miDireccion') {
@@ -87,7 +89,22 @@ class CarritoControlador extends Controller
                 'direccion' => auth()->user()->direccion
             ];
             Session::put('datosDireccion', $direccion);
-        }else if ($valorInput == 'otraDireccion'){
+        } else if ($valorInput == 'otraDireccion') {
+            $datos = \Validator::make($request->all(), [
+                'nombre' => 'required|string|max:255',
+                'cedula' => 'required|string|min:8|max:12',
+                'telefono' => 'required|string|min:7|max:10',
+                'departamento' => 'required|string',
+                'ciudad' => 'required|string',
+                'barrio' => 'required|string',
+                'direccion' => 'required|string'
+            ]);
+            if ($datos->fails()) {
+                return response()->json([
+                    'errores' => $datos->errors()
+                ]);
+            }
+
             $direccion = (object) [
                 'nombre' => $request->nombre,
                 'telefono' => $request->telefono,
@@ -102,7 +119,8 @@ class CarritoControlador extends Controller
         return Session::all();
     }
 
-    public function ingresarpago(Request $request){
+    public function ingresarpago(Request $request)
+    {
         dd('Hola');
         // DB::table('pedidos')->where('id', 1)->update(['nombre_cliente' => 'Camilo']);
 
