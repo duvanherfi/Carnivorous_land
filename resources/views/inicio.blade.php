@@ -42,6 +42,8 @@
                 <p class="texto-DS">Secondary text</p>
             </div>
         </div>
+
+        
         <div class="carousel-item">
             <!--Mask color-->
             <div class="view">
@@ -139,6 +141,13 @@
 <div class="row justify-content-center w-100 m-0" data-aos="fade-up" data-aos-anchor-placement="top-center">
     <img class="imagen-DS evento-DS m-3" src="{{ asset('img/eventos/evento1.jpg') }}" alt="">
     <div class="mask rgba-white-slight"></div>
+
+    {{-- Prueba--}}
+
 </div>
 {{-- /Eventos --}}
+
+
+
+
 @endsection

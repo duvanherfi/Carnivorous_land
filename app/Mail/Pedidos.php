@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Pedido;
+
 
 class Pedidos extends Mailable
 {
@@ -16,9 +18,11 @@ class Pedidos extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+     public $pedidos;
+    public function __construct($pedidos)
     {
-        //
+        $this->pedidos = $pedidos;
     }
 
     /**
@@ -28,6 +32,8 @@ class Pedidos extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('pedidos_correo')
+        ->subject('¡Tienes un nuevo pedido!')
+        ->from('kevin777b@gmail.com');
     }
 }

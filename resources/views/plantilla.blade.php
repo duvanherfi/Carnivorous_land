@@ -122,11 +122,11 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    ¿Está seguro que desea cerrar la cesión?
+                    ¿Está seguro que desea cerrar la sesión?
                 </div>
                 <div class="modal-footer">
-                     <a href="{{ route('cerrar_sesion') }}" class="btn btn-success">Avanzar</a>
-                  <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
+                     <a href="{{ route('cerrar_sesion') }}" class="btn btn-success">Aceptar</a>
+                  <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
                 </div>
               </div>
             </div>

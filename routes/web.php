@@ -144,3 +144,6 @@ Route::get('/pagConfirmacion', "CarritoControlador@ingresarpago")->name('pagConf
 //Rutas correo
 Route::post('/correo', "CorreoControlador@escribenos")
     ->name('correo');
+
+Route::get('/correo_pedido', "CorreoControlador@pedidos")
+    ->name('correo_pedidos');
