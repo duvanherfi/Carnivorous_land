@@ -91,9 +91,34 @@
                             Crear admin</a>
                         @endif
 
-                        <a class="dropdown-item" href="{{route('cerrar_sesion')}}">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
                             <img src="{{ asset('img/logout.png') }}" alt="Cerrar Sesión" width="23">
                             Cerrar sesión</a>
+                            
+                    {{--Modal confirm --}}
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">
+                                        <img class="" src="/img/precaucion.png" alt="Icono de precaucion" width="30">¡ADVERTENCIA!</h2>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Está seguro que desea cerrar la cesión?
+                                </div>
+                                <div class="modal-footer">
+                                  <button  onclick="{{route('cerrar_sesion')}} class="btn btn-success">Avanzar</button>
+                                  <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>      
+
+
+
                     </div>
                 </li>
 
