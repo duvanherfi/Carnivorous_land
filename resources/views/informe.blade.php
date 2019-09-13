@@ -13,8 +13,6 @@
             <table class="table tabla">
                 <thead class="cabecera_pedidos">
                     <tr>
-
-                    <th scope="col">Entregado</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Nombre cliente</th>
                     <th scope="col">Ciudad</th>
@@ -27,12 +25,11 @@
                 @foreach ( $pedidos as $pendiente)
                     <tr>
 
-                    <td><button data-id="{{$pendiente->id}}" id="enviarr" type="button" class="btn botones" data-dismiss="modal">Entregar</button></td>
+                    
                     <td>{{$pendiente->fecha}}</td>
                     <td>{{$pendiente->nombre_cliente}}</td>
                     <td>{{$pendiente->ciudad}}</td>
                     <td>{{$pendiente->estado}}</td>
-                    <td><input data-id="{{$pendiente->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}"></td>
 
                     </tr>
 

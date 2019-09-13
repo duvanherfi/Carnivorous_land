@@ -30,10 +30,31 @@ class PedidosController extends Controller
         $pdf=PDF::loadView('informe',compact('pedidos'));
 
        return $pdf->download('Informe.pdf');
+	}
+	
+	public function pdfVentasAño(Request $request){
+		$Año = $request->informeAño;
+		$meses = DB::table('pedidos')->where(DB::raw('YEAR(fecha)'), $Año)->select(DB::raw('MONTHNAME(fecha) as Mes, SUM(total) as Valor'))->groupBy('Mes')->get();
+		// dd($meses);
+		// $todosMeses = (object)[
+		// 	['Mes' => 'Enero', 'Valor' => 0],
+		// 	['Mes' => 'Febrero', 'Valor' => 0],
+		// 	['Mes' => 'Marzo', 'Valor' => 0],
+		// 	['Mes' => 'Abril', 'Valor' => 0],
+		// 	['Mes' => 'Junio', 'Valor' => 0],
+		// 	['Mes' => 'Julio', 'Valor' => 0],
+		// 	['Mes' => 'Agosto', 'Valor' => 0],
+		// 	['Mes' => 'Septiembre', 'Valor' => 0],
+		// 	['Mes' => 'Octubre', 'Valor' => 0],
+		// 	['Mes' => 'Noviembre', 'Valor' => 0],
+		// 	['Mes' => 'Diciembre', 'Valor' => 0],
+		// ];
+		// $meses = (object)array_merge((array)$meses, (array)$todosMeses);
+		// return view('informeVentasAño',compact('meses', 'Año'));
+		$pdf=PDF::loadView('informeVentasAño',compact('meses'));
+
+       return $pdf->download('Informe Ventas Año.pdf');
     }
-
-
-
 
     public function detalles($id){
 
