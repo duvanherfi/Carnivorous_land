@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Pedido;
 use App\Producto;
 use App\Compra;
+use App\Mail\Pedidos;
+
+
 
 class PagRespuestaControlador extends Controller
 {
     public function puente()
     {
+        
+
         $ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
         $merchant_id = $_REQUEST['merchantId'];
         $referenceCode = $_REQUEST['referenceCode'];
@@ -121,6 +127,13 @@ class PagRespuestaControlador extends Controller
             }
         } else if ($_REQUEST['transactionState'] == 104) { // Error
         } else { }
+
+
+//Enviar correo de pedidos
+        $pedidos = Pedido::all()->where('entregado', 'no');
+        Mail::to('cifuentes.kevin@correounivalle.edu.co')
+        ->send(new Pedidos($pedidos));
+       
         return redirect()->route('pagRespuesta', $transactionState);
     }
 }

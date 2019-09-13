@@ -77,7 +77,7 @@
             <p>Los tiempos de despacho se realizan de dos a tres días hábiles.</p>
           </div>
 
-          <a href="{{route('correo_pedidos')}}">CORREO PEDIDO</a>
+          
 
           <boton-terminar-compra id_ultpedido="{{ $id_ultPedido }}" correo="{{ $correo }}"></boton-terminar-compra>
         </td>
