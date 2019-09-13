@@ -9,7 +9,7 @@
 <body>
         <div class="bg-success justify-content-center align-items-center titulo_informe" >
             <img class="rounded-circle m-3" src="..\public\img\Logo.jpg" alt="Logo Carnivorous Land" width="70" height="70">
-            <h3 class="d-inline"> INFORME DE VENTAS DE PEDIDOS</h3><br>
+            <h3 class="d-inline"> INFORME DE PEDIDOS</h3><br>
         </div> 
 
     
