@@ -43,6 +43,8 @@
 
                 </tr>
             </thead>
+
+                    
             <tbody class="cuerpo_pedidos">
                 @foreach ( $meses as $mes)
                 <tr>
@@ -55,6 +57,14 @@
                 @endforeach()
 
             </tbody>
+
+            
+            <tfoot class="cabecera_pedidos">
+                    <tr>
+                    <th>Total</th>
+                    <th>{{$total->Total}}</th>
+                    </tr>
+            </tfoot>
         </table>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

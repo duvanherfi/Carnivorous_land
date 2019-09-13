@@ -33,9 +33,14 @@ class PedidosController extends Controller
 	}
 	
 	public function pdfVentasAño(Request $request){
+
+		DB::statement("SET lc_time_names = 'es_ES'");
 		$Año = $request->informeAño;
-		$meses = DB::table('pedidos')->where(DB::raw('YEAR(fecha)'), $Año)->select(DB::raw('MONTHNAME(fecha) as Mes, SUM(total) as Valor'))->groupBy('Mes')->get();
-		// dd($meses);
+		$meses = DB::table('pedidos')->where(DB::raw('YEAR(fecha)'), $Año)->select(DB::raw('MONTHNAME(fecha) as Mes, SUM(total) as Valor'))->groupBy('Mes')
+		->orderBy('Valor', 'desc')
+		->get();
+		$total = DB::table('pedidos')->where(DB::raw('YEAR(fecha)'), $Año)->select(DB::raw('SUM(total) as Total'))->first();
+	
 		// $todosMeses = (object)[
 		// 	['Mes' => 'Enero', 'Valor' => 0],
 		// 	['Mes' => 'Febrero', 'Valor' => 0],
@@ -51,7 +56,7 @@ class PedidosController extends Controller
 		// ];
 		// $meses = (object)array_merge((array)$meses, (array)$todosMeses);
 		// return view('informeVentasAño',compact('meses', 'Año'));
-		$pdf=PDF::loadView('informeVentasAño',compact('meses', 'Año'));
+		$pdf=PDF::loadView('informeVentasAño',compact('meses', 'Año', 'total'));
 
        return $pdf->download('Informe Ventas Año.pdf');
     }
