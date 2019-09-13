@@ -6,7 +6,7 @@
         <div class="col-md-5 p-0">
             <input v-model="nombre" id="nombre_carrito" placeholder="Ej: Antonio Jaramillo Cardenas" 
             :class="mensajesError.nombre != undefined ? 'is-invalid' : ''" type="text" class="form-control" name="nombre_carrito" required autocomplete="nombre_carrito" autofocus>
-            <span v-if="mensajesError.nombre != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+            <span v-if="mensajesError.nombre != undefined" class="invalid-feedback text-dark" style="display: flex;" role="alert">
                 <strong>{{ mensajesError.nombre[0] }}</strong>
             </span>
         </div>
@@ -16,7 +16,7 @@
         <div class="col-md-5 p-0">
             <input v-model="cedula" id="cedula_carrito" placeholder="Ej: 1113693793" type="number" class="form-control" 
             :class="mensajesError.cedula != undefined ? 'is-invalid' : ''" name="cedula_carrito" required autocomplete="cedula_carrito" autofocus>
-            <span v-if="mensajesError.cedula != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+            <span v-if="mensajesError.cedula != undefined" class="invalid-feedback text-dark" style="display: flex;" role="alert">
                 <strong>{{ mensajesError.cedula[0] }}</strong>
             </span>
         </div>
@@ -26,7 +26,7 @@
         <div class="col-md-5 p-0">
             <input v-model="telefono" id="telefono_carrito" placeholder="Ej: xxx xxx xx xx" type="number" class="form-control" 
             :class="mensajesError.telefono != undefined ? 'is-invalid' : ''" name="telefono_carrito" required autocomplete="telefono_carrito" autofocus>
-            <span v-if="mensajesError.telefono != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+            <span v-if="mensajesError.telefono != undefined" class="invalid-feedback text-dark" style="display: flex;" role="alert">
                 <strong>{{ mensajesError.telefono[0] }}</strong>
             </span>
         </div>
@@ -36,7 +36,7 @@
         <div class="col-md-5 p-0">
             <input v-model="departamento" id="departamento_carrito" placeholder="Ej: Valle del cauca" type="text" class="form-control" 
             :class="mensajesError.departamento != undefined ? 'is-invalid' : ''" name="departamento_carrito" required autocomplete="departamento_carrito" autofocus>
-            <span v-if="mensajesError.departamento != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+            <span v-if="mensajesError.departamento != undefined" class="invalid-feedback text-dark" style="display: flex;" role="alert">
                 <strong>{{ mensajesError.departamento[0] }}</strong>
             </span>
         </div>
@@ -46,7 +46,7 @@
         <div class="col-md-5 p-0">
             <input v-model="ciudad" id="ciudad_carrito" placeholder="Ej: Cali" type="text" class="form-control" name="ciudad_carrito" 
             :class="mensajesError.ciudad != undefined ? 'is-invalid' : ''" required autocomplete="ciudad_carrito" autofocus>
-            <span v-if="mensajesError.ciudad != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+            <span v-if="mensajesError.ciudad != undefined" class="invalid-feedback text-dark" style="display: flex;" role="alert">
                 <strong>{{ mensajesError.ciudad[0] }}</strong>
             </span>
         </div>
@@ -56,7 +56,7 @@
         <div class="col-md-5 p-0">
             <input v-model="barrio" id="barrio_carrito" placeholder="Ej: Petecuy" type="text" class="form-control" name="barrio_carrito" 
             :class="mensajesError.barrio != undefined ? 'is-invalid' : ''" required autocomplete="barrio_carrito" autofocus>
-            <span v-if="mensajesError.barrio != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+            <span v-if="mensajesError.barrio != undefined" class="invalid-feedback text-dark" style="display: flex;" role="alert">
                 <strong>{{ mensajesError.barrio[0] }}</strong>
             </span>
         </div>
@@ -66,7 +66,7 @@
         <div class="col-md-5 p-0">
             <input v-model="direccion" id="direccion_carrito" placeholder="Ej: Calle 13Cn # 13N40" type="text" class="form-control" 
             :class="mensajesError.direccion != undefined ? 'is-invalid' : ''" name="direccion_carrito" required autocomplete="direccion_carrito" autofocus>
-            <span v-if="mensajesError.direccion != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+            <span v-if="mensajesError.direccion != undefined" class="invalid-feedback text-dark" style="display: flex;" role="alert">
                 <strong>{{ mensajesError.direccion[0] }}</strong>
             </span>
         </div>
