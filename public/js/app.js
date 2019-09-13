@@ -48948,7 +48948,7 @@ var render = function() {
           ? _c(
               "span",
               {
-                staticClass: "invalid-feedback",
+                staticClass: "invalid-feedback text-dark",
                 staticStyle: { display: "flex" },
                 attrs: { role: "alert" }
               },
@@ -49004,7 +49004,7 @@ var render = function() {
           ? _c(
               "span",
               {
-                staticClass: "invalid-feedback",
+                staticClass: "invalid-feedback text-dark",
                 staticStyle: { display: "flex" },
                 attrs: { role: "alert" }
               },
@@ -49060,7 +49060,7 @@ var render = function() {
           ? _c(
               "span",
               {
-                staticClass: "invalid-feedback",
+                staticClass: "invalid-feedback text-dark",
                 staticStyle: { display: "flex" },
                 attrs: { role: "alert" }
               },
@@ -49117,7 +49117,7 @@ var render = function() {
           ? _c(
               "span",
               {
-                staticClass: "invalid-feedback",
+                staticClass: "invalid-feedback text-dark",
                 staticStyle: { display: "flex" },
                 attrs: { role: "alert" }
               },
@@ -49177,7 +49177,7 @@ var render = function() {
           ? _c(
               "span",
               {
-                staticClass: "invalid-feedback",
+                staticClass: "invalid-feedback text-dark",
                 staticStyle: { display: "flex" },
                 attrs: { role: "alert" }
               },
@@ -49233,7 +49233,7 @@ var render = function() {
           ? _c(
               "span",
               {
-                staticClass: "invalid-feedback",
+                staticClass: "invalid-feedback text-dark",
                 staticStyle: { display: "flex" },
                 attrs: { role: "alert" }
               },
@@ -49289,7 +49289,7 @@ var render = function() {
           ? _c(
               "span",
               {
-                staticClass: "invalid-feedback",
+                staticClass: "invalid-feedback text-dark",
                 staticStyle: { display: "flex" },
                 attrs: { role: "alert" }
               },
