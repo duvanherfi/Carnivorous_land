@@ -73,6 +73,9 @@
 
                             <div class="col-md-6">
                                 <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"  autocomplete="new-password" required>
+                                <span>
+                                 <strong>Recuerde que la contraseña no podrá ser cambiada</strong>
+                                </span>
                                 @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
