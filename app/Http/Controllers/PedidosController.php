@@ -36,10 +36,15 @@ class PedidosController extends Controller
 
 		DB::statement("SET lc_time_names = 'es_ES'");
 		$Año = $request->informeAño;
-		$meses = DB::table('pedidos')->where(DB::raw('YEAR(fecha)'), $Año)->select(DB::raw('MONTHNAME(fecha) as Mes, SUM(total) as Valor'))->groupBy('Mes')
+		$meses = DB::table('pedidos')->where(DB::raw('YEAR(fecha)'), $Año)
+		->where('entregado', 'si')
+		->select(DB::raw('MONTHNAME(fecha) as Mes, SUM(total) as Valor'))->groupBy('Mes')
 		->orderBy('Valor', 'desc')
 		->get();
-		$total = DB::table('pedidos')->where(DB::raw('YEAR(fecha)'), $Año)->select(DB::raw('SUM(total) as Total'))->first();
+		$total = DB::table('pedidos')
+		->where(DB::raw('YEAR(fecha)'), $Año)
+		->where('entregado','si')
+		->select(DB::raw('SUM(total) as Total'))->first();
 	
 		// $todosMeses = (object)[
 		// 	['Mes' => 'Enero', 'Valor' => 0],
