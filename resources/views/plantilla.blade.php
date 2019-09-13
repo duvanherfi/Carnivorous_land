@@ -91,7 +91,7 @@
                             Crear admin</a>
                         @endif
 
-                        <a class="dropdown-item" href="{{route('cerrar_sesion')}}">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">
                             <img src="{{ asset('img/logout.png') }}" alt="Cerrar Sesión" width="23">
                             Cerrar sesión</a>
                     </div>
@@ -102,9 +102,35 @@
                 @endif
             </ul>
         </div>
+
+
         @endif
     </nav>
+
+
+
     <!--/.Navbar -->
+ {{--Modal confirm --}}
+         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="row subtitulo-DS pt-3 w-100 m-0">
+                        <img class="" src="/img/precaucion.png" alt="Icono de precaucion" width="30">¡ADVERTENCIA!</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro que desea cerrar la sesión?
+                </div>
+                <div class="modal-footer">
+                     <a href="{{ route('cerrar_sesion') }}" class="btn btn-success">Aceptar</a>
+                  <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
     @if (!isset($estadoTx))
     <div class="container">
@@ -153,18 +179,18 @@
                 $cantidad = Session::get('cantidad');
                 @endphp
                 @if(auth()->user()==null)
-                <a href="{{ route('carrito') }}">
+                <a href="{{ route('carrito') }}" class="position-relative">
                     <img class="bordes-left-DS ml-3" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
                         data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
                     <span id="contadorCarrito" class="badge badge-primary badge-pill counter position-absolute"
                         style="z-index:4; top:14%; right:2%;"><?= $cantidad?></span>
                 </a>
                 @elseif(auth()->user()->rol=='cliente')
-                <a href="{{ route('carrito') }}">
-                    <img class="bordes-left-DS ml-3" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
-                        data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito">
+                <a href="{{ route('carrito') }}" class="position-relative d-flex justify-content-center" style="">
+                    <img class="bordes-left-DS ml-3 col pr-0" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
+                        data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito" style="right:6px;">
                     <span id="contadorCarrito" class="badge badge-primary badge-pill counter position-absolute"
-                        style="z-index:4; top:14%; right:2%;"><?= $cantidad?></span>
+                        style="z-index:4; right:0px;"><?= $cantidad?></span>
                 </a>
                 @endif
 
@@ -292,7 +318,7 @@
 
         jQuery(document).on("click", "#detalle_pedido", function(){
 
-            var url = 'http://127.0.0.1:8000/pedidos/'+$(this).attr('data-id');
+            var url = '/pedidos/'+$(this).attr('data-id');
             $.ajax({
 
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -321,12 +347,8 @@
 
 
                         $('#modal_pedidos').modal('show');
-<<<<<<< HEAD
 
-=======
->>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
 
-                        
                         $('#referencia').html(result.success[0].referencia);
                         $('#nombre_cli').html(result.success[0].nombre_cliente);
                         $('#cedula').html(result.success[0].cedula);
@@ -362,7 +384,7 @@
 
         jQuery(document).on("click", "#enviarr", function(){
 
-            var url = 'http://127.0.0.1:8000/pedidos/'+$(this).attr('data-id');
+            var url = '/pedidos/'+$(this).attr('data-id');
 
             $.ajax({
 
@@ -376,13 +398,9 @@
                         // console.log(result.success);
 
                         name = result.success.nombre_cliente;
-<<<<<<< HEAD
-                        alert("El pedido de " + name + " fue enviado a la lista de entregados exitosamente");
 
-=======
                         alert("El pedido de " + name + " fue enviado a la lista de entregados, exitosamente");
-                        
->>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
+
                         location.reload();
 
 

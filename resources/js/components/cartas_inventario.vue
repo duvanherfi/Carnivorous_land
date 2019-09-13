@@ -97,63 +97,89 @@
                     <form class="ml-3">
                         <div class="form-group row">
                             <label for="imagen_principal_modificar" class="col-md-4 col-form-label pr-0">Imagen principal:</label>
-                            <div class="archivos col-md-7">
-                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" name="imagen_principal_modificar" id="imagen_principal_modificar" lang="es">
+                            <div class="archivos col-md-7 p-0">
+                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" :class="mensajeErrorProducto.imagen_principal != undefined ? 'is-invalid' : ''" name="imagen_principal_modificar" id="imagen_principal_modificar" accept="image/*" lang="es">
                                 <label class="custom-file-label" for="imagen_principal_modificar" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen_principal_modificar" v-else>{{ this.producto.imagen_principalnombre }}</label>
+                                <span v-if="mensajeErrorProducto.imagen_principal != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.imagen_principal[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="imagen2_modificar" class="col-md-4 col-form-label">Imagen #2:</label>
-                            <div class="archivos col-md-7">
-                                <input @change="obtenerImagen2" type="file" class="custom-file-input" name="imagen2_modificar" id="imagen2_modificar" lang="es">
+                            <div class="archivos col-md-7 p-0">
+                                <input @change="obtenerImagen2" type="file" class="custom-file-input" :class="mensajeErrorProducto.imagen2 != undefined ? 'is-invalid' : ''" name="imagen2_modificar" id="imagen2_modificar" accept="image/*" lang="es">
                                 <label class="custom-file-label" for="imagen2_modificar" v-if="this.producto.imagen2nombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen2_modificar" v-else>{{ this.producto.imagen2nombre }}</label>
+                                <span v-if="mensajeErrorProducto.imagen2 != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.imagen2[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="imagen3_modificar" class="col-md-4 col-form-label">Imagen #3:</label>
-                            <div class="archivos col-md-7">
-                                <input @change="obtenerImagen3" type="file" class="custom-file-input" name="imagen3_modificar" id="imagen3_modificar" lang="es">
+                            <div class="archivos col-md-7 p-0">
+                                <input @change="obtenerImagen3" type="file" class="custom-file-input" :class="mensajeErrorProducto.imagen3 != undefined ? 'is-invalid' : ''" name="imagen3_modificar" id="imagen3_modificar" accept="image/*" lang="es">
                                 <label class="custom-file-label" for="imagen3_modificar" v-if="this.producto.imagen3nombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen3_modificar" v-else>{{ this.producto.imagen3nombre }}</label>
+                                <span v-if="mensajeErrorProducto.imagen3 != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.imagen3[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="nombre_modificar" class="col-md-4 col-form-label">Nombre:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.nombre" id="nombre_modificar" placeholder="Ej: Drosera" type="text" class="form-control" name="nombre_modificar" required autocomplete="nombre_modificar" autofocus>
+                                <input v-model="producto.nombre" id="nombre_modificar" placeholder="Ej: Drosera" type="text" class="form-control" 
+                                :class="mensajeErrorProducto.nombre != undefined ? 'is-invalid' : ''" name="nombre_modificar" required autocomplete="nombre_modificar" autofocus>
+                                <span v-if="mensajeErrorProducto.nombre != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.nombre[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="valor_modificar" class="col-md-4 col-form-label">Valor:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.valor" id="valor_modificar" placeholder="Ej: 50000" type="number" class="form-control" name="valor_modificar" required autocomplete="valor_modificar" autofocus>
+                                <input v-model="producto.valor" id="valor_modificar" placeholder="Ej: 50000" type="number" class="form-control" 
+                                :class="mensajeErrorProducto.valor != undefined ? 'is-invalid' : ''" name="valor_modificar" required autocomplete="valor_modificar" autofocus>
+                                <span v-if="mensajeErrorProducto.valor != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.valor[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="cantidad_modificar" class="col-md-4 col-form-label">Cantidad:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.cantidad" id="cantidad_modificar" placeholder="Ej: 43" type="number" class="form-control" name="cantidad_modificar" required autocomplete="cantidad_modificar" autofocus>
+                                <input v-model="producto.cantidad" id="cantidad_modificar" placeholder="Ej: 43" type="number" class="form-control" 
+                                :class="mensajeErrorProducto.cantidad != undefined ? 'is-invalid' : ''" name="cantidad_modificar" required autocomplete="cantidad_modificar" autofocus>
+                                <span v-if="mensajeErrorProducto.cantidad != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.cantidad[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="stock_minimo_modificar" class="col-md-4 col-form-label">Stock mínimo:</label>
                             <div class="col-md-7 p-0">
-                                <input v-model="producto.stock_minimo" id="stock_minimo_modificar" placeholder="Ej: 10" type="number" class="form-control" name="stock_minimo_modificar" required autocomplete="stock_minimo_modificar" autofocus>
+                                <input v-model="producto.stock_minimo" id="stock_minimo_modificar" placeholder="Ej: 10" type="number" class="form-control" 
+                                :class="mensajeErrorProducto.stock_minimo != undefined ? 'is-invalid' : ''" name="stock_minimo_modificar" required autocomplete="stock_minimo_modificar" autofocus>
+                                <span v-if="mensajeErrorProducto.stock_minimo != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.stock_minimo[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row" v-if="this.producto.categoria=='plantas'">
                             <label for="tamaño_modificar" class="col-md-4 col-form-label">Tamaño:</label>
                             <div class="col-md-7 p-0">
-                                <select v-model="producto.tamaño" class="custom-select form-control" id="tamaño" name="tamaño" required autocomplete="tamaño">
+                                <select v-model="producto.tamaño" class="custom-select form-control" id="tamaño" 
+                                :class="mensajeErrorProducto.tamaño != undefined ? 'is-invalid' : ''" name="tamaño" required autocomplete="tamaño">
                                     <option disabled value="">Escoge una opción</option>
                                     <option value="XS">XS</option>
                                     <option value="S">S</option>
@@ -161,17 +187,23 @@
                                     <option value="L">L</option>
                                     <option value="XL">XL</option>
                                 </select>
+                                <span v-if="mensajeErrorProducto.tamaño != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.tamaño[0] }}</strong>
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group mr-4">
                             <label for="descripcion_modificar" class="d-inline-flex col-form-label">Descripción:</label>
-                            <textarea v-model="producto.descripcion" class="form-control" id="descripcion_modificar" rows="5"></textarea>
+                            <textarea v-model="producto.descripcion" class="form-control" :class="mensajeErrorProducto.descripcion != undefined ? 'is-invalid' : ''" name="descripcion_modificar" id="descripcion_modificar" rows="5"></textarea>
+                            <span v-if="mensajeErrorProducto.descripcion != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                <strong>{{ mensajeErrorProducto.descripcion[0] }}</strong>
+                            </span>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button @click="modificarProducto(producto.id)" type="button" class="btn color-verde" data-dismiss="modal">Modificar</button>
+                    <button @click="modificarProducto(producto.id)" type="button" class="btn color-verde">Modificar</button>
                     <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -203,12 +235,14 @@ export default {
                 imagen3nombre: '',
                 imagen3nombreAntiguo: '',
                 nombre: '',
+                nombreAntiguo: '',
                 valor: '',
                 cantidad: '',
                 stock_minimo: '',
-                categoria: 'plantas',
+                categoria: '',
                 genero: '',
                 tamaño: '',
+                tamañoAntiguo: '',
                 opcion_catalogo: '',
                 descripcion: ''
             },
@@ -223,7 +257,8 @@ export default {
                 prev_page_url: 0,
                 from: 0,
                 to: 0
-            }
+            },
+            mensajeErrorProducto: []
         };
     },
     created() {
@@ -357,14 +392,23 @@ export default {
             this.generarTipos();
 
             this.producto.imagen_principalnombre = this.producto.imagen_principalnombreAntiguo = item.imagen_principal;
+            this.mensajeErrorProducto.imagen_principal = undefined;
             this.producto.imagen2nombre = this.producto.imagen2nombreAntiguo = item.imagen2;
+            this.mensajeErrorProducto.imagen2 = undefined;
             this.producto.imagen3nombre = this.producto.imagen3nombreAntiguo = item.imagen3;
-            this.producto.nombre = item.nombre;
+            this.mensajeErrorProducto.imagen3 = undefined;
+            this.producto.nombre = this.producto.nombreAntiguo = item.nombre;
+            this.mensajeErrorProducto.nombre = undefined;
             this.producto.valor = item.valor;
+            this.mensajeErrorProducto.valor = undefined;
             this.producto.cantidad = item.cantidad;
+            this.mensajeErrorProducto.cantidad = undefined;
             this.producto.stock_minimo = item.stock_minimo;
-            this.producto.tamaño = item.tamaño;
+            this.mensajeErrorProducto.stock_minimo = undefined;
+            this.producto.tamaño = this.producto.tamañoAntiguo = item.tamaño;
+            this.mensajeErrorProducto.tamaño = undefined;
             this.producto.descripcion = item.descripcion;
+            this.mensajeErrorProducto.descripcion = undefined;
 
             this.producto.id = item.id_producto;
 
@@ -375,20 +419,42 @@ export default {
         modificarProducto(id) {
             let formData = new FormData();
             formData.append('imagen_principal', this.producto.imagen_principal);
+            formData.append('imagen_principalnombre', this.producto.imagen_principalnombre);
             formData.append('imagen_principalnombreAntiguo', this.producto.imagen_principalnombreAntiguo);
             formData.append('imagen2', this.producto.imagen2);
+            formData.append('imagen2nombre', this.producto.imagen2nombre);
             formData.append('imagen2nombreAntiguo', this.producto.imagen2nombreAntiguo);
             formData.append('imagen3', this.producto.imagen3);
+            formData.append('imagen3nombre', this.producto.imagen3nombre);
             formData.append('imagen3nombreAntiguo', this.producto.imagen3nombreAntiguo);
             formData.append('nombre', this.producto.nombre);
+            formData.append('nombreAntiguo', this.producto.nombreAntiguo);
             formData.append('valor', this.producto.valor);
             formData.append('cantidad', this.producto.cantidad);
             formData.append('stock_minimo', this.producto.stock_minimo);
             formData.append('tamaño', this.producto.tamaño);
+            formData.append('tamañoAntiguo', this.producto.tamañoAntiguo);
+            formData.append('genero', this.producto.genero);
             formData.append('descripcion', this.producto.descripcion);
 
             axios.post(`/productosControl/${id}/${this.producto.categoria}`, formData).then(response => {
-                this.actualizarProductos();
+                if (!isNullOrUndefined(response.data.existenErrores)) {
+                    this.mensajeErrorProducto = response.data.errores;
+                    if (this.producto.imagen_principalnombre == '')
+                        this.mensajeErrorProducto.imagen_principal = ['El campo es obligatorio.'];
+                    if (this.producto.imagen2nombre == '')
+                        this.mensajeErrorProducto.imagen2 = ['El campo es obligatorio.'];
+                    if (this.producto.imagen3nombre == '')
+                        this.mensajeErrorProducto.imagen3 = ['El campo es obligatorio.'];
+                    if (response.data.nombreUnico != '') {
+                        this.mensajeErrorProducto.nombre = response.data.nombreUnico;
+                    }
+                    toastr.error('La modificación fue rechazada, por favor revise el formulario');
+                } else {
+                    $('#modal_modificar_articulo').modal('hide');
+                    this.actualizarProductos();
+                    toastr.success('La modificación se realizo con éxito');
+                }
             })
         },
         guardarOpcionCatalogo(id_producto, opcion_catalogo, index) {
@@ -486,5 +552,12 @@ label {
 
 .carta-DS {
     color: #434343;
+}
+
+.img-sombra-producto-DS {
+    -webkit-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
+    height: 185px;
 }
 </style>

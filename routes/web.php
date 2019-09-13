@@ -47,7 +47,8 @@ Route::get('/carrito_compra', function () {
     }else{
         $id_ultPedido = ($id_ultPedido->id+1) . mt_rand(1000, 9999);
     }
-    return view('carrito', compact('id_ultPedido'));
+    $correo = auth()->user()->correo;
+    return view('carrito', compact('id_ultPedido', 'correo'));
 })->name('carrito')->middleware('auth');
 
 Route::get('/mis_datos', 'UsuarioControlador@mostrar_datos')
@@ -93,8 +94,10 @@ Route::get('/tiposControl/{tipo}/{categoria}', 'TiposControlador@tipoEspecifico'
 Route::post('/tiposControl/{id}', 'TiposControlador@update')->name('tipos.update'); //PUT
 Route::delete('/tiposControl/{id}/{categoria}', 'TiposControlador@destroy')->name('tipos.destroy');
 
-// Modificar Tip cultivo
+// Obtener cantidad de los terminos
+Route::get('/tiposControl', 'TiposControlador@cantidadTerminos')->name('tipos.cantidadTerminos');
 
+// Modificar Tip cultivo
 Route::post('/tiposControl/{id}/{tip}', 'TiposControlador@modificarTipCultivo')->name('tipos.modificarTipCultivo');
 
 // Productos
@@ -153,3 +156,6 @@ Route::get('/pagConfirmacion', "CarritoControlador@ingresarpago")->name('pagConf
 //Rutas correo
 Route::post('/correo', "CorreoControlador@escribenos")
     ->name('correo');
+
+Route::get('/correo_pedido', "CorreoControlador@pedidos")
+    ->name('correo_pedidos');

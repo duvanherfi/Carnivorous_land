@@ -22,6 +22,7 @@ Vue.use(VueCurrencyFilter, {
     symbolSpacing: false
 });
 
+Vue.component('boton-terminar-compra', require('./components/boton_terminar_compra.vue').default);
 Vue.component('anuncio-stock-min', require('./components/anuncio_stock_minimo.vue').default);
 Vue.component('utilizar-otros-datos', require('./components/utilizar_otros_datos_carrito.vue').default);
 Vue.component('boton-arriba', require('./components/boton-arriba.vue').default);

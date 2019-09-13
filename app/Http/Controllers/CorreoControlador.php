@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Comentarios;
+use App\Mail\Pedidos;
+use App\Pedido;
+use Illuminate\Support\Facades\DB;
 
 class CorreoControlador extends Controller
 {
@@ -24,4 +27,22 @@ class CorreoControlador extends Controller
        
         
     }
+
+    public function pedidos(){
+
+      
+      $pedidos = Pedido::all()->where('entregado', 'no');
+     
+     
+    
+   
+  //  $when = now()->addMinutes(20);
+  //  dd($when);
+    Mail::to('cifuentes.kevin@correounivalle.edu.co')
+    ->send(new Pedidos($pedidos));
+    return 0;
+   
+     
+      
+  }
 }

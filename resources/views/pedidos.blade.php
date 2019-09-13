@@ -4,13 +4,8 @@
 
 <div class="pedido">
 
-<<<<<<< HEAD
-	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS PENDIENTES</h2><br>
+	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS</h2><br>
 
-=======
-	<h2 class="row subtitulo-DS pt-3 w-100 m-0">PEDIDOS EN PROCESO</h2><br>
-	
->>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
 
 	<table class="table tabla">
   		<thead class="cabecera_pedidos">
@@ -121,60 +116,45 @@
                     <td id="articulo_name0"></td>
                     <td id="tamaño0"></td>
                     <td id="cantidad0"></td>
-<<<<<<< HEAD
+
                     <td id="valor0"></td>
-                    <td id="imagen0"></td>
-=======
-                    <td id="valor0"></td>            
->>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
+
                   </tr>
 
                   <tr>
                     <td id="articulo_name1"></td>
                     <td id="tamaño1"></td>
                     <td id="cantidad1"></td>
-<<<<<<< HEAD
+
                     <td id="valor1"></td>
-                    <td id="imagen1"></td>
-=======
-                    <td id="valor1"></td>            
->>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
+
                   </tr>
 
                   <tr>
                     <td id="articulo_name2"></td>
                     <td id="tamaño2"></td>
                     <td id="cantidad2"></td>
-<<<<<<< HEAD
+
                     <td id="valor2"></td>
-                    <td id="imagen2"></td>
-=======
-                    <td id="valor2"></td>            
->>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
+
                   </tr>
 
                   <tr>
                     <td id="articulo_name3"></td>
                     <td id="tamaño3"></td>
                     <td id="cantidad3"></td>
-<<<<<<< HEAD
+
                     <td id="valor3"></td>
-                    <td id="imagen3"></td>
-=======
-                    <td id="valor3"></td>             
->>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
+
                   </tr>
 
                   <tr>
                     <td id="articulo_name4"></td>
                     <td id="tamaño4"></td>
                     <td id="cantidad4"></td>
-<<<<<<< HEAD
+
                     <td id="valor4"></td>
-                    <td id="imagen4"></td>
-=======
-                    <td id="valor4"></td>            
->>>>>>> 9b92d75e406a88ca70ea5d77b8e5ae3a8a6891c8
+
                   </tr>
 
                 </tbody>
