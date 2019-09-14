@@ -3,12 +3,12 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <link href="..\public\css\style.css" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
         <div class="bg-success justify-content-center align-items-center titulo_informe" >
-            <img class="rounded-circle m-3" src="..\public\img\Logo.jpg" alt="Logo Carnivorous Land" width="70" height="70">
+        <img class="rounded-circle m-3" src="{{ asset('img/Logo.jpg') }}" alt="Logo Carnivorous Land" width="70" height="70">
             <h3 class="d-inline"> INFORME DE VENTAS DEL AÑO {{$Año}}</h3><br>
         </div> 
 
