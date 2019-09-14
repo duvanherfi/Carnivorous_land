@@ -103,7 +103,7 @@
                             <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefono" placeholder="Ej: xxx xxx xx xx" type="tel" class="form-control @error('telefono') is-invalid @enderror" name="telefono"  value="{{ old('telefono') }}" autocomplete="telefono" required>
+                                <input id="telefono" placeholder="Ej:3315486563" type="tel" class="form-control @error('telefono') is-invalid @enderror" name="telefono"  value="{{ old('telefono') }}" autocomplete="telefono" required>
                                 @error('telefono')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
