@@ -33,7 +33,7 @@
         <td>{{$pendiente->nombre_cliente}}</td>
         <td>{{$pendiente->ciudad}}</td>
         <td>{{$pendiente->estado}}</td>
-        <td><input data-id="{{$pendiente->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}">
+        <td><input data-id="{{$pendiente->id}}" id="detalle_pedido" type="image" src="{{ asset('img/pedidos/ver.png') }}">
         </td>
 
       </tr>
@@ -72,7 +72,7 @@
         <td>{{$entregado->nombre_cliente}}</td>
         <td>{{$entregado->ciudad}}</td>
         <td>{{$entregado->estado}}</td>
-        <td><input data-id="{{$entregado->id}}" id="detalle_pedido" type=image src="{{ asset('img/pedidos/ver.png') }}">
+        <td><input data-id="{{$entregado->id}}" id="detalle_pedido" type="image" src="{{ asset('img/pedidos/ver.png') }}">
         </td>
       </tr>
       @endforeach()
