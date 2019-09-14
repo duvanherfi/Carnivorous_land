@@ -399,7 +399,7 @@
 
                         name = result.success.nombre_cliente;
 
-                        alert("El pedido de " + name + " fue enviado a la lista de entregados, exitosamente");
+                        alert("El pedido de " + name + " fue enviado a la lista de entregados exitosamente");
 
                         location.reload();
 

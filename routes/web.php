@@ -119,7 +119,7 @@ Route::post('/carritoControl/{cantidad}/{subtotal}/{id}', 'CarritoControlador@ac
 Route::post('/calificarControl', 'CalificarControlador@registrar')->name('calificar.registrar');
 
 //llamada al metodo isAdmin del controlador usuario para hacer el menú
-Route::get('/comprobarSiAdmin', 'usuarioControlador@isAdmin');
+Route::get('/comprobarSiAdmin', 'UsuarioControlador@isAdmin');
 
 
 Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');;
@@ -140,7 +140,7 @@ Route::get('/pagRespuesta/{estado}', function ($estado) {
 })->name('pagRespuesta');
 
 //ruta que es llamada desde la app android
-Route::get('/android','usuarioControlador@mostraralgo');
+Route::get('/android','UsuarioControlador@mostraralgo');
 
 //Rutas correo
 Route::post('/correo', "CorreoControlador@escribenos")
