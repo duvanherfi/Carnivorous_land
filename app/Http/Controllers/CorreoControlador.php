@@ -20,7 +20,7 @@ class CorreoControlador extends Controller
         $motivo = $request->motivo;
 
     
-      Mail::to('cifuentes.kevin@correounivalle.edu.co')
+      Mail::to('notificacion@carnivorousland.com')
       ->send(new Comentarios($mensaje,$correo,$nombre,$motivo));
 
       return redirect()->route('contactanos')->with('act','Usuario registrado con exito.');
@@ -28,21 +28,5 @@ class CorreoControlador extends Controller
         
     }
 
-    public function pedidos(){
-
-      
-      $pedidos = Pedido::all()->where('entregado', 'no');
-     
-     
-    
-   
-  //  $when = now()->addMinutes(20);
-  //  dd($when);
-    Mail::to('cifuentes.kevin@correounivalle.edu.co')
-    ->send(new Pedidos($pedidos));
-    return 0;
-   
-     
-      
-  }
+  
 }

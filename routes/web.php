@@ -122,7 +122,7 @@ Route::post('/calificarControl', 'CalificarControlador@registrar')->name('califi
 Route::get('/comprobarSiAdmin', 'UsuarioControlador@isAdmin');
 
 
-Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');;
+Route::get('/pedidos', "PedidosController@mostrar")->name('pedidos')->middleware('admin');
 
 Route::post('/pedidos/{id}', "PedidosController@detalles")->name('detalles');
 
