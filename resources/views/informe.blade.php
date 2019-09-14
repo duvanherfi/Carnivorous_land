@@ -21,6 +21,7 @@
                     <th scope="col">Nombre Cliente</th>
                     <th scope="col">Ciudad</th>
                     <th scope="col">Estado</th>
+                    <th scope="col">Entregado</th>
 
 
 
@@ -34,6 +35,7 @@
                     <td>{{ $pendiente->nombre_cliente}}</td>
                     <td>{{ $pendiente->ciudad }}</td>
                     <td>{{ $pendiente->estado}}</td>
+                    <td>{{ $pendiente->entregado}}</td>
 
                 </tr>
 
