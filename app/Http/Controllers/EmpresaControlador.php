@@ -26,6 +26,7 @@ class EmpresaControlador extends Controller
             $valores = Valor::find(1);
 
             $datos->mision = $request->mision;
+            $datos->vision = $request->vision;
             $datos->save();
 
             $valores->valor1 = $request->valor1;

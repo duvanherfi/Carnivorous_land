@@ -39,7 +39,7 @@ class UsuarioControlador extends Controller
         $user->save();
 
 
-        return redirect('login')->with('flash','Usuario registrado con exito.');
+        return redirect('login')->with('flash','Usuario registrado con éxito.');
 
     }
 

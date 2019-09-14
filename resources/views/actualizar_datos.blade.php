@@ -79,7 +79,7 @@
           </button>
         </div>
         <div class="modal-body">
-        ¿Está seguro que desea actualizar sus datos?
+        ¿Está seguro que desea actualizar los datos de la empresa?
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-success">Aceptar</button>

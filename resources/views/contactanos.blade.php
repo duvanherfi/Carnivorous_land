@@ -68,8 +68,17 @@
         <div id="texto-mapa" class="col pt-3 pb-3">
             <h3 class="pb-3">Ubicados en Cali, Colombia. Realizamos envíos a todo el país</h3>
             <!-- Default form subscription -->
+        
+        
+{{--             
+@if (session()->has('act'))
+<div class="alert alert-light col-md-8" role="alert">
+{{ session('act') }}
+</div>
+@endif --}}
         <form method="POST"  class="text-center  bg-success form-ubicacion border-light p-4" action="{{ route('correo') }}">
             @csrf
+                
                 <p class="h4 mb-4">Escríbenos</p>
 
                 <p>Puedes enviarnos una recomendación, queja, reclamo o lo que desees!</p>
@@ -94,7 +103,7 @@
                 <input type="text" id="mensaje" name="mensaje" class="form-control  mb-4" placeholder="Tu mensaje" required>
 
                 <!-- Sign in button -->
-                <button type="submit" class="btn btn-block" >Enviar</button>
+                <button type="submit" onclick="notificacion()" class="btn btn-block" >Enviar</button>
             </form>
             <!-- Default form subscription -->
         </div>
@@ -102,3 +111,13 @@
 </div>
 <!-- Fin Ubicación -->
 @endsection
+@section('script')
+<script>
+function notificacion(){
+
+
+    toastr.success('Correo enviado con éxito', {timeOut: 5000});
+}
+</script>
+@endsection
+
