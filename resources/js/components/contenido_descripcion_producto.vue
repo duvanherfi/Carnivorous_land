@@ -113,10 +113,10 @@ export default {
                     formData.append('imagen', this.producto.imagen_principal);
                     formData.append('valor', this.producto.valor);
                     formData.append('tamaño', this.producto.tamaño);
-                    formData.append('cantidad', item.cantidad);
+                    formData.append('cantidad', this.producto.cantidad);
 
                     axios.post('/carritoControl', formData).then(response => {
-                        // console.log(response.data);
+                        console.log(response.data);
                     })
                 }
             })
