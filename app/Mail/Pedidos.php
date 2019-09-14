@@ -34,6 +34,6 @@ class Pedidos extends Mailable
     {
         return $this->view('pedidos_correo')
         ->subject('¡Tienes un nuevo pedido!')
-        ->from('kevin777b@gmail.com');
+        ->from('notificacion@carnivorousland.com');
     }
 }
