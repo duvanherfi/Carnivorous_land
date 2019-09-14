@@ -128,7 +128,7 @@ class PagRespuestaControlador extends Controller
         } else if ($_REQUEST['transactionState'] == 104) { // Error
         } else { }
 
-
+            
 //Enviar correo de pedidos
         $pedidos = Pedido::all()->where('entregado', 'no');
         Mail::to('notificacion@carnivorousland.com')

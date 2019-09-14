@@ -61,9 +61,9 @@ class PedidosController extends Controller
 		// ];
 		// $meses = (object)array_merge((array)$meses, (array)$todosMeses);
 		// return view('informeVentasAño',compact('meses', 'Año'));
-		$pdf=PDF::loadView('informeVentasAño',compact('meses', 'Año', 'total'));
+		$pdf=PDF::loadView('informeVentas',compact('meses', 'Año', 'total'));
 
-       return $pdf->download('Informe Ventas Año.pdf');
+       return $pdf->download('Informe Ventas.pdf');
     }
 
     public function detalles($id){
