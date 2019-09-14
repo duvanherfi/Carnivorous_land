@@ -44,7 +44,7 @@
   </table>
   <p>
     <a href="{{ route('pedido.pdf') }}" class="btn btn-sm btn-success">
-      Descargar Informe de pedidos en PDF
+      Descargar listado de pedidos
     </a>
   </p>
 
