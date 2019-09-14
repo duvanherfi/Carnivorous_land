@@ -27,7 +27,7 @@
             </tr>
             @endforeach
 
-            <a href="http://www.carnivorousland.com/pedidos">Revisa tus pedidos !</a>
+            <a href="https://www.carnivorousland.com/pedidos">Revisa tus pedidos !</a>
 
     </table>
  

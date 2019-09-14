@@ -61,7 +61,7 @@ Route::post('register', 'UsuarioControlador@registrar');
 
 Route::post('login', 'UsuarioControlador@inicio_sesion');
 
-Route::get('logout', 'usuarioControlador@cerrar_sesion')->name('cerrar_sesion');
+Route::get('logout', 'UsuarioControlador@cerrar_sesion')->name('cerrar_sesion');
 
 
 //Vistas del administrador
