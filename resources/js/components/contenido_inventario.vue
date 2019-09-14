@@ -139,6 +139,7 @@ export default {
                 imagennombre: '',
                 imagennombreAntiguo: '',
                 nombre: '',
+                nombreAntiguo: '',
                 descripcion: ''
             },
             tipoOrden: 'ninguno',
@@ -191,7 +192,7 @@ export default {
         modalModificarTipo() {
             this.genero.imagennombre = this.genero.imagennombreAntiguo = this.imagen;
             this.mensajeErrorTipo.imagen = undefined;
-            this.genero.nombre = this.nombre;
+            this.genero.nombre = this.genero.nombreAntiguo = this.nombre;
             this.mensajeErrorTipo.genero = undefined;
             this.genero.descripcion = this.descripcion;
             this.mensajeErrorTipo.descripcion = undefined;
@@ -204,6 +205,7 @@ export default {
             formData.append('imagennombre', this.genero.imagennombre);
             formData.append('imagennombreAntiguo', this.genero.imagennombreAntiguo);
             formData.append('genero', this.genero.nombre);
+            formData.append('generoAntiguo', this.genero.nombreAntiguo);
             formData.append('descripcion', this.genero.descripcion);
             formData.append('categoria', this.categoria);
 

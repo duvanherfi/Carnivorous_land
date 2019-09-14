@@ -3104,6 +3104,7 @@ __webpack_require__.r(__webpack_exports__);
         imagennombre: '',
         imagennombreAntiguo: '',
         nombre: '',
+        nombreAntiguo: '',
         descripcion: ''
       },
       tipoOrden: 'ninguno',
@@ -3165,7 +3166,7 @@ __webpack_require__.r(__webpack_exports__);
     modalModificarTipo: function modalModificarTipo() {
       this.genero.imagennombre = this.genero.imagennombreAntiguo = this.imagen;
       this.mensajeErrorTipo.imagen = undefined;
-      this.genero.nombre = this.nombre;
+      this.genero.nombre = this.genero.nombreAntiguo = this.nombre;
       this.mensajeErrorTipo.genero = undefined;
       this.genero.descripcion = this.descripcion;
       this.mensajeErrorTipo.descripcion = undefined;
@@ -3179,6 +3180,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('imagennombre', this.genero.imagennombre);
       formData.append('imagennombreAntiguo', this.genero.imagennombreAntiguo);
       formData.append('genero', this.genero.nombre);
+      formData.append('generoAntiguo', this.genero.nombreAntiguo);
       formData.append('descripcion', this.genero.descripcion);
       formData.append('categoria', this.categoria);
       axios.post("/tiposControl/".concat(this.id), formData).then(function (response) {

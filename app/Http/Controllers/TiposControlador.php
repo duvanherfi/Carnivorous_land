@@ -217,26 +217,28 @@ class TiposControlador extends Controller
             'categoria' => 'required'
         ]);
         $nombreUnico = '';
-        if ($request->categoria == 'plantas') {
-            $plantas = DB::table('generos')
-                ->where('genero', $request->genero)
-                ->where('generos.habilitado', 'true')->get();
-            if (count($plantas) > 0) {
-                $nombreUnico = 'El valor del campo nombre ya está en uso.';
-            }
-        } else if ($request->categoria == 'merchandising') {
-            $tipo_merchandisings = DB::table('tipo_merchandisings')
-                ->where('tipo', $request->genero)
-                ->where('tipo_merchandisings.habilitado', 'true')->get();
-            if (count($tipo_merchandisings) > 0) {
-                $nombreUnico = 'El valor del campo nombre ya está en uso.';
-            }
-        } else if ($request->categoria == 'implementos') {
-            $tipo_implementos = DB::table('tipo_implementos')
-                ->where('tipo', $request->genero)
-                ->where('tipo_implementos.habilitado', 'true')->get();
-            if (count($tipo_implementos) > 0) {
-                $nombreUnico = 'El valor del campo nombre ya está en uso.';
+        if ($request->generoAntiguo != $request->genero) {
+            if ($request->categoria == 'plantas') {
+                $plantas = DB::table('generos')
+                    ->where('genero', $request->genero)
+                    ->where('generos.habilitado', 'true')->get();
+                if (count($plantas) > 0) {
+                    $nombreUnico = 'El valor del campo nombre ya está en uso.';
+                }
+            } else if ($request->categoria == 'merchandising') {
+                $tipo_merchandisings = DB::table('tipo_merchandisings')
+                    ->where('tipo', $request->genero)
+                    ->where('tipo_merchandisings.habilitado', 'true')->get();
+                if (count($tipo_merchandisings) > 0) {
+                    $nombreUnico = 'El valor del campo nombre ya está en uso.';
+                }
+            } else if ($request->categoria == 'implementos') {
+                $tipo_implementos = DB::table('tipo_implementos')
+                    ->where('tipo', $request->genero)
+                    ->where('tipo_implementos.habilitado', 'true')->get();
+                if (count($tipo_implementos) > 0) {
+                    $nombreUnico = 'El valor del campo nombre ya está en uso.';
+                }
             }
         }
         $arrayNombreUnico = [$nombreUnico];
