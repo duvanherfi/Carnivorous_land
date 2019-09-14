@@ -23,7 +23,7 @@ class CorreoControlador extends Controller
       Mail::to('notificacion@carnivorousland.com')
       ->send(new Comentarios($mensaje,$correo,$nombre,$motivo));
 
-      return redirect()->route('contactanos')->with('act','Usuario registrado con exito.');
+      return redirect()->route('contactanos')->with('act','Correo enviado con éxito.');
        
         
     }
