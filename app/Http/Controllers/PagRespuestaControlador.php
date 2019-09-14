@@ -131,7 +131,7 @@ class PagRespuestaControlador extends Controller
 
 //Enviar correo de pedidos
         $pedidos = Pedido::all()->where('entregado', 'no');
-        Mail::to('cifuentes.kevin@correounivalle.edu.co')
+        Mail::to('notificacion@carnivorousland.com')
         ->send(new Pedidos($pedidos));
        
         return redirect()->route('pagRespuesta', $transactionState);
