@@ -73,6 +73,9 @@
 
                             <div class="col-md-6">
                                 <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"  autocomplete="new-password" required>
+                                <span>
+                                 <strong>Recuerde que la contraseña no podrá ser cambiada</strong>
+                                </span>
                                 @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -130,7 +133,7 @@
 
                             <div class="col-md-6">
                                     <select class="custom-select form-control @error('sexo') is-invalid @enderror" id="sexo" name="sexo" value="{{ old('sexo') }}" autocomplete="sexo" required>
-                                            <option selected>Escoge una opción</option>
+                                            <option selected value="">Escoge una opción</option>
                                             <option value="Masculino">Masculino</option>
                                             <option value="Femenino">Femenino</option>
                                     </select>

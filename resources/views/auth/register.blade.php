@@ -57,8 +57,10 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  value="{{ old('password') }}" autocomplete="new-password" placeholder="********">
-
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  value="{{ old('password') }}" autocomplete="new-password" placeholder="*******">
+                                <span>
+                                        <strong>Recuerde que la contraseña no podrá ser cambiada</strong>
+                                    </span>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,8 +71,7 @@
 
                         <div class="form-group row">
                             <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Confirme La Contraseña') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-md-6">         
                                 <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"  autocomplete="new-password">
                                 @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">

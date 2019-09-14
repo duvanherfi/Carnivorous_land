@@ -19,7 +19,6 @@ class EmpresaControlador extends Controller
             $datos = Dato::find(1);
             $valores = Valor::find(1);
             return view('actualizar_datos', compact('datos','valores'));
-          
         }
 
         public function guardar(Request $request){

@@ -148,6 +148,7 @@ Route::post('/correo', "CorreoControlador@escribenos")
 
 //rutas ppdf
 Route::get('/informe',"PedidosController@pdf")->name('pedido.pdf');
+Route::post('/informeVentasAño',"PedidosController@pdfVentasAño")->name('VentasAño.pdf');
 
 Route::get('/pagRespuestaPuente', "PagRespuestaControlador@puente")->name('pagRespuestaPuente');
 

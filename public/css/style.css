@@ -634,3 +634,15 @@ tr:nth-child(odd) td {
     font-family: 'Source Sans Pro', serif;
     font-size: 110%;
 }
+
+/* Informes */
+
+.titulo_informe{
+    background-color: #9DCE5B;
+    
+}
+
+.titulo_informe h3{
+   color: white;
+ 
+}

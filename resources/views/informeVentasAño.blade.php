@@ -9,39 +9,62 @@
 <body>
         <div class="bg-success justify-content-center align-items-center titulo_informe" >
             <img class="rounded-circle m-3" src="..\public\img\Logo.jpg" alt="Logo Carnivorous Land" width="70" height="70">
-            <h3 class="d-inline"> INFORME DE PEDIDOS</h3><br>
+            <h3 class="d-inline"> INFORME DE VENTAS DEL AÑO {{$Año}}</h3><br>
         </div> 
 
-    
+         {{-- <div class="container">
+            <table id="tabla_cantidad_productos" class="table table-hover table-condensed mt-5">
+                <thead id="carrito_tabla">
+                    <tr class="text-center">
+                        <th>Mes</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ( $meses as $mes)
+                    <tr>
+
+                        <td>{{ $mes->Mes }}</td>
+                        <td>{{ $mes->Valor}}</td>
+
+                    </tr>
+
+                    @endforeach
+                </tbody>
+            </table>
+        </div> --}}
         <table class="table tabla">
             <thead class="cabecera_pedidos">
                 <tr>
 
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Nombre Cliente</th>
-                    <th scope="col">Ciudad</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Entregado</th>
-
+                    <th scope="col">Meses</th>
+                    <th scope="col">Valor</th>
 
 
                 </tr>
             </thead>
+
+                    
             <tbody class="cuerpo_pedidos">
-                @foreach ( $pedidos as $pendiente)
+                @foreach ( $meses as $mes)
                 <tr>
 
-                    <td>{{ $pendiente->fecha }}</td>
-                    <td>{{ $pendiente->nombre_cliente}}</td>
-                    <td>{{ $pendiente->ciudad }}</td>
-                    <td>{{ $pendiente->estado}}</td>
-                    <td>{{ $pendiente->entregado}}</td>
+                    <td>{{ $mes->Mes }}</td>
+                    <td>{{ $mes->Valor}}</td>
 
                 </tr>
 
                 @endforeach()
 
             </tbody>
+
+            
+            <tfoot class="cabecera_pedidos">
+                    <tr>
+                    <th>Total</th>
+                    <th>{{$total->Total}}</th>
+                    </tr>
+            </tfoot>
         </table>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
