@@ -73,9 +73,6 @@
 
                             <div class="col-md-6">
                                 <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"  autocomplete="new-password" required>
-                                <span>
-                                 <strong>Recuerde que la contraseña no podrá ser cambiada</strong>
-                                </span>
                                 @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -223,12 +220,20 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                ¿Está seguro que desea crear otro administrador ?
-                                Recuerde que tendrá el mismo acceso a todas las funciones, que usted tiene actualmente.
+                                ¿Está seguro que desea crear otro administrador?
+                                Recuerde que tendrá el mismo acceso a todas las funciones, que usted tiene actualmente, además de recordarle
+                                al nuevo administrador que los siguientes campos no son modificables:
+                                <ul>
+                                    <li>Contraseña</li>
+                                    <li>Correo</li>
+                                    <li>Cédula</li>
+                                    <li>Fecha de nacimiento</li>
+                                    <li>Sexo</li>
+                                </ul>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="submit" class="btn btn-success">Avanzar</button>
-                                  <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
+                                  <button type="submit" class="btn btn-success">Aceptar</button>
+                                  <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
                                 </div>
                               </div>
                             </div>

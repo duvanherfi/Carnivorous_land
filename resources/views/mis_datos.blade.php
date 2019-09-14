@@ -12,7 +12,6 @@
 @if (session()->has('act'))
 <div class="alert alert-success" role="alert">
     {{ session('act') }}
-   datos actualizados con exito
 </div>
 @endif
 
@@ -84,19 +83,19 @@
 
             <div class="form-group col-md-6">
                 <label for="ciudad">Ciudad</label>
-                <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $user->ciudad }}" placeholder="tu ciudad" required>
+                <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $user->ciudad }}" placeholder="Tu ciudad" required>
              </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="Barrio">Barrio</label>
-                <input type="text" class="form-control" id="Barrio" name="barrio" value="{{ $user->barrio }}" placeholder="{{$user->barrio}}" required>
+                <input type="text" class="form-control" id="Barrio" name="barrio" value="{{ $user->barrio }}" placeholder="Tu barrio" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="via">Dirección</label>
-                <input type="text" class="form-control" id="direccion" name="direccion" value="{{ $user->direccion }}" placeholder="tu dirección" required>
+                <input type="text" class="form-control" id="direccion" name="direccion" value="{{ $user->direccion }}" placeholder="Tu dirección" required>
             </div>
         </div>
 
@@ -125,8 +124,8 @@
       ¿Está seguro que desea actualizar sus datos?
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Avanzar</button>
-        <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-success">Aceptar</button>
+        <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>

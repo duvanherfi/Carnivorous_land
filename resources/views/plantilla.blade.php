@@ -110,27 +110,28 @@
 
 
     <!--/.Navbar -->
- {{--Modal confirm --}}
-         <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
+    {{--Modal confirm --}}
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="row subtitulo-DS pt-3 w-100 m-0">
                         <img class="" src="/img/precaucion.png" alt="Icono de precaucion" width="30">¡ADVERTENCIA!</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     ¿Está seguro que desea cerrar la sesión?
                 </div>
                 <div class="modal-footer">
-                     <a href="{{ route('cerrar_sesion') }}" class="btn btn-success">Aceptar</a>
-                  <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
+                    <a href="{{ route('cerrar_sesion') }}" class="btn btn-success">Aceptar</a>
+                    <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
+    </div>
 
     @if (!isset($estadoTx))
     <div class="container">
@@ -187,8 +188,9 @@
                 </a>
                 @elseif(auth()->user()->rol=='cliente')
                 <a href="{{ route('carrito') }}" class="position-relative d-flex justify-content-center" style="">
-                    <img class="bordes-left-DS ml-3 col pr-0" id="añadirCarrito" src="{{ asset('img/carro.png') }}" alt="Carro"
-                        data-placement="bottom" data-toggle="popover" data-content="Producto añadido al carrito" style="right:6px;">
+                    <img class="bordes-left-DS ml-3 col pr-0" id="añadirCarrito" src="{{ asset('img/carro.png') }}"
+                        alt="Carro" data-placement="bottom" data-toggle="popover"
+                        data-content="Producto añadido al carrito" style="right:6px;">
                     <span id="contadorCarrito" class="badge badge-primary badge-pill counter position-absolute"
                         style="z-index:4; right:0px;"><?= $cantidad?></span>
                 </a>
@@ -285,7 +287,7 @@
     @yield('script')
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
+    
     <script>
         $(document).ready(function() {
             $(".tabla").DataTable({

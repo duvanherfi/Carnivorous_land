@@ -82,8 +82,8 @@
         ¿Está seguro que desea actualizar sus datos?
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Avanzar</button>
-          <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-success">Aceptar</button>
+          <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
         
         </div>
       </div>

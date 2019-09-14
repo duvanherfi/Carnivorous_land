@@ -452,7 +452,6 @@ export default {
             this.tipo.imagen_tipo = file;
         },
         registrarTipo() {
-            alert("Confirme los datos");
             let formData = new FormData();
             formData.append('imagen', this.tipo.imagen_tipo);
             formData.append('imagennombre', this.tipo.imagen_tiponombre);
@@ -498,7 +497,6 @@ export default {
             })
         },
         registrarProducto() {
-            alert("Verifique sus datos");
             let formData = new FormData();
             formData.append('imagen_principal', this.producto.imagen_principal);
             formData.append('imagen_principalnombre', this.producto.imagen_principalnombre);
