@@ -222,6 +222,8 @@
                         la ciudad de Cali, Colombia</p>
                     <p><img src="{{ asset('img/iconos-footer/email.png') }}" alt="Email" width="23">
                         Carnivorousland@gmail.com</p>
+
+                        <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a  href="https://drive.google.com/open?id=1RpWvl-1IQ74iLkTJQt3BnCWlE7FqKGaQ" target="_blank"> ayuda</a></p>
                 </div>
 
                 <div class=" col-sm-4 col-md  col-6 col">
