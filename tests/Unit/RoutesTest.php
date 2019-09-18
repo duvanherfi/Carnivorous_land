@@ -45,12 +45,7 @@ class RoutesTest extends TestCase
         ->assertSee('NUESTRAS REDES SOCIALES');
     }
 
-    public function test_status_carrito()
-    {
-        $this->get('/carrito_compra')
-        ->assertStatus(200)
-        ->assertSee('producto');
-    }
+   
 
     public function test_status_lnicio_sesion()
     {
