@@ -2,7 +2,7 @@
 <!--Cartas-->
 <div id="todos_los_productos_vista">
     <!--Card-->
-    <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
+    <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 475px;">
         <!--Card image-->
         <div class="img-sombra-producto-DS">
             <a @click="descripcion(item)" v-if="tipo != 'calificacion'" v-bind:href="descripcionProducto"><img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" /></a>
@@ -33,7 +33,7 @@
                 <p v-if="tipo == 'plantas' || item.tamaño != null" class="col-4 align-self-center mb-0 px-0">Tamaño: {{ item.tamaño }}</p>
             </div>
             <!-- Nombre -->
-            <h5 class="font-weight-bold card-title mb-1">{{ item.nombre }}</h5>
+            <h5 class="font-weight-bold texto-truncado card-title mb-1">{{ item.nombre }}</h5>
             <!-- Cantidad -->
             <p class="mb-1">Disponible: {{ item.cantidad }}</p>
             <!-- Valor -->
@@ -379,6 +379,6 @@ input[type="radio"]:checked~label {
     -webkit-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
-    height: 185px;
+    height: 290px;
 }
 </style>

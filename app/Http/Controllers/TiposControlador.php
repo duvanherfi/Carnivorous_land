@@ -194,10 +194,10 @@ class TiposControlador extends Controller
         //
     }
 
-    public function modificarTipCultivo($id, $tip)
+    public function modificarTipCultivo(Request $request, $id, $tip)
     {
         $genero = Genero::find($id);
-        $genero->tips_de_cultivo = $tip;
+        $genero->tips_de_cultivo = $request->tip;
         $genero->save();
     }
 

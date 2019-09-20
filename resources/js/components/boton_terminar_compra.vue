@@ -1,5 +1,5 @@
 <template>
-    <form id="PayU" method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu">
+    <form id="PayU" method="post" action="https://checkout.payulatam.com/ppp-web-gateway-payu">
         <input name="merchantId" type="hidden" id="merchantId">
         <input name="accountId" type="hidden" id="accountId">
         <input name="description" type="hidden" id="description">
@@ -60,14 +60,14 @@ export default {
             }
         },
         valores() {
-            var merchantId = 508029;
-            var ApiKey = "4Vj8eK4rloUd272L48hsrarnUA";
+            var merchantId = 814283;
+            var ApiKey = "u3PSV7MF973oLeOa7HmWbnMh6v";
             var referenceCode = this.id_ultpedido;
             var amount = $('#amount').val();
             var tax = 0;
             var taxReturnBase = 0;
             var currency = "COP";
-            var accountId = 512321;
+            var accountId = 821422;
             // var buyerEmail = "{{ auth()->user()->correo }}";
             var description = $('#description').val();
             var signature = md5(ApiKey + "~" + merchantId + "~" + referenceCode + "~" + amount + "~" + currency);

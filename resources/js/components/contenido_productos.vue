@@ -103,7 +103,10 @@ export default {
         guardarTip(){
             this.tips_de_cultivo = this.tips_de_cultivo_nuevo;
             this.modificar = false;
-            axios.post(`/tiposControl/${this.id}/${this.tips_de_cultivo_nuevo}`).then(response => {})
+            const params = {
+                'tip': this.tips_de_cultivo_nuevo
+            }
+            axios.post(`/tiposControl/${this.id}/${this.tips_de_cultivo_nuevo}`, params).then(response => {})
         },
         cancelarTip(){
             this.modificar = false;
@@ -150,6 +153,6 @@ h1 {
     font-size: 60px;
     font-weight: bold;
     font-family: 'Source Sans Pro', serif;
-    text-shadow: 0 0 30px #9DCE5B;
+    text-shadow: 0 0 30px #9DCE5B, 0 0 5px #244623;
 }
 </style>

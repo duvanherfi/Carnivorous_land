@@ -2,7 +2,7 @@
 <!--Cartas-->
 <div id="todos_los_productos">
     <!--Card-->
-    <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 370px;">
+    <div class="card carta-DS" v-for="(item, index) in productos" :key="index" style="width: 290px; height: 475px;">
         <!--Card image-->
         <div class="img-sombra-producto-DS">
             <img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" />
@@ -18,7 +18,7 @@
             <div v-if="producto.categoria == 'merchandising'
                 || producto.categoria == 'implementos'" class="my-2"></div>
             <!-- Nombre -->
-            <h5 class="font-weight-bold mb-0 text-center">{{ item.nombre }}</h5>
+            <h5 class="font-weight-bold mb-0 texto-truncado text-center">{{ item.nombre }}</h5>
             <hr class="my-1">
             <!-- Valor -->
             <p class="mb-0 text-center">Valor: {{ item.valor | currency}} COP</p>
@@ -32,13 +32,13 @@
             <!-- Opcion catalogo -->
             <div class="custom-control custom-switch pl-5" v-if="item.opcion_catalogo == 'true'">
                 <label class="opcion_catalogo">Enviar a catálogo:</label>
-                <input @change="guardarOpcionCatalogo(item.id_producto, item.opcion_catalogo, index)" type="checkbox" class="custom-control-input" :id="item.nombre" checked>
-                <label class="custom-control-label" :for="item.nombre"></label>
+                <input @change="guardarOpcionCatalogo(item.id_producto, item.opcion_catalogo, index)" type="checkbox" class="custom-control-input" :id="item.id_producto" checked>
+                <label class="custom-control-label" :for="item.id_producto"></label>
             </div>
             <div class="custom-control custom-switch pl-5" v-else>
                 <label class="opcion_catalogo">Enviar a catálogo:</label>
-                <input @change="guardarOpcionCatalogo(item.id_producto, item.opcion_catalogo, index)" type="checkbox" class="custom-control-input" :id="item.nombre" name="check">
-                <label class="custom-control-label" :for="item.nombre"></label>
+                <input @change="guardarOpcionCatalogo(item.id_producto, item.opcion_catalogo, index)" type="checkbox" class="custom-control-input" :id="item.id_producto" name="check">
+                <label class="custom-control-label" :for="item.id_producto"></label>
             </div>
         </div>
     </div>
@@ -558,6 +558,6 @@ label {
     -webkit-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 7px 13px -5px rgba(0, 0, 0, 0.75);
-    height: 185px;
+    height: 290px;
 }
 </style>

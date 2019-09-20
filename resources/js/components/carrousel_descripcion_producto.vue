@@ -1,16 +1,23 @@
 <template>
 <!--Carousel Wrapper-->
 <div id="carousel-example-2" class="carousel slide carousel-fade h-100 d-inline-block carrousel-descripcion" data-interval="false" data-ride="carousel">
+    <!--Indicators-->
+    <div class="contenedor-imgs-pequeñas">
+        <img data-target="#carousel-example-2" data-slide-to="0" class="active indicadores float-left" v-bind:src="'/img/productoss/' + producto.imagen_principal" alt="">
+        <img data-target="#carousel-example-2" data-slide-to="1" class="indicadores float-left" v-bind:src="'/img/productoss/' + producto.imagen2" alt="">
+        <img data-target="#carousel-example-2" data-slide-to="2" class="indicadores float-left" v-bind:src="'/img/productoss/' + producto.imagen3" alt="">
+    </div>
+    <!--/.Indicators-->
     <!--Slides-->
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner contenedor-imgs-grandes" role="listbox">
         <div class="carousel-item active">
-                <img class="d-block w-100 imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen_principal" alt="First slide">
+                <img class="d-block imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen_principal" alt="First slide">
         </div>
         <div class="carousel-item">
-                <img class="d-block w-100 imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen2" alt="Second slide">
+                <img class="d-block imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen2" alt="Second slide">
         </div>
         <div class="carousel-item">
-                <img class="d-block w-100 imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen3" alt="Third slide">
+                <img class="d-block imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen3" alt="Third slide">
         </div>
         <!--Controls-->
         <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
@@ -24,13 +31,7 @@
         <!--/.Controls-->
     </div>
     <!--/.Slides-->
-    <!--Indicators-->
-    <div class="row justify-content-center">
-        <img data-target="#carousel-example-2" data-slide-to="0" class="active d-inline indicadores" v-bind:src="'/img/productoss/' + producto.imagen_principal" alt="">
-        <img data-target="#carousel-example-2" data-slide-to="1" class="d-inline indicadores" v-bind:src="'/img/productoss/' + producto.imagen2" alt="">
-        <img data-target="#carousel-example-2" data-slide-to="2" class="d-inline indicadores" v-bind:src="'/img/productoss/' + producto.imagen3" alt="">
-    </div>
-    <!--/.Indicators-->
+    
 </div>
 <!--/.Carousel Wrapper-->
 </template>
@@ -55,12 +56,16 @@ export default {
 
 <style scoped>
 .indicadores {
-    width: 31.5%;
-    height: 125px;
-    padding: .3rem;
+    width: 100%;
+    height: 133.3px;
+    padding: 5.33333px 5.33333px 0px 0px;
     object-fit: cover;
     box-sizing: border-box;
     cursor: pointer;
+}
+
+.indicadores:first-child{
+    padding-top: 0px;
 }
 
 .carrousel-descripcion {
@@ -71,8 +76,16 @@ export default {
 }
 
 .imagen-descripcion{
-    width: 555px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
+}
+
+.contenedor-imgs-grandes{
+    width: 72%;
+}
+
+.contenedor-imgs-pequeñas{
+    width: 28%;
 }
 </style>
