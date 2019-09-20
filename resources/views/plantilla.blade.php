@@ -222,6 +222,13 @@
                         la ciudad de Cali, Colombia</p>
                     <p><img src="{{ asset('img/iconos-footer/email.png') }}" alt="Email" width="23">
                         Carnivorousland@gmail.com</p>
+                    @if(auth()->user()==null)
+                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a  href="https://drive.google.com/open?id=1RpWvl-1IQ74iLkTJQt3BnCWlE7FqKGaQ" target="_blank"> Ayuda</a></p>
+                    @elseif(auth()->user()->rol=='cliente')
+                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a  href="https://drive.google.com/open?id=1RpWvl-1IQ74iLkTJQt3BnCWlE7FqKGaQ" target="_blank"> Ayuda</a></p>
+                    @elseif(auth()->user()->rol=='administrador')
+                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a  href="https://drive.google.com/open?id=1lKw2k8tC72yYz9Ddn2ozssn5a7elwx3A" target="_blank"> Ayuda</a></p>
+                    @endif
                 </div>
 
                 <div class=" col-sm-4 col-md  col-6 col">

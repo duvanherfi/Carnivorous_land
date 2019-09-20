@@ -41,11 +41,36 @@ class UserTest extends TestCase
     public function test_login(){
 
         $user = factory(User::class)->create([
-            'nombre' => 'pedro'
+            'nombre' => 'pedro',
+            
         ]);
         Auth::login($user);
 
         $this->get('/mis_datos')
         ->assertSee('pedro');
     }
+
+
+    public function car_login(){
+
+        $user = factory(User::class)->create([
+            'nombre' => 'pedro'
+        ]);
+        Auth::login($user);
+
+        $this->get('/carrito_compra')
+        ->assertSee('Tamaño');
+    }
+
+    // public function inventario(){
+
+    //     $user = factory(User::class)->create([
+    //         'nombre' => 'pedro',
+    //         'rol' => 'administrador'
+    //     ]);
+    //     Auth::login($user);
+
+    //     $this->get('/inventario/gestion')
+    //     ->assertSee('GESTIÓN');
+    // }
 }
