@@ -8,11 +8,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- Limpiar la cache del navegador --}}
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-
     <title>Carnivorous Land</title>
     {{-- Fuentes --}}
     {{-- Source Sans Pro --}}
@@ -228,11 +223,17 @@
                     <p><img src="{{ asset('img/iconos-footer/email.png') }}" alt="Email" width="23">
                         Carnivorousland@gmail.com</p>
                     @if(auth()->user()==null)
-                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a  href="https://drive.google.com/open?id=1RpWvl-1IQ74iLkTJQt3BnCWlE7FqKGaQ" target="_blank"> Ayuda</a></p>
+                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a
+                            href="https://drive.google.com/open?id=1RpWvl-1IQ74iLkTJQt3BnCWlE7FqKGaQ" target="_blank">
+                            Ayuda</a></p>
                     @elseif(auth()->user()->rol=='cliente')
-                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a  href="https://drive.google.com/open?id=1RpWvl-1IQ74iLkTJQt3BnCWlE7FqKGaQ" target="_blank"> Ayuda</a></p>
+                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a
+                            href="https://drive.google.com/open?id=1RpWvl-1IQ74iLkTJQt3BnCWlE7FqKGaQ" target="_blank">
+                            Ayuda</a></p>
                     @elseif(auth()->user()->rol=='administrador')
-                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a  href="https://drive.google.com/open?id=1lKw2k8tC72yYz9Ddn2ozssn5a7elwx3A" target="_blank"> Ayuda</a></p>
+                    <p><img src="{{ asset('img/iconos-footer/ayuda.png') }}" alt="Email" width="23"><a
+                            href="https://drive.google.com/open?id=1lKw2k8tC72yYz9Ddn2ozssn5a7elwx3A" target="_blank">
+                            Ayuda</a></p>
                     @endif
                 </div>
 
@@ -298,7 +299,7 @@
     @yield('script')
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    
+
     <script>
         $(document).ready(function() {
             $(".tabla").DataTable({
