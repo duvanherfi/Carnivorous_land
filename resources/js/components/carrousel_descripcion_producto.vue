@@ -4,8 +4,8 @@
     <!--Indicators-->
     <div class="contenedor-imgs-pequeñas">
         <img data-target="#carousel-example-2" data-slide-to="0" class="active indicadores float-left" v-bind:src="'/img/productoss/' + producto.imagen_principal" alt="">
-        <img data-target="#carousel-example-2" data-slide-to="1" class="indicadores float-left" v-bind:src="'/img/productoss/' + producto.imagen2" alt="">
-        <img data-target="#carousel-example-2" data-slide-to="2" class="indicadores float-left" v-bind:src="'/img/productoss/' + producto.imagen3" alt="">
+        <img v-if="producto.imagen2 != null" data-target="#carousel-example-2" data-slide-to="1" class="indicadores float-left" v-bind:src="'/img/productoss/' + producto.imagen2" alt="">
+        <img v-if="producto.imagen3 != null" data-target="#carousel-example-2" data-slide-to="2" class="indicadores float-left" v-bind:src="'/img/productoss/' + producto.imagen3" alt="">
     </div>
     <!--/.Indicators-->
     <!--Slides-->
@@ -13,10 +13,10 @@
         <div class="carousel-item active">
                 <img class="d-block imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen_principal" alt="First slide">
         </div>
-        <div class="carousel-item">
+        <div v-if="producto.imagen2 != null" class="carousel-item">
                 <img class="d-block imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen2" alt="Second slide">
         </div>
-        <div class="carousel-item">
+        <div v-if="producto.imagen3 != null" class="carousel-item">
                 <img class="d-block imagen-descripcion" v-bind:src="'/img/productoss/' + producto.imagen3" alt="Third slide">
         </div>
         <!--Controls-->

@@ -79,12 +79,13 @@
                     <form class="ml-3" method="POST" action="">
                         <div class="form-group row">
                             <label for="imagen" class="col-md-3 col-form-label">Imagen:</label>
-                            <div class="archivos col-md-8 p-0">
-                                <input @change="obtenerImagen" type="file" class="custom-file-input" :class="mensajeErrorTipo.imagen != undefined ? 'is-invalid' : ''" name="imagen_modificar" id="imagen_modificar" accept="image/*" lang="es">
+                            <div class="archivos col-md-8 p-0 inner-addon right-addon">
+                                <i @click="limpiarCampoImagen" class="fas fa-backspace bg-white"></i>
+                                <input @change="obtenerImagen" type="file" class="custom-file-input" :class="mensajeErrorTipo.imagennombre != undefined ? 'is-invalid' : ''" name="imagen_modificar" id="imagen_modificar" accept="image/*" lang="es">
                                 <label class="custom-file-label" for="imagen_modificar" v-if="this.genero.imagennombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen_modificar" v-else>{{ this.genero.imagennombre }}</label>
-                                <span v-if="mensajeErrorTipo.imagen != undefined" class="invalid-feedback" style="display: flex;" role="alert">
-                                    <strong>{{ mensajeErrorTipo.imagen[0] }}</strong>
+                                <span v-if="mensajeErrorTipo.imagennombre != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorTipo.imagennombre[0] }}</strong>
                                 </span>
                             </div>
                         </div>
@@ -111,7 +112,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button @click="modificarTipo" type="button" class="btn color-verde">Modificar</button>
+                    <button @click="modificarTipo" type="button" id="modificarTipoBtn" class="btn color-verde">Modificar</button>
                     <button type="button" class="btn botones" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -191,7 +192,7 @@ export default {
         },
         modalModificarTipo() {
             this.genero.imagennombre = this.genero.imagennombreAntiguo = this.imagen;
-            this.mensajeErrorTipo.imagen = undefined;
+            this.mensajeErrorTipo.imagennombre = undefined;
             this.genero.nombre = this.genero.nombreAntiguo = this.nombre;
             this.mensajeErrorTipo.genero = undefined;
             this.genero.descripcion = this.descripcion;
@@ -200,6 +201,7 @@ export default {
             $('#imagen_modificar').val(null);
         },
         modificarTipo() {
+            $("#modificarTipoBtn").attr("disabled", true);
             let formData = new FormData();
             formData.append('imagen', this.genero.imagen);
             formData.append('imagennombre', this.genero.imagennombre);
@@ -210,10 +212,9 @@ export default {
             formData.append('categoria', this.categoria);
 
             axios.post(`/tiposControl/${this.id}`, formData).then(response => {
+                $("#modificarTipoBtn").attr("disabled", false);
                 if (!isNullOrUndefined(response.data.existenErrores)) {
                     this.mensajeErrorTipo = response.data.errores;
-                    if (this.genero.imagennombre == '')
-                        this.mensajeErrorTipo.imagen = ['El campo es obligatorio.'];
                     if (response.data.nombreUnico != '') {
                         this.mensajeErrorTipo.genero = response.data.nombreUnico;
                     }
@@ -274,6 +275,10 @@ export default {
         },
         ordenar() {
             EventBus.$emit('ordenar', this.tipoOrden);
+        },
+        limpiarCampoImagen(){
+            this.genero.imagennombre = '';
+            $('#imagen_modificar').val(null);
         }
     },
     props: ['gestion']

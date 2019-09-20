@@ -4,7 +4,7 @@
 <div class="descripcion-producto">
     <div id="app" class="container">
         <carrousel-descripcion categoria="{{ $categoria }}" id="{{ $id }}"></carrousel-descripcion>
-        <contenido-descripcion></contenido-descripcion>
+        <contenido-descripcion categoria="{{ $categoria }}"></contenido-descripcion>
         {{-- Subtitulo --}}
         <br><br>
         <h2 class="row justify-content-center subtitulo-DS w-100 m-0">PRODUCTOS MÁS DESTACADOS</h2>

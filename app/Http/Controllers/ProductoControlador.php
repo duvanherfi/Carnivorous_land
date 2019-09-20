@@ -130,8 +130,6 @@ class ProductoControlador extends Controller
         if ($request->categoria == 'plantas') {
             $datos = \Validator::make($request->all(), [
                 'imagen_principalnombre' => 'required',
-                'imagen2nombre' => 'required',
-                'imagen3nombre' => 'required',
                 'nombre' => 'required|string|max:255',
                 'valor' => 'required|numeric|max:999999999999999',
                 'cantidad' => 'required|numeric|max:2147483647',
@@ -144,8 +142,6 @@ class ProductoControlador extends Controller
         } else {
             $datos = \Validator::make($request->all(), [
                 'imagen_principalnombre' => 'required',
-                'imagen2nombre' => 'required',
-                'imagen3nombre' => 'required',
                 'nombre' => 'required|string|max:255',
                 'valor' => 'required|numeric|max:9999999999999999999',
                 'cantidad' => 'required|numeric|max:99999999999',
@@ -240,26 +236,27 @@ class ProductoControlador extends Controller
             ]);
         }
 
+        $producto = new Producto();
+
         if ($request->hasFile('imagen_principal')) {
             $file = $request->file('imagen_principal');
             $imagen_principal = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen_principal);
+            $producto->imagen_principal = $imagen_principal;
         }
         if ($request->hasFile('imagen2')) {
             $file = $request->file('imagen2');
             $imagen2 = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen2);
+            $producto->imagen2 = $imagen2;
         }
         if ($request->hasFile('imagen3')) {
             $file = $request->file('imagen3');
             $imagen3 = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen3);
+            $producto->imagen3 = $imagen3;
         }
         
-        $producto = new Producto();
-        $producto->imagen_principal = $imagen_principal;
-        $producto->imagen2 = $imagen2;
-        $producto->imagen3 = $imagen3;
         $producto->nombre = $request->input('nombre');
         $producto->valor = $request->input('valor');
         $producto->cantidad = $request->input('cantidad');
@@ -327,8 +324,6 @@ class ProductoControlador extends Controller
         if ($categoria == 'plantas') {
             $datos = \Validator::make($request->all(), [
                 'imagen_principalnombre' => 'required',
-                'imagen2nombre' => 'required',
-                'imagen3nombre' => 'required',
                 'nombre' => 'required|string|max:255',
                 'valor' => 'required|numeric|max:999999999999999',
                 'cantidad' => 'required|numeric|max:2147483647',
@@ -339,8 +334,6 @@ class ProductoControlador extends Controller
         } else {
             $datos = \Validator::make($request->all(), [
                 'imagen_principalnombre' => 'required',
-                'imagen2nombre' => 'required',
-                'imagen3nombre' => 'required',
                 'nombre' => 'required|string|max:255',
                 'valor' => 'required|numeric|max:999999999999999',
                 'cantidad' => 'required|numeric|max:2147483647',
@@ -359,7 +352,7 @@ class ProductoControlador extends Controller
                     ->where('tamaño', $request->tamaño)
                     ->where('genero', $request->genero)
                     ->where('productos.habilitado', 'true')->get();
-                if (count($plantas) > 0) {
+                if (count($plantas) > 0 && $request->registroExistente == '') {
                     $nombreUnico = 'El valor del campo nombre ya está en uso.';
                 }
             } else if ($categoria == 'merchandising') {
@@ -369,7 +362,7 @@ class ProductoControlador extends Controller
                     ->where('nombre', $request->nombre)
                     ->where('tipo', $request->genero)
                     ->where('productos.habilitado', 'true')->get();
-                if (count($tipo_merchandisings) > 0) {
+                if (count($tipo_merchandisings) > 0  && $request->registroExistente == '') {
                     $nombreUnico = 'El valor del campo nombre ya está en uso.';
                 }
             } else if ($categoria == 'implementos') {
@@ -379,7 +372,7 @@ class ProductoControlador extends Controller
                     ->where('nombre', $request->nombre)
                     ->where('tipo', $request->genero)
                     ->where('productos.habilitado', 'true')->get();
-                if (count($tipo_implementos) > 0) {
+                if (count($tipo_implementos) > 0  && $request->registroExistente == '') {
                     $nombreUnico = 'El valor del campo nombre ya está en uso.';
                 }
             }
@@ -394,27 +387,37 @@ class ProductoControlador extends Controller
         }
 
         $producto = Producto::find($id);
-
         if ($request->hasFile('imagen_principal')) {
             $file = $request->file('imagen_principal');
             $imagen_principal = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen_principal);
-            unlink(public_path() . '/img/productoss/' . $request->imagen_principalnombreAntiguo);
+            if ($request->hasFile('imagen_principalnombreAntiguo'))
+                unlink(public_path() . '/img/productoss/' . $request->imagen_principalnombreAntiguo);
             $producto->imagen_principal = $imagen_principal;
         }
         if ($request->hasFile('imagen2')) {
             $file = $request->file('imagen2');
             $imagen2 = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen2);
-            unlink(public_path() . '/img/productoss/' . $request->imagen2nombreAntiguo);
+            if ($request->hasFile('imagen2nombreAntiguo'))
+                unlink(public_path() . '/img/productoss/' . $request->imagen2nombreAntiguo);
             $producto->imagen2 = $imagen2;
+        }else if($request->imagen2nombre == ''){
+            if ($request->hasFile('imagen2nombreAntiguo'))
+                unlink(public_path() . '/img/productoss/' . $request->imagen2nombreAntiguo);
+            $producto->imagen2 = null;
         }
         if ($request->hasFile('imagen3')) {
             $file = $request->file('imagen3');
             $imagen3 = time() . $file->getClientOriginalName();
             $file->move(public_path() . '/img/productoss/', $imagen3);
-            unlink(public_path() . '/img/productoss/' . $request->imagen3nombreAntiguo);
+            if ($request->hasFile('imagen3nombreAntiguo'))
+                unlink(public_path() . '/img/productoss/' . $request->imagen3nombreAntiguo);
             $producto->imagen3 = $imagen3;
+        }else if($request->imagen3nombre == ''){
+            if ($request->hasFile('imagen3nombreAntiguo'))
+                unlink(public_path() . '/img/productoss/' . $request->imagen3nombreAntiguo);
+            $producto->imagen3 = null;
         }
 
         $producto->nombre = $request->input('nombre');

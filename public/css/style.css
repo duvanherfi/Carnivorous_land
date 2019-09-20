@@ -652,3 +652,18 @@ tr:nth-child(odd) td {
    color: white;
  
 }
+
+/* Icono borrar en formulario */
+.inner-addon {
+   position: relative;
+}
+.inner-addon .fas {
+   position: absolute;
+   z-index: 3;
+   padding: 4px;
+   margin: 7.5px;
+   cursor: pointer;
+}
+.right-addon .fas {
+   right: 60px;
+}

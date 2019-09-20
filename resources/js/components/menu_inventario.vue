@@ -97,37 +97,34 @@
                         <p>Todos los campos con * son obligatorios</p>
                         <div class="form-group row">
                             <label for="imagen_principal" class="col-md-4 col-form-label pr-0">Imagen principal*:</label>
-                            <div class="archivos col-md-7 p-0">
-                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" :class="mensajeErrorProducto.imagen_principal != undefined ? 'is-invalid' : ''" name="imagen_principal" id="imagen_principal" accept="image/*" lang="es">
+                            <div class="archivos col-md-7 p-0 inner-addon right-addon">
+                                <i @click="limpiarCampoImagenPrincipal" class="fas fa-backspace bg-white"></i>
+                                <input @change="obtenerImagenPrincipal" type="file" class="custom-file-input" :class="mensajeErrorProducto.imagen_principalnombre != undefined ? 'is-invalid' : ''" name="imagen_principal" id="imagen_principal" accept="image/*" lang="es">
                                 <label class="custom-file-label" for="imagen_principal" v-if="this.producto.imagen_principalnombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen_principal" v-else>{{ this.producto.imagen_principalnombre }}</label>
-                                <span v-if="mensajeErrorProducto.imagen_principal != undefined" class="invalid-feedback" style="display: flex;" role="alert">
-                                    <strong>{{ mensajeErrorProducto.imagen_principal[0] }}</strong>
+                                <span v-if="mensajeErrorProducto.imagen_principalnombre != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                    <strong>{{ mensajeErrorProducto.imagen_principalnombre[0] }}</strong>
                                 </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="imagen2" class="col-md-4 col-form-label">Imagen #2*:</label>
-                            <div class="archivos col-md-7 p-0">
-                                <input @change="obtenerImagen2" type="file" class="custom-file-input" :class="mensajeErrorProducto.imagen2 != undefined ? 'is-invalid' : ''" name="imagen2" id="imagen2" accept="image/*" lang="es">
+                            <label for="imagen2" class="col-md-4 col-form-label">Imagen #2:</label>
+                            <div class="archivos col-md-7 p-0 inner-addon right-addon">
+                                <i @click="limpiarCampoImagen2" class="fas fa-backspace bg-white"></i>
+                                <input @change="obtenerImagen2" type="file" class="custom-file-input" name="imagen2" id="imagen2" accept="image/*" lang="es">
                                 <label class="custom-file-label" for="imagen2" v-if="this.producto.imagen2nombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen2" v-else>{{ this.producto.imagen2nombre }}</label>
-                                <span v-if="mensajeErrorProducto.imagen2 != undefined" class="invalid-feedback" style="display: flex;" role="alert">
-                                    <strong>{{ mensajeErrorProducto.imagen2[0] }}</strong>
-                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="imagen3" class="col-md-4 col-form-label">Imagen #3*:</label>
-                            <div class="archivos col-md-7 p-0">
-                                <input @change="obtenerImagen3" type="file" class="custom-file-input" :class="mensajeErrorProducto.imagen3 != undefined ? 'is-invalid' : ''" name="imagen3" id="imagen3" accept="image/*" lang="es">
+                            <label for="imagen3" class="col-md-4 col-form-label">Imagen #3:</label>
+                            <div class="archivos col-md-7 p-0 inner-addon right-addon">
+                                <i @click="limpiarCampoImagen3" class="fas fa-backspace bg-white"></i>
+                                <input @change="obtenerImagen3" type="file" class="custom-file-input" name="imagen3" id="imagen3" accept="image/*" lang="es">
                                 <label class="custom-file-label" for="imagen3" v-if="this.producto.imagen3nombre == ''">Seleccionar Archivo</label>
                                 <label class="custom-file-label" for="imagen3" v-else>{{ this.producto.imagen3nombre }}</label>
-                                <span v-if="mensajeErrorProducto.imagen3 != undefined" class="invalid-feedback" style="display: flex;" role="alert">
-                                    <strong>{{ mensajeErrorProducto.imagen3[0] }}</strong>
-                                </span>
                             </div>
                         </div>
 
@@ -223,11 +220,11 @@
                                             <div class="form-group row">
                                                 <label for="imagen" class="col-md-3 col-form-label">Imagen*:</label>
                                                 <div class="archivos col-md-8 p-0">
-                                                    <input @change="obtenerImagenTipo" type="file" class="custom-file-input" :class="mensajeErrorTipo.imagen != undefined ? 'is-invalid' : ''" name="imagen" id="imagen" accept="image/*" lang="es">
+                                                    <input @change="obtenerImagenTipo" type="file" class="custom-file-input" :class="mensajeErrorTipo.imagennombre != undefined ? 'is-invalid' : ''" name="imagen" id="imagen" accept="image/*" lang="es">
                                                     <label class="custom-file-label" for="imagen" v-if="this.tipo.imagen_tiponombre == ''">Seleccionar Archivo</label>
                                                     <label class="custom-file-label" for="imagen" v-else>{{ this.tipo.imagen_tiponombre }}</label>
-                                                    <span v-if="mensajeErrorTipo.imagen != undefined" class="invalid-feedback" style="display: flex;" role="alert">
-                                                        <strong>{{ mensajeErrorTipo.imagen[0] }}</strong>
+                                                    <span v-if="mensajeErrorTipo.imagennombre != undefined" class="invalid-feedback" style="display: flex;" role="alert">
+                                                        <strong>{{ mensajeErrorTipo.imagennombre[0] }}</strong>
                                                     </span>
                                                 </div>
                                             </div>
@@ -250,8 +247,8 @@
                                                 </span>
                                             </div>
 
-                                            <button @click="registrarTipo" type="button" class="btn btn-md color-verde">Registrar</button>
-                                            <button type="button" class="btn btn-md botones" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Cancelar</button>
+                                            <button @click="registrarTipo" type="button" id="registrarTipoBtn" class="btn btn-md color-verde">Registrar</button>
+                                            <button @click="cancelarProducto" type="button" class="btn btn-md botones" data-toggle="collapse" data-target="#registrar_genero" aria-expanded="false" aria-controls="registrar_genero">Cancelar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -296,7 +293,7 @@
                 <div class="modal-footer d-block">
                     <p>Señor(a) usuario, los campos "Categoría" y "Género" no podran ser modificados, así que recuerde revisar bien la información antes de registrar el artículo.</p>
                     <div class="d-flex justify-content-end">
-                        <button @click="registrarProducto" type="button" class="btn color-verde">Registrar</button>
+                        <button @click="registrarProducto" type="button" id="registrarProductoBtn" class="btn color-verde">Registrar</button>
                         <button type="button" class="btn botones" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -452,6 +449,7 @@ export default {
             this.tipo.imagen_tipo = file;
         },
         registrarTipo() {
+            $("#registrarTipoBtn").attr("disabled", true);
             let formData = new FormData();
             formData.append('imagen', this.tipo.imagen_tipo);
             formData.append('imagennombre', this.tipo.imagen_tiponombre);
@@ -459,10 +457,9 @@ export default {
             formData.append('descripcion', this.tipo.descripcion);
             formData.append('categoria', this.producto.categoria);
             axios.post('/tiposControl', formData).then(response => {
+                $("#registrarTipoBtn").attr("disabled", false);
                 if (!isNullOrUndefined(response.data.existenErrores)) {
                     this.mensajeErrorTipo = response.data.errores;
-                    if (this.tipo.imagen_tiponombre == '')
-                        this.mensajeErrorTipo.imagen = ['El campo es obligatorio.'];
                     if (response.data.nombreUnico != '') {
                         this.mensajeErrorTipo.genero = response.data.nombreUnico;
                     }
@@ -497,13 +494,19 @@ export default {
             })
         },
         registrarProducto() {
+            $("#registrarProductoBtn").attr("disabled", true);
             let formData = new FormData();
-            formData.append('imagen_principal', this.producto.imagen_principal);
+            if (this.producto.imagen_principalnombre != '')
+                formData.append('imagen_principal', this.producto.imagen_principal);
             formData.append('imagen_principalnombre', this.producto.imagen_principalnombre);
-            formData.append('imagen2', this.producto.imagen2);
-            formData.append('imagen2nombre', this.producto.imagen2nombre);
-            formData.append('imagen3', this.producto.imagen3);
-            formData.append('imagen3nombre', this.producto.imagen3nombre);
+            if (this.producto.imagen2nombre != ''){
+                formData.append('imagen2', this.producto.imagen2);
+                formData.append('imagen2nombre', this.producto.imagen2nombre);
+            }
+            if (this.producto.imagen3nombre != ''){
+                formData.append('imagen3', this.producto.imagen3);
+                formData.append('imagen3nombre', this.producto.imagen3nombre);
+            }
             formData.append('nombre', this.producto.nombre);
             formData.append('valor', this.producto.valor);
             formData.append('cantidad', this.producto.cantidad);
@@ -518,16 +521,10 @@ export default {
             formData.append('descripcion', this.producto.descripcion);
 
             axios.post('/productosControl', formData).then(response => {
-                console.log(response.data);
-
+                // console.log(response.data);
+                $("#registrarProductoBtn").attr("disabled", false);
                 if (!isNullOrUndefined(response.data.existenErrores)) {
                     this.mensajeErrorProducto = response.data.errores;
-                    if (this.producto.imagen_principalnombre == '')
-                        this.mensajeErrorProducto.imagen_principal = ['El campo es obligatorio.'];
-                    if (this.producto.imagen2nombre == '')
-                        this.mensajeErrorProducto.imagen2 = ['El campo es obligatorio.'];
-                    if (this.producto.imagen3nombre == '')
-                        this.mensajeErrorProducto.imagen3 = ['El campo es obligatorio.'];
                     if (response.data.nombreUnico != '') {
                         this.mensajeErrorProducto.nombre = response.data.nombreUnico;
                     }
@@ -541,7 +538,7 @@ export default {
                         formData.append('imagen_principalnombreAntiguo', response.data.imagen_principal);
                         formData.append('imagen2nombreAntiguo', response.data.imagen2);
                         formData.append('imagen3nombreAntiguo', response.data.imagen3);
-                        // console.log(formData);
+                        formData.append('registroExistente', 'si');
                         axios.post(`/productosControl/${response.data.id}/${response.data.categoria}`, formData).then(response => {
                             // console.log(response.data);
                             EventBus.$emit('activarUpdate', true);
@@ -579,10 +576,13 @@ export default {
             };
             EventBus.$emit('articulos', params);
         },
+        cancelarProducto(){
+            this.mensajeErrorTipo.categoria = undefined;
+        },
         limpiarRegistrarTipo() {
             $('#imagen').val(null);
             this.tipo.imagen_tiponombre = '';
-            this.mensajeErrorTipo.imagen = undefined;
+            this.mensajeErrorTipo.imagennombre = undefined;
             this.tipo.nombre = '';
             this.mensajeErrorTipo.genero = undefined;
             this.tipo.descripcion = '';
@@ -592,14 +592,12 @@ export default {
             this.mensajeErrorTipo.categoria = undefined;
             $('#registrar_genero').collapse('hide');
             this.producto.imagen_principalnombre = '';
-            this.mensajeErrorProducto.imagen_principal = undefined;
+            this.mensajeErrorProducto.imagen_principalnombre = undefined;
             $('#imagen_principal').val(null);
             $('#imagen2').val(null);
             this.producto.imagen2nombre = '';
-            this.mensajeErrorProducto.imagen2 = undefined;
             $('#imagen3').val(null);
             this.producto.imagen3nombre = '';
-            this.mensajeErrorProducto.imagen3 = undefined;
             this.producto.nombre = '';
             this.mensajeErrorProducto.nombre = undefined;
             this.producto.valor = '';
@@ -618,6 +616,18 @@ export default {
             this.producto.opcion_catalogo = '';
             this.producto.descripcion = '';
             this.mensajeErrorProducto.descripcion = undefined;
+        },
+        limpiarCampoImagenPrincipal(){
+            this.producto.imagen_principalnombre = '';
+            $('#imagen_principal').val(null);
+        },
+        limpiarCampoImagen2(){
+            this.producto.imagen2nombre = '';
+            $('#imagen2').val(null);
+        },
+        limpiarCampoImagen3(){
+            this.producto.imagen3nombre = '';
+            $('#imagen3').val(null);
         }
     }
 }

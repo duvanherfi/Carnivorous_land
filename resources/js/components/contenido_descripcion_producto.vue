@@ -15,7 +15,7 @@
         <label>★</label>
     </p>
     <h1>{{ producto.valor | currency }} COP</h1>
-    <h4 class="font-weight-bold">Tamaño: {{ producto.tamaño }}</h4>
+    <h4 v-if="categoria == 'plantas'" class="font-weight-bold">Tamaño: {{ producto.tamaño }}</h4>
     <h4 class="font-weight-bold">Disponible: {{ producto.cantidad }}</h4>
     <button @click="cancelarCarrito()" v-if="producto.opcionCancelar == true" class="btn btn-lg botones w-50 m-0">
         <i class="fas fa-ban"></i> Cancelar</button>
@@ -134,8 +134,9 @@ export default {
             axios.delete(`/carritoControl/${this.producto.id_producto}`).then(response => {
                 // console.log(response.data);
             })
-        },
-    }
+        }
+    },
+    props: ['categoria']
 }
 </script>
 

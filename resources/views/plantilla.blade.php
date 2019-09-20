@@ -8,6 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- Limpiar la cache del navegador --}}
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+
     <title>Carnivorous Land</title>
     {{-- Fuentes --}}
     {{-- Source Sans Pro --}}

@@ -159,11 +159,13 @@ class TiposControlador extends Controller
     }
 
     public function cantidadTerminos(){
-        $productos = DB::table('productos')->get();
+        $productos = DB::table('productos')->where('productos.habilitado', 'true')->get();
         $cantidadProductos = count($productos);
-        $generos = DB::table('generos')->get();
+        $generos = DB::table('generos')->where('generos.habilitado', 'true')->get();
         $cantidadGeneros = count($generos);
-        $plantas = DB::table('plantas')->get();
+        $plantas = DB::table('productos')
+                ->join('plantas', 'plantas.id_planta', '=', 'productos.id')
+                ->where('productos.habilitado', 'true')->get();
         $cantidadPlantas = count($plantas);
         return response()->json([
             'cantidadProductos' => $cantidadProductos,
