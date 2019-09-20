@@ -389,6 +389,9 @@ export default {
         modalModificar(item) {
             this.generarTipos();
 
+            this.producto.imagen_principal = '';
+            this.producto.imagen2 = '';
+            this.producto.imagen3 = '';
             this.producto.imagen_principalnombre = this.producto.imagen_principalnombreAntiguo = item.imagen_principal;
             this.mensajeErrorProducto.imagen_principalnombre = undefined;
             this.producto.imagen2nombre = this.producto.imagen2nombreAntiguo = item.imagen2;
@@ -411,6 +414,8 @@ export default {
             $('#imagen_principal_modificar').val(null);
             $('#imagen2_modificar').val(null);
             $('#imagen3_modificar').val(null);
+
+            console.log($('#imagen_principal_modificar').val());
         },
         modificarProducto(id) {
             $("#modificarProductoBtn").attr("disabled", true);

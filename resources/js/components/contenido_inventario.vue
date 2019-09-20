@@ -191,6 +191,7 @@ export default {
             })
         },
         modalModificarTipo() {
+            this.genero.imagen = '';
             this.genero.imagennombre = this.genero.imagennombreAntiguo = this.imagen;
             this.mensajeErrorTipo.imagennombre = undefined;
             this.genero.nombre = this.genero.nombreAntiguo = this.nombre;

@@ -582,6 +582,7 @@ export default {
         limpiarRegistrarTipo() {
             $('#imagen').val(null);
             this.tipo.imagen_tiponombre = '';
+            this.tipo.imagen_tipo = '';
             this.mensajeErrorTipo.imagennombre = undefined;
             this.tipo.nombre = '';
             this.mensajeErrorTipo.genero = undefined;
@@ -592,12 +593,15 @@ export default {
             this.mensajeErrorTipo.categoria = undefined;
             $('#registrar_genero').collapse('hide');
             this.producto.imagen_principalnombre = '';
+            this.producto.imagen_principal = '';
             this.mensajeErrorProducto.imagen_principalnombre = undefined;
             $('#imagen_principal').val(null);
             $('#imagen2').val(null);
             this.producto.imagen2nombre = '';
+            this.producto.imagen2 = '';
             $('#imagen3').val(null);
             this.producto.imagen3nombre = '';
+            this.producto.imagen3 = '';
             this.producto.nombre = '';
             this.mensajeErrorProducto.nombre = undefined;
             this.producto.valor = '';
