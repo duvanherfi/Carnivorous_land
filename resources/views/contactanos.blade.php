@@ -90,6 +90,7 @@
                     <option value="Reclamo">Reclamo</option>
                     <option value="Sugerencia">Sugerencia</option>
                     <option value="Duda">Duda</option>
+                    <option value="Cotización">Cotización</option>
                 </select>
 
                 <!-- Nombre -->

@@ -6,7 +6,7 @@
         <!--Card image-->
         <div class="img-sombra-producto-DS">
             <a @click="descripcion(item)" v-if="tipo != 'calificacion'" v-bind:href="descripcionProducto"><img class="imagen-producto-DS" v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" /></a>
-            <img class="imagen-producto-DS" v-else v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" /></a>
+            <img class="imagen-producto-DS" v-else v-bind:src="'/img/productoss/' + item.imagen_principal" alt="Imagen producto" />
         </div>
         <div v-if="item.cantidad == 0" class="position-absolute tamaño_agotado d-flex align-items-center">
             <h1 class="col text-dark text-center font-weight-bold">AGOTADO</h1>

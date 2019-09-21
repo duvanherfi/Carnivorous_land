@@ -139,15 +139,9 @@
 
 {{-- Eventos --}}
 <div class="row justify-content-center w-100 m-0" data-aos="fade-up" data-aos-anchor-placement="top-center">
-    <img class="imagen-DS evento-DS m-3" src="{{ asset('img/eventos/evento1.jpg') }}" alt="">
+    <a href="https://www.facebook.com/events/1159709071058212/" target="_blank">
+    <img class="imagen-DS evento-DS m-3" src="{{ asset('img/eventos/evento1.jpg') }}" alt="evento #1" /></a>
     <div class="mask rgba-white-slight"></div>
-
-    {{-- Prueba--}}
-
 </div>
 {{-- /Eventos --}}
-
-
-
-
 @endsection

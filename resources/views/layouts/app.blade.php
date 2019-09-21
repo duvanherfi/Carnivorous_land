@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="google-site-verification" content="XfNumpGmd-UkREuoXoHBd_sAeLM7qjqVWK9r9-B69e4" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

@@ -4,15 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{-- Limpiar la cache del navegador --}}
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="google-site-verification" content="XfNumpGmd-UkREuoXoHBd_sAeLM7qjqVWK9r9-B69e4" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

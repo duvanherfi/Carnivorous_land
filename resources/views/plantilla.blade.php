@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Carnivorous Land</title>
+    <meta name="google-site-verification" content="XfNumpGmd-UkREuoXoHBd_sAeLM7qjqVWK9r9-B69e4" />
     {{-- Fuentes --}}
     {{-- Source Sans Pro --}}
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900&display=swap" rel="stylesheet">
